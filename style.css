@@ -1,0 +1,413 @@
+/**
+  Theme Name: Metallic
+  Theme URI:
+  Version: 1.0
+  Author: PARMAJA
+  Author URI: http://www.parmaja.com
+  Licence: LGPL
+  Description: CSS3 them without any images inside, plain and simple, right side column, and work find for right to left languages
+  Tags: css3, simple, plain, clean, fixed width, no-images, widget-ready, widgets, right sidebar, two columns, valid XHTML, valid CSS, blank-slate, rtl, right-to-left
+*/
+
+/*
+Based on naked
+  http://code.google.com/p/wordpress-naked/
+  Author URI: http://www.siftware.co.uk
+*/
+
+html {
+	position: relative;
+  height: 100%;
+}
+
+body {
+	position: relative;
+  height: 100%;
+	width: 900px;
+	min-width:100px;
+	max-width:100%;
+	margin:0 auto;
+	font: 10pt Tahoma, Verdana, Arial, sans-serif;
+	line-height:150%;
+  background: #d3d3d3;
+}
+
+#container {
+  background: #eee;
+}
+
+#logo {
+	display: block;
+  float: left;
+}
+
+#header {
+	position: relative;
+	background: #535353;
+	background: linear-gradient(to bottom, #4e5056 0%,#828c95 6%,#5e616b 34%,#28343b 100%);
+  z-index: 999;
+	text-decoration: none;
+}
+
+#fulllogo{
+  padding: 1em;
+}
+
+/** the heading and tagline are h1 on homepage and h4 on internal */
+#header h1 {
+	font-size: 250%;
+	margin: 0.2em 0;
+	text-shadow: 0.1em 0.1em 0.1em #242424;
+}
+
+#header #description{
+  font-size: 75%;
+  color: #d8d8d8;
+}
+
+#header a{
+	text-decoration: none;
+  color: white;
+}
+
+#header h4 {
+	font-size: 100%;
+	margin: 0;
+}
+
+/** the tagline is a span within the h1 or h4 */
+#header h1 span {
+	clear: both;
+	font-size: 100%;
+}
+
+#header h4 span {
+	font-size: 120%;
+}
+
+#content {
+	clear: both;
+  margin: 0em;
+  background: #eeeeee; /*not sure*/
+}
+
+/**      main content     */
+#main { /*do not put padding or margin*/
+  float: left;
+  background: white;
+}
+
+#inside {
+	width: auto;
+  height: 100%;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  padding: 1em;
+}
+
+#main h1 {
+  padding: 0;
+  margin: 0.1em 0 0 0;
+}
+
+#main h2 {
+  padding: 0.2em 0em;
+  margin: 0.2em 0 0 0;
+  font-size: 100%;
+}
+
+/* titles are h2 on homepage and h1 for internal */
+#main h1.title,
+#main h2.title {
+  font-size: 130%;
+}
+#main h2.title {
+	border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+#main h3 {
+  padding: 0;
+  margin: 0.1em 0 0 0;
+}
+
+ol#posts {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post h2 a{
+	color: #000;
+	text-decoration: none;
+}
+
+.post h2 a:hover {
+	text-decoration: none;
+	color: #487291;
+}
+
+.post_info {
+	list-style: none outside none;
+  overflow: auto;
+	font-size: 80%;
+  color: #797979;
+  padding: 0;
+}
+
+.post_info li{
+	display: block;
+	padding: 0.0em 0.2em;
+}
+
+.post_info a{
+	text-decoration: none;
+  color: #558caa;
+}
+
+.post_info .date{
+  float: left;
+}
+
+.post_info .date:before{
+	content: "≡ "
+}
+
+.post_info .author{
+  float: left;
+}
+
+.post_info .author:before{
+	content: "• "
+}
+
+.post_info .post_edit{
+  float: right;
+}
+
+.post_info .category{
+  float: left;
+}
+
+.post_info .tags{
+  float: left;
+}
+
+.post_info .comments_count{
+  float: right;
+}
+
+li.post, div.post {
+	clear: both;
+}
+
+.post img {
+}
+
+div.post {
+}
+
+.post_content {
+	color: #222;
+  clear: both;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+/* pagination */
+
+#pagination {
+  list-style: none;
+  margin: 0.1em 0.1em;
+  padding: 0.1em 0.5em;
+  background: #000;
+  overflow: auto;
+}
+
+#pagination a{
+	color: white;
+  text-decoration: none;
+}
+
+#pagination ul {
+}
+
+#pagination li {
+}
+
+#pagination .previous {
+  float: left;
+  text-align: left;
+}
+
+#pagination .future {
+  float: right;
+  text-align: right;
+}
+
+/*       sidebar          */
+
+#sidebar {
+}
+
+#sidebar h3{
+	font-size: 150%;
+  padding: 0;
+}
+
+#sidebar a:hover{
+	color: #6295a4;
+	text-decoration: none;
+}
+
+#sidebar > ul {
+  list-style-type: none;
+}
+
+#sidebar li {
+	list-style-type: disc;
+}
+
+#sidebar > ul > li {
+	list-style-type: none;
+}
+
+#sidebar>ul>li {
+  font-size: 120%;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+
+#sidebar >ul >li > ul {
+	font-size: 80%;
+  text-shadow: none;
+  color: green;
+	text-decoration: none;
+}
+
+/* sub pages less padding */
+
+#sidebar >ul >li > ul >li> ul {
+	font-size: 80%;
+  padding-left: 1em;
+}
+
+#sidebar >ul >li a{
+	text-decoration: none;
+}
+
+.widget li{
+	color: green;
+}
+
+#nav{
+/*  background: #3A434B; */
+	clear: both;
+  padding: 0.1em 1em;
+  overflow: auto;
+	border-top: 1px solid #5f6878;
+}
+
+#nav_page, #nav_subpage {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	clear: both;
+}
+
+#nav_subpage {
+  font-size: 85%;
+	clear: both;
+}
+
+#nav_page ul, #nav_subpage ul {
+}
+
+#nav_page li, #nav_subpage li {
+	display: block;
+  float: left;
+	padding: 0.1em 0.4em;
+  margin: 0.2em
+}
+
+#header .current_page_item{
+	border-radius: 3px;
+  box-shadow: 0em 0em 0.4em 0.0em #B7B7B7;
+}
+
+#header .current_page_parent{
+	border-radius: 3px;
+  box-shadow: 0em 0em 0.4em 0.0em #B7B7B7;
+}
+
+#nav a:hover{
+	color: #dfe3f2;
+}
+
+#header .current_page_parent a{
+}
+
+#header .current_page_item a, #header .current_page_parent a {
+	text-decoration: none;
+}
+
+#header .current_page_item a:hover,#header .current_page_parent a:hover {
+	text-decoration: none;
+}
+
+.widget_tag_cloud a {
+  padding-left: 5px;
+}
+
+#comments h2{
+  font-size: 100%;
+}
+
+#comment {
+  width: 90%;
+  font-size: 120%;
+	border: 1px solid #a4a4a4;
+	padding: 0.5em;
+	border-radius:6px;
+	color:#111;
+}
+
+#footer {
+  clear: both;
+  font-size: 80%;
+}
+
+/**
+  theme requirements as per 
+  http://codex.wordpress.org/CSS
+*/
+.aligncenter, div.aligncenter {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.alignleft {
+   float: left;
+}
+
+.alignright {
+   float: right;
+}
+
+.skip {
+  display: none;
+}
+
+#copyright {
+	padding: 0em 0.3;
+  margin: 0 1em;
+  width: 100%;
+  height: auto;
+  color: #acacac;
+  font-size: 80%;
+}
+
+#copyright a{
+}
+

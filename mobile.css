@@ -1,0 +1,47 @@
+#main {
+  width: 100%;
+}
+
+#container {
+	margin: 0em;
+}
+
+#header {
+}
+
+#sidebar {
+  width: 100%;
+	position: relative;
+  height: auto;
+  float: left;
+  overflow: hidden;
+  background: #000;
+	color: #fff;
+}
+
+#sidebar  {
+}
+
+#sidebar a{
+	color: #fff;
+	text-decoration: none;
+}
+
+#sidebar > ul {
+  padding: 0em 0em;
+}
+
+#sidebar>ul>li {
+  float: left;
+}
+
+.widget {
+	padding-left: 1em;
+}
+
+
+.post img {
+	max-width:100%;
+	height:auto;
+	margin:auto;
+}
