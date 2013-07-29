@@ -43,14 +43,12 @@ body {
 }
 
 #fulllogo{
-	overflow: auto;
   padding: 0.5em;
+	overflow: auto;
 }
 
 #header #title{
 	display: block;
-  margin: 0.1em;
-	float: left;
 }
 
 #header #logo {
@@ -61,8 +59,8 @@ body {
 
 #header #logo_text {
 	display: block;
-  margin: 0.5em 0.2em;
   float: left;
+  vertical-align: middle;
 }
 
 /** the heading and tagline are h1 on homepage and h4 on internal */
@@ -73,13 +71,8 @@ body {
 }
 
 #header #description{
-  font-size: 75%;
+  font-size: 80%;
   color: #d8d8d8;
-}
-
-#header a{
-	text-decoration: none;
-  color: white;
 }
 
 #header h4 {
@@ -87,20 +80,14 @@ body {
 	margin: 0em;
 }
 
-/** the tagline is a span within the h1 or h4 */
-#header h1 span {
-	clear: both;
-	font-size: 100%;
-}
-
-#header h4 span {
-	font-size: 120%;
+#header a{
+	text-decoration: none;
+  color: white;
 }
 
 #content {
 	clear: both;
   margin: 0em;
-  background: #eeeeee; /*not sure*/
 }
 
 /**      main content     */
