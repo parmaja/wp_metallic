@@ -39,5 +39,12 @@
   border-bottom: 1px solid #cccccc;
 }
 
+#sidebar >ul >li {
+  font-size: 120%;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+
+
 .post img {
 }

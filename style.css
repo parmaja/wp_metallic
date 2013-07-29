@@ -16,8 +16,6 @@ Based on naked
 */
 
 html {
-	position: relative;
-  height: 100%;
 }
 
 body {
@@ -26,19 +24,16 @@ body {
 	width: 900px;
 	min-width:100px;
 	max-width:100%;
-	margin:0 auto;
+	margin:0em auto;
 	font: 10pt Tahoma, Verdana, Arial, sans-serif;
 	line-height:150%;
   background: #d3d3d3;
+  color: #111;
 }
 
 #container {
   background: #eee;
-}
-
-#logo {
-	display: block;
-  float: left;
+  color: #111;
 }
 
 #header {
@@ -50,13 +45,32 @@ body {
 }
 
 #fulllogo{
-  padding: 1em;
+	overflow: auto;
+  padding: 0.5em;
+}
+
+#header #title{
+	display: block;
+  margin: 0.1em;
+	float: left;
+}
+
+#header #logo {
+	display: block;
+  margin: 0.2em;
+  float: left;
+}
+
+#header #logo_text {
+	display: block;
+  margin: 0.1em;
+  float: left;
 }
 
 /** the heading and tagline are h1 on homepage and h4 on internal */
 #header h1 {
 	font-size: 250%;
-	margin: 0.2em 0;
+	margin: 0.2em 0em;
 	text-shadow: 0.1em 0.1em 0.1em #242424;
 }
 
@@ -72,7 +86,7 @@ body {
 
 #header h4 {
 	font-size: 100%;
-	margin: 0;
+	margin: 0em;
 }
 
 /** the tagline is a span within the h1 or h4 */
@@ -106,13 +120,13 @@ body {
 }
 
 #main h1 {
-  padding: 0;
-  margin: 0.1em 0 0 0;
+  padding: 0em;
+  margin: 0.1em 0em 0em 0em;
 }
 
 #main h2 {
   padding: 0.2em 0em;
-  margin: 0.2em 0 0 0;
+  margin: 0.2em 0em 0em 0em;
   font-size: 100%;
 }
 
@@ -122,18 +136,18 @@ body {
   font-size: 130%;
 }
 #main h2.title {
-	border-bottom: 1px solid rgb(204, 204, 204);
+	border-bottom: 1px solid #cccccc;
 }
 
 #main h3 {
-  padding: 0;
-  margin: 0.1em 0 0 0;
+  padding: 0em;
+  margin: 0.1em 0em 0em 0em;
 }
 
 ol#posts {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 0em;
+  padding: 0em;
 }
 
 .post h2 a{
@@ -151,7 +165,7 @@ ol#posts {
   overflow: auto;
 	font-size: 80%;
   color: #797979;
-  padding: 0;
+  padding: 0em;
 }
 
 .post_info li{
@@ -210,8 +224,8 @@ div.post {
 	color: #222;
   clear: both;
   overflow: hidden;
-  padding: 0;
-  margin: 0;
+  padding: 0em;
+  margin: 0em;
 }
 
 /* pagination */
@@ -245,14 +259,14 @@ div.post {
   text-align: right;
 }
 
-/*       sidebar          */
+/* sidebar */
 
 #sidebar {
 }
 
 #sidebar h3{
 	font-size: 150%;
-  padding: 0;
+  padding: 0em;
 }
 
 #sidebar a:hover{
@@ -272,10 +286,8 @@ div.post {
 	list-style-type: none;
 }
 
-#sidebar>ul>li {
+#sidebar >ul >li {
   font-size: 120%;
-  padding-bottom: 1em;
-  margin-bottom: 1em;
 }
 
 #sidebar >ul >li > ul {
@@ -310,8 +322,8 @@ div.post {
 
 #nav_page, #nav_subpage {
 	list-style: none;
-	padding: 0;
-	margin: 0;
+	padding: 0em;
+	margin: 0em;
 	clear: both;
 }
 
@@ -400,8 +412,8 @@ div.post {
 }
 
 #copyright {
-	padding: 0em 0.3;
-  margin: 0 1em;
+	padding: 0em 0.3em;
+  margin: 0em 1em;
   width: 100%;
   height: auto;
   color: #acacac;
@@ -410,4 +422,3 @@ div.post {
 
 #copyright a{
 }
-
