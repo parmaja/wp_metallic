@@ -1,3 +1,8 @@
+body{
+	margin:0em auto;
+	width: 900px;
+}
+
 #main {
   width: 70%;
 }
@@ -11,6 +16,11 @@
 #header {
   border-radius: 5px 5px 0 0;
   box-shadow: 0em 0.2em 0.5em 0.0em #AAA;
+}
+
+#inside {
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
 }
 
 #sidebar {
@@ -30,16 +40,13 @@
 	text-decoration: none;
 }
 
-#sidebar > ul {
+#sidebar>ul {
   padding: 0em 1em;
 }
 
 #sidebar>ul>li {
 	text-shadow: 2px 2px #d7d7d7;
   border-bottom: 1px solid #cccccc;
-}
-
-#sidebar >ul >li {
   font-size: 120%;
   padding-bottom: 1em;
   margin-bottom: 1em;

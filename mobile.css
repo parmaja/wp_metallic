@@ -1,3 +1,7 @@
+body{
+	margin:0em 0em;
+}
+
 #main {
   width: 100%;
 }
@@ -33,15 +37,21 @@
 
 #sidebar>ul>li {
   float: left;
+  padding-bottom: 0.5em;
+}
+
+#sidebar>ul>li>ul {
+  float: left;
+  padding-bottom: 0.5em;
+  padding-left: 2em;
 }
 
 .widget {
 	padding-left: 1em;
 }
 
-
 .post img {
-	max-width:100%;
-	height:auto;
-	margin:auto;
+	max-width: 100%;
+	height: auto;
+	margin: auto;
 }
