@@ -3,15 +3,16 @@
   /**
   *@desc Included at the bottom of post.php and single.php, deals with all comment layout
   */
-
-  if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $post->post_password) {
+/* Check if protected*/
+if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $post->post_password) {
+	?>
+		<p><?php _e('Enter your password to view comments.'); ?></p>
+	<?php return; }
+//-------------------------------------
 ?>
-<p><?php _e('Enter your password to view comments.'); ?></p>
-<?php return; } ?>
 
-<h2 id="comments"><?php comments_number(__('No Comments'), __('1 Comment'), __('% Comments')); ?>
 <?php if ( comments_open() ) { ?>
-	<a href="#postcomment" title="<?php _e("Leave a comment"); ?>">&raquo;</a>
+	<a href="#postcomment"><?php _e("Leave a comment"); ?></a>
 <?php } ?>
 </h2>
 
@@ -22,7 +23,7 @@
 	<li id="comment-<?php comment_ID() ?>">
   <?php echo get_avatar( $comment, 32 ); ?>  
 	<?php comment_text() ?>
-	<p><cite><?php comment_type(__('Comment'), __('Trackback'), __('Pingback')); ?> <?php _e('by'); ?> <?php comment_author_link() ?> &#8212; <?php comment_date() ?> @ <a href="#comment-<?php comment_ID() ?>"><?php comment_time() ?></a></cite> <?php edit_comment_link(__("Edit This"), ' |'); ?></p>
+	<p><?php comment_type(__('Comment'), __('Trackback'), __('Pingback')); ?> <?php _e('by'); ?> <?php comment_author_link() ?> &#8212; <?php comment_date() ?> @ <a href="#comment-<?php comment_ID() ?>"><?php comment_time() ?></a><?php edit_comment_link(__("Edit This"), ' |'); ?></p>
 	</li>
 
 <?php }   ?>
@@ -40,7 +41,6 @@
 </p>
 
 <?php if ( comments_open() ) { ?>
-<h2 id="postcomment"><?php _e('Leave a comment'); ?></h2>
 
 <?php if ( get_option('comment_registration') && !$user_ID ) { ?>
 <p><?php printf(__('You must be <a href="%s">logged in</a> to post a comment.'), get_option('siteurl')."/wp-login.php?redirect_to=".urlencode(get_permalink()));?></p>
