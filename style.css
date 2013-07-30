@@ -27,6 +27,7 @@ body {
 	line-height:150%;
   background: #d3d3d3;
   color: #111;
+  max-width: 100%; /* Good to be flexible */
 }
 
 #container {
@@ -40,42 +41,43 @@ body {
 	background: linear-gradient(to bottom, #4e5056 0%,#828c95 6%,#5e616b 34%,#28343b 100%);
   z-index: 999;
 	text-decoration: none;
-}
-
-#fulllogo{
-  padding: 0.5em;
-	overflow: auto;
-}
-
-#header #title{
-	display: block;
-}
-
-#header #logo {
-	display: block;
-  margin: 0.2em;
-  float: left;
-}
-
-#header #logo_text {
-	display: block;
-  float: left;
   vertical-align: middle;
 }
 
-/** the heading and tagline are h1 on homepage and h4 on internal */
-#header h1 {
-	font-size: 300%;
+#logo_header{
+  padding: 0.2em;
+	overflow: auto;
+  height: auto;
+  display: table;
+}
+
+#title{
+}
+
+#logo_image{
+	display: table-cell;
+  float: left;
+	margin: 0.2em;
+  vertical-align: middle;
+}
+
+#logo_text {
+	display: table-cell;
+  vertical-align: middle;
+}
+
+#header h1{
+	font-size: 200%;
 	margin: 0.2em 0em;
 	text-shadow: 0.1em 0.1em 0.1em #242424;
 }
 
-#header #description{
+#description{
   font-size: 80%;
   color: #d8d8d8;
 }
 
-#header h4 {
+#header h4{
 	font-size: 100%;
 	margin: 0em;
 }
@@ -316,18 +318,25 @@ div.post {
 }
 
 #nav_subpage {
-  font-size: 85%;
+  font-size: 80%;
 	clear: both;
 }
 
 #nav_page ul, #nav_subpage ul {
 }
 
-#nav_page li, #nav_subpage li {
+#nav_page li{
 	display: block;
   float: left;
 	padding: 0.1em 0.4em;
-  margin: 0.2em
+  margin: 0.1em
+}
+
+#nav_subpage li {
+	display: block;
+  float: left;
+	padding: 0.1em 0.4em;
+  margin: 0.1em
 }
 
 #header .current_page_item{

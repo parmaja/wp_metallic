@@ -27,11 +27,11 @@
 <body>
   <div id="container">
     <div id="header">
-      <div id="fulllogo">
-				<img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/images/logo.png" />
+      <div id="logo_header">
+				<img id="logo_image" src="<?php bloginfo('stylesheet_directory'); ?>/images/logo.png" />
         <div id="logo_text">
-	  			<div id="title"><h1><a href=<?php print '"'.get_bloginfo('url').'">'.get_bloginfo('name'); ?> </a></h1></div>
-  	      <div id="description"><?php print get_bloginfo('description') ?></div>
+	  			<span id="title"><h1><a href=<?php print '"'.get_bloginfo('url').'">'.get_bloginfo('name'); ?> </a></h1></span>
+  	      <span id="description"><?php print get_bloginfo('description') ?></span>
         </div>
 			</div>
 

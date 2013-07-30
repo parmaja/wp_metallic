@@ -1,6 +1,8 @@
 body{
 	margin:0em auto;
 	width: 900px;
+  min-width: 100px;
+  max-width: 100%;
 }
 
 #main {
@@ -51,7 +53,6 @@ body{
   padding-bottom: 1em;
   margin-bottom: 1em;
 }
-
 
 .post img {
 }
