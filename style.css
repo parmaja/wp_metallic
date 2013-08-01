@@ -68,7 +68,7 @@ body {
 
 #header h1{
 	font-size: 200%;
-	margin: 0.2em 0em;
+	margin: 0.2em 0;
 	text-shadow: 0.1em 0.1em 0.1em #242424;
 }
 
@@ -79,7 +79,7 @@ body {
 
 #header h4{
 	font-size: 100%;
-	margin: 0em;
+	margin: 0;
 }
 
 #header a{
@@ -89,7 +89,7 @@ body {
 
 #content {
 	clear: both;
-  margin: 0em;
+  margin: 0;
 }
 
 /**      main content     */
@@ -104,13 +104,13 @@ body {
 }
 
 #main h1 {
-  padding: 0em;
-  margin: 0.1em 0em 0em 0em;
+  padding: 0;
+  margin: 0.1em 0 0 0;
 }
 
 #main h2 {
-  padding: 0.2em 0em;
-  margin: 0.2em 0em 0em 0em;
+  padding: 0.2em 0;
+  margin: 0.2em 0 0 0;
   font-size: 100%;
 }
 
@@ -120,18 +120,23 @@ body {
   font-size: 130%;
 }
 #main h2.title {
-	border-bottom: 1px solid #cccccc;
+	border-bottom: 1px solid #ccc;
 }
 
 #main h3 {
-  padding: 0em;
-  margin: 0.1em 0em 0em 0em;
+  padding: 0;
+  margin: 0.1em 0 0 0;
 }
 
 ol#posts {
-  list-style: none outside none;;
-  margin: 0em;
-  padding: 0em;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-content p{
+	margin: 0.1em;
+  padding-bottom: 0.1em;
 }
 
 .post h2 a{
@@ -144,53 +149,45 @@ ol#posts {
 	color: #487291;
 }
 
-.post_info {
+ol#posts .more-link{
+	text-decoration: none;
+	font-size: 80%;
+  color: #558caa;
+}
+
+
+.infobar {
 	list-style: none outside none;
   overflow: auto;
 	font-size: 80%;
   color: #797979;
-  padding: 0em;
+  padding: 0.1em 0 0 0;
 }
 
-.post_info li{
+.infobar li{
 	display: block;
-	padding: 0.0em 0.2em;
+	padding: 0 0.2em;
 }
 
-.post_info a{
+.infobar a{
 	text-decoration: none;
   color: #558caa;
 }
 
-.post_info .date{
+.infobar .avatar{
+	float: left;
+  padding: 1em;
+}
+
+.infobar .category{
   float: left;
 }
 
-.post_info .date:before{
-	content: "≡ "
-}
-
-.post_info .author{
+.infobar .tags{
   float: left;
 }
 
-.post_info .author:before{
-	content: "• "
-}
-
-.post_info .post_edit{
-  float: right;
-}
-
-.post_info .category{
-  float: left;
-}
-
-.post_info .tags{
-  float: left;
-}
-
-.post_info .comments_count{
+.infobar .comments_count{
   float: right;
 }
 
@@ -201,11 +198,30 @@ li.post, div.post {
 .post img {
 }
 
-.post_content p{
-	margin: 0.1em;
-  padding-bottom: 0.5em;
+/* Shared with comments */
+
+.info_type {
+	float: left;
 }
 
+.date{
+  float: left;
+}
+.date:before{
+	content: "≡ "
+}
+
+.author{
+  float: left;
+}
+
+.author:before{
+	content: "• "
+}
+
+.edit{
+  float: right;
+}
 
 div.post {
 }
@@ -214,8 +230,8 @@ div.post {
 	color: #222;
   clear: both;
   overflow: hidden;
-  padding: 0em;
-  margin: 0em;
+  padding: 0;
+  margin: 0;
 }
 
 /* pagination */
@@ -256,7 +272,7 @@ div.post {
 
 #sidebar h3{
 	font-size: 150%;
-  padding: 0em;
+  padding: 0;
 }
 
 #sidebar a:hover{
@@ -312,8 +328,8 @@ div.post {
 
 #nav_page, #nav_subpage {
 	list-style: none;
-	padding: 0em;
-	margin: 0em;
+	padding: 0;
+	margin: 0;
 	clear: both;
 }
 
@@ -341,12 +357,12 @@ div.post {
 
 #header .current_page_item{
 	border-radius: 3px;
-  box-shadow: 0em 0em 0.4em 0.0em #B7B7B7;
+  box-shadow: 0 0 0.4em 0 #B7B7B7;
 }
 
 #header .current_page_parent{
 	border-radius: 3px;
-  box-shadow: 0em 0em 0.4em 0.0em #B7B7B7;
+  box-shadow: 0 0 0.4em 0 #B7B7B7;
 }
 
 #nav a:hover{
@@ -372,12 +388,55 @@ div.post {
   font-size: 100%;
 }
 
-#comment {
+#commentlist {
+  list-style: none outside none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment{
+	background :#eee;
+	border-bottom: 1px solid #e1e3e8;
+	color:#111;
+  margin-bottom: 0.5em;
+  padding: 0;
+  overflow: auto;
+}
+
+.comment p {
+  padding: 0;
+  margin: 0.5em;
+
+}
+
+.avatar{
+  padding: 0.2em;
+  float: left;
+  display: Block;
+}
+
+input[type=text]{
+	border: 1px solid #a4a4a4;
+	padding: 0.2em;
+  margin: 0;
+	border-radius: 3px;
+	color:#111;
+}
+
+input[type=submit]{
+	border: 1px solid #a4a4a4;
+	padding: 0.2em;
+  margin: 0;
+	border-radius: 3px;
+	color:#111;
+}
+
+#comment-area {
   width: 90%;
   font-size: 120%;
 	border: 1px solid #a4a4a4;
-	padding: 0.5em;
-	border-radius:6px;
+	padding: 0.2em;
+	border-radius: 3px;
 	color:#111;
 }
 
@@ -409,8 +468,8 @@ div.post {
 }
 
 #copyright {
-	padding: 0em 0.3em;
-  margin: 0em 1em;
+	padding: 0 0.3em;
+  margin: 0 1em;
   width: auto;
   height: auto;
   color: #acacac;

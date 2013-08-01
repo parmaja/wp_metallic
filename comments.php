@@ -12,33 +12,34 @@ if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $p
 ?>
 
 <?php if ( comments_open() ) { ?>
-	<a href="#postcomment"><?php _e("Leave a comment"); ?></a>
+	<!-- a href="#postcomment"><?php _e("Leave a comment"); ?></a -->
 <?php } ?>
-</h2>
 
 <?php if ( $comments ) { ?>
 <ol id="commentlist">
 
 <?php foreach ($comments as $comment) { ?>
 	<li id="comment-<?php comment_ID() ?>">
-  <?php echo get_avatar( $comment, 32 ); ?>  
-	<?php comment_text() ?>
-	<p><?php comment_type(__('Comment'), __('Trackback'), __('Pingback')); ?> <?php _e('by'); ?> <?php comment_author_link() ?> &#8212; <?php comment_date() ?> @ <a href="#comment-<?php comment_ID() ?>"><?php comment_time() ?></a><?php edit_comment_link(__("Edit This"), ' |'); ?></p>
+    <div class="comment">
+		  <div class="avatar"><?php echo get_avatar( $comment, 48); ?></div>
+  	  <ul class="infobar">
+			  <li class="author"><?php comment_author_link(); ?></li>
+	    	<li class="date"><?php comment_date(); ?> <?php comment_time(); ?></li>
+			  <li class="info_type"><?php comment_type(__(''), __('Trackback'), __('Pingback')); ?></li>
+	  	  <li class="edit"><?php edit_comment_link(__('Edit')); ?></li>
+    	</ul>
+			<?php comment_text() ?>
+    </div>
+    <hr class="skip" />
 	</li>
 
-<?php }   ?>
+<?php } ?>
 
 </ol>
 
 <?php } else { // If there are no comments yet ?>
 	<p><?php _e('No comments yet.'); ?></p>
 <?php } ?>
-
-<p><?php comments_rss_link(__('<abbr title="Really Simple Syndication">RSS</abbr> feed for comments on this post.')); ?>
-<?php if ( pings_open() ) { ?>
-	<a href="<?php trackback_url() ?>" rel="trackback"><?php _e('TrackBack <abbr title="Universal Resource Locator">URL</abbr>'); ?></a>
-<?php } ?>
-</p>
 
 <?php if ( comments_open() ) { ?>
 
@@ -50,7 +51,7 @@ if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $p
 
 <?php if ( $user_ID ) { ?>
 
-<p><?php printf(__('Logged in as %s.'), '<a href="'.get_option('siteurl').'/wp-admin/profile.php">'.$user_identity.'</a>'); ?> <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="<?php _e('Log out of this account') ?>"><?php _e('Logout &raquo;'); ?></a></p>
+<p class="infobar"><?php printf(__('Logged in as %s.'), '<a href="'.get_option('siteurl').'/wp-admin/profile.php">'.$user_identity.'</a>'); ?> <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="<?php _e('Log out of this account') ?>"><?php _e('Logout &raquo;'); ?></a></p>
 
 <?php } else { ?>
 
@@ -67,7 +68,7 @@ if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $p
 
 <!--<p><small><strong>XHTML:</strong> <?php printf(__('You can use these tags: %s'), allowed_tags()); ?></small></p>-->
 
-<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+<p><textarea name="comment" id="comment-area" cols="100%" rows="10" tabindex="4"></textarea></p>
 
 <p><input name="submit" type="submit" id="submit" tabindex="5" value="<?php echo attribute_escape(__('Submit Comment')); ?>" />
 <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
@@ -75,6 +76,11 @@ if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $p
 <?php do_action('comment_form', $post->ID); ?>
 
 </form>
+<p class="infobar"><?php comments_rss_link(__('<abbr title="Really Simple Syndication">RSS</abbr> Feed for comments.')); ?>
+<?php if ( pings_open() ) { ?>
+	<a href="<?php trackback_url() ?>" rel="trackback"><?php _e('TrackBack <abbr title="Universal Resource Locator">URL</abbr>'); ?></a>
+<?php } ?>
+</p>
 
 <?php } // If registration required and not logged in ?>
 
