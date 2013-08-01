@@ -23,8 +23,9 @@
     </ul>
     <hr class="skip" />
   </li>
-
+	<?php } ?>
 </ol>
-<?php comments_template(); } ?>
+
+<?php comments_template(); ?>
 
 <?php } ?>
