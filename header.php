@@ -30,7 +30,7 @@
       <div id="logo_header">
 				<img id="logo_image" src="<?php bloginfo('stylesheet_directory'); ?>/images/logo.png" alt="" />
         <div id="logo_text">
-	  			<p id="title"><a href=<?php print '"'.get_bloginfo('url').'">'.get_bloginfo('name'); ?></a></p>
+	  			<p class="title" id="title"><strong><a href=<?php print '"'.get_bloginfo('url').'">'.get_bloginfo('name'); ?></a></strong></p>
   	      <p id="description"><?php print get_bloginfo('description') ?></p>
         </div>
 			</div>

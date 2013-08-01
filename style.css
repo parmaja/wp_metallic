@@ -55,7 +55,7 @@ a:hover{
 }
 
 #logo_header{
-  padding: 0.2em;
+  padding: 0.5em 0.5em 0 0.5em;
 	overflow: auto;
   height: auto;
   display: table;
@@ -76,9 +76,9 @@ a:hover{
   vertical-align: middle;
 }
 
-#header h1{
-	font-size: 200%;
-	margin: 0.2em 0;
+#title{
+	font-size: 300%;
+ 	margin: 0.3em 0;
 	text-shadow: 0.1em 0.1em 0.1em #242424;
 }
 
@@ -201,8 +201,12 @@ ol#posts .more-link{
   float: right;
 }
 
-li.post, div.post {
+li.post{
 	clear: both;
+  overflow: hidden;
+}
+
+div.post {
 }
 
 .post img {
