@@ -236,16 +236,16 @@ div.post {
 
 #pagination {
   list-style: none;
-  margin: 0.1em 0.1em;
+  margin: 0.5em 0.1em 0;
   padding: 0.1em 0.5em;
-  background: #000;
   min-height: 1em;
   overflow: auto;
-  background: #111;
+	border-top: 1px solid #ccc;
+	color: #000;
+  background: #eee;
 }
 
 #pagination a{
-	color: #fff;
   text-decoration: none;
 }
 
