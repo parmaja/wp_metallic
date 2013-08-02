@@ -1,10 +1,10 @@
 	<?php include('post.inc.php'); ?>
 
-  <?php if (will_paginate()) { ?>
-    <ul id="pagination">
-      <li class="previous"><?php posts_nav_link('','','&laquo; Previous Entries') ?></li>
-      <li class="future"><?php posts_nav_link('','Next Entries &raquo;','') ?></li>
-    </ul>
-  <?php } ?>
+  <ul id="pagination">
+    <li class="previous-posts"><?php previous_posts_link('&laquo; Previous') ?></li>
+    <li class="next-posts"><?php next_posts_link('Next &raquo;') ?></li>
+  </ul>
 
-  <?php	get_footer(); ?>
+  <?php	get_footer();
+  /* << &laquo   &raquo >>  */
+  ?>

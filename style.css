@@ -78,17 +78,14 @@ a:hover{
 #title{
 	font-size: 300%;
  	margin: 0.3em 0;
+  line-height: 1em;
 	text-shadow: 0.1em 0.1em 0.1em #242424;
 }
 
 #description{
   font-size: 80%;
+  line-height: 1em;
   color: #d8d8d8;
-}
-
-#header h4{
-	font-size: 100%;
-	margin: 0;
 }
 
 #header a{
@@ -254,7 +251,9 @@ div.post {
   margin: 0.1em 0.1em;
   padding: 0.1em 0.5em;
   background: #000;
+  min-height: 1em;
   overflow: auto;
+  background: #111;
 }
 
 #pagination a{
@@ -268,12 +267,12 @@ div.post {
 #pagination li {
 }
 
-#pagination .previous {
+.previous-posts {
   float: left;
   text-align: left;
 }
 
-#pagination .future {
+.next-posts {
   float: right;
   text-align: right;
 }
@@ -313,6 +312,7 @@ div.post {
 	font-size: 80%;
   text-shadow: none;
   color: green;
+  padding-left: 2em; /* not sure if it is good, it is the left of widget list item*/
 	text-decoration: none;
 }
 
@@ -320,7 +320,7 @@ div.post {
 
 #sidebar>ul>li>ul>li>ul {
 	font-size: 80%;
-  padding-left: 0.5em;
+  padding-left: 1em;
 }
 
 #sidebar >ul >li a{
