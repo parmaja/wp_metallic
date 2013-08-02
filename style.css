@@ -5,7 +5,7 @@
   Author: PARMAJA
   Author URI: http://www.parmaja.com
   Licence: LGPL
-  Description: CSS3 them without any images inside, plain and simple, right side column, and work find for right to left languages
+  Description: CSS3 theme without any images inside, plain and simple, right side column and work for right to left languages
   Tags: css3, simple, plain, clean, fixed width, no-images, widget-ready, widgets, right sidebar, two columns, valid XHTML, valid CSS, blank-slate, rtl, right-to-left
 */
 
@@ -77,8 +77,8 @@ a:hover{
 
 #title{
 	font-size: 300%;
- 	margin: 0.3em 0;
-  line-height: 1em;
+ 	margin: auto 0;
+  line-height: 100%;
 	text-shadow: 0.1em 0.1em 0.1em #242424;
 }
 
@@ -90,7 +90,7 @@ a:hover{
 
 #header a{
 	text-decoration: none;
-  color: white;
+  color: #fff;
 }
 
 #content {
@@ -99,19 +99,15 @@ a:hover{
 }
 
 /**      main content     */
+
 #main { /*do not put padding or margin*/
   float: left;
-  background: white;
+  background: #fff;
 }
 
 #inside {
 	width: auto;
   padding: 1em;
-}
-
-#main h1 {
-  padding: 0;
-  margin: 0.1em 0 0 0;
 }
 
 #main h2 {
@@ -121,17 +117,11 @@ a:hover{
 }
 
 /* titles are h2 on homepage and h1 for internal */
-#main h1.title,
 #main h2.title {
   font-size: 130%;
 }
 #main h2.title {
 	border-bottom: 1px solid #ccc;
-}
-
-#main h3 {
-  padding: 0;
-  margin: 0.1em 0 0 0;
 }
 
 ol#posts {
@@ -140,9 +130,13 @@ ol#posts {
   padding: 0;
 }
 
+.post-content{
+  padding-top: 0.5em;
+}
+
 .post-content p{
 	margin: 0.1em;
-  padding-bottom: 0.1em;
+  padding-bottom: 0.3em;
 }
 
 .post h2 a{
@@ -161,7 +155,6 @@ ol#posts .more-link{
   color: #558caa;
 }
 
-
 .infobar {
 	list-style: none outside none;
   overflow: auto;
@@ -178,11 +171,6 @@ ol#posts .more-link{
 .infobar a{
 	text-decoration: none;
   color: #558caa;
-}
-
-.infobar .avatar{
-	float: left;
-  padding: 1em;
 }
 
 .infobar .category{
@@ -257,14 +245,8 @@ div.post {
 }
 
 #pagination a{
-	color: white;
+	color: #fff;
   text-decoration: none;
-}
-
-#pagination ul {
-}
-
-#pagination li {
 }
 
 .previous-posts {
@@ -403,7 +385,7 @@ div.post {
 
 #commentlist {
   list-style: none outside none;
-  padding: 0;
+  padding: 0.5em 0 0 0;
   margin: 0;
 }
 
