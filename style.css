@@ -23,8 +23,7 @@ body {
   width: auto;
   padding: 0px;
   margin:  0px;
-	font: 10pt Tahoma, Verdana, Arial, sans-serif;
-	line-height:150%;
+	font: 10pt/1.3 Tahoma, Verdana, Arial, sans-serif;
   background: #d3d3d3;
   color: #111;
   max-width: 100%; /* Good to be flexible */
