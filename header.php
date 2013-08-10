@@ -11,7 +11,7 @@
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
 	<link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
-	<link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.css" type='text/css' />
+	<link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' />
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
