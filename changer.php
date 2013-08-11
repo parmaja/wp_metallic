@@ -6,7 +6,7 @@ use phpColors\Color;
 
 class Changer {
 	public $ini;
-	private $func = array('color'=>'func_color', 'change'=>'func_change', 'gradient'=>'func_gradient');
+	private $func = array('value'=>'func_value', 'color'=>'func_color', 'gradient'=>'func_gradient');
 
 
   function func_color($color, $amount = 0){
@@ -21,6 +21,10 @@ class Changer {
     }
   }
 
+  function func_value($value){
+  	return $value;
+  }
+
   public function call($name, $arg) {
 	  if (array_key_exists($name, $this->func)) {
 		  $real_func = $this->func[$name];
@@ -32,10 +36,14 @@ class Changer {
         if (is_array($arg)) {
 	        foreach($arg as $value) {
           	$value = trim($value);
-        	  if (substr($value,1)=='$') {
+            $fc = strtolower(substr($value, 1));
+        	  if ($fc=='$') {
             	$value = $this->ini[$value];
-            } elseif (substr($value,1)=='#') {
-            } elseif (is_integer($value)) {
+            } elseif ($fc=='#') {
+            } elseif (is_int($value)) {
+            } elseif (is_numeric($value)) {
+            } elseif ($fc > 'a' and $fc < 'z') {
+            	$value = $this->ini[$value];
             } else {
             }
           }
