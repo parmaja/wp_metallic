@@ -31,40 +31,6 @@ if ( function_exists('register_sidebar') )
   ));
 }
 
-/*
-	Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
-*/
-
-function metallic_load_ini($name) {
-	$styleini = array();
-  $ini = dirname(__FILE__).'\\'.$name.'.style.ini';
-  if (file_exists($ini))
-		$styleini = parse_ini_file($ini, true);
-  else
-  	$styleini = array();
-  return $styleini;
-}
-
-function metallic_generate_css($name) {
-	$styleini = metallic_load_ini($name);
-  $file= dirname(__FILE__).'\\style.css';
-  if (file_exists($file)) {
-		$style = file_get_contents($file);
-	  $css = strtr($style, $styleini['css']);
-  	$css_dir = get_stylesheet_directory() . '/css/';
-	  file_put_contents($css_dir.'style.css', $css, LOCK_EX);
-  }
-  else
-  	'';
-}
-
-function metallic_customize_save(){
-	$color = get_theme_mod('color_scheme');
-	metallic_generate_css('gray');
-}
-add_action('customize_save', 'metallic_customize_save');
-
-
 function metallic_customize_register($wp_customize) {
 
 	$wp_customize->add_section('metallic_color_scheme', array(
@@ -108,4 +74,45 @@ function metallic_customize_register($wp_customize) {
 
 add_action('customize_register', 'metallic_customize_register');
 
+function metallic_customize_save(){
+	$color = get_theme_mod('color_scheme');
+	metallic_generate_css('gray');
+}
+
+add_action('customize_save', 'metallic_customize_save');
+
+/*
+	Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
+*/
+
+include('changer.ini');
+
+function metallic_load_ini($name) {
+	$styleini = array();
+  $ini = dirname(__FILE__).'\\'.$name.'.style.ini';
+  if (file_exists($ini))
+		$styleini = parse_ini_file($ini, true);
+  else
+  	$styleini = array();
+  return $styleini;
+}
+
+function metallic_replace($matches) {
+	global $css_changer;
+	return $css_changer->call($matches[1], $matches[2]);
+}
+
+function metallic_generate_css($name) {
+	global $css_changer;
+	$css_changer->ini = metallic_load_ini($name);
+  $file= dirname(__FILE__).'\\style.css';
+  if (file_exists($file)) {
+		$style = file_get_contents($file);
+		$css = preg_replace_callback('/\$(.*)\((.*)\)/i', 'metallic_replace', $style);
+  	$css_dir = get_stylesheet_directory() . '/css/';
+	  file_put_contents($css_dir.'style.css', $css, LOCK_EX);
+  }
+  else
+  	'';
+}
 ?>
