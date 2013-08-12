@@ -15,3 +15,7 @@ Metallic WordPress Theme
 **Disadvantages**
 
 * CSS3, not all browser can show it, but it still works
+
+**Install**
+
+Put all file here \wp-content\themes\metallic
