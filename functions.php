@@ -85,7 +85,7 @@ add_action('customize_save', 'metallic_customize_save');
 	Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
 */
 
-include('changer.ini');
+include('inc/changer.php');
 
 function metallic_load_ini($name) {
 	$styleini = array();
@@ -104,7 +104,7 @@ function metallic_replace($matches) {
 
 function metallic_generate_css($name) {
 	global $css_changer;
-	$css_changer->ini = metallic_load_ini($name);
+	$css_changer->values = metallic_load_ini($name);
   $file= dirname(__FILE__).'\\style.css';
   if (file_exists($file)) {
 		$style = file_get_contents($file);
