@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Style Changer
+ *
+ * @license    LGPL
+ * @author    Zaher Dirkey <zaher at parmaja dot com>
+ * @author    Louy Alakkad
+ **/
 include('color.php');
 
 use phpColors\Color;

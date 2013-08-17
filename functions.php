@@ -1,11 +1,8 @@
 <?php
 /**
-* Wordpress Naked, a very minimal wordpress theme designed to be used as a base for other themes.
-*
 * @licence LGPL
-* @author Darren Beale - http://siftware.co.uk - bealers@gmail.com - @bealers
-* 
-* Project URL http://code.google.com/p/wordpress-naked/
+*
+* Based on Naked project URL http://code.google.com/p/wordpress-naked/
 */
 
 /**
