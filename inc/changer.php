@@ -97,7 +97,19 @@ class Changer {
 	}
 
   public function generate($style) {
-  	return preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $style);
+  	$this->_comments = array();
+  	
+  	$return = preg_replace_callback('/(\/\*.*\*\/)/i', array($this, '_replace_comments'), $style);
+  	$return = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $return);
+  	
+  	return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
+  }
+  
+  private $_comments = array();
+  function _replace_comments($match) {
+  	$key = '/*CCTMP'.count($this->_comments).'*/';
+  	$this->_comments[$key] = $match[1];
+  	return $key;
   }
 }
 
