@@ -35,7 +35,7 @@ class Changer {
     'gradient'=>'func_gradient'
     );
 
-  function __construct($values) {
+  function __construct($values = array()) {
   	if (is_array($values))
 	  	$this->values = $values;
   }
@@ -58,7 +58,7 @@ class Changer {
 
   function func_mix($color1, $color2, $amount = 50){
     $co = new Color($color1);
-    return '#'.$co->mix(abs($amount));
+    return '#'.$co->mix($color2, $amount);
   }
 
   public function call($name, $arg) {
@@ -70,11 +70,10 @@ class Changer {
 	        $arg = explode(',', $arg);
         }
         if (is_array($arg)) {
-	        foreach($arg as $value) {
-          	$value = trim($value);
-            $fc = strtolower(substr($value, 1));
+	        foreach($arg as &$value) {
+	        	$value = trim($value);
+            $fc = strtolower(substr($value, 1)); //First Char
         	  if ($fc=='$') {
-            	$value = $this->values[$value];
             } elseif ($fc=='#') {
             } elseif (is_int($value)) {
             } elseif (is_numeric($value)) {
@@ -85,6 +84,7 @@ class Changer {
               	$value = $this->colors[$value];
             } else {
             }
+
           }
 		      return call_user_func_array(array($this, $real_func), $arg);
         }

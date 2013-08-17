@@ -1,4 +1,7 @@
 <?php
+/*
+	ref: https://github.com/mexitek/phpColors
+*/
 
 namespace phpColors;
 
@@ -220,12 +223,12 @@ class Color {
     }
 
     /**
-     * Given a Two HEX values, returns a mixed color. If no desired amount provided, then the color mixed by this ratio
-     * @param int $amount = 0..100
+     * Given a HEX value, returns a mixed color. If no desired amount provided, then the color mixed by this ratio
+     * @param int $amount = -50..+50
      * @return string mixed HEX value
      */
-    public function mix($hex1, $hex2, $amount = 50){
-        $rgb2 = hexToRgb($hex2);
+    public function mix($hex2, $amount = 0){
+        $rgb2 = self::hexToRgb($hex2);
         $mixed = $this->_mix($this->_rgb, $rgb2, $amount);
         // Return as HEX
         return self::rgbToHex($mixed);
@@ -410,16 +413,16 @@ class Color {
      *
      * 	ported from http://phpxref.pagelines.com/nav.html?includes/class.colors.php.source.html
      */
-    private function _mix($rgb1, $rgb2, $amount = 50) {
+    private function _mix($rgb1, $rgb2, $amount = 0) {
 
-         $r1 = $amount / 100 * 2;
+         $r1 = ($amount + 50) * 2 / 100;
          $r2 = 2 - $r1;
 
-         $rmix = (($rgb1['red'] * $r1) + ($rgb2['red'] * $r2)) / 2;
-         $gmix = (($rgb1['green'] * $r1) + ($rgb2['green'] * $r2)) / 2;
-         $bmix = (($rgb1['blue'] * $r1) + ($rgb2['blue'] * $r2)) / 2;
+         $rmix = (($rgb1['R'] * $r1) + ($rgb2['R'] * $r2)) / 2;
+         $gmix = (($rgb1['G'] * $r1) + ($rgb2['G'] * $r2)) / 2;
+         $bmix = (($rgb1['B'] * $r1) + ($rgb2['B'] * $r2)) / 2;
 
-         return array('red' => $rmix, 'green' => $gmix, 'blue' => $bmix);
+         return array('R' => $rmix, 'G' => $gmix, 'B' => $bmix);
      }
 
     /**

@@ -5,18 +5,27 @@
 
 include('changer.php');
 
+$values = array(
+  'background'=>'#eee',
+  'foreground'=>'#111'
+);
+
 $style = 'body {
 	background: $color(white, -1);
   color: $color(#cccccc, -1);
 }
 
 div {
-	background: $color($background, -1);
-  color: $mix(#ccc, #f00, -1);
+  /*  background: $color(bg, +1); */
+	background: $color(background, -1);
+  mixed-color: $mix(#ccc, #f00, 0);
 }
 ';
 
+echo "<code>";
 echo "\n------------------------------------------------\n\n";
-echo $css_changer->generate($style);
 
+$css_changer = new changer($values);
+echo $css_changer->generate($style);
+echo "</code>";
 ?>
