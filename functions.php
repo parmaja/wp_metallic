@@ -97,18 +97,13 @@ function metallic_load_ini($name) {
   return $styleini;
 }
 
-function metallic_replace($matches) {
-	global $css_changer;
-	return $css_changer->call($matches[1], $matches[2]);
-}
-
 function metallic_generate_css($name) {
-	global $css_changer;
+	$css_changer = new Changer;
 	$css_changer->values = metallic_load_ini($name);
   $file= dirname(__FILE__).'\\style.css';
   if (file_exists($file)) {
 		$style = file_get_contents($file);
-		$css = preg_replace_callback('/\$(.*)\((.*)\)/i', 'metallic_replace', $style);
+		$css = $css_changer->generate($style);
   	$css_dir = get_stylesheet_directory() . '/css/';
 	  file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
