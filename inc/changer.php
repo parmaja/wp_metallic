@@ -59,16 +59,16 @@ class Changer {
   	if ($amount == 0)
     	return $color;
   	else {
-	    $co = new Color($color);
-      if ($amount > 0)
-	      return '#'.$co->lighten($amount);
-      else
-	      return '#'.$co->darken(abs($amount));
+		  $co = new Color($color);
+  	  if ($amount > 0)
+	  	  return '#'.$co->lighten($amount);
+	    else
+		    return '#'.$co->darken(abs($amount));
     }
   }
 
   private function func_get($value){
-  	return $value;
+    return $value; //as it
   }
 
   private function func_def($name, $value){
@@ -112,13 +112,19 @@ class Changer {
       if(is_callable(array($this, $real_func)))
       {
     	  if (is_string($arg)) {
-	        $arg = explode(',', $arg);
-        }
-        if (is_array($arg)) {
-	        foreach($arg as &$value) {
+	        $values = explode(',', $arg);
+        } else
+	        $values = $arg;
+
+        if (is_array($values)) {
+	        foreach($values as &$value) {
           	$value = $this->check_value($value);
           }
-		      return call_user_func_array(array($this, $real_func), $arg);
+          try {
+			      return call_user_func_array(array($this, $real_func), $values);
+          } catch (Exception $e) {
+      	    echo 'Error : '.$name.'('.$arg.') > ',  $e->getMessage(), "\n";
+          }
         }
       }
 	  }

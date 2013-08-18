@@ -16,17 +16,13 @@ Based on naked
 */
 
 /*
-  todo:PHP on the fly
-	header("Content-type: text/css; charset: UTF-8");
-	header('Content-type: text/css');
-	header('Cache-control: must-revalidate')
+  Back $set(back, #d3d3d3)
+  Fore $set(fore, #111)
+  Ink Color $set(ink, #111155)
+  Canvas Color $set(cavas, #fff)
+  Highlight $set(highlight, #fff)
 */
 
-/*
-  test $color(#555, +10);
-  test $color(#666, +10);
-  test $color(background, -10);
-*/
 html {
 }
 
@@ -35,10 +31,9 @@ body {
   width: auto;
   padding: 0px;
   margin:  0px;
-	font: 10pt/1.3 Tahoma, Verdana, Arial, sans-serif;
-  background: #d3d3d3;
-/*  background: $color(bg, +1); */
-  color: #111;
+  font: 10pt/1.3 Tahoma, Verdana, Arial, sans-serif;
+  background: $get(back);
+  color: $get(fore);
   max-width: 100%; /* Good to be flexible */
 }
 

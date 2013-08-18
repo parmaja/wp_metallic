@@ -7,7 +7,7 @@
   this is a test file
 */
 
-error_reporting( E_ALL);
+error_reporting(E_ALL);
 ini_set('display_errors', true);
 
 include('changer.php');
@@ -21,12 +21,18 @@ $style = '
 body {
   background: $set(background, $fff);
   color: $color(#cccccc, 0);
-/*  color: $color(background(d,e), 0); this not work yet */
+/*  color: $color($background(d,e), 0); this not work yet */
 }
+
+/**
+	Example:
+	  background: $color(bg, +1);
+*/
 
 div {
   /*  background: $color(bg, +1); */
   background: $color(background, -1);
+  background2: $get(background);
   mixed-color1: $mix(#ccc, #f00, 0);
   mixed-color2: $mix(#ccc, $color(background, -1), 0);
 }
