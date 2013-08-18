@@ -137,7 +137,7 @@ class Changer {
   public function generate($style) {
   	$this->_comments = array();
   	
-  	$return = preg_replace_callback('/(\/\*.*\*\/)/i', array($this, '_replace_comments'), $style);
+  	$return = preg_replace_callback('/(\/\*.*\*\/)/is', array($this, '_replace_comments'), $style);
   	$return = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $return);
   	
   	return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
