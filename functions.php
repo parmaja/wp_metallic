@@ -1,6 +1,11 @@
 <?php
 /**
-* @licence LGPL
+*  This file is part of the "Metallic Theme" for wordpress
+*
+* @license   LGPL (http://www.gnu.org/licenses/gpl.html)
+* @url			 http://www.github.com/parmaja/wp_metallic
+* @author    Zaher Dirkey <zaher at parmaja dot com>
+*
 *
 * Based on Naked project URL http://code.google.com/p/wordpress-naked/
 */
@@ -8,7 +13,6 @@
 /**
 * register_sidebar()
 *
-*@desc Registers the markup to display in and around a widget
 */
 if ( function_exists('register_sidebar') )
 {
@@ -73,7 +77,7 @@ add_action('customize_register', 'metallic_customize_register');
 
 function metallic_customize_save(){
 	$color = get_theme_mod('color_scheme');
-	metallic_generate_css('gray');
+	metallic_generate_css($color);
 }
 
 add_action('customize_save', 'metallic_customize_save');
@@ -84,24 +88,14 @@ add_action('customize_save', 'metallic_customize_save');
 
 include('inc/changer.php');
 
-function metallic_load_ini($name) {
-	$styleini = array();
-  $ini = dirname(__FILE__).'\\'.$name.'.style.ini';
-  if (file_exists($ini))
-		$styleini = parse_ini_file($ini, true);
-  else
-  	$styleini = array();
-  return $styleini;
-}
-
 function metallic_generate_css($name) {
 	$css_changer = new Changer;
-	$css_changer->values = metallic_load_ini($name);
+	$css_changer->load_values_ini(dirname(__FILE__).'\\'.$name.'.style.ini');
   $file= dirname(__FILE__).'\\style.css';
   if (file_exists($file)) {
 		$style = file_get_contents($file);
-		$css = $css_changer->generate($style);
   	$css_dir = get_stylesheet_directory() . '/css/';
+		$css = $css_changer->generate($style);
 	  file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
   else

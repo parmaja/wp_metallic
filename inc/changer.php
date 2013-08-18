@@ -1,11 +1,18 @@
 <?php
 /**
- * Style Changer
- *
- * @license    LGPL
- * @author    Zaher Dirkey <zaher at parmaja dot com>
- * @author    Louy Alakkad
- **/
+*
+* Style Changer
+*
+* This file is part of the "Metallic Theme" for wordpress
+*
+* @license   LGPL (http://www.gnu.org/licenses/gpl.html)
+* @url			 http://www.github.com/parmaja/wp_metallic
+* @author    Zaher Dirkey <zaher at parmaja dot com>
+*
+* @contributor  Louy Alakkad
+*
+*/
+
 include('color.php');
 
 use phpColors\Color;
@@ -35,7 +42,9 @@ class Changer {
   );
 
 	private $functions = array(
-  	'value'=>'func_value',
+  	'get'=>'func_get',
+    'set'=>'func_set',
+    'def'=>'func_def',
     'color'=>'func_color',
     'mix'=>'func_mix',
     'gradient'=>'func_gradient'
@@ -46,7 +55,7 @@ class Changer {
 	  	$this->values = $values;
   }
 
-  function func_color($color, $amount = 0){
+  private function func_color($color, $amount = 0){
   	if ($amount == 0)
     	return $color;
   	else {
@@ -58,16 +67,46 @@ class Changer {
     }
   }
 
-  function func_value($value){
+  private function func_get($value){
   	return $value;
   }
 
-  function func_mix($color1, $color2, $amount = 50){
+  private function func_def($name, $value){
+	  if (array_key_exists($name, $this->values))
+  	  $this->values[$name] = $value;
+  	return $this->values[$name];
+  }
+
+  private function func_set($name, $value){
+  	$this->values[$name] = $value;
+  	return $value;
+  }
+
+  private function func_mix($color1, $color2, $amount = 0) {
     $co = new Color($color1);
     return '#'.$co->mix($color2, $amount);
   }
 
+  private function check_value($value) {
+	  $value = trim($value);
+    $fc = strtolower(substr($value, 1)); //First Char
+    if ($fc=='$') {
+//			$value = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $value);
+    } elseif ($fc=='#') {
+    } elseif (is_int($value)) {
+    } elseif (is_numeric($value)) {
+    } elseif ($fc > 'a' and $fc < 'z') {
+			if (array_key_exists($value, $this->values))
+	      $value = $this->values[$value];
+      elseif (array_key_exists($value, $this->colors))
+        $value = $this->colors[$value];
+    } else {
+    }
+    return $value;
+  }
+
   public function call($name, $arg) {
+//  	echo '>>>'.$name.">>>".$arg."\n";
 	  if (array_key_exists($name, $this->functions)) {
 		  $real_func = $this->functions[$name];
       if(is_callable(array($this, $real_func)))
@@ -77,20 +116,7 @@ class Changer {
         }
         if (is_array($arg)) {
 	        foreach($arg as &$value) {
-	        	$value = trim($value);
-            $fc = strtolower(substr($value, 1)); //First Char
-        	  if ($fc=='$') {
-            } elseif ($fc=='#') {
-            } elseif (is_int($value)) {
-            } elseif (is_numeric($value)) {
-            } elseif ($fc > 'a' and $fc < 'z') {
-						  if (array_key_exists($value, $this->values))
-	            	$value = $this->values[$value];
-            	elseif (array_key_exists($value, $this->colors))
-              	$value = $this->colors[$value];
-            } else {
-            }
-
+          	$value = $this->check_value($value);
           }
 		      return call_user_func_array(array($this, $real_func), $arg);
         }
@@ -116,6 +142,14 @@ class Changer {
   	$key = '/*CCTMP'.count($this->_comments).'*/';
   	$this->_comments[$key] = $match[1];
   	return $key;
+  }
+
+  function load_values_ini($filename) {
+    if (file_exists($filename))
+		  $styleini = parse_ini_file($filename, true);
+    else
+  	  $styleini = array();
+    return $styleini;
   }
 }
 
