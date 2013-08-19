@@ -224,7 +224,7 @@ class Color {
 
     /**
      * Given a HEX value, returns a mixed color. If no desired amount provided, then the color mixed by this ratio
-     * @param int $amount = -50..+50
+     * @param int $amount = -100..0..+100
      * @return string mixed HEX value
      */
     public function mix($hex2, $amount = 0){
@@ -408,7 +408,7 @@ class Color {
      * Mix 2 rgb colors and return an rgb color
      * @param array $rgb1
      * @param array $rgb2
-     * @param int $amount
+     * @param int $amount ranged -100..0..+100
      * @return array $rgb
      *
      * 	ported from http://phpxref.pagelines.com/nav.html?includes/class.colors.php.source.html
