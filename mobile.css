@@ -1,5 +1,5 @@
 body{
-	margin:0em 0em;
+  margin:0em 0em;
 }
 
 #main {
@@ -7,7 +7,7 @@ body{
 }
 
 #container {
-	margin: 0em;
+  margin: 0em;
 }
 
 #header {
@@ -15,20 +15,23 @@ body{
 
 #sidebar {
   width: 100%;
-	position: relative;
+  position: relative;
   height: auto;
   float: left;
   overflow: hidden;
+}
+
+#sidebar {
   background: #000;
-	color: #fff;
+  color: #fff;
 }
 
 #sidebar  {
 }
 
 #sidebar a{
-	color: #fff;
-	text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 #sidebar > ul {
@@ -47,11 +50,11 @@ body{
 }
 
 .widget {
-	padding-left: 1em;
+  padding-left: 1em;
 }
 
 .post img {
-	max-width: 100%;
-	height: auto;
-	margin: auto;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
 }
