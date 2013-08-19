@@ -9,11 +9,11 @@ include('inc/changer.php');
   in the header of theme, no need to use SQL/Classes of wordpress here.
 */
 $css_changer = new changer();
-if (isset($_GET['style']) and !empty($_GET['style']))
-  $name = $_GET['style'];
+if (isset($_GET['scheme']) and !empty($_GET['scheme']))
+  $scheme = $_GET['scheme'];
 else
-  $name = 'gray'; //default;
+  $scheme = 'gray'; //default;
 
-changer_print_css_file(dirname(__FILE__).'\\style.css', dirname(__FILE__).'\\'.$name.'.style.ini');
+changer_print_css_file(dirname(__FILE__).'\\style.css', dirname(__FILE__).'\\'.$scheme.'.style.ini');
 
 ?>

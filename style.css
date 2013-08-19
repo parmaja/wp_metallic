@@ -349,11 +349,13 @@ div.post {
 #header .current_page_item{
   border-radius: 3px;
   box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
+  background: $color(title_text);
 }
 
 #header .current_page_parent{
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
+  background: $color(title_text);
 }
 
 #nav a{
@@ -364,15 +366,14 @@ div.post {
   color: $mix(title_text, highlight);
 }
 
-#header .current_page_parent a{
+#header .current_page_item a {
+  text-decoration: none;
+  color: $color(title_back);
 }
 
-#header .current_page_item a, #header .current_page_parent a {
+#header .current_page_parent a {
   text-decoration: none;
-}
-
-#header .current_page_item a:hover, #header .current_page_parent a:hover {
-  text-decoration: none;
+  color: $color(title_back);
 }
 
 .widget_tag_cloud a {

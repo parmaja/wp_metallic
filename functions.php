@@ -17,14 +17,14 @@
 if ( function_exists('register_sidebar') )
 {
   register_sidebars(1, array(
-  	'name' => 'Sidebar',
+    'name' => 'Sidebar',
     'before_widget' => '<li id="%1$s" class="widget %2$s">',
     'after_widget' => '</li>',
     'before_title' => '<div class="title">',
     'after_title' => '</div>',
   ));
   register_sidebars(1, array(
-  	'name' => 'Mobile',
+    'name' => 'Mobile',
     'before_widget' => '<li id="%1$s" class="widget %2$s">',
     'after_widget' => '</li>',
     'before_title' => '<div class="title">',
@@ -34,24 +34,24 @@ if ( function_exists('register_sidebar') )
 
 function metallic_customize_register($wp_customize) {
 
-	$wp_customize->add_section('metallic_color_scheme', array(
+  $wp_customize->add_section('metallic_color_scheme', array(
         'title'    => __('Color Scheme', 'metallic'),
         'priority' => 120,
   ));
-/*
-	$wp_customize->add_setting('metallic_theme_options[checkbox_test]', array(
+
+  $wp_customize->add_setting('metallic_theme_options[checkbox_test]', array(
         'capability' => 'edit_theme_options',
         'type'       => 'option',
     ));
 
-    $wp_customize->add_control('display_header_text', array(
+    $wp_customize->add_control('display_nav_text', array(
         'settings' => 'metallic_theme_options[checkbox_test]',
-        'label'    => __('Display Header Text'),
+        'label'    => __('Pages Navigator'),
         'section'  => 'metallic_color_scheme',
         'type'     => 'checkbox',
     ));
-*/
-		//  =============================
+
+    //  =============================
     //  = Select Color Box                =
     //  =============================
      $wp_customize->add_setting('color_scheme', array(
@@ -68,6 +68,7 @@ function metallic_customize_register($wp_customize) {
         'choices'    => array(
             'gray' => 'Gray',
             'blue' => 'Blue',
+            'green' => 'Green',
             'pink' => 'Pink',
         ),
     ));
@@ -76,29 +77,29 @@ function metallic_customize_register($wp_customize) {
 add_action('customize_register', 'metallic_customize_register');
 
 function metallic_customize_save(){
-	$color = get_theme_mod('color_scheme');
-	metallic_generate_css($color);
+  $color = get_theme_mod('color_scheme');
+  metallic_generate_css($color);
 }
 
-add_action('customize_save', 'metallic_customize_save');
+//add_action('customize_save', 'metallic_customize_save');
 
 /*
-	Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
+  Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
 */
 
 include('inc/changer.php');
 
 function metallic_generate_css($name) {
-	$css_changer = new Changer;
-	$css_changer->load_values_ini(dirname(__FILE__).'\\'.$name.'.style.ini');
+  $css_changer = new Changer;
+  $css_changer->load_values(dirname(__FILE__).'\\'.$name.'.style.ini');
   $file= dirname(__FILE__).'\\style.css';
   if (file_exists($file)) {
-		$style = file_get_contents($file);
-  	$css_dir = get_stylesheet_directory() . '/css/';
-		$css = $css_changer->generate($style);
-	  file_put_contents($css_dir.'style.css', $css, LOCK_EX);
+    $style = file_get_contents($file);
+    $css_dir = get_stylesheet_directory() . '/css/';
+    $css = $css_changer->generate($style);
+    file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
   else
-  	'';
+    '';
 }
 ?>
