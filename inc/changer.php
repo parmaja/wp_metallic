@@ -15,9 +15,9 @@
 
 /*TODO
   color(c1, c1, c2)
-  color(backcolor, 10) -> lighten
-  color(backcolor, -10) -> darker
-  color(backcolor, forecolor, 20) ->mix
+  color(backcolor, 10) -> lighten, value -100..0..100
+  color(backcolor, -10) -> darker, value -100..0..100
+  color(backcolor, forecolor, 20) ->mix , value -100..0..100
 
 */
 
@@ -54,6 +54,8 @@ class Changer {
     'set'=>'func_set',
     'def'=>'func_def',
     'color'=>'func_color',
+    'lighten'=>'func_lighten',
+    'darken'=>'func_darken',
     'mix'=>'func_mix',
     'gradient'=>'func_gradient'
     );
@@ -62,6 +64,7 @@ class Changer {
     if (is_array($values))
       $this->values = $values;
   }
+
 
   private function func_color($color, $amount = 0){
     if ($amount == 0)
@@ -73,6 +76,14 @@ class Changer {
       else
         return '#'.$co->darken(abs($amount));
     }
+  }
+
+  private function func_lighten($color, $amount = 0){
+    func_color($color, $amount);
+  }
+
+  private function func_darken($color, $amount = 0){
+    func_color($color, -$amount);
   }
 
   private function func_get($value){
@@ -158,7 +169,7 @@ class Changer {
     return $key;
   }
 
-  function load_values_ini($filename) {
+  function load_values($filename) {
     if (file_exists($filename)) {
       $styleini = parse_ini_file($filename, false);
       $this->values = $styleini;
@@ -169,6 +180,11 @@ class Changer {
   }
 }
 
-$css_changer = new Changer;
-
+function changer_print_css_file($css_file, $values_file) {
+  $css_changer = new changer();
+  if (file_exists($values_file))
+    $css_changer->load_values($values_file);
+  $style = file_get_contents($css_file);
+  echo $css_changer->generate($style);
+}
 ?>

@@ -1,6 +1,6 @@
 <?php
 /*
-	ref: https://github.com/mexitek/phpColors
+  ref: https://github.com/mexitek/phpColors
 */
 
 namespace phpColors;
@@ -193,7 +193,7 @@ class Color {
 
         return implode( '', $hex );
 
-	}
+  }
 
 
     /**
@@ -415,7 +415,7 @@ class Color {
      */
     private function _mix($rgb1, $rgb2, $amount = 0) {
 
-         $r1 = ($amount + 50) * 2 / 100;
+         $r1 = ($amount + 100) / 100;
          $r2 = 2 - $r1;
 
          $rmix = (($rgb1['R'] * $r1) + ($rgb2['R'] * $r2)) / 2;
