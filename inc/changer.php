@@ -13,6 +13,14 @@
 *
 */
 
+/*TODO
+  color(c1, c1, c2)
+  color(backcolor, 10) -> lighten
+  color(backcolor, -10) -> darker
+  color(backcolor, forecolor, 20) ->mix
+
+*/
+
 include('color.php');
 
 use phpColors\Color;

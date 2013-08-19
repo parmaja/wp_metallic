@@ -324,7 +324,6 @@ div.post {
 }
 
 #nav{
-/*  background: #3A434B; */
   clear: both;
   padding: 0.1em 1em;
   overflow: auto;
@@ -362,20 +361,20 @@ div.post {
 
 #header .current_page_item{
   border-radius: 3px;
-  box-shadow: 0 0 0.4em 0 #B7B7B7;
+  box-shadow: 0 0 0.4em 0 $mix(title_color, highlight);
 }
 
 #header .current_page_parent{
   border-radius: 3px;
-  box-shadow: 0 0 0.4em 0 #B7B7B7;
+  box-shadow: 0 0 0.4em 0 $mix(title_color, highlight);
+}
+
+#nav a{
+  color: $color(title_color);
 }
 
 #nav a:hover{
-  color: #dfe3f2;
-}
-
-#nav a:hover{
-  color: #dfe3f2;
+  color: $mix(title_color, highlight);
 }
 
 #header .current_page_parent a{
