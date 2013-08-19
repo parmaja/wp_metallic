@@ -19,7 +19,7 @@ use phpColors\Color;
 
 class Changer {
 
-	public $values = array();
+  public $values = array();
 
   public $colors = array(
     'white' => '#ffffff',
@@ -41,8 +41,8 @@ class Changer {
     'black' => '#000000'
   );
 
-	private $functions = array(
-  	'get'=>'func_get',
+  private $functions = array(
+    'get'=>'func_get',
     'set'=>'func_set',
     'def'=>'func_def',
     'color'=>'func_color',
@@ -51,19 +51,19 @@ class Changer {
     );
 
   function __construct($values = array()) {
-  	if (is_array($values))
-	  	$this->values = $values;
+    if (is_array($values))
+      $this->values = $values;
   }
 
   private function func_color($color, $amount = 0){
-  	if ($amount == 0)
-    	return $color;
-  	else {
-		  $co = new Color($color);
-  	  if ($amount > 0)
-	  	  return '#'.$co->lighten($amount);
-	    else
-		    return '#'.$co->darken(abs($amount));
+    if ($amount == 0)
+      return $color;
+    else {
+      $co = new Color($color);
+      if ($amount > 0)
+        return '#'.$co->lighten($amount);
+      else
+        return '#'.$co->darken(abs($amount));
     }
   }
 
@@ -72,14 +72,14 @@ class Changer {
   }
 
   private function func_def($name, $value){
-	  if (array_key_exists($name, $this->values))
-  	  $this->values[$name] = $value;
-  	return $this->values[$name];
+    if (array_key_exists($name, $this->values))
+      $this->values[$name] = $value;
+    return $this->values[$name];
   }
 
   private function func_set($name, $value){
-  	$this->values[$name] = $value;
-  	return $value;
+    $this->values[$name] = $value;
+    return $value;
   }
 
   private function func_mix($color1, $color2, $amount = 0) {
@@ -88,7 +88,7 @@ class Changer {
   }
 
   private function check_value($value) {
-	  $value = trim($value);
+    $value = trim($value);
     $fc = strtolower(substr($value, 1)); //First Char
     if ($fc=='$') {
 //			$value = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $value);
@@ -96,8 +96,8 @@ class Changer {
     } elseif (is_int($value)) {
     } elseif (is_numeric($value)) {
     } elseif ($fc > 'a' and $fc < 'z') {
-			if (array_key_exists($value, $this->values))
-	      $value = $this->values[$value];
+      if (array_key_exists($value, $this->values))
+        $value = $this->values[$value];
       elseif (array_key_exists($value, $this->colors))
         $value = $this->colors[$value];
     } else {
@@ -107,54 +107,56 @@ class Changer {
 
   public function call($name, $arg) {
 //  	echo '>>>'.$name.">>>".$arg."\n";
-	  if (array_key_exists($name, $this->functions)) {
-		  $real_func = $this->functions[$name];
+    if (array_key_exists($name, $this->functions)) {
+      $real_func = $this->functions[$name];
       if(is_callable(array($this, $real_func)))
       {
-    	  if (is_string($arg)) {
-	        $values = explode(',', $arg);
+        if (is_string($arg)) {
+          $values = explode(',', $arg);
         } else
-	        $values = $arg;
+          $values = $arg;
 
         if (is_array($values)) {
-	        foreach($values as &$value) {
-          	$value = $this->check_value($value);
+          foreach($values as &$value) {
+            $value = $this->check_value($value);
           }
           try {
-			      return call_user_func_array(array($this, $real_func), $values);
+            return call_user_func_array(array($this, $real_func), $values);
           } catch (Exception $e) {
-      	    echo 'Error : '.$name.'('.$arg.') > ',  $e->getMessage(), "\n";
+            echo 'Error : '.$name.'('.$arg.') > ',  $e->getMessage(), "\n";
           }
         }
       }
-	  }
+    }
   }
 
-	function changer_replace($matches) {
-		return $this->call($matches[1], $matches[2]);
-	}
+  function changer_replace($matches) {
+    return $this->call($matches[1], $matches[2]);
+  }
 
   public function generate($style) {
-  	$this->_comments = array();
-  	
-  	$return = preg_replace_callback('/(\/\*.*\*\/)/is', array($this, '_replace_comments'), $style);
-  	$return = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $return);
-  	
-  	return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
+    $this->_comments = array();
+    
+    $return = preg_replace_callback('/(\/\*.*\*\/)/isU', array($this, '_replace_comments'), $style);
+    $return = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $return);
+    
+    return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
   }
   
   private $_comments = array();
   function _replace_comments($match) {
-  	$key = '/*CCTMP'.count($this->_comments).'*/';
-  	$this->_comments[$key] = $match[1];
-  	return $key;
+    $key = '/*CCTMP'.count($this->_comments).'*/';
+    $this->_comments[$key] = $match[1];
+    return $key;
   }
 
   function load_values_ini($filename) {
-    if (file_exists($filename))
-		  $styleini = parse_ini_file($filename, true);
+    if (file_exists($filename)) {
+      $styleini = parse_ini_file($filename, false);
+      $this->values = $styleini;
+    }
     else
-  	  $styleini = array();
+      $styleini = array();
     return $styleini;
   }
 }
