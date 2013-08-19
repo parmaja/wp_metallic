@@ -39,13 +39,13 @@ function metallic_customize_register($wp_customize) {
         'priority' => 120,
   ));
 
-  $wp_customize->add_setting('metallic_theme_options[checkbox_test]', array(
+  $wp_customize->add_setting('pages_navigator', array(
         'capability' => 'edit_theme_options',
-        'type'       => 'option',
+        'type'       => 'theme_mod',
     ));
 
-    $wp_customize->add_control('display_nav_text', array(
-        'settings' => 'metallic_theme_options[checkbox_test]',
+    $wp_customize->add_control('pages_navigator', array(
+        'settings' => 'pages_navigator',
         'label'    => __('Pages Navigator'),
         'section'  => 'metallic_color_scheme',
         'type'     => 'checkbox',

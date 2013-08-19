@@ -36,6 +36,7 @@
         </div>
       </div>
 
+      <?php if (get_theme_mod('pages_navigator')) { ?>
       <div id="nav">
       <?php
         $output = "";
@@ -77,6 +78,7 @@
       </form>
     </li>
 -->
+    <?php } ?>
     </div>
     <div id="content">
       <div id="main">
