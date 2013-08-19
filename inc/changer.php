@@ -138,7 +138,7 @@ class Changer {
     $this->_comments = array();
     
     $return = preg_replace_callback('/(\/\*.*\*\/)/isU', array($this, '_replace_comments'), $style);
-    $return = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $return);
+    $return = preg_replace_callback('/\$(.*)\((.*)\)/iU', array($this, 'changer_replace'), $return);
     
     return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
   }

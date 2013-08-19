@@ -39,12 +39,12 @@ body {
 
 a{
   text-decoration: none;
-  color: #2e4a5a;
+  color: $get(highlight);
 }
 
 a:hover{
   text-decoration: none;
-  color: #46748c;
+  color: $color(highlight, 10);
 }
 
 #container {
@@ -55,7 +55,8 @@ a:hover{
 #header {
   position: relative;
   background: #535353;
-  background: linear-gradient(to bottom, #4e5056 0%,#828c95 6%,#5e616b 34%,#28343b 100%);
+/*  background: linear-gradient(to bottom, #4e5056 0%,#828c95 6%,#5e616b 34%,#28343b 100%); */
+  background: linear-gradient(to bottom, $color(title_back, 10) 0%,$color(title_back, 50) 5%,$color(title_back, 30) 30%,$color(title_back, 0) 100%);
   z-index: 999;
   text-decoration: none;
   vertical-align: middle;
@@ -87,7 +88,7 @@ a:hover{
   font-size: 300%;
    margin: auto 0;
   line-height: 100%;
-  text-shadow: 0.1em 0.1em 0.1em #242424;
+  text-shadow: 0.1em 0.1em 0.1em $color(title_back, -20);
 }
 
 #description{
@@ -98,7 +99,7 @@ a:hover{
 
 #header a{
   text-decoration: none;
-  color: #fff;
+  color: $color(title_color);
 }
 
 #content {
@@ -148,13 +149,13 @@ ol#posts {
 }
 
 .post h2 a{
-  color: #000;
+  color: $color(ink);
   text-decoration: none;
 }
 
 .post h2 a:hover {
+  color: $mix(highlight, ink, 25);
   text-decoration: none;
-  color: #487291;
 }
 
 ol#posts .more-link{
@@ -277,8 +278,13 @@ div.post {
   padding: 0;
 }
 
+#sidebar a{
+  color: $mix(highlight, ink, 0);
+  text-decoration: none;
+}
+
 #sidebar a:hover{
-  color: #6295a4;
+  color: $mix(highlight, ink, 50);
   text-decoration: none;
 }
 
@@ -313,10 +319,6 @@ div.post {
   padding-left: 1em;
 }
 
-#sidebar >ul >li a{
-  text-decoration: none;
-}
-
 .widget li{
   color: green;
 }
@@ -326,7 +328,7 @@ div.post {
   clear: both;
   padding: 0.1em 1em;
   overflow: auto;
-  border-top: 1px solid #5f6878;
+  border-top: 1px solid $mix(canvas, title_back);
 }
 
 #nav_page, #nav_subpage {
@@ -372,6 +374,10 @@ div.post {
   color: #dfe3f2;
 }
 
+#nav a:hover{
+  color: #dfe3f2;
+}
+
 #header .current_page_parent a{
 }
 
@@ -379,7 +385,7 @@ div.post {
   text-decoration: none;
 }
 
-#header .current_page_item a:hover,#header .current_page_parent a:hover {
+#header .current_page_item a:hover, #header .current_page_parent a:hover {
   text-decoration: none;
 }
 
