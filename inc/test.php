@@ -19,14 +19,14 @@ $values = array(
 
 $style = '
 body {
+  color: $color($color(#ccc, 5), 5);
   background: $set(background, $fff);
   color: $color(#cccccc, 0);
-/*  color: $color($background(d,e), 0); this not work yet */
 }
 
 /**
-	Example:
-	  background: $color(bg, +1);
+  Example:
+    background: $color(bg, +1);
 */
 
 div {
@@ -43,6 +43,8 @@ echo "\n------------------------------------------------\n\n";
 $css_changer = new changer($values);
 echo $css_changer->generate($style);
 
+$s = '10,$mix(dfdf,dsds),40';
+//var_dump(split_arg($s));
 ?>
 </pre>
 </body>

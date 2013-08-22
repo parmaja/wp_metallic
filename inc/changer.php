@@ -25,6 +25,56 @@ include('color.php');
 
 use phpColors\Color;
 
+define('REGEX_COMMAND', '/\$([a-z]*)\((.*)\)/i');
+
+function split_arg(&$code, $separator = ',')
+{
+  $ch = '';
+  $next_ch = '';
+  $l = strlen($code);
+  $i = 0;
+  $start = 0;
+  $single_quotes = 0;
+  $double_quotes = 0;
+  $parenthesis = 0;
+  $return=array();
+  while ($i < $l)
+  {
+    $ch = $code{$i};
+    if ($i + 1 < $l)
+      $next_ch = $code{$i+1};
+    else
+      $next_ch = '';
+
+    if ($ch==='"' and $double_quotes == 0)
+      $double_quotes++;
+    else if ($ch==='"' and $double_quotes > 0)
+      $double_quotes--;
+    else if ($double_quotes==0) {
+      if ($ch==='\'' and $single_quotes == 0)
+        $single_quotes++;
+      else if ($ch==='\'' and $single_quotes > 0)
+        $single_quotes--;
+      else if ($single_quotes == 0) {
+        if ($ch==='(')
+          $parenthesis++;
+        else if ($ch===')')
+          $parenthesis--;
+        else if ($parenthesis == 0) {
+          if ($ch===$separator) {
+            $return[] = substr($code, $start, $i - $start);
+            $start = $i + 1;
+          }
+        }
+      }
+    }
+    $i++;
+  }
+  if ($i>=$start)
+    $return[] = substr($code, $start, $i - $start);
+  return $return;
+}
+
 class Changer {
 
   public $values = array();
@@ -108,9 +158,9 @@ class Changer {
 
   private function check_value($value) {
     $value = trim($value);
-    $fc = strtolower(substr($value, 1)); //First Char
+    $fc = strtolower(substr($value, 0, 1)); //First Char
     if ($fc=='$') {
-//			$value = preg_replace_callback('/\$(.*)\((.*)\)/i', array($this, 'changer_replace'), $value);
+      $value = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $value);
     } elseif ($fc=='#') {
     } elseif (is_int($value)) {
     } elseif (is_numeric($value)) {
@@ -131,10 +181,9 @@ class Changer {
       if(is_callable(array($this, $real_func)))
       {
         if (is_string($arg)) {
-          $values = explode(',', $arg);
+          $values = split_arg($arg);
         } else
           $values = $arg;
-
         if (is_array($values)) {
           foreach($values as &$value) {
             $value = $this->check_value($value);
@@ -157,8 +206,8 @@ class Changer {
     $this->_comments = array();
     
     $return = preg_replace_callback('/(\/\*.*\*\/)/isU', array($this, '_replace_comments'), $style);
-    $return = preg_replace_callback('/\$(.*)\((.*)\)/iU', array($this, 'changer_replace'), $return);
-    
+    $return = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $return);
+    //((.*)?|(?R))
     return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
   }
   
