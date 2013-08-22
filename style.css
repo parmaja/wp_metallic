@@ -468,7 +468,7 @@ input[type=submit]{
   margin: 0 1em;
   width: auto;
   height: auto;
-  color: $mix(canvas_back, title_back, 80);
+  color: $mix(canvas_back, title_back, 40);
   font-size: 80%;
 }
 

@@ -19,7 +19,9 @@ $values = array(
 
 $style = '
 body {
-  color: $color($color(#ccc, 5), 5);
+  background: linear-gradient(to bottom, $color(title_back, -10) 0%,$color(title_back, 30) 5%,$color(title_back, 0) 30%,$color(title_back, -30) 100%);
+
+  color: $color($mix(#ccc, #eee), 10);
   background: $set(background, $fff);
   color: $color(#cccccc, 0);
 }

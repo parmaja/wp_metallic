@@ -14,18 +14,14 @@
 */
 
 /*TODO
-  color(c1, c1, c2)
-  color(backcolor, 10) -> lighten, value -100..0..100
-  color(backcolor, -10) -> darker, value -100..0..100
-  color(backcolor, forecolor, 20) ->mix , value -100..0..100
-
+  bug when
 */
 
 include('color.php');
 
 use phpColors\Color;
 
-define('REGEX_COMMAND', '/\$([a-z]*)\((.*)\)/i');
+define('REGEX_COMMAND', '/\$([a-z]*)\((.*)\)/iU');
 
 function split_arg(&$code, $separator = ',')
 {
@@ -101,8 +97,8 @@ class Changer {
 
   private $functions = array(
     'get'=>'func_get',
-    'set'=>'func_set',
-    'def'=>'func_def',
+    'set'=>'func_set', //set value to new value and return the same value
+    'def'=>'func_def', //like set but without retrun any value, it return empty string
     'color'=>'func_color',
     'lighten'=>'func_lighten',
     'darken'=>'func_darken',
@@ -141,9 +137,8 @@ class Changer {
   }
 
   private function func_def($name, $value){
-    if (array_key_exists($name, $this->values))
-      $this->values[$name] = $value;
-    return $this->values[$name];
+    $this->values[$name] = $value;
+    return '';
   }
 
   private function func_set($name, $value){
