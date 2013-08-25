@@ -14,7 +14,7 @@ body{
 }
 
 #sidebar {
-  float: left;
+/*  float: left; */
   width: 100%;
   position: relative;
   height: auto;

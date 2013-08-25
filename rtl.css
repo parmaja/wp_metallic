@@ -1,3 +1,5 @@
+/* From Style */
+
 .alignleft {
   float: right;
 }
@@ -75,4 +77,13 @@
 .next-posts {
   float: left;
   text-align: left;
+}
+
+/* From Screen */
+#sidebar {
+  float: right;
+}
+
+#inside {
+  border-left-width: 1px;
 }

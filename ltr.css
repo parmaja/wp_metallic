@@ -76,3 +76,12 @@
   float: right;
   text-align: right;
 }
+
+/* From Screen */
+#sidebar {
+  float: left;
+}
+
+#inside {
+  border-right-width: 1px;
+}

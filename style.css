@@ -275,6 +275,7 @@ div.post {
 }
 
 #sidebar>ul>li {
+  border-bottom: 0px solid #cccccc; /* Will override in other css */
   list-style-type: none;
 }
 
@@ -441,6 +442,7 @@ input[type=submit]{
 }
 
 #copyright {
+  text-align: left; /* Do not change it */
   padding: 0 0.3em;
   margin: 0 1em;
   width: auto;
@@ -450,4 +452,10 @@ input[type=submit]{
 }
 
 #copyright a{
+}
+
+#inside {
+  border-width: 0px;/* Will override it in other css*/
+  border-style: solid;
+  border-color: #cccccc;
 }

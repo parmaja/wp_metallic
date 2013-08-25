@@ -21,15 +21,13 @@ body{
 }
 
 #inside {
-  border-right: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
+  border-bottom-width: 1px;
 }
 
 #sidebar {
   width: 30%;
   position: relative;
   height: 100%;
-  float: right;
   overflow: hidden;
   padding: 0em;
   margin: 0em;
@@ -46,7 +44,7 @@ body{
 
 #sidebar>ul>li {
   text-shadow: 2px 2px #d7d7d7;
-  border-bottom: 1px solid #cccccc;
+  border-bottom-width: 1px;
   font-size: 120%;
   padding-bottom: 1em;
   margin-bottom: 1em;
