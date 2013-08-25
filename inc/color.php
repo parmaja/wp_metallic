@@ -1,6 +1,6 @@
 <?php
 /*
-  ref: https://github.com/mexitek/phpColors
+  @url: https://github.com/mexitek/phpColors
 */
 
 namespace phpColors;

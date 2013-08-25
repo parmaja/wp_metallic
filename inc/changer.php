@@ -13,6 +13,30 @@
 *
 */
 
+/**
+  Usage:
+  use this syntax every every $command(argments)
+
+  Examples:
+  color: $set(mycolor, #000);
+
+  color: $get(mycolor); get the color without any change
+  color: $color(mycolor); same
+
+  color: $lighten(mycolor, 10); make it lighten +10, rabge 0..100
+  color: $color(mycolor, 10); make it lighten +10, rabge 100..0..100
+
+  color: $darken(mycolor, 10); make it darken +10, range 0..100
+  color: $color(mycolor, -10); range 100..0..100
+
+  color: $mix(mycolor1, mycolor2); mix 2 colors
+  color: $mix(mycolor1, mycolor2, 50); mix 2 colors but put more mycolor2 ranged 100..0..100
+
+  TODO:
+    You can use nested command
+    color: $mix($lighten(mycolor1, 10), mycolor2, 50);
+*/
+
 /*TODO
   bug when
 */
@@ -21,7 +45,8 @@ include('color.php');
 
 use phpColors\Color;
 
-define('REGEX_COMMAND', '/\$([a-z]*)\((.*)\)/iU');
+//define('REGEX_COMMAND', '/\$([a-z_]*)\((.*)\)/iU');
+define('REGEX_COMMAND', '/\$([a-z_]*)\((.*)\)/iU');
 
 function split_arg(&$code, $separator = ',')
 {
@@ -111,7 +136,6 @@ class Changer {
       $this->values = $values;
   }
 
-
   private function func_color($color, $amount = 0){
     if ($amount == 0)
       return $color;
@@ -155,7 +179,8 @@ class Changer {
     $value = trim($value);
     $fc = strtolower(substr($value, 0, 1)); //First Char
     if ($fc=='$') {
-      $value = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $value);
+      //TODO
+      //$value = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $value);
     } elseif ($fc=='#') {
     } elseif (is_int($value)) {
     } elseif (is_numeric($value)) {
@@ -170,7 +195,7 @@ class Changer {
   }
 
   public function call($name, $arg) {
-//  	echo '>>>'.$name.">>>".$arg."\n";
+    echo '>>>'.$name.">>>".$arg."\n";
     if (array_key_exists($name, $this->functions)) {
       $real_func = $this->functions[$name];
       if(is_callable(array($this, $real_func)))
@@ -197,26 +222,41 @@ class Changer {
     return $this->call($matches[1], $matches[2]);
   }
 
-  public function generate($style) {
+  private function do_replace($contents) {
+    $return = preg_replace_callback('/\n?\r?\$\{(.*)\}/isU', array($this, '_replace_values'), $contents);
+    $return = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $return);
+    return $return;
+  }
+
+  public function generate($contents) {
     $this->_comments = array();
     
-    $return = preg_replace_callback('/(\/\*.*\*\/)/isU', array($this, '_replace_comments'), $style);
-    $return = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $return);
-    //((.*)?|(?R))
+    $return = preg_replace_callback('/(\/\*.*\*\/)/isU', array($this, '_replace_comments'), $contents);
+    $return = $this->do_replace($return);
     return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
   }
   
   private $_comments = array();
+
   function _replace_comments($match) {
     $key = '/*CCTMP'.count($this->_comments).'*/';
     $this->_comments[$key] = $match[1];
     return $key;
   }
 
-  function load_values($filename) {
+  function _replace_values($match) {
+    $ini = $this->do_replace($match[1]);
+    $this->values[] = parse_ini_string($ini);
+    return '';//delete it
+  }
+
+  function load_values($filename, $replace_it = false) {
     if (file_exists($filename)) {
-      $styleini = parse_ini_file($filename, false);
-      $this->values = $styleini;
+      $ini->load_values($filename);
+      if ($replace_it) {
+        $ini = $this->do_replace($match);
+      }
+      $this->values[] = parse_ini_string($ini, false);
     }
     else
       $styleini = array();
