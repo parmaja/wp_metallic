@@ -195,7 +195,7 @@ class Changer {
   }
 
   public function call($name, $arg) {
-    echo '>>>'.$name.">>>".$arg."\n";
+//    echo '>>>'.$name.">>>".$arg."\n";
     if (array_key_exists($name, $this->functions)) {
       $real_func = $this->functions[$name];
       if(is_callable(array($this, $real_func)))
@@ -238,29 +238,30 @@ class Changer {
   
   private $_comments = array();
 
-  function _replace_comments($match) {
+  private function _replace_comments($match) {
     $key = '/*CCTMP'.count($this->_comments).'*/';
     $this->_comments[$key] = $match[1];
     return $key;
   }
 
-  function _replace_values($match) {
-    $ini = $this->do_replace($match[1]);
-    $this->values[] = parse_ini_string($ini);
-    return '';//delete it
+
+  private function _replace_values($match) {
+    $ini = $this->parse_string($this->values, $match[1]);
+    return '';//Empty, we want to delete it from the css
   }
 
-  function load_values($filename, $replace_it = false) {
-    if (file_exists($filename)) {
-      $ini->load_values($filename);
-      if ($replace_it) {
-        $ini = $this->do_replace($match);
-      }
-      $this->values[] = parse_ini_string($ini, false);
+  function parse_string(&$values, $string) {
+    $lines = preg_split("/[\n\r]+/", $string);
+    foreach($lines as $l){
+      $kv = explode("=", trim($l));
+      $k = $kv[0];
+      $v = $this->do_replace($kv[1]);
+      $values[$k]=$v;
     }
-    else
-      $styleini = array();
-    return $styleini;
+  }
+
+  public function load_values($filename) {
+    $this->parse_string($this->values, file_get_contents($filename));
   }
 }
 

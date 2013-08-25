@@ -9,6 +9,10 @@
   Tags: css3, simple, plain, clean, fixed width, no-images, widget-ready, widgets, right sidebar, two columns, valid XHTML, valid CSS, blank-slate, rtl, right-to-left
 */
 
+${
+  title=$mix(base, title_back, 90)
+}
+
 html {
 }
 
@@ -18,7 +22,7 @@ body {
   padding: 0px;
   margin:  0px;
   font: $get(font_size)/1.3 Tahoma, Verdana, Arial, sans-serif;
-  background: $get(back);
+  background: $color(back);
   color: $get(fore);
   max-width: 100%; /* Good to be flexible */
 }
