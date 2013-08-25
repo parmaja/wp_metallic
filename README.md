@@ -7,14 +7,14 @@ Metallic WordPress Theme
 
 * CSS3, Modern styling
 * No images at all, only your logo at corner
-* Custom Logo
 * Mobile style, if you open your site/blog in a mobile, it will show for small screen
-* //Right To Left support
-* //Multi colors
+* Right To Left support
+* Multi colors
+* //Custom Logo
 
 **Disadvantages**
 
-* CSS3, not all browser can show it, but it still works
+* CSS3, not all browsers can show it, but it still works
 
 **Install**
 

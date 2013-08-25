@@ -28,6 +28,7 @@ body{
   width: 30%;
   position: relative;
   height: 100%;
+  float: right;
   overflow: hidden;
   padding: 0em;
   margin: 0em;
