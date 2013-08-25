@@ -1,5 +1,5 @@
 .alignleft {
-  float: right;
+  float: left;
 }
 
 .alignright {
@@ -7,72 +7,72 @@
 }
 
 #logo_image{
-  float: right;
+  float: left;
 }
 
 #main {
-  float: right;
+  float: left;
 }
 
 .infobar .category{
-  float: right;
+  float: left;
 }
 
 .infobar .tags{
-  float: right;
+  float: left;
 }
 
 .info_type {
-  float: right;
+  float: left;
 }
 
 .date{
-  float: right;
+  float: left;
 }
 
 .author{
-  float: right;
+  float: left;
 }
 
 .previous-posts {
-  float: right;
-  text-align: right;
+  float: left;
+  text-align: left;
 }
 
 /* not sure if it is good, it is the left of widget list item*/
 #sidebar>ul>li>ul {
-  padding-right: 2em;
+  padding-left: 2em;
 }
 
 #sidebar>ul>li>ul>li>ul {
-  padding-right: 1em;
+  padding-left: 1em;
 }
 
 #nav_page li{
-  float: right;
+  float: left;
 }
 
 #nav_subpage li {
-  float: right;
+  float: left;
 }
 
 .widget_tag_cloud a {
-  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .avatar{
-  float: right;
+  float: left;
 }
 
 .infobar .comments_count{
-  float: left;
+  float: right;
 }
 
 .edit{
-  float: left;
+  float: right;
 }
 
 .next-posts {
-  float: left;
-  text-align: left;
+  float: right;
+  text-align: right;
 }

@@ -14,10 +14,10 @@ body{
 }
 
 #sidebar {
+  float: left;
   width: 100%;
   position: relative;
   height: auto;
-  float: left;
   overflow: hidden;
 }
 

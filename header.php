@@ -18,6 +18,11 @@
   <?php } else  { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/screen.css" type='text/css' />
   <?php } ?>
+  <?php if (is_rtl()) { ?>
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/rtl.css" type='text/css' />
+  <?php } else  { ?>
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/ltr.css" type='text/css' />
+  <?php } ?>
   <link rel="pingback" href="<?php print bloginfo('pingback_url'); ?>" />
   <?php
     wp_get_archives('type=monthly&format=link');

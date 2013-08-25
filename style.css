@@ -63,7 +63,6 @@ a:hover{
 
 #logo_image{
   display: table-cell;
-  float: left;
   margin: 0.2em;
   vertical-align: middle;
 }
@@ -100,7 +99,6 @@ a:hover{
 /**      main content     */
 
 #main { /*do not put padding or margin*/
-  float: left;
   background: $color(canvas_back);
 }
 
@@ -173,15 +171,12 @@ ol#posts .more-link{
 }
 
 .infobar .category{
-  float: left;
 }
 
 .infobar .tags{
-  float: left;
 }
 
 .infobar .comments_count{
-  float: right;
 }
 
 li.post{
@@ -198,18 +193,15 @@ div.post {
 /* Shared with comments */
 
 .info_type {
-  float: left;
 }
 
 .date{
-  float: left;
 }
 .date:before{
   content: "≡ "
 }
 
 .author{
-  float: left;
 }
 
 .author:before{
@@ -217,7 +209,6 @@ div.post {
 }
 
 .edit{
-  float: right;
 }
 
 div.post {
@@ -249,13 +240,9 @@ div.post {
 }
 
 .previous-posts {
-  float: left;
-  text-align: left;
 }
 
 .next-posts {
-  float: right;
-  text-align: right;
 }
 
 /* sidebar */
@@ -299,7 +286,6 @@ div.post {
   font-size: 80%;
   text-shadow: none;
   color: green;
-  padding-left: 2em; /* not sure if it is good, it is the left of widget list item*/
   text-decoration: none;
 }
 
@@ -307,7 +293,6 @@ div.post {
 
 #sidebar>ul>li>ul>li>ul {
   font-size: 80%;
-  padding-left: 1em;
 }
 
 .widget li{
@@ -338,14 +323,12 @@ div.post {
 
 #nav_page li{
   display: block;
-  float: left;
   padding: 0.1em 0.4em;
   margin: 0.1em
 }
 
 #nav_subpage li {
   display: block;
-  float: left;
   padding: 0.1em 0.4em;
   margin: 0.1em
 }
@@ -381,7 +364,6 @@ div.post {
 }
 
 .widget_tag_cloud a {
-  padding-left: 5px;
 }
 
 #comments h2{
@@ -411,7 +393,6 @@ div.post {
 
 .avatar{
   padding: 0.2em;
-  float: left;
   display: Block;
 }
 
@@ -453,14 +434,6 @@ input[type=submit]{
    display: block;
    margin-left: auto;
    margin-right: auto;
-}
-
-.alignleft {
-   float: left;
-}
-
-.alignright {
-   float: right;
 }
 
 .skip {
