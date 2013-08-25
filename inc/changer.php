@@ -254,9 +254,11 @@ class Changer {
     $lines = preg_split("/[\n\r]+/", $string);
     foreach($lines as $l){
       $kv = explode("=", trim($l));
-      $k = $kv[0];
-      $v = $this->do_replace($kv[1]);
-      $values[$k]=$v;
+      if ((isset($kv[0])) and !empty($kv[0])) {
+        $k = trim($kv[0]);
+        $v = $this->do_replace(trim($kv[1]));
+        $values[$k]=$v;
+      }
     }
   }
 
