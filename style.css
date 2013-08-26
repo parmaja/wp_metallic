@@ -10,7 +10,8 @@
 */
 
 ${
-  title=$mix(base, title_back, 90)
+  border=$mix(canvas_back, title_back, 80)
+  background: $mix(canvas_back, title_back, 90);
 }
 
 html {
@@ -38,7 +39,7 @@ a:hover{
 }
 
 #container {
-  background: $mix(canvas_back, title_back, 90);
+  background: $color(background);
   color: $color(canvas_ink);
 }
 
@@ -73,7 +74,7 @@ a:hover{
 }
 
 #title{
-  font-size: 300%;
+  font-size: 240%;
   margin: auto 0;
   line-height: 100%;
 /*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
@@ -105,6 +106,9 @@ a:hover{
 #inside {
   width: auto;
   padding: 1em;
+  border-width: 0px;/* Will override it in other css*/
+  border-style: solid;
+  border-color: #cccccc;
 }
 
 #main h2 {
@@ -118,7 +122,7 @@ a:hover{
   font-size: 130%;
 }
 #main h2.title {
-  border-bottom: 1px solid $mix(canvas_back, title_back, 80);
+  border-bottom: 1px solid $get(border);
 }
 
 ol#posts {
@@ -230,9 +234,9 @@ div.post {
   padding: 0.1em 0.5em;
   min-height: 1em;
   overflow: auto;
-  border-top: 1px solid $mix(canvas_back, title_back, 80);
+  border-top: 1px solid $color(border);
   color: $color(canvas_ink);
-  background: $mix(canvas_back, title_back, 80);
+  background: $color(border);
 }
 
 #pagination a{
@@ -275,8 +279,9 @@ div.post {
 }
 
 #sidebar>ul>li {
-  border-bottom: 0px solid #cccccc; /* Will override in other css */
   list-style-type: none;
+  border-bottom: 0px solid #cccccc; /* Will override in other css */
+  text-shadow: 2px 2px #d7d7d7;
 }
 
 #sidebar>ul>li {
@@ -378,8 +383,8 @@ div.post {
 }
 
 .comment{
-  background: $mix(canvas_back, title_back, 90);
-  border-bottom: 1px solid $mix(canvas_back, title_back, 80);
+  background: $color(background);
+  border-bottom: 1px solid $color(border);
   color:$color(canvas_ink);
   margin-bottom: 0.5em;
   padding: 0;
@@ -398,7 +403,7 @@ div.post {
 }
 
 input[type=text]{
-  border: 1px solid $mix(canvas_back, title_back, 80);
+  border: 1px solid $color(border);
   padding: 0.2em;
   margin: 0;
   border-radius: 3px;
@@ -452,10 +457,4 @@ input[type=submit]{
 }
 
 #copyright a{
-}
-
-#inside {
-  border-width: 0px;/* Will override it in other css*/
-  border-style: solid;
-  border-color: #cccccc;
 }

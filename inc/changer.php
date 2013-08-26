@@ -253,11 +253,14 @@ class Changer {
   function parse_string(&$values, $string) {
     $lines = preg_split("/[\n\r]+/", $string);
     foreach($lines as $l){
-      $kv = explode("=", trim($l));
-      if ((isset($kv[0])) and !empty($kv[0])) {
-        $k = trim($kv[0]);
-        $v = $this->do_replace(trim($kv[1]));
-        $values[$k]=$v;
+      $fc = strtolower(substr($l, 0, 1)); //First Char
+      if ($fv !== ';') {
+        $kv = preg_split("/[\:\=]/", trim($l));
+        if ((isset($kv[0])) and !empty($kv[0])) {
+          $k = trim($kv[0]);
+          $v = $this->do_replace(trim($kv[1]));
+          $values[$k]=$v;
+        }
       }
     }
   }

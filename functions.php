@@ -77,7 +77,7 @@ function metallic_customize_register($wp_customize) {
 add_action('customize_register', 'metallic_customize_register');
 
 function metallic_customize_save(){
-  $color = get_theme_mod('color_scheme');
+  $color = get_theme_mod('color_scheme', 'gray');
   metallic_generate_css($color);
 }
 

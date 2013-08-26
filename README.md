@@ -18,4 +18,5 @@ Metallic WordPress Theme
 
 **Install**
 
+Need PHP 5.3 or above
 Put all file here \wp-content\themes\metallic
