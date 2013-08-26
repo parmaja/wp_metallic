@@ -10,8 +10,8 @@
 */
 
 ${
-  border=$mix(canvas_back, title_back, 80)
-  background: $mix(canvas_back, title_back, 90);
+  border=$mix(canvas_back, base, 80)
+  background: $mix(canvas_back, base, 90);
 }
 
 html {
@@ -45,8 +45,8 @@ a:hover{
 
 #header {
   position: relative;
-  background: $color(title_back);
-  background: linear-gradient(to bottom, $color(title_back, -10) 0%,$color(title_back, 30) 5%,$color(title_back, 0) 30%,$color(title_back, -30) 100%);
+  background: $color(base);
+  background: linear-gradient(to bottom, $color(base, -10) 0%,$color(base, 40) 5%, $color(base, 20) 10%, $color(base, -20) 100%);
   z-index: 999;
   text-decoration: none;
   vertical-align: middle;
@@ -78,7 +78,7 @@ a:hover{
   margin: auto 0;
   line-height: 100%;
 /*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
-  text-shadow: 0.1em 0.1em 0.1em $color(title_back, -20);
+  text-shadow: 0.1em 0.1em 0.1em $color(base, -20);
 }
 
 #description{
@@ -309,7 +309,7 @@ div.post {
   clear: both;
   padding: 0.1em 1em;
   overflow: auto;
-  border-top: 1px solid $mix(canvas_back, title_back);
+  border-top: 1px solid $mix(canvas_back, base);
 }
 
 #nav_page, #nav_subpage {
@@ -361,12 +361,12 @@ div.post {
 
 #header .current_page_item a {
   text-decoration: none;
-  color: $color(title_back);
+  color: $color(base);
 }
 
 #header .current_page_parent a {
   text-decoration: none;
-  color: $color(title_back);
+  color: $color(base);
 }
 
 .widget_tag_cloud a {
@@ -414,7 +414,7 @@ input[type=submit]{
   padding: 0.2em;
   margin: 0;
   border-radius: 3px;
-  border: 1px solid $mix(canvas_back, title_back);
+  border: 1px solid $mix(canvas_back, base);
   color:$color(canvas_ink);
 }
 
@@ -423,7 +423,7 @@ input[type=submit]{
   font-size: 120%;
   padding: 0.2em;
   border-radius: 3px;
-  border: 1px solid $mix(canvas_back, title_back, 50);
+  border: 1px solid $mix(canvas_back, base, 50);
   color:$color(canvas_ink);
 }
 
@@ -452,7 +452,7 @@ input[type=submit]{
   margin: 0 1em;
   width: auto;
   height: auto;
-  color: $mix(canvas_back, title_back, 40);
+  color: $mix(canvas_back, base, 40);
   font-size: 80%;
 }
 

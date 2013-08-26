@@ -69,7 +69,7 @@ function metallic_customize_register($wp_customize) {
             'gray' => 'Gray',
             'blue' => 'Blue',
             'green' => 'Green',
-            'pink' => 'Pink',
+            'yellow' => 'Yellow'
         ),
     ));
 }
