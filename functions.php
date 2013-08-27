@@ -106,7 +106,7 @@ function metallic_generate_css($name) {
   $css_changer = new Changer;
   $css_changer->load_values(dirname(__FILE__).'/default.scheme.ini');
   $css_changer->load_values(dirname(__FILE__).'/schemes/'.$name.'.scheme.ini');
-  $file= dirname(__FILE__).'\\style.css';
+  $file= dirname(__FILE__).'/style.css';
   if (file_exists($file)) {
     $style = file_get_contents($file);
     $css_dir = get_stylesheet_directory() . '/css/';

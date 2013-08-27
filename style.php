@@ -17,6 +17,6 @@ if (empty($scheme))
 $css_changer = new changer();
 $css_changer->load_values(dirname(__FILE__).'/default.scheme.ini'); //load default values
 $css_changer->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
-echo $css_changer->generate(file_get_contents(dirname(__FILE__).'\\style.css'));
+echo $css_changer->generate(file_get_contents(dirname(__FILE__).'/style.css'));
 
 ?>
