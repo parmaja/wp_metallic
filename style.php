@@ -10,10 +10,13 @@ include('inc/changer.php');
 */
 if (isset($_GET['scheme']) and !empty($_GET['scheme']))
   $scheme = $_GET['scheme'];
-else
+
+if (empty($scheme))
   $scheme = 'gray'; //default;
 
 $css_changer = new changer();
-changer_print_css_file(dirname(__FILE__).'/style.css', dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
+$css_changer->load_values(dirname(__FILE__).'/default.scheme.ini'); //load default values
+$css_changer->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
+echo $css_changer->generate(file_get_contents(dirname(__FILE__).'\\style.css'));
 
 ?>
