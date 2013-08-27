@@ -100,17 +100,17 @@ function metallic_customize_save(){
   Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
 */
 
-include('inc/changer.php');
+include('inc/macros.php');
 
 function metallic_generate_css($name) {
-  $css_changer = new Changer;
-  $css_changer->load_values(dirname(__FILE__).'/default.scheme.ini');
-  $css_changer->load_values(dirname(__FILE__).'/schemes/'.$name.'.scheme.ini');
+  $css_macro = new CssMacro;
+  $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini');
+  $css_macro->load_values(dirname(__FILE__).'/schemes/'.$name.'.scheme.ini');
   $file= dirname(__FILE__).'/style.css';
   if (file_exists($file)) {
     $style = file_get_contents($file);
     $css_dir = get_stylesheet_directory() . '/css/';
-    $css = $css_changer->generate($style);
+    $css = $css_macro->generate($style);
     file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
 }

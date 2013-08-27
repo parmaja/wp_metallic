@@ -1,13 +1,15 @@
 <?php
 /**
 *
-* Style Changer
+* CSS Style Macro
 *
 * This file is part of the "Metallic Theme" for wordpress
 *
-* @license   LGPL (http://www.gnu.org/licenses/gpl.html)
-* @url			 http://www.github.com/parmaja/wp_metallic
-* @author    Zaher Dirkey <zaher at parmaja dot com>
+* @license      LGPL (http://www.gnu.org/licenses/gpl.html)
+* @url			    http://www.github.com/parmaja/wp_metallic
+* @author       Zaher Dirkey <zaher at parmaja dot com>
+* @dependency   phpColor https://github.com/mexitek/phpColors
+*
 *
 * @contributor  Louy Alakkad
 *
@@ -96,7 +98,7 @@ function split_arg(&$code, $separator = ',')
   return $return;
 }
 
-class Changer {
+class CssMacro {
 
   public $values = array();
 
@@ -180,7 +182,7 @@ class Changer {
     $fc = strtolower(substr($value, 0, 1)); //First Char
     if ($fc=='$') {
       //TODO
-      //$value = preg_replace_callback(REGEX_COMMAND, array($this, '_changer_replace'), $value);
+      //$value = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $value);
     } elseif ($fc=='#') {
     } elseif (is_int($value)) {
     } elseif (is_numeric($value)) {
@@ -218,13 +220,13 @@ class Changer {
     }
   }
 
-  function _changer_replace($matches) {
+  function _macro_replace($matches) {
     return $this->call($matches[1], $matches[2]);
   }
 
   private function do_replace($contents) {
     $return = preg_replace_callback('/\n?\r?\$\{(.*)\}/isU', array($this, '_replace_values'), $contents);
-    $return = preg_replace_callback(REGEX_COMMAND, array($this, '_changer_replace'), $return);
+    $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
     return $return;
   }
 
@@ -256,7 +258,7 @@ class Changer {
       $l = trim($l);
       if (!empty($l)) {
         $fc = strtolower(substr($l, 0, 1)); //First Char
-        if ($fv !== ';' and $fv !== '[') {
+        if ($fc !== ';' and $fc !== '[') {
           $kv = preg_split("/[\:\=]/", trim($l));
           if ((isset($kv[0])) and !empty($kv[0])) {
             $k = trim($kv[0]);//TODO dequote the string
@@ -273,11 +275,11 @@ class Changer {
   }
 }
 
-function changer_print_css_file($css_file, $values_file) {
-  $css_changer = new changer();
+function macro_print_css_file($css_file, $values_file) {
+  $css_macro = new CssMacro();
   if (file_exists($values_file))
-    $css_changer->load_values($values_file);
+    $css_macro->load_values($values_file);
   $style = file_get_contents($css_file);
-  echo $css_changer->generate($style);
+  echo $css_macro->generate($style);
 }
 ?>
