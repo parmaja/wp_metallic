@@ -10,10 +10,10 @@
   Tags: css3, simple, plain, clean, fixed width, no-images, widget-ready, widgets, right sidebar, two columns, valid XHTML, valid CSS, blank-slate, rtl, right-to-left
 */
 
-${
+$<
   border=$mix(canvas_back, base, 80)
   background: $mix(canvas_back, base, 90);
-}
+>
 
 html {
 }
@@ -292,7 +292,7 @@ div.post {
 #sidebar>ul>li>ul {
   font-size: 80%;
   text-shadow: none;
-  color: green;
+  color: $color(base, -20);
   text-decoration: none;
 }
 
@@ -303,7 +303,7 @@ div.post {
 }
 
 .widget li{
-  color: green;
+  color: $color(base, -20);
 }
 
 #nav{

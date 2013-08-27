@@ -34,6 +34,23 @@
   color: $mix(mycolor1, mycolor2); mix 2 colors
   color: $mix(mycolor1, mycolor2, 50); mix 2 colors but put more mycolor2 ranged 100..0..100
 
+  Inside the css you can use blocks, besure $< or > alone in a line do not mix it with any text
+  Examples:
+
+  Next lines is for assign values only
+$<
+  border=$mix(canvas_back, base, 80)
+  background: $mix(canvas_back, base, 90);
+  b=false
+>
+
+  Next lines is for condition
+
+$if(b)<
+  border=$mix(canvas_back, base, 80)
+  background: $mix(canvas_back, base, 90);
+>
+
   TODO:
     You can use nested command
     color: $mix($lighten(mycolor1, 10), mycolor2, 50);
@@ -52,6 +69,11 @@ define('REGEX_COMMAND', '/\$([a-z_]*)\((.*)\)/iU');
 
 function split_arg(&$code, $separator = ',')
 {
+  if (substr($code, 0, 1) === '(')
+    $code = substr($code, 1);
+  if (substr($code, -1, 1) === ')')
+    $code = substr($code, 0, -1);
+
   $ch = '';
   $next_ch = '';
   $l = strlen($code);
@@ -122,15 +144,20 @@ class CssMacro {
     'black' => '#000000'
   );
 
+  /*
+    c: Condition
+    a: Pass paramters as an array otherwise as arguments
+  */
   private $functions = array(
-    'get'=>'func_get',
-    'set'=>'func_set', //set value to new value and return the same value
-    'def'=>'func_def', //like set but without retrun any value, it return empty string
-    'color'=>'func_color',
-    'lighten'=>'func_lighten',
-    'darken'=>'func_darken',
-    'mix'=>'func_mix',
-    'gradient'=>'func_gradient'
+    'get'=>array('func_get',''),
+    'set'=>array('func_set',''), //set value to new value and return the same value
+    'def'=>array('func_def',''), //like set but without retrun any value, it return empty string
+    'color'=>array('func_color',''),
+    'lighten'=>array('func_lighten',''),
+    'darken'=>array('func_darken',''),
+    'mix'=>array('func_mix',''),
+    'if'=>array('func_if','a,c'),
+    'gradient'=>array('func_gradient','')
     );
 
   function __construct($values = array()) {
@@ -177,6 +204,19 @@ class CssMacro {
     return '#'.$co->mix($color2, $amount);
   }
 
+  private function func_if($args){
+    if (count($args) == 3) {
+      $b = $args[0] == $args[1];
+      if ($b) {
+        return $args[2];
+      }
+    } else { //or 2
+    $f = (strtoupper($args[0])==='FALSE') || ($args[0]==='0');
+    if (!$f)
+      return $args[1];
+    }
+  }
+
   private function check_value($value) {
     $value = trim($value);
     $fc = strtolower(substr($value, 0, 1)); //First Char
@@ -199,8 +239,9 @@ class CssMacro {
   public function call($name, $arg) {
 //    echo '>>>'.$name.">>>".$arg."\n";
     if (array_key_exists($name, $this->functions)) {
-      $real_func = $this->functions[$name];
-      if(is_callable(array($this, $real_func)))
+      $func = $this->functions[$name][0];
+      $func_opt = explode(',', $this->functions[$name][1]);
+      if(is_callable(array($this, $func)))
       {
         if (is_string($arg)) {
           $values = split_arg($arg);
@@ -211,7 +252,10 @@ class CssMacro {
             $value = $this->check_value($value);
           }
           try {
-            return call_user_func_array(array($this, $real_func), $values);
+            if (in_array('a', $func_opt))
+              return call_user_func(array($this, $func), $values);
+            else
+              return call_user_func_array(array($this, $func), $values);
           } catch (Exception $e) {
             echo 'Error : '.$name.'('.$arg.') > ',  $e->getMessage(), "\n";
           }
@@ -225,7 +269,7 @@ class CssMacro {
   }
 
   private function do_replace($contents) {
-    $return = preg_replace_callback('/\n?\r?\$\{(.*)\}/isU', array($this, '_replace_values'), $contents);
+    $return = preg_replace_callback('/\n?\r?'.'\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/imsU', array($this, '_replace_values'), $contents);
     $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
     return $return;
   }
@@ -248,8 +292,20 @@ class CssMacro {
 
 
   private function _replace_values($match) {
-    $ini = $this->parse_string($this->values, $match[1]);
-    return '';//Empty, we want to delete it from the css
+    $cmd = $match[1];
+    $cmd = strstr($cmd, '(', true);
+    $arg = $match[2];
+    $contents = $match[3];
+
+    if (empty($cmd)) {
+      $ini = $this->parse_string($this->values, $contents);
+      return '';//Empty, we want to delete it from the css
+    } else {
+      $args = split_arg($arg);
+      $args[] = $contents;
+      $ret = $this->call($cmd, $args);
+      return $ret;
+    }
   }
 
   function parse_string(&$values, $string) {
