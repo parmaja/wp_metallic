@@ -5,14 +5,24 @@
   <!-- Tell the browser to use the same width of the device -->
   <meta name="HandheldFriendly" content="true"/>
   <meta name="viewport" content="width=device-width; initial-scale=1.0" />
-  <?php if (wp_is_mobile()) { ?>
+  <?php
+    if (file_exists(get_stylesheet_directory().'/images/logo.png'))
+      $logo_file = get_stylesheet_directory_uri().'/images/logo.png';
+    else
+      $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
+    //TODO check is_preview()
+    if (isset($_GET['scheme']) and !empty($_GET['scheme']))
+      $scheme = $_GET['scheme'];
+    if (empty($scheme))
+      $scheme = get_theme_mod('color_scheme', 'gray');
+    if (wp_is_mobile()) { ?>
   <?php } ?>
   <title><?php if(is_home()) bloginfo('name'); else wp_title(''); ?></title>
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
   <link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
   <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php?scheme=<?php echo get_theme_mod('color_scheme', 'gray'); ?>" type='text/css' />
-  <!-- link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' /-->
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php?scheme=<?php echo $scheme ?>" type='text/css' />
+  <!--todo using is_preview() link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' /-->
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
@@ -34,7 +44,7 @@
   <div id="container">
     <div id="header">
       <div id="logo_header">
-        <img id="logo_image" src="<?php bloginfo('stylesheet_directory'); ?>/images/logo.png" alt="" />
+        <img id="logo_image" src="<?php print $logo_file ?>" alt="" />
         <div id="logo_text">
           <p class="title" id="title"><strong><a href=<?php print '"'.get_bloginfo('url').'">'.get_bloginfo('name'); ?></a></strong></p>
           <p id="description"><?php print get_bloginfo('description') ?></p>
