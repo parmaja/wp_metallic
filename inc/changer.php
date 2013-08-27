@@ -180,7 +180,7 @@ class Changer {
     $fc = strtolower(substr($value, 0, 1)); //First Char
     if ($fc=='$') {
       //TODO
-      //$value = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $value);
+      //$value = preg_replace_callback(REGEX_COMMAND, array($this, '_changer_replace'), $value);
     } elseif ($fc=='#') {
     } elseif (is_int($value)) {
     } elseif (is_numeric($value)) {
@@ -218,13 +218,13 @@ class Changer {
     }
   }
 
-  function changer_replace($matches) {
+  function _changer_replace($matches) {
     return $this->call($matches[1], $matches[2]);
   }
 
   private function do_replace($contents) {
     $return = preg_replace_callback('/\n?\r?\$\{(.*)\}/isU', array($this, '_replace_values'), $contents);
-    $return = preg_replace_callback(REGEX_COMMAND, array($this, 'changer_replace'), $return);
+    $return = preg_replace_callback(REGEX_COMMAND, array($this, '_changer_replace'), $return);
     return $return;
   }
 
@@ -253,13 +253,16 @@ class Changer {
   function parse_string(&$values, $string) {
     $lines = preg_split("/[\n\r]+/", $string);
     foreach($lines as $l){
-      $fc = strtolower(substr($l, 0, 1)); //First Char
-      if ($fv !== ';') {
-        $kv = preg_split("/[\:\=]/", trim($l));
-        if ((isset($kv[0])) and !empty($kv[0])) {
-          $k = trim($kv[0]);
-          $v = $this->do_replace(trim($kv[1]));
-          $values[$k]=$v;
+      $l = trim($l);
+      if (!empty($l)) {
+        $fc = strtolower(substr($l, 0, 1)); //First Char
+        if ($fv !== ';' and $fv !== '[') {
+          $kv = preg_split("/[\:\=]/", trim($l));
+          if ((isset($kv[0])) and !empty($kv[0])) {
+            $k = trim($kv[0]);//TODO dequote the string
+            $v = $this->do_replace(trim($kv[1]));
+            $values[$k]=$v;
+          }
         }
       }
     }

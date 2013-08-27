@@ -60,18 +60,31 @@ function metallic_customize_register($wp_customize) {
         'type'           => 'theme_mod', //or 'option' if u want to have a record in database
 
     ));
+
+    $shemes = array();
+
+    $dir = dirname(__FILE__).'/schemes';
+
+    if ($handle = opendir($dir)) {
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                $ini = parse_ini_file($dir.'/'.$entry, false);
+                $name = strstr($entry, '.', true);//explode('.', $entry);
+                $title = $ini['name'];
+                $shemes[$name] = __($title);
+            }
+        }
+        closedir($handle);
+    }
+
     $wp_customize->add_control( 'color_select_box', array(
         'settings' => 'color_scheme',
         'label'   => 'Select Color:',
         'section' => 'metallic_color_scheme',
         'type'    => 'select',
-        'choices'    => array(
-            'gray' => 'Gray',
-            'blue' => 'Blue',
-            'green' => 'Green',
-            'yellow' => 'Yellow'
-        ),
-    ));
+        'choices' => $shemes
+        )
+    );
 }
 
 add_action('customize_register', 'metallic_customize_register');
@@ -91,7 +104,7 @@ include('inc/changer.php');
 
 function metallic_generate_css($name) {
   $css_changer = new Changer;
-  $css_changer->load_values(dirname(__FILE__).'\\'.$name.'.style.ini');
+  $css_changer->load_values(dirname(__FILE__).'/schemes/'.$name.'.scheme.ini');
   $file= dirname(__FILE__).'\\style.css';
   if (file_exists($file)) {
     $style = file_get_contents($file);
@@ -99,7 +112,5 @@ function metallic_generate_css($name) {
     $css = $css_changer->generate($style);
     file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
-  else
-    '';
 }
 ?>

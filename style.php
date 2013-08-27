@@ -14,6 +14,6 @@ else
   $scheme = 'gray'; //default;
 
 $css_changer = new changer();
-changer_print_css_file(dirname(__FILE__).'/style.css', dirname(__FILE__).'/'.$scheme.'.style.ini');
+changer_print_css_file(dirname(__FILE__).'/style.css', dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
 
 ?>
