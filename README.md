@@ -1,7 +1,13 @@
-wp_metallic
+WP Metallic Theme and CSS Macros
 ===========
 
-Metallic WordPress Theme 
+This project have two projects,
+
+WordPress Metallic Theme: a very simple and light theme for wordpress work for desktop and mobile
+
+CSS Macros, small engine css_macros.php used by this theme, so you can take the theme as good exapmple how to write css
+
+**** WP Metallic Theme ****
 
 **Advantages**
 
@@ -20,3 +26,42 @@ Metallic WordPress Theme
 
 Need PHP 5.3 or above
 Put all file here \wp-content\themes\metallic
+
+**** CSS Macros ****
+
+Command and macro to change the CSS 
+
+When build your css you need to repeat your colors, or make a color depend on another color lighter of darker or mix.
+remodifiing your css will be so hard, so CssMacros read the command started with $ like $get and replace it.
+
+  color: $set(mycolor, #000);
+
+  color: $get(mycolor); get the color without any change
+  color: $color(mycolor); same
+
+  color: $lighten(mycolor, 10); make it lighten +10, rabge 0..100
+  color: $color(mycolor, 10); make it lighten +10, rabge 100..0..100
+
+  color: $darken(mycolor, 10); make it darken +10, range 0..100
+  color: $color(mycolor, -10); range 100..0..100
+
+  color: $mix(mycolor1, mycolor2); mix 2 colors
+  color: $mix(mycolor1, mycolor2, 50); mix 2 colors but put more mycolor2 ranged 100..0..100
+
+  Also you can define a confition to execlude a bock of css the $< or > alone in a line do not mix it with any text
+  Examples:
+
+  Next lines is for assign values only
+$<
+  border=$mix(canvas_back, base, 80)
+  background: $mix(canvas_back, base, 90);
+  b=false
+>
+
+  Next lines is for condition
+
+$if(b)<
+  border=$mix(canvas_back, base, 80)
+  background: $mix(canvas_back, base, 90);
+>
+
