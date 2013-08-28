@@ -1,7 +1,10 @@
 <?php
-/*
-  @url: https://github.com/mexitek/phpColors
-*/
+
+/**
+ * Author: Arlo Carreon <http://arlocarreon.com>
+ * Info: http://mexitek.github.io/phpColors/
+ * License: http://arlo.mit-license.org/
+ */
 
 namespace phpColors;
 
@@ -303,7 +306,7 @@ class Color {
         // Return the new value in HEX
         return self::hslToHex($hsl);
     }
-    
+
     /**
      * Returns your color's HSL array
      */
@@ -322,7 +325,7 @@ class Color {
     public function getRgb() {
         return $this->_rgb;
     }
-    
+
     /**
      * Returns the cross browser CSS3 gradient
      * @param int Optional: percentage amount to light/darken the gradient
