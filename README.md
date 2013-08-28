@@ -26,6 +26,7 @@ WP Metallic Theme
 **Install**
 
 Need PHP 5.3 or above
+
 Put all file here \wp-content\themes\metallic
 
 CSS Macros
@@ -40,19 +41,23 @@ then remodifing your css will be so hard, CssMacros read the command started wit
 
 Examples:
 Set the color and return the same vallue
+
     color: $set(mycolor, #000);
     
 Get the color from the variable
+
     color: $get(mycolor); 
     color: $color(mycolor); 
 
 Get it and make it lighten or darken by +10, range 0..100
+
     color: $lighten(mycolor, 10); 
     color: $color(mycolor, 10); make it lighten +10, rabge 100..0..100
     color: $darken(mycolor, 10); make it darken +10, range 0..100
     color: $color(mycolor, -10); range 100..0..100
 
 Mix two of color, the range 100..0..100, 0 meant 50% from mycolor1 and 50% from mycolor2
+
     color: $mix(mycolor1, mycolor2); mix 2 colors
     color: $mix(mycolor1, mycolor2, 50);
 
