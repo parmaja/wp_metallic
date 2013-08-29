@@ -1,7 +1,7 @@
 <?php
 header("Content-type: text/css; charset: UTF-8");
 header('Content-type: text/css');
-//header('Cache-control: must-revalidate');
+header('Cache-control: must-revalidate');
 
 include('inc/macros.php');
 /**

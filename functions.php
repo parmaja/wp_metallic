@@ -10,10 +10,8 @@
 * Based on Naked project URL http://code.google.com/p/wordpress-naked/
 */
 
-/**
-* register_sidebar()
-*
-*/
+/** Register sidebar */
+
 if ( function_exists('register_sidebar') )
 {
   register_sidebars(1, array(
@@ -31,6 +29,8 @@ if ( function_exists('register_sidebar') )
     'after_title' => '</div>',
   ));
 }
+
+/** Register customize */
 
 function metallic_customize_register($wp_customize) {
 
@@ -89,23 +89,22 @@ function metallic_customize_register($wp_customize) {
 
 add_action('customize_register', 'metallic_customize_register');
 
-function metallic_customize_save(){
-  $color = get_theme_mod('color_scheme', 'gray');
-  metallic_generate_css($color);
-}
-
-add_action('customize_save', 'metallic_customize_save');
+/** Save after */
 
 /*
-  Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
+  Ref:
+        http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
+        http://stackoverflow.com/questions/14802251/hook-into-the-wordpress-theme-customizer-save-action
 */
 
 include('inc/macros.php');
 
-function metallic_generate_css($name) {
+function metallic_customize_save_after(){
+  global $wp_customize;
+  $scheme = get_theme_mod('color_scheme', 'gray');
   $css_macro = new CssMacro;
   $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini');
-  $css_macro->load_values(dirname(__FILE__).'/schemes/'.$name.'.scheme.ini');
+  $css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
   $file= dirname(__FILE__).'/style.css';
   if (file_exists($file)) {
     $style = file_get_contents($file);
@@ -114,4 +113,7 @@ function metallic_generate_css($name) {
     file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
 }
+
+add_action('customize_save_after', 'metallic_customize_save_after');
+
 ?>
