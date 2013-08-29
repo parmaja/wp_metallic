@@ -10,6 +10,8 @@
 * Based on Naked project URL http://code.google.com/p/wordpress-naked/
 */
 
+define(Metallic, 'Metallic');
+
 /** Register sidebar */
 
 if ( function_exists('register_sidebar') )
@@ -21,8 +23,17 @@ if ( function_exists('register_sidebar') )
     'before_title' => '<div class="title">',
     'after_title' => '</div>',
   ));
+
   register_sidebars(1, array(
     'name' => 'Mobile',
+    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+    'after_widget' => '</li>',
+    'before_title' => '<div class="title">',
+    'after_title' => '</div>',
+  ));
+
+  register_sidebars(1, array(
+    'name' => 'Footer',
     'before_widget' => '<li id="%1$s" class="widget %2$s">',
     'after_widget' => '</li>',
     'before_title' => '<div class="title">',
@@ -99,7 +110,7 @@ add_action('customize_register', 'metallic_customize_register');
 
 include('inc/macros.php');
 
-function metallic_customize_save_after(){
+function metallic_generate_css_cache(){
   global $wp_customize;
   $scheme = get_theme_mod('color_scheme', 'gray');
   $css_macro = new CssMacro;
@@ -114,7 +125,21 @@ function metallic_customize_save_after(){
   }
 }
 
+function metallic_customize_save_after(){
+  metallic_generate_css_cache();
+}
+
+function metallic_activation_settings($theme)
+{
+    if ($theme==Metallic)
+    {
+      metallic_generate_css_cache();
+    }
+    return;
+}
+
 add_action('customize_save_after', 'metallic_customize_save_after');
+add_action("switch_theme", 'metallic_activation_settings');
 
 /* set_current_user */
 
@@ -125,6 +150,8 @@ function metallic_set_current_user() {
     show_admin_bar(false);
   }
 }
+
+add_action("switch_theme", $fn);
 
 /**************/
 
