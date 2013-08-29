@@ -129,17 +129,14 @@ function metallic_customize_save_after(){
   metallic_generate_css_cache();
 }
 
-function metallic_activation_settings($theme)
+function metallic_activation($old_theme)
 {
-    if ($theme==Metallic)
-    {
-      metallic_generate_css_cache();
-    }
-    return;
+  metallic_generate_css_cache();
+  return;
 }
 
 add_action('customize_save_after', 'metallic_customize_save_after');
-add_action("switch_theme", 'metallic_activation_settings');
+add_action("after_switch_theme", 'metallic_activation');
 
 /* set_current_user */
 
