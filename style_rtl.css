@@ -84,6 +84,8 @@
   float: right;
 }
 
-#inside {
-  border-left-width: 1px;
+@media screen{
+  #inside {
+    border-left-width: 1px;
+  }
 }

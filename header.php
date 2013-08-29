@@ -11,10 +11,11 @@
       $logo_file = get_stylesheet_directory_uri().'/images/logo.png';
     else
       $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
-    //TODO check is_preview()
+
     if (isset($_GET['scheme']) and !empty($_GET['scheme']))
       $scheme = $_GET['scheme'];
-    if (isset($wp_customize) && empty($scheme))
+    /* if Debug is enabled or using theme customize we need on the fly css */
+    if ((WP_DEBUG or isset($wp_customize)) && empty($scheme))
       $scheme = get_theme_mod('color_scheme', 'gray');
     if (wp_is_mobile()) { ?>
   <?php } ?>
@@ -27,7 +28,6 @@
   <?php } else { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php?scheme=<?php echo $scheme ?>" type='text/css' />
   <?php } ?>
-
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
@@ -51,7 +51,7 @@
       <div id="logo_header">
         <img id="logo_image" src="<?php print $logo_file ?>" alt="" />
         <div id="logo_text">
-          <p class="title" id="title"><strong><a href=<?php print '"'.get_bloginfo('url').'">'.get_bloginfo('name'); ?></a></strong></p>
+          <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>
           <p id="description"><?php print get_bloginfo('description') ?></p>
         </div>
       </div>
@@ -90,7 +90,7 @@
       </div>
 <!--    <li id="search">
       <label for="s"><?php _e('Search:'); ?></label>
-      <form id="searchform" method="get" action="<?php bloginfo('home'); ?>">
+      <form id="searchform" method="get" action="<?php home_url(); ?>">
       <div>
         <input type="text" name="s" id="s" size="15" /><br />
         <input type="submit" value="<?php _e('Search'); ?>" />

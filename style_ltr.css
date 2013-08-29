@@ -82,6 +82,7 @@
   float: left;
 }
 
-#inside {
-  border-right-width: 1px;
-}
+@media screen{
+  #inside {
+    border-right-width: 1px;
+  }

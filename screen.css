@@ -1,24 +1,52 @@
 body{
   margin:0em auto;
-  width: 900px;
   min-width: 100px;
   max-width: 100%;
 }
 
-#main {
-  width: 70%;
+@media screen{
+  body{
+    width: 900px;
+  }
 }
+
+@media print{
+  body{
+    margin:0em 0em;
+  }
+}
+
+
+@media screen{
+  #main {
+    width: 70%;
+  }
+}
+
+@media print{
+  #main {
+    width: 100%;
+  }
+}
+
 
 #container {
   margin: 1em;
-  box-shadow: 0.3em 0.3em 0.3em #AAA;
-  border-radius: 5px;
 }
 
-#header {
-  border-radius: 5px 5px 0 0;
-  box-shadow: 0em 0.2em 0.5em 0.0em #AAA;
+@media screen{
+  #container {
+    box-shadow: 0.3em 0.3em 0.3em #AAA;
+    border-radius: 5px;
+  }
+
+  #header {
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0em 0.2em 0.5em 0.0em #AAA;
+  }
 }
+
+
 
 #inside {
   border-bottom-width: 1px;
@@ -33,6 +61,13 @@ body{
   padding: 0em;
   margin: 0em;
 }
+
+@media print{
+  #sidebar {
+    display: none;
+  }
+}
+
 /* todo for screen, now moved to style.css
 #sidebar a{
   color: #324e56;

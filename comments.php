@@ -5,40 +5,40 @@
   */
 /* Check if protected*/
 if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $post->post_password) {
-	?>
-		<p><?php _e('Enter your password to view comments.'); ?></p>
-	<?php return; }
+  ?>
+    <p><?php _e('Enter your password to view comments.'); ?></p>
+  <?php return; }
 //-------------------------------------
 ?>
 
 <?php if ( comments_open() ) { ?>
-	<!-- a href="#postcomment"><?php _e("Leave a comment"); ?></a -->
+  <!-- a href="#postcomment"><?php _e("Leave a comment"); ?></a -->
 <?php } ?>
 
 <?php if ( $comments ) { ?>
 <ol id="commentlist">
 
 <?php foreach ($comments as $comment) { ?>
-	<li id="comment-<?php comment_ID() ?>">
+  <li id="comment-<?php comment_ID() ?>">
     <div class="comment">
-		  <div class="avatar"><?php echo get_avatar( $comment, 48); ?></div>
-  	  <ul class="infobar">
-			  <li class="author"><?php comment_author_link(); ?></li>
-	    	<li class="date"><?php comment_date(); ?> <?php comment_time(); ?></li>
-			  <li class="info_type"><?php comment_type(__(''), __('Trackback'), __('Pingback')); ?></li>
-	  	  <li class="edit"><?php edit_comment_link(__('Edit')); ?></li>
-    	</ul>
-			<?php comment_text() ?>
+      <div class="avatar"><?php echo get_avatar( $comment, 48); ?></div>
+      <ul class="infobar">
+        <li class="author"><?php comment_author_link(); ?></li>
+        <li class="date"><?php comment_date(); ?> <?php comment_time(); ?></li>
+        <li class="info_type"><?php comment_type(__(''), __('Trackback'), __('Pingback')); ?></li>
+        <li class="edit"><?php edit_comment_link(__('Edit')); ?></li>
+      </ul>
+      <?php comment_text() ?>
     </div>
     <hr class="skip" />
-	</li>
+  </li>
 
 <?php } ?>
 
 </ol>
 
 <?php } else { // If there are no comments yet ?>
-	<p><?php _e('No comments yet.'); ?></p>
+  <p><?php _e('No comments yet.'); ?></p>
 <?php } ?>
 
 <?php if ( comments_open() ) { ?>
@@ -70,15 +70,15 @@ if ( !empty($post->post_password) && $_COOKIE['wp-postpass_' . COOKIEHASH] != $p
 
 <p><textarea name="comment" id="comment-area" cols="100%" rows="10" tabindex="4"></textarea></p>
 
-<p><input name="submit" type="submit" id="submit" tabindex="5" value="<?php echo attribute_escape(__('Submit Comment')); ?>" />
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="<?php echo esc_attr(__('Submit Comment')); ?>" />
 <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
 </p>
 <?php do_action('comment_form', $post->ID); ?>
 
 </form>
-<p class="infobar"><?php comments_rss_link(__('<abbr title="Really Simple Syndication">RSS</abbr> Feed for comments.')); ?>
+<p id="footer_info" class="infobar"><?php post_comments_feed_link(__('<abbr title="Really Simple Syndication">RSS</abbr> Feed for comments.')); ?>
 <?php if ( pings_open() ) { ?>
-	<a href="<?php trackback_url() ?>" rel="trackback"><?php _e('TrackBack <abbr title="Universal Resource Locator">URL</abbr>'); ?></a>
+  <a href="<?php trackback_url() ?>" rel="trackback"><?php _e('TrackBack <abbr title="Universal Resource Locator">URL</abbr>'); ?></a>
 <?php } ?>
 </p>
 

@@ -78,8 +78,13 @@ a:hover{
   font-size: 240%;
   margin: auto 0;
   line-height: 100%;
-/*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
-  text-shadow: 0.1em 0.1em 0.1em $color(base, -20);
+}
+
+@media screen {
+  #title{
+  /*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
+    text-shadow: 0.1em 0.1em 0.1em $color(base, -20);
+  }
 }
 
 #description{
@@ -122,8 +127,17 @@ a:hover{
 #main h2.title {
   font-size: 130%;
 }
-#main h2.title {
-  border-bottom: 1px solid $get(border);
+
+@media screen{
+  #main h2.title {
+    border-bottom: 1px solid $get(border);
+  }
+}
+
+@media print{
+  #main h2.title {
+    border-bottom: 1px solid #333;
+  }
 }
 
 ol#posts {
@@ -213,7 +227,10 @@ div.post {
   content: "• "
 }
 
-.edit{
+@media print{
+  li.edit{
+    display: none;
+  }
 }
 
 div.post {
@@ -238,6 +255,12 @@ div.post {
   border-top: 1px solid $color(border);
   color: $color(canvas_ink);
   background: $color(border);
+}
+
+@media print{
+  #pagination {
+    display: none;
+  }
 }
 
 #pagination a{
@@ -285,6 +308,9 @@ div.post {
   text-shadow: 2px 2px #d7d7d7;
 }
 
+@media screen {
+}
+
 #sidebar>ul>li {
   font-size: 120%;
 }
@@ -311,6 +337,12 @@ div.post {
   padding: 0.1em 1em;
   overflow: auto;
   border-top: 1px solid $mix(canvas_back, base);
+}
+
+@media print{
+  #nav{
+    display: none;
+  }
 }
 
 #nav_page, #nav_subpage {
@@ -428,6 +460,12 @@ input[type=submit]{
   color:$color(canvas_ink);
 }
 
+@media print{
+  #commentform {
+    display: none;
+  }
+}
+
 #footer {
   clear: both;
   font-size: 80%;
@@ -458,4 +496,10 @@ input[type=submit]{
 }
 
 #copyright a{
+}
+
+@media print{
+  #footer_info {
+    display: none;
+  }
 }
