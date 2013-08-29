@@ -2,18 +2,19 @@
 
 <ol id="posts">
 <?php	if (!have_posts()) { ?>
-		<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
+    <p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
 <?php	} else {
-		    while (have_posts()) {
+        $count = 0;
+        while (have_posts()) {
           the_post(); ?>
 
   <li class="post" id="post-<?php the_ID(); ?>">
-    <h2 class="title"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+    <h2 class="title<?php if ($count>0) print(' pagebreak') ?>"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
     <ul class="infobar">
-	    <!-- li class="avatar"><?php echo get_avatar( $comment, 32 ); ?></li -->
+      <!-- li class="avatar"><?php echo get_avatar( $comment, 32 ); ?></li -->
       <li class="author"><?php the_author(); ?></li>
-  	  <li class="date"><?php the_date(); ?></li>
-	    <li class="edit"><?php edit_post_link(__('Edit')); ?></li>
+      <li class="date"><?php the_date(); ?></li>
+      <li class="edit"><?php edit_post_link(__('Edit')); ?></li>
     </ul>
     <div class="post-content"><?php the_content(__('(more...)')); ?></div>
     <ul class="infobar">
@@ -23,7 +24,9 @@
     </ul>
     <hr class="skip" />
   </li>
-	<?php } ?>
+  <?php
+    $count++;
+  } ?>
 </ol>
 
 <?php comments_template(); ?>

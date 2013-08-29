@@ -503,3 +503,14 @@ input[type=submit]{
     display: none;
   }
 }
+
+@media print
+{
+  .post {
+    page-break-inside: avoid;
+  }
+
+  .pagebreak {
+    page-break-before: auto;
+  }
+}
