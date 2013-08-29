@@ -6,6 +6,7 @@
   <meta name="HandheldFriendly" content="true"/>
   <meta name="viewport" content="width=device-width; initial-scale=1.0" />
   <?php
+    global $wp_customize;
     if (file_exists(get_stylesheet_directory().'/images/logo.png'))
       $logo_file = get_stylesheet_directory_uri().'/images/logo.png';
     else
@@ -13,7 +14,7 @@
     //TODO check is_preview()
     if (isset($_GET['scheme']) and !empty($_GET['scheme']))
       $scheme = $_GET['scheme'];
-    if (empty($scheme))
+    if (isset($wp_customize) && empty($scheme))
       $scheme = get_theme_mod('color_scheme', 'gray');
     if (wp_is_mobile()) { ?>
   <?php } ?>
@@ -21,17 +22,21 @@
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
   <link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
   <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
+  <?php if (empty($scheme)) { ?>
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' />
+  <?php } else { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php?scheme=<?php echo $scheme ?>" type='text/css' />
-  <!--todo using is_preview() link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' /-->
+  <?php } ?>
+
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/screen.css" type='text/css' />
   <?php } ?>
   <?php if (is_rtl()) { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/rtl.css" type='text/css' />
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style_rtl.css" type='text/css' />
   <?php } else  { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/ltr.css" type='text/css' />
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style_ltr.css" type='text/css' />
   <?php } ?>
   <link rel="pingback" href="<?php print bloginfo('pingback_url'); ?>" />
   <?php

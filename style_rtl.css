@@ -1,0 +1,89 @@
+/* From Style */
+
+.alignleft {
+  float: right;
+}
+
+.alignright {
+   float: right;
+}
+
+#logo_image{
+  float: right;
+}
+
+#main {
+  float: right;
+}
+
+.infobar .category{
+  float: right;
+}
+
+.infobar .tags{
+  float: right;
+}
+
+.info_type {
+  float: right;
+}
+
+.date{
+  float: right;
+}
+
+.author{
+  float: right;
+}
+
+.previous-posts {
+  float: right;
+  text-align: right;
+}
+
+/* not sure if it is good, it is the left of widget list item*/
+#sidebar>ul>li>ul {
+  padding-right: 2em;
+}
+
+#sidebar>ul>li>ul>li>ul {
+  padding-right: 1em;
+}
+
+#nav_page li{
+  float: right;
+}
+
+#nav_subpage li {
+  float: right;
+}
+
+.widget_tag_cloud a {
+  padding-right: 5px;
+}
+
+.avatar{
+  float: right;
+}
+
+.infobar .comments_count{
+  float: left;
+}
+
+.edit{
+  float: left;
+}
+
+.next-posts {
+  float: left;
+  text-align: left;
+}
+
+/* From Screen */
+#sidebar {
+  float: right;
+}
+
+#inside {
+  border-left-width: 1px;
+}

@@ -94,7 +94,7 @@ function metallic_customize_save(){
   metallic_generate_css($color);
 }
 
-//add_action('customize_save', 'metallic_customize_save');
+add_action('customize_save', 'metallic_customize_save');
 
 /*
   Ref: http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
