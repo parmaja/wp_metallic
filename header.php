@@ -88,16 +88,6 @@
         print $output;
       ?>
       </div>
-<!--    <li id="search">
-      <label for="s"><?php _e('Search:'); ?></label>
-      <form id="searchform" method="get" action="<?php home_url(); ?>">
-      <div>
-        <input type="text" name="s" id="s" size="15" /><br />
-        <input type="submit" value="<?php _e('Search'); ?>" />
-      </div>
-      </form>
-    </li>
--->
     <?php } ?>
     </div>
     <div id="content">

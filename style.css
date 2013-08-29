@@ -11,8 +11,8 @@
 */
 
 $<
-  border=$mix(canvas_back, base, 80)
-  background: $mix(canvas_back, base, 90);
+  border=$mix(canvas_back, base, 70)
+  background: $mix(canvas_back, base, 90)
 >
 
 html {
@@ -116,7 +116,7 @@ a:hover{
   padding: 1em;
   border-width: 0px;/* Will override it in other css*/
   border-style: solid;
-  border-color: #cccccc;
+  border-color: $color(border);
 }
 
 #main h2 {
@@ -306,7 +306,7 @@ div.post {
 
 #sidebar>ul>li {
   list-style-type: none;
-  border-bottom: 0px solid #cccccc; /* Will override in other css */
+  border-bottom: 0px solid $color(border); /* Will override in other css */
   text-shadow: 2px 2px #d7d7d7;
 }
 
