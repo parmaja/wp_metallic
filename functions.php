@@ -10,7 +10,7 @@
 * Based on Naked project URL http://code.google.com/p/wordpress-naked/
 */
 
-define(Metallic, 'Metallic');
+define('Metallic', 'Metallic');
 
 /** Register sidebar */
 
@@ -151,10 +151,7 @@ function metallic_set_current_user() {
   }
 }
 
-add_action("switch_theme", $fn);
-
-/**************/
-
+/*  */
 /*
 add_action('wp_enqueue_scripts', 'prefix_add_my_stylesheet');
 
@@ -163,4 +160,5 @@ function prefix_add_my_stylesheet() {
     wp_enqueue_style( 'custom-supersized-styles' );
 }
 */
+
 ?>

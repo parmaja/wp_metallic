@@ -54,7 +54,7 @@ a:hover{
 }
 
 #logo_header{
-  padding: 0.5em 0.5em 0 0.5em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
   overflow: auto;
   height: auto;
   display: table;
@@ -67,15 +67,17 @@ a:hover{
   display: table-cell;
   margin: 0.2em;
   vertical-align: middle;
+  margin: 0.1em;
 }
 
 #logo_text {
   display: table-cell;
   vertical-align: middle;
+  padding: 0em 0.5em;
 }
 
 #title{
-  font-size: 240%;
+  font-size: 200%;
   margin: auto 0;
   line-height: 100%;
 }
