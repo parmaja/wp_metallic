@@ -116,12 +116,24 @@ function metallic_customize_save_after(){
 
 add_action('customize_save_after', 'metallic_customize_save_after');
 
+/* set_current_user */
+
+add_action('set_current_user', 'metallic_set_current_user');
+
+function metallic_set_current_user() {
+  if (!current_user_can('edit_posts')) {
+    show_admin_bar(false);
+  }
+}
+
 /**************/
 
+/*
 add_action('wp_enqueue_scripts', 'prefix_add_my_stylesheet');
 
 function prefix_add_my_stylesheet() {
     wp_register_style( 'custom-supersized-styles', get_template_directory_uri(). '/css/style.css', array('style','supersized'));
     wp_enqueue_style( 'custom-supersized-styles' );
 }
+*/
 ?>
