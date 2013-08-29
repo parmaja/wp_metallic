@@ -178,11 +178,11 @@ class CssMacro {
   }
 
   private function func_lighten($color, $amount = 0){
-    func_color($color, $amount);
+    $this->func_color($color, $amount);
   }
 
   private function func_darken($color, $amount = 0){
-    func_color($color, -$amount);
+    $this->func_color($color, -$amount);
   }
 
   private function func_get($value){
