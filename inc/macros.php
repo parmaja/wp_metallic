@@ -60,7 +60,7 @@ $if(b)<
   bug when
 */
 
-include('color.php');
+require('color.php');
 
 use phpColors\Color;
 

@@ -12,8 +12,21 @@
 
 define('Metallic', 'Metallic');
 
+add_theme_support( 'automatic-feed-links' );
+
 if (!isset($content_width))
   $content_width = 900;
+
+
+/* set_current_user */
+
+add_action('set_current_user', 'metallic_set_current_user');
+
+function metallic_set_current_user() {
+  if (!current_user_can('edit_posts')) {
+    show_admin_bar(false);
+  }
+}
 
 /** Register sidebar */
 
@@ -111,7 +124,7 @@ add_action('customize_register', 'metallic_customize_register');
         http://stackoverflow.com/questions/14802251/hook-into-the-wordpress-theme-customizer-save-action
 */
 
-include('inc/macros.php');
+require('inc/macros.php');
 
 function metallic_generate_css_cache(){
   global $wp_customize;
@@ -140,16 +153,6 @@ function metallic_activation($old_theme)
 
 add_action('customize_save_after', 'metallic_customize_save_after');
 add_action("after_switch_theme", 'metallic_activation');
-
-/* set_current_user */
-
-add_action('set_current_user', 'metallic_set_current_user');
-
-function metallic_set_current_user() {
-  if (!current_user_can('edit_posts')) {
-    show_admin_bar(false);
-  }
-}
 
 /*  */
 /*

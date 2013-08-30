@@ -82,6 +82,12 @@ caption, th, td {
   display: none;
 }
 
+code{
+  font-family: monospace, serif;
+  font-size: 80%;
+  hyphens: none;
+}
+
 /*----------------*/
 
 #container {
@@ -254,6 +260,22 @@ div.post {
 }
 
 .post img {
+  margin:0.5em;
+}
+
+table, th ,td, tr {
+  border: 1px solid $color(border);
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.2em;
+}
+
+blockquote{
+  margin: 1em;
+  background: $color(background);
+  color: $color(canvas_ink);
 }
 
 /* Shared with comments */
@@ -495,10 +517,14 @@ input[type=submit]{
   margin: 0;
   border-radius: 3px;
   border: 1px solid $mix(canvas_back, base);
-  color:$color(canvas_ink);
+  color: $color(canvas_ink);
 }
 
-#comment-area {
+#reply-title{
+  font-size: 100%;
+}
+
+#comment {
   width: 90%;
   font-size: 120%;
   padding: 0.2em;
