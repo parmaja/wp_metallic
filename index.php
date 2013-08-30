@@ -1,4 +1,4 @@
-	<?php include('post.inc.php'); ?>
+  <?php get_template_part('post', 'inc'); ?>
 
   <ul id="pagination">
     <li class="previous-posts"><?php previous_posts_link('&laquo; Previous') ?></li>
