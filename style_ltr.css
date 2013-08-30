@@ -22,7 +22,7 @@
   float: left;
 }
 
-.info_type {
+.info-type {
   float: left;
 }
 
@@ -48,16 +48,20 @@
   padding-left: 1em;
 }
 
-#nav_page li{
+#nav-page li{
   float: left;
 }
 
-#nav_subpage li {
+#nav-subpage li {
   float: left;
 }
 
 .widget_tag_cloud a {
   padding-left: 5px;
+}
+
+.children{
+  padding-left: 1em;
 }
 
 .avatar{

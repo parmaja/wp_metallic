@@ -1,49 +1,64 @@
 <?php
 /**
-*@desc Included at the bottom of post.php and single.php, deals with all comment layout
-*/
+ * @ported from Twenty Thirteen
+ */
 
-/* Check if protected*/
-if (post_password_required())
+/*
+ * If the current post is protected by a password and the visitor has not yet
+ * entered the password we will return early without loading the comments.
+ */
+if ( post_password_required() )
   return;
+
+function metallic_comment($comment, $args, $depth) {
 ?>
-
-<?php if ( comments_open() ) { ?>
-  <!-- a href="#postcomment"><?php __("Leave a comment", 'default'); ?></a -->
-<?php } ?>
-
-<?php if ($comments) { ?>
-<ol id="comment-list">
-<?php foreach ($comments as $comment) { ?>
   <li class="comment" id="comment-<?php comment_ID() ?>">
-    <div class="avatar"><?php echo get_avatar( $comment, 48); ?></div>
+    <div class="avatar"><?php echo get_avatar($comment, $args['avatar_size']); ?></div>
       <ul class="infobar">
         <li class="author"><?php comment_author_link(); ?></li>
         <li class="date"><?php comment_date(); ?> <?php comment_time(); ?></li>
-        <li class="info_type"><?php comment_type(__(''), __('Trackback'), __('Pingback')); ?></li>
-        <li class="edit"><?php edit_comment_link(__('Edit')); ?></li>
+        <li class="info-type"><?php comment_type('', __('Trackback', 'default'), __('Pingback', 'default')); ?></li>
+        <li class="edit"><?php edit_comment_link(__('Edit', 'default')); ?></li>
       </ul>
       <div class="comment-body">
       <?php comment_text() ?>
       </div>
     <hr class="skip" />
   </li>
-<?php } ?>
-</ol>
+<?php
+}
+?>
+<div id="comments" class="comments-area">
 
-<?php } else { // If there are no comments yet ?>
-  <p><?php __('No comments yet.', 'default'); ?></p>
-<?php } ?>
+  <?php if (have_comments()) { ?>
+    <ol class="comment-list">
+      <?php
+        wp_list_comments(
+          array(
+            'callback' => 'metallic_comment',
+            'avatar_size' => 32,
+            'style'       => 'ol',
+            'short_ping'  => true
+          )
+        );
+      ?>
+    </ol><!-- .comment-list -->
 
-<?php if ( comments_open() ) { ?>
+    <?php
+      // Are there comments to navigate through?
+      if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) {
+    ?>
+    <nav class="navigation comment-navigation" role="navigation">
+      <div class="nav-previous"><?php previous_comments_link(__( '&laquo; Older Comments', 'default' ) ); ?></div>
+      <div class="nav-next"><?php next_comments_link(__('Newer Comments &raquo;', 'default')); ?></div>
+    </nav><!-- .comment-navigation -->
+    <?php } // Check for comment navigation ?>
 
-<?php if ( get_option('comment_registration') && !$user_ID ) { ?>
-<p><?php printf(__('You must be <a href="%s">logged in</a> to post a comment.'), get_option('siteurl')."/wp-login.php?redirect_to=".urlencode(get_permalink()));?></p>
-<?php } else { ?>
-<?php comment_form(); ?>
+    <?php if (!comments_open() && get_comments_number() ) { ?>
+    <p class="no-comments"><?php __( 'Comments are closed.' , 'default' ); ?></p>
+    <?php } ?>
 
-<?php } // If registration required and not logged in ?>
-
-<?php } else { // Comments are closed ?>
-<p><?php __('Sorry, the comment form is closed at this time.', 'default'); ?></p>
-<?php } ?>
+  <?php } // have_comments() ?>
+  <?php comment_form();
+  ?>
+</div><!-- #comments -->

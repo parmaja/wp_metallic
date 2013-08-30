@@ -46,12 +46,12 @@
   ?>
 </head>
 
-<body>
+<body <?php body_class(); ?>>
   <div id="container">
     <div id="header">
-      <div id="logo_header">
-        <img id="logo_image" src="<?php print $logo_file ?>" alt="" />
-        <div id="logo_text">
+      <div id="logo-header">
+        <img id="logo-image" src="<?php print $logo_file ?>" alt="" />
+        <div id="logo-text">
           <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>
           <p id="description"><?php print get_bloginfo('description') ?></p>
         </div>
@@ -65,7 +65,7 @@
         $params = "title_li=&depth=1&echo=0";
 
         // Top level page
-        $output .= '<ul id="nav_page">';
+        $output .= '<ul id="nav-page">';
         $output .= wp_list_pages($params);
         $output .= '</ul>';
 
@@ -82,7 +82,7 @@
 
         if ($subpage)
         {
-          $output .= '<ul id="nav_subpage">';
+          $output .= '<ul id="nav-subpage">';
           $output .= $subpage;
           $output .= '</ul>';
         }

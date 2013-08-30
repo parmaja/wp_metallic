@@ -6,8 +6,7 @@
         $count = 0;
         while (have_posts()) {
           the_post(); ?>
-
-  <li class="post" id="post-<?php the_ID(); ?>">
+  <li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <h2 class="title<?php if ($count>0) print(' pagebreak') ?>"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
     <ul class="infobar">
       <!-- li class="avatar"><?php echo get_avatar( $comment, 32 ); ?></li -->
@@ -19,7 +18,7 @@
     <ul class="infobar">
       <li class="category"><?php print __('Category', 'default').': '; print the_category(', ') ?></li>
       <li class="tags"><?php the_tags(__('Tags: ', 'default'), ', ', '') ?></li>
-      <li class="comments_count"><?php comments_popup_link(__('No Comments', 'default'), __('1 Comment', 'default'), __('% Comments', 'default'), ''); ?></li>
+      <li class="comments-count"><?php comments_popup_link(__('No Comments', 'default'), __('1 Comment', 'default'), __('% Comments', 'default'), ''); ?></li>
     </ul>
     <hr class="skip" />
   </li>

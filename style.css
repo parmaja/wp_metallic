@@ -61,7 +61,6 @@ caption, th, td {
 }
 
 .sticky{
-  display: none;
 }
 
 .gallery-caption{
@@ -108,7 +107,7 @@ pre, code{
   vertical-align: middle;
 }
 
-#logo_header{
+#logo-header{
   padding: 0.5em 0.5em 0.5em 0.5em;
   overflow: auto;
   height: auto;
@@ -118,14 +117,14 @@ pre, code{
 #title{
 }
 
-#logo_image{
+#logo-image{
   display: table-cell;
   margin: 0.2em;
   vertical-align: middle;
   margin: 0.1em;
 }
 
-#logo_text {
+#logo-text {
   display: table-cell;
   vertical-align: middle;
   padding: 0em 0.5em;
@@ -252,7 +251,7 @@ ol#posts .more-link{
 .infobar .tags{
 }
 
-.infobar .comments_count{
+.infobar .comments-count{
 }
 
 li.post{
@@ -261,10 +260,6 @@ li.post{
 }
 
 div.post {
-}
-
-.post img {
-  margin:0.5em;
 }
 
 table, th ,td, tr {
@@ -284,7 +279,7 @@ blockquote{
 
 /* Shared with comments */
 
-.info_type {
+.info-type {
 }
 
 .date{
@@ -312,7 +307,7 @@ blockquote{
 div.post {
 }
 
-.post_content {
+.post-content {
   color: #222;
   clear: both;
   overflow: hidden;
@@ -320,9 +315,13 @@ div.post {
   margin: 0;
 }
 
+.post-content img{
+  margin:0.5em;
+}
+
 /* pagination */
 
-#pagination {
+.pagination {
   list-style: none;
   margin: 0.5em 0.1em 0;
   padding: 0.1em 0.5em;
@@ -419,28 +418,28 @@ div.post {
   }
 }
 
-#nav_page, #nav_subpage {
+#nav-page, #nav-subpage {
   list-style: none;
   padding: 0;
   margin: 0;
   clear: both;
 }
 
-#nav_subpage {
+#nav-subpage {
   font-size: 80%;
   clear: both;
 }
 
-#nav_page ul, #nav_subpage ul {
+#nav-page ul, #nav-subpage ul {
 }
 
-#nav_page li{
+#nav-page li{
   display: block;
   padding: 0.1em 0.4em;
   margin: 0.1em
 }
 
-#nav_subpage li {
+#nav-subpage li {
   display: block;
   padding: 0.1em 0.4em;
   margin: 0.1em
@@ -486,13 +485,17 @@ div.post {
   font-size: 100%;
 }
 
-#comment {
-  width: 90%;
+.comment-form-comment label{
+  vertical-align: top;
+}
+
+textarea#comment {
+  width: 95%;
   font-size: 120%;
   padding: 0.2em;
   border-radius: 3px;
   border: 1px solid $mix(canvas_back, base, 50);
-  color:$color(canvas_ink);
+  color: $color(canvas_ink);
 }
 
 .comment-list {
@@ -504,6 +507,9 @@ div.post {
   border-bottom: 1px solid $color(border);
   margin: 0.5em;
   padding-bottom: 0.5em;
+}
+
+.children{
 }
 
 .comment{
@@ -544,6 +550,11 @@ input[type=submit]{
 }
 
 @media print{
+  #reply-title{
+    display: none;
+  }
+}
+@media print{
   #commentform {
     display: none;
   }
@@ -568,7 +579,7 @@ input[type=submit]{
 }
 
 @media print{
-  #footer_info {
+  #footer-info {
     display: none;
   }
 }

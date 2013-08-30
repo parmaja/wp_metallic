@@ -24,7 +24,7 @@
   float: right;
 }
 
-.info_type {
+.info-type {
   float: right;
 }
 
@@ -50,7 +50,7 @@
   padding-right: 1em;
 }
 
-#nav_page li{
+#nav-page li{
   float: right;
 }
 
@@ -60,6 +60,10 @@
 
 .widget_tag_cloud a {
   padding-right: 5px;
+}
+
+.children{
+  padding-right: 1em;
 }
 
 .avatar{

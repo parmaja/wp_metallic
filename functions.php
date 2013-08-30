@@ -17,6 +17,19 @@ add_theme_support( 'automatic-feed-links' );
 if (!isset($content_width))
   $content_width = 900;
 
+function metallic_link_pages(){
+    print wp_link_pages(
+      array(
+        'before' => '<ul class="pagination">',
+        'after' => '</ul>',
+        'link_before' => '<li class="previous-posts">',
+        'link_after' => '</li>',
+        'pagelink'         => '%',
+	      'nextpagelink'     => __('Next page'),
+      	'previouspagelink' => __('Previous page')
+        )
+    );
+}
 
 /* set_current_user */
 
@@ -98,7 +111,7 @@ function metallic_customize_register($wp_customize) {
                 $ini = parse_ini_file($dir.'/'.$entry, false);
                 $name = strstr($entry, '.', true);//explode('.', $entry);
                 $title = $ini['name'];
-                $shemes[$name] = __($title);//It is a color name we can translate it
+                $shemes[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
             }
         }
         closedir($handle);
