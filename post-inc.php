@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <ol id="posts">
 <?php	if (!have_posts()) { ?>
     <p><?php __('Sorry, no posts matched your criteria.', 'default'); ?></p>
@@ -25,10 +24,10 @@
     <hr class="skip" />
   </li>
   <?php
-    $count++;
-  } ?>
+      $count++;
+    } ?>
 </ol>
-
-<?php comments_template(); ?>
-
-<?php } ?>
+<?php
+    comments_template();
+  }
+?>

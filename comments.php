@@ -12,26 +12,23 @@ if (post_password_required())
   <!-- a href="#postcomment"><?php __("Leave a comment", 'default'); ?></a -->
 <?php } ?>
 
-<?php if ( $comments ) { ?>
-<ol id="commentlist">
-
+<?php if ($comments) { ?>
+<ol id="comment-list">
 <?php foreach ($comments as $comment) { ?>
-  <li id="comment-<?php comment_ID() ?>">
-    <div class="comment">
-      <div class="avatar"><?php echo get_avatar( $comment, 48); ?></div>
+  <li class="comment" id="comment-<?php comment_ID() ?>">
+    <div class="avatar"><?php echo get_avatar( $comment, 48); ?></div>
       <ul class="infobar">
         <li class="author"><?php comment_author_link(); ?></li>
         <li class="date"><?php comment_date(); ?> <?php comment_time(); ?></li>
         <li class="info_type"><?php comment_type(__(''), __('Trackback'), __('Pingback')); ?></li>
         <li class="edit"><?php edit_comment_link(__('Edit')); ?></li>
       </ul>
+      <div class="comment-body">
       <?php comment_text() ?>
-    </div>
+      </div>
     <hr class="skip" />
   </li>
-
 <?php } ?>
-
 </ol>
 
 <?php } else { // If there are no comments yet ?>

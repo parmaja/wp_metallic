@@ -8,7 +8,7 @@ Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Description: CSS3 theme without any images inside, plain and simple, multi color, right side column and work for right to left languages
-Tags: css3, simple, plain, clean, fixed width, no-images, widget-ready, widgets, right sidebar, two columns, valid XHTML, valid CSS, rtl, right-to-left
+Tags: fixed-width, right-sidebar, two-columns, light
 */
 
 /* Set Variables values */
@@ -82,9 +82,13 @@ caption, th, td {
   display: none;
 }
 
-code{
+pre {
+  margin: 1em;
+}
+
+pre, code{
   font-family: monospace, serif;
-  font-size: 80%;
+  font-size: 100%;
   hyphens: none;
 }
 
@@ -297,7 +301,10 @@ blockquote{
 }
 
 @media print{
-  li.edit{
+  li.edit {
+    display: none;
+  }
+  a.comment-edit-link{
     display: none;
   }
 }
@@ -319,9 +326,7 @@ div.post {
   list-style: none;
   margin: 0.5em 0.1em 0;
   padding: 0.1em 0.5em;
-  min-height: 1em;
   overflow: auto;
-  border-top: 1px solid $color(border);
   color: $color(canvas_ink);
   background: $color(border);
 }
@@ -474,21 +479,36 @@ div.post {
 .widget_tag_cloud a {
 }
 
+.comments-area{
+}
+
 #comments h2{
   font-size: 100%;
 }
 
-#commentlist {
+#comment {
+  width: 90%;
+  font-size: 120%;
+  padding: 0.2em;
+  border-radius: 3px;
+  border: 1px solid $mix(canvas_back, base, 50);
+  color:$color(canvas_ink);
+}
+
+.comment-list {
   list-style: none outside none;
   padding: 0.5em 0 0 0;
-  margin: 0;
+}
+
+.comment-body {
+  border-bottom: 1px solid $color(border);
+  margin: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 .comment{
   background: $color(background);
-  border-bottom: 1px solid $color(border);
-  color:$color(canvas_ink);
-  margin-bottom: 0.5em;
+  color: $color(canvas_ink);
   padding: 0;
   overflow: auto;
 }
@@ -496,7 +516,6 @@ div.post {
 .comment p {
   padding: 0;
   margin: 0.5em;
-
 }
 
 .avatar{
@@ -522,15 +541,6 @@ input[type=submit]{
 
 #reply-title{
   font-size: 100%;
-}
-
-#comment {
-  width: 90%;
-  font-size: 120%;
-  padding: 0.2em;
-  border-radius: 3px;
-  border: 1px solid $mix(canvas_back, base, 50);
-  color:$color(canvas_ink);
 }
 
 @media print{
