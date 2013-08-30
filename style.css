@@ -1,19 +1,27 @@
-/**
-  Theme Name: Metallic
-  Theme URI: https://github.com/parmaja/wp_metallic
-  Download: https://github.com/parmaja/wp_metallic/archive/release.zip
-  Version: 1.5
-  Author: Zaher Dirkey
-  Author URI: http://www.parmaja.com
-  Licence: LGPL
-  Description: CSS3 theme without any images inside, plain and simple, multi color, right side column and work for right to left languages
-  Tags: css3, simple, plain, clean, fixed width, no-images, widget-ready, widgets, right sidebar, two columns, valid XHTML, valid CSS, blank-slate, rtl, right-to-left
+/*
+Theme Name: Metallic
+Theme URI: https://github.com/parmaja/wp_metallic
+Download: https://github.com/parmaja/wp_metallic/archive/release.zip
+Version: 1.5
+Author: Zaher Dirkey
+Author URI: http://www.parmaja.com
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Description: CSS3 theme without any images inside, plain and simple, multi color, right side column and work for right to left languages
+Tags: css3, simple, plain, clean, fixed width, no-images, widget-ready, widgets, right sidebar, two columns, valid XHTML, valid CSS, rtl, right-to-left
 */
+
+/* Set Variables values */
 
 $<
   border=$mix(canvas_back, base, 70)
   background: $mix(canvas_back, base, 90)
 >
+
+/*
+  ref:
+    http://codex.wordpress.org/CSS
+*/
 
 html {
 }
@@ -38,6 +46,43 @@ a:hover{
   text-decoration: none;
   color: $color(highlight, 10);
 }
+
+caption, th, td {
+  font-weight: normal;
+  text-align: left;
+}
+
+.wp-caption {
+  max-width: 100%;
+}
+
+.wp-caption-text{
+  color: $color(canvas_ink);
+}
+
+.sticky{
+  display: none;
+}
+
+.gallery-caption{
+  color: $color(canvas_ink);
+}
+
+.bypostauthor{
+  display: inline-block;
+}
+
+.aligncenter, div.aligncenter {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.skip {
+  display: none;
+}
+
+/*----------------*/
 
 #container {
   background: $color(background);
@@ -338,7 +383,7 @@ div.post {
   clear: both;
   padding: 0.1em 1em;
   overflow: auto;
-  border-top: 1px solid $mix(canvas_back, base);
+  border-top: 1px solid $mix(base, canvas_back);
 }
 
 @media print{
@@ -471,20 +516,6 @@ input[type=submit]{
 #footer {
   clear: both;
   font-size: 80%;
-}
-
-/**
-  theme requirements as per 
-  http://codex.wordpress.org/CSS
-*/
-.aligncenter, div.aligncenter {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-}
-
-.skip {
-  display: none;
 }
 
 #copyright {

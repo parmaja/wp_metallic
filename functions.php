@@ -12,6 +12,9 @@
 
 define('Metallic', 'Metallic');
 
+if (!isset($content_width))
+  $content_width = 900;
+
 /** Register sidebar */
 
 if ( function_exists('register_sidebar') )
@@ -57,7 +60,7 @@ function metallic_customize_register($wp_customize) {
 
     $wp_customize->add_control('pages_navigator', array(
         'settings' => 'pages_navigator',
-        'label'    => __('Pages Navigator'),
+        'label'    => __('Navigation Menus', 'default'),
         'section'  => 'metallic_color_scheme',
         'type'     => 'checkbox',
     ));
@@ -82,7 +85,7 @@ function metallic_customize_register($wp_customize) {
                 $ini = parse_ini_file($dir.'/'.$entry, false);
                 $name = strstr($entry, '.', true);//explode('.', $entry);
                 $title = $ini['name'];
-                $shemes[$name] = __($title);
+                $shemes[$name] = __($title);//It is a color name we can translate it
             }
         }
         closedir($handle);
