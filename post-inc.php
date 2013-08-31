@@ -10,9 +10,9 @@
     <h2 class="title<?php if ($count>0) print(' pagebreak') ?>"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
     <ul class="infobar">
       <!-- li class="avatar"><?php echo get_avatar( $comment, 32 ); ?></li -->
-      <li class="author"><?php the_author(); ?></li>
-      <li class="date"><?php the_date(); ?></li>
-      <li class="edit"><?php edit_post_link(__('Edit', 'default')); ?></li>
+      <li class="entry-author"><?php the_author_posts_link(); ?></li>
+      <li class="entry-date"><?php the_date(); ?></li>
+      <li class="entry-edit"><?php edit_post_link(__('Edit', 'default')); ?></li>
     </ul>
     <div class="post-content"><?php the_content(__('More...', 'default')); ?></div>
     <ul class="infobar">

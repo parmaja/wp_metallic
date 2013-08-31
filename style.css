@@ -284,25 +284,25 @@ blockquote{
 
 /* Shared with comments */
 
-.post .info-type {
+.entry-type {
 }
 
-.post .date{
+.entry-date{
 }
 
-.post .date:before{
+.entry-date:before{
   content: "≡ "
 }
 
-.post .author{
+.entry-author{
 }
 
-.post .author:before{
+.entry-author:before{
   content: "• "
 }
 
 @media print{
-  .post li.edit {
+  .post li.entry-edit {
     display: none;
   }
 
@@ -323,7 +323,9 @@ div.post {
 }
 
 .post-content img{
-  margin:0.5em;
+  margin: 0.5em;
+  height: auto;
+  max-width: 100%;
 }
 
 /* pagination */

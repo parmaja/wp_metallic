@@ -12,13 +12,13 @@ if ( post_password_required() )
 
 function metallic_comment($comment, $args, $depth) {
 ?>
-  <li class="comment" id="comment-<?php comment_ID() ?>">
+  <li <?php comment_class() ?> id="comment-<?php comment_ID() ?>">
     <div class="avatar"><?php echo get_avatar($comment, $args['avatar_size']); ?></div>
       <ul class="infobar">
-        <li class="author"><?php comment_author_link(); ?></li>
-        <li class="date"><?php comment_date(); ?> <?php comment_time(); ?></li>
-        <li class="info-type"><?php comment_type('', __('Trackback', 'default'), __('Pingback', 'default')); ?></li>
-        <li class="edit"><?php edit_comment_link(__('Edit', 'default')); ?></li>
+        <li class="entry-author"><?php comment_author_link(); ?></li>
+        <li class="entry-date"><?php comment_date(); ?> <?php comment_time(); ?></li>
+        <li class="entry-type"><?php comment_type('', __('Trackback', 'default'), __('Pingback', 'default')); ?></li>
+        <li class="entry-edit"><?php edit_comment_link(__('Edit', 'default')); ?></li>
       </ul>
       <div class="comment-body">
       <?php comment_text() ?>

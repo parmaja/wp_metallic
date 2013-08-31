@@ -22,16 +22,20 @@
   float: left;
 }
 
-.info-type {
+.entry-type {
   float: left;
 }
 
-.date{
+.entry-date{
   float: left;
 }
 
-.author{
+.entry-author{
   float: left;
+}
+
+.entry-edit{
+  float: right;
 }
 
 .previous-posts {
@@ -69,10 +73,6 @@
 }
 
 .infobar .comments_count{
-  float: right;
-}
-
-.edit{
   float: right;
 }
 
