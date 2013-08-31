@@ -25,8 +25,8 @@ function metallic_link_pages(){
         'link_before' => '<li class="previous-posts">',
         'link_after' => '</li>',
         'pagelink'         => '%',
-	      'nextpagelink'     => __('Next page'),
-      	'previouspagelink' => __('Previous page')
+        'nextpagelink'     => __('Next page', 'default'),
+        'previouspagelink' => __('Previous page', 'default')
         )
     );
 }
