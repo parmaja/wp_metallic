@@ -38,6 +38,31 @@ body {
   max-width: 100%; /* Good to be flexible */
 }
 
+h1{
+  font-size: 160%;
+}
+
+h2{
+  font-size: 140%;
+}
+
+h3{
+  font-size: 130%;
+}
+
+h4{
+  font-size: 120%;
+}
+
+h5{
+  font-size: 110%;
+}
+
+h6{
+  font-size: 100%;
+}
+
+
 a{
   text-decoration: none;
   color: $get(highlight);
@@ -182,12 +207,6 @@ embed, iframe, object {
 #main h2 {
   padding: 0.2em 0;
   margin: 0.2em 0 0 0;
-  font-size: 100%;
-}
-
-/* titles are h2 on homepage and h1 for internal */
-#main h2.title {
-  font-size: 130%;
 }
 
 @media screen{
@@ -212,10 +231,6 @@ ol#posts .more-link{
   text-decoration: none;
   font-size: 80%;
   color: #558caa;
-}
-
-.post-content{
-  padding-top: 0.5em;
 }
 
 .post-content p{
@@ -321,7 +336,7 @@ div.post {
   color: #222;
   clear: both;
   overflow: hidden;
-  padding: 0;
+  padding: 0.5em 0 0 0;
   margin: 0;
 }
 
