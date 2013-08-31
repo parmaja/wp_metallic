@@ -18,11 +18,11 @@ if (!isset($content_width))
   $content_width = 900;
 
 function metallic_link_pages(){
-    print wp_link_pages(
+    wp_link_pages(
       array(
-        'before' => '<ul class="pagination">',
+        'before' => '<ul class="page-numbers">',
         'after' => '</ul>',
-        'link_before' => '<li class="previous-posts">',
+        'link_before' => '<li class="page-number">',
         'link_after' => '</li>',
         'pagelink'         => '%',
         'nextpagelink'     => __('Next page', 'default'),
