@@ -7,10 +7,13 @@
   <meta name="viewport" content="width=device-width; initial-scale=1.0" />
   <?php
     global $wp_customize;
-    if (file_exists(get_stylesheet_directory().'/images/logo.png'))
-      $logo_file = get_stylesheet_directory_uri().'/images/logo.png';
-    else
-      $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
+    $logo_file = get_theme_mod('logo_url', '');
+    if (empty($logo_file)) {
+      if (file_exists(get_stylesheet_directory().'/images/logo.png'))
+        $logo_file = get_stylesheet_directory_uri().'/images/logo.png';
+      else
+        $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
+    }
 
     if (isset($_GET['scheme']) and !empty($_GET['scheme']))
       $scheme = $_GET['scheme'];

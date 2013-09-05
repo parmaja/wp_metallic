@@ -19,7 +19,7 @@
     <ul class="infobar">
       <li class="category"><?php print __('Category', 'default').': '; print the_category(', ') ?></li>
       <li class="tags"><?php the_tags(__('Tags: ', 'default'), ', ', '') ?></li>
-      <li class="comments-count"><?php comments_popup_link(__('No Comments', 'default'), __('1 Comment', 'default'), __('% Comments', 'default'), ''); ?></li>
+      <li class="entry-edit"><?php comments_popup_link(__('No Comments', 'default'), __('1 Comment', 'default'), __('% Comments', 'default'), ''); ?></li>
     </ul>
     <hr class="skip" />
   </li>
