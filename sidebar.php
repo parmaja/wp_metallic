@@ -1,5 +1,6 @@
 <ul>
 <?php
+  if (get_theme_mod('show_sidebar', true)) {
     if (function_exists('dynamic_sidebar')) {
       if (wp_is_mobile()) {
         dynamic_sidebar('Mobile');
@@ -10,5 +11,6 @@
         }
       }
     }
+  }
 ?>
 </ul>

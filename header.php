@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width; initial-scale=1.0" />
   <?php
     global $wp_customize;
+    $header_font_name = get_theme_mod('header_font_name', 'Arial');
+    $header_font_size = get_theme_mod('header_font_size', '16');
     $logo_file = get_theme_mod('logo_url', '');
     if (empty($logo_file)) {
       if (file_exists(get_stylesheet_directory().'/images/logo.png'))
@@ -35,6 +37,9 @@
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/screen.css" type='text/css' />
+  <?php } ?>
+  <?php if (get_theme_mod('show_sidebar', true)) { ?>
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/sidebar.css" type='text/css' />
   <?php } ?>
   <?php if (is_rtl()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style_rtl.css" type='text/css' />

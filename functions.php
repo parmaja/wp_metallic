@@ -74,8 +74,8 @@ if ( function_exists('register_sidebar') )
 
 function metallic_customize_register($wp_customize) {
 
-  $wp_customize->add_section('metallic_color_scheme', array(
-        'title'    => __('Color Scheme', 'metallic'),
+  $wp_customize->add_section('metallic_options', array(
+        'title'    => __('Options', 'metallic'),
         'priority' => 120,
   ));
 
@@ -87,10 +87,21 @@ function metallic_customize_register($wp_customize) {
     $wp_customize->add_control('pages_navigator', array(
         'settings' => 'pages_navigator',
         'label'    => __('Navigation Menus', 'default'),
-        'section'  => 'metallic_color_scheme',
+        'section'  => 'metallic_options',
         'type'     => 'checkbox',
     ));
 
+    $wp_customize->add_setting('show_sidebar', array(
+        'capability' => 'edit_theme_options',
+        'type'       => 'theme_mod',
+    ));
+
+    $wp_customize->add_control('show_sidebar', array(
+        'settings' => 'show_sidebar',
+        'label'    => __('Show Sidebar', 'default'),
+        'section'  => 'metallic_options',
+        'type'     => 'checkbox',
+    ));
 
     $wp_customize->add_setting('logo_url', array(
         'capability' => 'edit_theme_options',
@@ -100,7 +111,7 @@ function metallic_customize_register($wp_customize) {
     $wp_customize->add_control('logo_url', array(
         'settings' => 'logo_url',
         'label'    => __('Logo URL', 'metallic'),
-        'section'  => 'metallic_color_scheme',
+        'section'  => 'metallic_options',
         'type'     => 'text',
     ));
 
@@ -133,7 +144,7 @@ function metallic_customize_register($wp_customize) {
     $wp_customize->add_control( 'color_select_box', array(
         'settings' => 'color_scheme',
         'label'   => 'Select Color:',
-        'section' => 'metallic_color_scheme',
+        'section' => 'metallic_options',
         'type'    => 'select',
         'choices' => $shemes
         )
