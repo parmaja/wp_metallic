@@ -37,9 +37,9 @@
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/screen.css" type='text/css' />
-  <?php } ?>
-  <?php if (get_theme_mod('show_sidebar', true)) { ?>
+    <?php if (get_theme_mod('show_sidebar', true)) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/sidebar.css" type='text/css' />
+    <?php } ?>
   <?php } ?>
   <?php if (is_rtl()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style_rtl.css" type='text/css' />
@@ -59,10 +59,12 @@
     <div id="header">
       <div id="logo-header">
         <img id="logo-image" src="<?php print $logo_file ?>" alt="" />
+        <?php if (get_theme_mod('show_title', true)) { ?>
         <div id="logo-text">
           <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>
           <p id="description"><?php print get_bloginfo('description') ?></p>
         </div>
+        <?php } ?>
       </div>
 
       <?php if (get_theme_mod('pages_navigator', true)) { ?>

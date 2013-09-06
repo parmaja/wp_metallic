@@ -85,6 +85,7 @@ function metallic_customize_register($wp_customize) {
 
     $wp_customize->add_setting('pages_navigator', array(
         'capability' => 'edit_theme_options',
+        'default' => 'true',
         'type'       => 'theme_mod',
     ));
 
@@ -97,6 +98,7 @@ function metallic_customize_register($wp_customize) {
 
     $wp_customize->add_setting('show_sidebar', array(
         'capability' => 'edit_theme_options',
+        'default' => 'true',
         'type'       => 'theme_mod',
     ));
 
@@ -109,6 +111,7 @@ function metallic_customize_register($wp_customize) {
 
     $wp_customize->add_setting('show_footbar', array(
         'capability' => 'edit_theme_options',
+        'default' => 'true',
         'type'       => 'theme_mod',
     ));
 
@@ -119,8 +122,22 @@ function metallic_customize_register($wp_customize) {
         'type'     => 'checkbox',
     ));
 
+    $wp_customize->add_setting('show_title', array(
+        'capability' => 'edit_theme_options',
+        'default' => 'true',
+        'type'       => 'theme_mod',
+    ));
+
+    $wp_customize->add_control('show_title', array(
+        'settings' => 'show_title',
+        'label'    => __('Show Title', 'default'),
+        'section'  => 'metallic_options',
+        'type'     => 'checkbox',
+    ));
+
     $wp_customize->add_setting('logo_url', array(
         'capability' => 'edit_theme_options',
+        'default' => 'true',
         'type'       => 'theme_mod',
     ));
 
