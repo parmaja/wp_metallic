@@ -136,6 +136,8 @@ embed, iframe, object {
   z-index: 999;
   text-decoration: none;
   vertical-align: middle;
+  overflow: hidden;
+  min-height: 0.5em;
 }
 
 #logo-header{

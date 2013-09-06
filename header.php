@@ -58,7 +58,9 @@
   <div id="container">
     <div id="header">
       <div id="logo-header">
-        <img id="logo-image" src="<?php print $logo_file ?>" alt="" />
+        <?php if (get_theme_mod('show_logo', true)) { ?>
+        <a href="<?php home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>
+        <?php } ?>
         <?php if (get_theme_mod('show_title', true)) { ?>
         <div id="logo-text">
           <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>

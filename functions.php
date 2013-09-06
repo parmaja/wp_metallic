@@ -122,6 +122,19 @@ function metallic_customize_register($wp_customize) {
         'type'     => 'checkbox',
     ));
 
+    $wp_customize->add_setting('show_logo', array(
+        'capability' => 'edit_theme_options',
+        'default' => 'true',
+        'type'       => 'theme_mod',
+    ));
+
+    $wp_customize->add_control('show_logo', array(
+        'settings' => 'show_logo',
+        'label'    => __('Show Logo', 'default'),
+        'section'  => 'metallic_options',
+        'type'     => 'checkbox',
+    ));
+
     $wp_customize->add_setting('show_title', array(
         'capability' => 'edit_theme_options',
         'default' => 'true',
