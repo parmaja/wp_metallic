@@ -62,7 +62,6 @@ h6{
   font-size: 100%;
 }
 
-
 a{
   text-decoration: none;
   color: $get(highlight);
@@ -397,108 +396,6 @@ div.post {
   padding: 0 0.2em;
 }
 
-/* sidebar */
-
-@media screen {
-}
-
-@media print{
-  #sidebar {
-    display: none;
-  }
-
-  #footbar {
-    display: none;
-  }
-}
-
-#sidebar {
-  width: 30%;
-  position: relative;
-  height: 100%;
-  float: right;
-  overflow: hidden;
-  padding: 0em;
-  margin: 0em;
-  color: $color(canvas_ink);
-}
-
-#sidebar h3{
-  font-size: 150%;
-  padding: 0;
-}
-
-#sidebar a{
-  color: $mix(highlight, canvas_ink, 0);
-  text-decoration: none;
-}
-
-#sidebar a:hover{
-  color: $mix(highlight, canvas_ink, 100);
-  text-decoration: none;
-}
-
-#sidebar>ul {
-  padding: 0em 1em;
-  list-style-type: none;
-}
-
-#sidebar li{
-  list-style-type: disc;
-}
-
-#sidebar >ul>li {
-  text-shadow: 2px 2px #d7d7d7;
-  font-size: 120%;
-  padding-bottom: 1em;
-  margin-bottom: 1em;
-  list-style-type: none;
-  border-bottom: 1px solid $color(border); /* Will override in other css */
-  text-shadow: 2px 2px #d7d7d7;
-}
-
-#sidebar>ul>li>ul {
-  font-size: 80%;
-  text-shadow: none;
-  color: $color(base, -20);
-  text-decoration: none;
-}
-
-/* sub pages less padding */
-
-#sidebar>ul>li>ul>li>ul {
-  font-size: 80%;
-}
-
-.widget li{
-  color: $color(base, -20);
-}
-
-#footbar {
-  position: relative;
-  height: auto;
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-  color: #fff;
-}
-
-#footbar a{
-  color: #fff;
-  text-decoration: none;
-}
-
-#footbar>ul {
-  list-style-type: none;
-}
-
-#footbar>ul>li {
-  list-style-type: none;
-  padding: 0.5em;
-}
-
-/*------------------------*/
-
 #nav{
   clear: both;
   padding: 0.1em 1em;
@@ -653,6 +550,108 @@ input[type=submit]{
     display: none;
   }
 }
+
+/* sidebar */
+
+@media screen {
+}
+
+@media print{
+  #sidebar {
+    display: none;
+  }
+
+  #footbar {
+    display: none;
+  }
+}
+
+#sidebar {
+  width: 30%;
+  position: relative;
+  height: 100%;
+  float: right;
+  overflow: hidden;
+  padding: 0em;
+  margin: 0em;
+  color: $color(canvas_ink);
+}
+
+#sidebar h3{
+  font-size: 150%;
+  padding: 0;
+}
+
+#sidebar a{
+  color: $mix(highlight, canvas_ink, 0);
+  text-decoration: none;
+}
+
+#sidebar a:hover{
+  color: $mix(highlight, canvas_ink, 100);
+  text-decoration: none;
+}
+
+#sidebar>ul {
+  padding: 0em 1em;
+  list-style-type: none;
+}
+
+#sidebar li{
+  list-style-type: disc;
+}
+
+#sidebar>ul>li {
+  text-shadow: 2px 2px #d7d7d7;
+  font-size: 120%;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  list-style-type: none;
+  border-bottom: 1px solid $color(border); /* Will override in other css */
+  text-shadow: 2px 2px #d7d7d7;
+}
+
+#sidebar>ul>li>ul {
+  font-size: 80%;
+  text-shadow: none;
+  color: $color(base, -20);
+  text-decoration: none;
+}
+
+/* sub pages less padding */
+
+#sidebar>ul>li>ul>li>ul {
+  font-size: 80%;
+}
+
+.widget li{
+  color: $color(base, -20);
+}
+
+#footbar {
+  position: relative;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+}
+
+#footbar a{
+  color: #fff;
+  text-decoration: none;
+}
+
+#footbar>ul {
+  list-style-type: none;
+}
+
+#footbar>ul>li {
+  list-style-type: none;
+  padding: 0.5em;
+}
+
+/*------------------------*/
 
 #footer {
   clear: both;
