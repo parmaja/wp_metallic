@@ -137,13 +137,13 @@ embed, iframe, object {
   text-decoration: none;
   vertical-align: middle;
   overflow: hidden;
-  min-height: 0.5em;
+s  min-height: 0.5em;
 }
 
 #logo-header{
-  padding: 0.5em 0.5em 0.5em 0.5em;
   overflow: auto;
   height: auto;
+  padding: 0.5em 0 0;
   display: table;
 }
 
@@ -152,7 +152,6 @@ embed, iframe, object {
 
 #logo-image{
   display: table-cell;
-  margin: 0.2em;
   vertical-align: middle;
   margin: 0.1em;
 }
@@ -450,12 +449,11 @@ div.post {
 
 #sidebar >ul>li {
   text-shadow: 2px 2px #d7d7d7;
-  border-bottom-width: 1px;
   font-size: 120%;
   padding-bottom: 1em;
   margin-bottom: 1em;
   list-style-type: none;
-  border-bottom: 0px solid $color(border); /* Will override in other css */
+  border-bottom: 1px solid $color(border); /* Will override in other css */
   text-shadow: 2px 2px #d7d7d7;
 }
 
@@ -659,6 +657,10 @@ input[type=submit]{
 #footer {
   clear: both;
   font-size: 80%;
+}
+
+#calendar_wrap th, #calendar_wrap td{
+  text-align: center;
 }
 
 #copyright {
