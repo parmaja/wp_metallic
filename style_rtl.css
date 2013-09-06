@@ -88,6 +88,18 @@
   float: right;
 }
 
+#footbar {
+  float: right;
+}
+
+#footbar>ul {
+  padding-right: 1em;
+}
+
+#footbar>ul>li {
+  float: right;
+}
+
 @media screen{
   #inside {
     border-left-width: 1px;

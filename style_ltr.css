@@ -86,7 +86,20 @@
   float: left;
 }
 
+#footbar {
+  float: left;
+}
+
+#footbar>ul {
+  padding-left: 1em;
+}
+
+#footbar>ul>li {
+  float: left;
+}
+
 @media screen{
   #inside {
     border-right-width: 1px;
   }
+}

@@ -14,8 +14,12 @@ define('Metallic', 'Metallic');
 
 add_theme_support( 'automatic-feed-links' );
 
-if (!isset($content_width))
-  $content_width = 900;
+if (!isset($content_width)) {
+  if (get_theme_mod('show_sidebar', true))
+    $content_width = 600; //70%
+  else
+    $content_width = 900;
+}
 
 function metallic_link_pages(){
     wp_link_pages(
@@ -99,6 +103,18 @@ function metallic_customize_register($wp_customize) {
     $wp_customize->add_control('show_sidebar', array(
         'settings' => 'show_sidebar',
         'label'    => __('Show Sidebar', 'default'),
+        'section'  => 'metallic_options',
+        'type'     => 'checkbox',
+    ));
+
+    $wp_customize->add_setting('show_footbar', array(
+        'capability' => 'edit_theme_options',
+        'type'       => 'theme_mod',
+    ));
+
+    $wp_customize->add_control('show_footbar', array(
+        'settings' => 'show_footbar',
+        'label'    => __('Show Footbar', 'default'),
         'section'  => 'metallic_options',
         'type'     => 'checkbox',
     ));

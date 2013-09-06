@@ -398,7 +398,27 @@ div.post {
 
 /* sidebar */
 
+@media screen {
+}
+
+@media print{
+  #sidebar {
+    display: none;
+  }
+
+  #footbar {
+    display: none;
+  }
+}
+
 #sidebar {
+  width: 30%;
+  position: relative;
+  height: 100%;
+  float: right;
+  overflow: hidden;
+  padding: 0em;
+  margin: 0em;
   color: $color(canvas_ink);
 }
 
@@ -417,25 +437,24 @@ div.post {
   text-decoration: none;
 }
 
-#sidebar > ul {
+#sidebar>ul {
+  padding: 0em 1em;
   list-style-type: none;
 }
 
-#sidebar li {
+#sidebar li{
   list-style-type: disc;
 }
 
-#sidebar>ul>li {
+#sidebar >ul>li {
+  text-shadow: 2px 2px #d7d7d7;
+  border-bottom-width: 1px;
+  font-size: 120%;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
   list-style-type: none;
   border-bottom: 0px solid $color(border); /* Will override in other css */
   text-shadow: 2px 2px #d7d7d7;
-}
-
-@media screen {
-}
-
-#sidebar>ul>li {
-  font-size: 120%;
 }
 
 #sidebar>ul>li>ul {
@@ -454,6 +473,31 @@ div.post {
 .widget li{
   color: $color(base, -20);
 }
+
+#footbar {
+  position: relative;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+}
+
+#footbar a{
+  color: #fff;
+  text-decoration: none;
+}
+
+#footbar>ul {
+  list-style-type: none;
+}
+
+#footbar>ul>li {
+  list-style-type: none;
+  padding: 0.5em;
+}
+
+/*------------------------*/
 
 #nav{
   clear: both;

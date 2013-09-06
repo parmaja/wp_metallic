@@ -12,7 +12,7 @@ body{
 
 @media print{
   body{
-    margin:0em 0em;
+    margin: 0em 0em;
   }
 }
 
@@ -27,7 +27,6 @@ body{
     width: 100%;
   }
 }
-
 
 #container {
   margin: 1em;
@@ -45,44 +44,8 @@ body{
   }
 }
 
-
-
 #inside {
   border-bottom-width: 1px;
-}
-
-#sidebar {
-  width: 30%;
-  position: relative;
-  height: 100%;
-  float: right;
-  overflow: hidden;
-  padding: 0em;
-  margin: 0em;
-}
-
-@media print{
-  #sidebar {
-    display: none;
-  }
-}
-
-/* todo for screen, now moved to style.css
-#sidebar a{
-  color: #324e56;
-  text-decoration: none;
-}
-*/
-#sidebar>ul {
-  padding: 0em 1em;
-}
-
-#sidebar>ul>li {
-  text-shadow: 2px 2px #d7d7d7;
-  border-bottom-width: 1px;
-  font-size: 120%;
-  padding-bottom: 1em;
-  margin-bottom: 1em;
 }
 
 .post img {
