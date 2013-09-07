@@ -486,7 +486,7 @@ div.post {
 
 textarea#comment {
   width: 95%;
-  font-size: 120%;
+  font-size: 100%;
   padding: 0.2em;
   border-radius: 3px;
   border: 1px solid $mix(canvas_back, base, 50);
@@ -580,7 +580,7 @@ input[type=submit]{
   padding: 0em;
   margin: 0em;
   color: $color(canvas_ink);
-  font-size: 120%;
+  font-size: 100%;
 }
 
 #sidebar a{
