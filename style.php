@@ -25,6 +25,7 @@ $css_macro = new CssMacro();
 $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini'); //load default values
 $css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
 $css_macro->set('gradients', $gradients);
+$css_macro->set('scheme', $scheme);
 echo $css_macro->generate(file_get_contents(dirname(__FILE__).'/style.css'));
 
 ?>

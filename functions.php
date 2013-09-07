@@ -160,9 +160,12 @@ require('inc/macros.php');
 function metallic_generate_css_cache(){
   global $wp_customize;
   $scheme = get_theme_mod('color_scheme', 'gray');
+  $gradients = get_theme_mod('gradients', true);
   $css_macro = new CssMacro;
   $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini');
   $css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
+  $css_macro->set('gradients', $gradients);
+  $css_macro->set('scheme', $scheme);
   $file= dirname(__FILE__).'/style.css';
   if (file_exists($file)) {
     $style = file_get_contents($file);
