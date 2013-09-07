@@ -76,6 +76,21 @@ if ( function_exists('register_sidebar') )
 
 /** Register customize */
 
+function metallic_add_option($wp_customize, $name, $title, $type = 'checkbox', $default = 'true') {
+    $wp_customize->add_setting($name, array(
+        'capability' => 'edit_theme_options',
+        'default' => $default,
+        'type'       => 'theme_mod',
+    ));
+
+    $wp_customize->add_control($name, array(
+        'settings' => $name,
+        'label'    => $title,
+        'section'  => 'metallic_options',
+        'type'     => $type,
+    ));
+}
+
 function metallic_customize_register($wp_customize) {
 
   $wp_customize->add_section('metallic_options', array(
@@ -83,86 +98,16 @@ function metallic_customize_register($wp_customize) {
         'priority' => 120,
   ));
 
-    $wp_customize->add_setting('pages_navigator', array(
-        'capability' => 'edit_theme_options',
-        'default' => 'true',
-        'type'       => 'theme_mod',
-    ));
-
-    $wp_customize->add_control('pages_navigator', array(
-        'settings' => 'pages_navigator',
-        'label'    => __('Navigation Menus', 'default'),
-        'section'  => 'metallic_options',
-        'type'     => 'checkbox',
-    ));
-
-    $wp_customize->add_setting('show_sidebar', array(
-        'capability' => 'edit_theme_options',
-        'default' => 'true',
-        'type'       => 'theme_mod',
-    ));
-
-    $wp_customize->add_control('show_sidebar', array(
-        'settings' => 'show_sidebar',
-        'label'    => __('Show Sidebar', 'default'),
-        'section'  => 'metallic_options',
-        'type'     => 'checkbox',
-    ));
-
-    $wp_customize->add_setting('show_footbar', array(
-        'capability' => 'edit_theme_options',
-        'default' => 'true',
-        'type'       => 'theme_mod',
-    ));
-
-    $wp_customize->add_control('show_footbar', array(
-        'settings' => 'show_footbar',
-        'label'    => __('Show Footbar', 'default'),
-        'section'  => 'metallic_options',
-        'type'     => 'checkbox',
-    ));
-
-    $wp_customize->add_setting('show_logo', array(
-        'capability' => 'edit_theme_options',
-        'default' => 'true',
-        'type'       => 'theme_mod',
-    ));
-
-    $wp_customize->add_control('show_logo', array(
-        'settings' => 'show_logo',
-        'label'    => __('Show Logo', 'default'),
-        'section'  => 'metallic_options',
-        'type'     => 'checkbox',
-    ));
-
-    $wp_customize->add_setting('show_title', array(
-        'capability' => 'edit_theme_options',
-        'default' => 'true',
-        'type'       => 'theme_mod',
-    ));
-
-    $wp_customize->add_control('show_title', array(
-        'settings' => 'show_title',
-        'label'    => __('Show Title', 'default'),
-        'section'  => 'metallic_options',
-        'type'     => 'checkbox',
-    ));
-
-    $wp_customize->add_setting('logo_url', array(
-        'capability' => 'edit_theme_options',
-        'default' => 'true',
-        'type'       => 'theme_mod',
-    ));
-
-    $wp_customize->add_control('logo_url', array(
-        'settings' => 'logo_url',
-        'label'    => __('Logo URL', 'metallic'),
-        'section'  => 'metallic_options',
-        'type'     => 'text',
-    ));
+    metallic_add_option($wp_customize, 'pages_navigator', __('Navigation Menus', 'default'));
+    metallic_add_option($wp_customize, 'wide_header', __('Wide Header', 'metallic'));
+    metallic_add_option($wp_customize, 'show_sidebar', __('Show Sidebar', 'default'));
+    metallic_add_option($wp_customize, 'show_footbar', __('Show Footbar', 'default'));
+    metallic_add_option($wp_customize, 'show_title', __('Show Title', 'default'));
+    metallic_add_option($wp_customize, 'show_logo', __('Show Logo', 'default'));
+    metallic_add_option($wp_customize, 'logo_url', __('Logo URL', 'metallic'), 'text');
 
     //  =============================
-    //  = Select Color Box                =
+    //  Select Scheme
     //  =============================
      $wp_customize->add_setting('color_scheme', array(
         'default'        => 'Gray',

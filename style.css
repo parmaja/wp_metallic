@@ -132,7 +132,7 @@ embed, iframe, object {
 #header {
   position: relative;
   background: $color(base);
-  background: linear-gradient(to bottom, $color(base, -10) 0%,$color(base, 40) 5%, $color(base, 20) 10%, $color(base, -20) 100%);
+  /*background: linear-gradient(to bottom, $color(base, -10) 0%,$color(base, 40) 5%, $color(base, 20) 10%, $color(base, -20) 100%);*/
   z-index: 999;
   text-decoration: none;
   vertical-align: middle;
@@ -432,7 +432,7 @@ div.post {
 }
 
 #nav-subpage li {
-  display: block;
+  display: inline;
   padding: 0.1em 0.4em;
   margin: 0.1em
 }

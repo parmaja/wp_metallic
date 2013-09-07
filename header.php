@@ -36,7 +36,11 @@
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
+    <?php if (get_theme_mod('wide_header', true)) { ?>
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/wide-screen.css" type='text/css' />
+  <?php } else  { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/screen.css" type='text/css' />
+  <?php } ?>
     <?php if (get_theme_mod('show_sidebar', true)) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/sidebar.css" type='text/css' />
     <?php } ?>
@@ -55,54 +59,61 @@
 </head>
 
 <body <?php body_class(); ?>>
+  <?php if (!get_theme_mod('wide_header', true)) { ?>
   <div id="container">
+  <?php } ?>
     <div id="header">
-      <div id="logo-header">
-        <?php if (get_theme_mod('show_logo', true)) { ?>
-        <a href="<?php home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>
-        <?php } ?>
-        <?php if (get_theme_mod('show_title', true)) { ?>
-        <div id="logo-text">
-          <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>
-          <p id="description"><?php print get_bloginfo('description') ?></p>
+      <div id="head">
+        <div id="logo-header">
+          <?php if (get_theme_mod('show_logo', true)) { ?>
+          <a href="<?php home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>
+          <?php } ?>
+          <?php if (get_theme_mod('show_title', true)) { ?>
+          <div id="logo-text">
+            <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>
+            <p id="description"><?php print get_bloginfo('description') ?></p>
+          </div>
+          <?php } ?>
         </div>
-        <?php } ?>
-      </div>
 
-      <?php if (get_theme_mod('pages_navigator', true)) { ?>
-      <div id="nav">
-      <?php
-        $output = "";
-        $subpage = "";
-        $params = "title_li=&depth=1&echo=0";
+        <?php if (get_theme_mod('pages_navigator', true)) { ?>
+        <div id="nav">
+        <?php
+          $output = "";
+          $subpage = "";
+          $params = "title_li=&depth=1&echo=0";
 
-        // Top level page
-        $output .= '<ul id="nav-page">';
-        $output .= wp_list_pages($params);
-        $output .= '</ul>';
-
-        // second level?
-        if($post->post_parent)
-        {
-          $params .= "&child_of=" . $post->post_parent;
-        }
-        else
-        {
-          $params .= "&child_of=" . $post->ID;
-        }
-        $subpage = wp_list_pages($params);
-
-        if ($subpage)
-        {
-          $output .= '<ul id="nav-subpage">';
-          $output .= $subpage;
+          // Top level page
+          $output .= '<ul id="nav-page">';
+          $output .= wp_list_pages($params);
           $output .= '</ul>';
-        }
-        print $output;
-      ?>
+
+          // second level?
+          if($post->post_parent)
+          {
+            $params .= "&child_of=" . $post->post_parent;
+          }
+          else
+          {
+            $params .= "&child_of=" . $post->ID;
+          }
+          $subpage = wp_list_pages($params);
+
+          if ($subpage)
+          {
+            $output .= '<ul id="nav-subpage">';
+            $output .= $subpage;
+            $output .= '</ul>';
+          }
+          print $output;
+        ?>
+        </div>
+      <?php } ?>
       </div>
-    <?php } ?>
     </div>
+    <?php if (get_theme_mod('wide_header', true)) { ?>
+    <div id="container">
+    <?php } ?>
     <div id="content">
       <div id="main">
         <div id="inside">
