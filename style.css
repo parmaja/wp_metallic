@@ -285,9 +285,6 @@ li.post{
   overflow: hidden;
 }
 
-div.post {
-}
-
 table, th ,td, tr {
   border: 1px solid $color(border);
   border-collapse: collapse;
@@ -580,11 +577,7 @@ input[type=submit]{
   padding: 0em;
   margin: 0em;
   color: $color(canvas_ink);
-}
-
-#sidebar h3{
-  font-size: 150%;
-  padding: 0;
+  font-size: 120%;
 }
 
 #sidebar a{
@@ -607,7 +600,6 @@ input[type=submit]{
 
 #sidebar>ul>li {
   text-shadow: 2px 2px #d7d7d7;
-  font-size: 120%;
   padding-bottom: 1em;
   margin-bottom: 1em;
   list-style-type: none;
@@ -616,7 +608,6 @@ input[type=submit]{
 }
 
 #sidebar>ul>li>ul {
-  font-size: 80%;
   text-shadow: none;
   color: $color(base, -20);
   text-decoration: none;
@@ -662,6 +653,10 @@ input[type=submit]{
 #footer {
   clear: both;
   font-size: 80%;
+}
+
+table#wp-calendar {
+  width: 100%;
 }
 
 #calendar_wrap th, #calendar_wrap td{
