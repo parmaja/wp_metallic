@@ -126,6 +126,7 @@ embed, iframe, object {
 #container {
   background: $color(background);
   color: $color(canvas_ink);
+  overflow: hidden;
 }
 
 #header {
@@ -624,7 +625,7 @@ input[type=submit]{
   font-size: 80%;
 }
 
-.widget li{
+.widget#sidebar li{
   color: $color(base, -20);
 }
 
@@ -634,16 +635,18 @@ input[type=submit]{
   width: 100%;
   overflow: hidden;
   background: #000;
-  color: #fff;
+  color: $color(canvas_back);
+  border-top: 3px solid $get(base);
 }
 
 #footbar a{
-  color: #fff;
+  color: $color(canvas_back);
   text-decoration: none;
 }
 
 #footbar>ul {
   list-style-type: none;
+  margin: 0;
 }
 
 #footbar>ul>li {
