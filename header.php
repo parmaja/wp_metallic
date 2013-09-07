@@ -16,12 +16,20 @@
       else
         $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
     }
+    $wide_header = get_theme_mod('wide_header', true);
+    $pass = '?wide_header=';
+    if ($wide_header)
+      $pass .= '1';
+    else
+      $pass .= '0';
 
     if (isset($_GET['scheme']) and !empty($_GET['scheme']))
       $scheme = $_GET['scheme'];
     /* if Debug is enabled or using theme customize we need on the fly css */
     if ((WP_DEBUG or isset($wp_customize)) && empty($scheme))
       $scheme = get_theme_mod('color_scheme', 'gray');
+    if (!empty($scheme))
+      $pass.='&scheme='.$scheme;
   ?>
   <title><?php if (!is_home()) { the_title(); print ' - '; } bloginfo('name'); ?></title>
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
@@ -30,7 +38,7 @@
   <?php if (empty($scheme)) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' />
   <?php } else { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php?scheme=<?php echo $scheme ?>" type='text/css' />
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php<?php echo $pass; ?>" type='text/css' />
   <?php } ?>
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
