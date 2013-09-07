@@ -96,21 +96,23 @@
           $output .= '</ul>';
 
           // second level?
-          if($post->post_parent)
-          {
-            $params .= "&child_of=" . $post->post_parent;
-          }
-          else
-          {
-            $params .= "&child_of=" . $post->ID;
-          }
-          $subpage = wp_list_pages($params);
+          if (get_theme_mod('show_subpages', true)) {
+            if($post->post_parent)
+            {
+              $params .= "&child_of=" . $post->post_parent;
+            }
+            else
+            {
+              $params .= "&child_of=" . $post->ID;
+            }
+            $subpage = wp_list_pages($params);
 
-          if ($subpage)
-          {
-            $output .= '<ul id="nav-subpage">';
-            $output .= $subpage;
-            $output .= '</ul>';
+            if ($subpage)
+            {
+              $output .= '<ul id="nav-subpage">';
+              $output .= $subpage;
+              $output .= '</ul>';
+            }
           }
           print $output;
         ?>
