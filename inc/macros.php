@@ -211,7 +211,7 @@ class CssMacro {
         return $args[2];
       }
     } else { //or 2
-    $f = (strtoupper($args[0])==='FALSE') || ($args[0]==='0');
+    $f = (strtoupper($args[0])==='FALSE') || ($args[0]==='0') || ($args[0]==0);
     if (!$f)
       return $args[1];
     }
@@ -224,7 +224,7 @@ class CssMacro {
         return $args[2];
       }
     } else { //or 2
-    $f = (strtoupper($args[0])==='FALSE') || ($args[0]==='0');
+    $f = (strtoupper($args[0])==='FALSE') || ($args[0]==='0') || ($args[0]==0);
     if ($f)
       return $args[1];
     }
@@ -287,7 +287,7 @@ class CssMacro {
   }
 
   private function do_replace($contents) {
-    $return = preg_replace_callback('/\n?\r?'.'^\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/imsU', array($this, '_replace_values'), $contents);
+    $return = preg_replace_callback('/'.'^\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/imsU', array($this, '_replace_values'), $contents);
     $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
     return $return;
   }
