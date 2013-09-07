@@ -118,7 +118,6 @@
       <?php } ?>
       </div>
     </div>
-    <div id="mybody">
     <?php if (get_theme_mod('wide_header', true)) { ?>
     <div id="container">
     <?php } ?>

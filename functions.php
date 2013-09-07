@@ -16,7 +16,7 @@ add_theme_support( 'automatic-feed-links' );
 
 if (!isset($content_width)) {
   if (wp_is_mobile()) {
-    $content_width = 300; //70%
+    $content_width = 900;//idk
   } if (get_theme_mod('show_sidebar', true))
     $content_width = 600; //70%
   else
