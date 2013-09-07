@@ -157,6 +157,7 @@ class CssMacro {
     'darken'=>array('func_darken',''),
     'mix'=>array('func_mix',''),
     'if'=>array('func_if','a,c'),
+    'ifnot'=>array('func_ifnot','a,c'),
     'gradient'=>array('func_gradient','')
     );
 
@@ -195,8 +196,7 @@ class CssMacro {
   }
 
   private function func_set($name, $value){
-    $this->values[$name] = $value;
-    return $value;
+    return $this->set($name, $value);
   }
 
   private function func_mix($color1, $color2, $amount = 0) {
@@ -215,6 +215,24 @@ class CssMacro {
     if (!$f)
       return $args[1];
     }
+  }
+
+  private function func_ifnot($args){
+    if (count($args) == 3) {
+      $b = $args[0] != $args[1];
+      if ($b) {
+        return $args[2];
+      }
+    } else { //or 2
+    $f = (strtoupper($args[0])==='FALSE') || ($args[0]==='0');
+    if ($f)
+      return $args[1];
+    }
+  }
+
+  public function set($name, $value){
+    $this->values[$name] = $value;
+    return $value;
   }
 
   private function check_value($value) {
@@ -269,7 +287,7 @@ class CssMacro {
   }
 
   private function do_replace($contents) {
-    $return = preg_replace_callback('/\n?\r?'.'\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/imsU', array($this, '_replace_values'), $contents);
+    $return = preg_replace_callback('/\n?\r?'.'^\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/imsU', array($this, '_replace_values'), $contents);
     $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
     return $return;
   }
