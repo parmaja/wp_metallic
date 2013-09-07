@@ -136,7 +136,7 @@ embed, iframe, object {
 #header {
   position: relative;
   background: $color(base);
-$ifnot(wide_header)<
+$if(gradients)<
   background: linear-gradient(to bottom, $color(base, -10) 0%,$color(base, 40) 5%, $color(base, 20) 10%, $color(base, -20) 100%);
 >
   z-index: 999;

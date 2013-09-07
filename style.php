@@ -14,17 +14,17 @@ if (isset($_GET['scheme']) and !empty($_GET['scheme']))
 if (empty($scheme))
   $scheme = 'gray'; //default;
 
-if (isset($_GET['wide_header']) and !empty($_GET['wide_header']))
-  $wide_header = $_GET['wide_header'];
+if (isset($_GET['gradients']) and !empty($_GET['gradients']))
+  $gradients = $_GET['gradients'];
 
-if (empty($wide_header))
-  $wide_header = '0'; //default;
+if (empty($gradients))
+  $gradients = '0'; //default;
 
 
 $css_macro = new CssMacro();
 $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini'); //load default values
 $css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
-$css_macro->set('wide_header', $wide_header);
+$css_macro->set('gradients', $gradients);
 echo $css_macro->generate(file_get_contents(dirname(__FILE__).'/style.css'));
 
 ?>

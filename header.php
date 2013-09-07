@@ -16,9 +16,9 @@
       else
         $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
     }
-    $wide_header = get_theme_mod('wide_header', true);
-    $pass = '?wide_header=';
-    if ($wide_header)
+    $gradients = get_theme_mod('gradients', true);
+    $pass = '?gradients=';
+    if ($gradients)
       $pass .= '1';
     else
       $pass .= '0';
