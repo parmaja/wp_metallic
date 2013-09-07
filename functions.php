@@ -15,7 +15,9 @@ define('Metallic', 'Metallic');
 add_theme_support( 'automatic-feed-links' );
 
 if (!isset($content_width)) {
-  if (get_theme_mod('show_sidebar', true))
+  if (wp_is_mobile()) {
+    $content_width = 300; //70%
+  } if (get_theme_mod('show_sidebar', true))
     $content_width = 600; //70%
   else
     $content_width = 900;

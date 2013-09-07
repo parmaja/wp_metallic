@@ -113,7 +113,6 @@ pre {
 pre, code{
   font-family: monospace, serif;
   font-size: 100%;
-  hyphens: none;
 }
 
 embed, iframe, object {
@@ -137,7 +136,7 @@ embed, iframe, object {
   text-decoration: none;
   vertical-align: middle;
   overflow: hidden;
-s  min-height: 0.5em;
+  min-height: 0.5em;
 }
 
 #logo-header{

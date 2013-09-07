@@ -22,9 +22,8 @@
     /* if Debug is enabled or using theme customize we need on the fly css */
     if ((WP_DEBUG or isset($wp_customize)) && empty($scheme))
       $scheme = get_theme_mod('color_scheme', 'gray');
-    if (wp_is_mobile()) { ?>
-  <?php } ?>
-  <title><?php wp_title(''); ?></title>
+  ?>
+  <title><?php if (!is_home()) { the_title(); print ' - '; } bloginfo('name'); ?></title>
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
   <link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
   <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
@@ -66,7 +65,7 @@
       <div id="head">
         <div id="logo-header">
           <?php if (get_theme_mod('show_logo', true)) { ?>
-          <a href="<?php home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>
+          <a href="<?php print home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>
           <?php } ?>
           <?php if (get_theme_mod('show_title', true)) { ?>
           <div id="logo-text">
@@ -111,6 +110,7 @@
       <?php } ?>
       </div>
     </div>
+    <div id="mybody">
     <?php if (get_theme_mod('wide_header', true)) { ?>
     <div id="container">
     <?php } ?>
