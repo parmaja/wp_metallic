@@ -72,6 +72,10 @@ a:hover{
   color: $color(highlight, 10);
 }
 
+li{
+  list-style-type: disc;
+}
+
 caption, th, td {
   font-weight: normal;
   text-align: left;
@@ -113,6 +117,7 @@ pre {
 pre, code{
   font-family: monospace, serif;
   font-size: 100%;
+  overflow: auto;
 }
 
 embed, iframe, object {
@@ -598,7 +603,6 @@ input[type=submit]{
 }
 
 #sidebar li{
-  list-style-type: disc;
 }
 
 #sidebar>ul>li {
