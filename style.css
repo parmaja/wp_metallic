@@ -123,15 +123,15 @@ pre {
 pre {
   padding: 0.2em;
   margin: 0em;
+  overflow: auto;
+  background: $color(background);
+  color: $color(canvas_ink);
+  border: 1px dotted $color(border)
 }
 
 pre, code{
   font-family: monospace, serif;
   font-size: 100%;
-  overflow: auto;
-  background: $color(background);
-  color: $color(canvas_ink);
-  border: 1px dotted $color(border)
 }
 
 embed, iframe, object {
@@ -243,6 +243,7 @@ $if(gradients)<
 }
 
 ol#posts {
+  list-style: none outside none;
   margin: 0;
   padding: 0;
 }
