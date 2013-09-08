@@ -72,10 +72,6 @@ a:hover{
   color: $color(highlight, 10);
 }
 
-li{
-  list-style-type: disc;
-}
-
 caption, th, td {
   font-weight: normal;
   text-align: left;
@@ -229,9 +225,12 @@ $if(gradients)<
 }
 
 ol#posts {
-  list-style: none outside none;
   margin: 0;
   padding: 0;
+}
+
+li.post{
+  list-style: none outside none;
 }
 
 ol#posts .more-link{
