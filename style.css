@@ -151,7 +151,7 @@ embed, iframe, object {
   position: relative;
   background: $color(base);
 $if(gradients)<
-  background: linear-gradient(to bottom, $color(base, 10) 1%, $color(base, 25) 10%, $color(base) 40%);
+  background: linear-gradient(to bottom, $color(base, 10) 1%, $color(base, 25) 10%, $color(base) 60%);
 >
   z-index: 999;
   text-decoration: none;

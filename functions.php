@@ -110,16 +110,32 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'show_title', __('Show Title', 'default'));
     metallic_add_option($wp_customize, 'gradients', __('Gradients', 'metallic'));
     metallic_add_option($wp_customize, 'show_logo', __('Show Logo', 'default'));
-    metallic_add_option($wp_customize, 'logo_url', __('Logo URL', 'metallic'), 'text');
+    metallic_add_option($wp_customize, 'logo_url', __('Logo URL', 'metallic'), 'text', '');
+//    metallic_add_option($wp_customize, 'user_color', __('User Color', 'metallic'), 'colorbox', '');
+
+    //  =============================
+    //  = Color Picker              =
+    //  =============================
+
+    $wp_customize->add_setting('user_color', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'capability'        => 'edit_theme_options',
+        'type'           => 'theme_mod',
+
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'user_color', array(
+          'settings' => 'user_color',
+          'label'    => __('User Color', 'metallic'),
+          'section'  => 'metallic_options'
+        )
+      )
+    );
+
     //  =============================
     //  Select Scheme
     //  =============================
-     $wp_customize->add_setting('color_scheme', array(
-        'default'        => 'Gray',
-        'capability'     => 'edit_theme_options',
-        'type'           => 'theme_mod', //or 'option' if u want to have a record in database
-
-    ));
 
     $shemes = array();
 
@@ -137,12 +153,19 @@ function metallic_customize_register($wp_customize) {
         closedir($handle);
     }
 
-    $wp_customize->add_control( 'color_select_box', array(
+    $wp_customize->add_setting('color_scheme', array(
+      'default'        => 'Gray',
+      'capability'     => 'edit_theme_options',
+      'type'           => 'theme_mod', //or 'option' if u want to have a record in database
+
+    ));
+
+    $wp_customize->add_control('color_select_box', array(
         'settings' => 'color_scheme',
-        'label'   => 'Select Color:',
-        'section' => 'metallic_options',
-        'type'    => 'select',
-        'choices' => $shemes
+        'label'    => __('Select Scheme', 'metallic'),
+        'section'  => 'metallic_options',
+        'type'     => 'select',
+        'choices'  => $shemes
         )
     );
 }
@@ -163,11 +186,13 @@ function metallic_generate_css_cache(){
   global $wp_customize;
   $scheme = get_theme_mod('color_scheme', 'gray');
   $gradients = get_theme_mod('gradients', true);
+  $user_color = get_theme_mod('user_color', '');
   $css_macro = new CssMacro;
   $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini');
   $css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
   $css_macro->set('gradients', $gradients);
   $css_macro->set('scheme', $scheme);
+  $css_macro->set('user_color', $user_color);
   $file= dirname(__FILE__).'/style.css';
   if (file_exists($file)) {
     $style = file_get_contents($file);

@@ -23,6 +23,13 @@
     else
       $pass .= '0';
 
+    $user_color = get_theme_mod('user_color', '');
+    if (!empty($user_color)) {
+      if (substr($user_color, 0, 1) === '#')
+        $user_color = substr($user_color, 1);
+      $pass .= '&user_color='.$user_color;
+    }
+
     if (isset($_GET['scheme']) and !empty($_GET['scheme']))
       $scheme = $_GET['scheme'];
     /* if Debug is enabled or using theme customize we need on the fly css */

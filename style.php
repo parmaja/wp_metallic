@@ -20,11 +20,20 @@ if (isset($_GET['gradients']) and !empty($_GET['gradients']))
 if (empty($gradients))
   $gradients = '0'; //default;
 
+if (isset($_GET['user_color']) and !empty($_GET['user_color']))
+  $user_color = $_GET['user_color'];
+
+if (!empty($user_color)) {
+  if (substr($user_color, 0, 1) === '#')
+    $user_color = substr($user_color, 1);
+}
 
 $css_macro = new CssMacro();
 $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini'); //load default values
 $css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
 $css_macro->set('gradients', $gradients);
+if (!empty($user_color))
+  $css_macro->set('base', '#'.$user_color);
 $css_macro->set('scheme', $scheme);
 echo $css_macro->generate(file_get_contents(dirname(__FILE__).'/style.css'));
 
