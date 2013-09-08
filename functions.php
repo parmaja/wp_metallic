@@ -101,6 +101,8 @@ function metallic_customize_register($wp_customize) {
   ));
 
     metallic_add_option($wp_customize, 'pages_navigator', __('Navigation Menus', 'default'));
+    metallic_add_option($wp_customize, 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
+    metallic_add_option($wp_customize, 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'wide_header', __('Wide Header', 'metallic'));
     metallic_add_option($wp_customize, 'show_sidebar', __('Show Sidebar', 'default'));
     metallic_add_option($wp_customize, 'show_subpages', __('Show SubPages', 'metallic'));

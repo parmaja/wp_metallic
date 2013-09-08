@@ -13,6 +13,7 @@ if ( post_password_required() )
 function metallic_comment($comment, $args, $depth) {
 ?>
   <li <?php comment_class() ?> id="comment-<?php comment_ID() ?>">
+    <?php if (!get_theme_mod('hide_mata', false)) { ?>
     <div class="avatar"><?php echo get_avatar($comment, $args['avatar_size']); ?></div>
       <ul class="infobar">
         <li class="entry-author"><?php comment_author_link(); ?></li>
@@ -20,6 +21,7 @@ function metallic_comment($comment, $args, $depth) {
         <li class="entry-type"><?php comment_type('', __('Trackback', 'default'), __('Pingback', 'default')); ?></li>
         <li class="entry-edit"><?php edit_comment_link(__('Edit', 'default')); ?></li>
       </ul>
+      <?php } ?>
       <div class="comment-body">
       <?php comment_text() ?>
       </div>

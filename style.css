@@ -79,6 +79,16 @@ caption, th, td {
 
 .wp-caption {
   max-width: 100%;
+  padding: 0.1em;
+  background: $color(background);
+  color: $color(canvas_ink);
+  border: 1px dotted $color(border)
+}
+
+.post-content img{
+  height: auto;
+  max-width: 100%;
+  padding: 0.1em;
 }
 
 .wp-caption-text{
@@ -110,10 +120,18 @@ pre {
   margin: 1em;
 }
 
+pre {
+  padding: 0.2em;
+  margin: 0em;
+}
+
 pre, code{
   font-family: monospace, serif;
   font-size: 100%;
   overflow: auto;
+  background: $color(background);
+  color: $color(canvas_ink);
+  border: 1px dotted $color(border)
 }
 
 embed, iframe, object {
@@ -241,7 +259,6 @@ ol#posts .more-link{
 
 .post-content p{
   margin: 0.1em;
-  padding-bottom: 0.3em;
 }
 
 .post h2 a{
@@ -341,12 +358,6 @@ div.post {
   overflow: hidden;
   padding: 0.5em 0 0.5em 0;
   margin: 0;
-}
-
-.post-content img{
-  margin: 0.5em;
-  height: auto;
-  max-width: 100%;
 }
 
 /* pagination */
