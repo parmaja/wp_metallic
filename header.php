@@ -16,33 +16,43 @@
       else
         $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
     }
-    $gradients = get_theme_mod('gradients', true);
-    $pass = '?gradients=';
-    if ($gradients)
-      $pass .= '1';
-    else
-      $pass .= '0';
 
-    $user_color = get_theme_mod('user_color', '');
-    if (!empty($user_color)) {
-      if (substr($user_color, 0, 1) === '#')
-        $user_color = substr($user_color, 1);
-      $pass .= '&user_color='.$user_color;
-    }
-
-    if (isset($_GET['scheme']) and !empty($_GET['scheme']))
-      $scheme = $_GET['scheme'];
     /* if Debug is enabled or using theme customize we need on the fly css */
-    if ((WP_DEBUG or isset($wp_customize)) && empty($scheme))
-      $scheme = get_theme_mod('color_scheme', 'gray');
-    if (!empty($scheme))
-      $pass.='&scheme='.$scheme;
+    if (WP_DEBUG || isset($wp_customize) || isset($_GET['scheme'])) {
+      $gradients = get_theme_mod('gradients', true);
+      $pass = '?gradients=';
+      if ($gradients)
+        $pass .= '1';
+      else
+        $pass .= '0';
+
+      if (isset($_GET['scheme']))
+        $scheme = $_GET['scheme'];
+      else
+        $scheme = get_theme_mod('color_scheme', 'gray');
+
+      if (!empty($scheme))
+        $pass.='&scheme='.$scheme;
+
+      if (empty($scheme)) {
+        if (isset($_GET['user_color']) and !empty($_GET['user_color']))
+          $user_color = $_GET['user_color'];
+        else
+          $user_color = get_theme_mod('user_color', '');
+
+        if (!empty($user_color)) {
+          if (substr($user_color, 0, 1) === '#')
+            $user_color = substr($user_color, 1);
+          $pass .= '&user_color='.$user_color;
+        }
+      }
+    }
   ?>
   <title><?php if (!is_home()) { the_title(); print ' - '; } bloginfo('name'); ?></title>
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
   <link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
   <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
-  <?php if (empty($scheme)) { ?>
+  <?php if (empty($pass)) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' />
   <?php } else { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php<?php echo $pass; ?>" type='text/css' />
