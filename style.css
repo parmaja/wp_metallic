@@ -586,7 +586,6 @@ input[type=submit]{
 
 #sidebar {
   width: 30%;
-  position: relative;
   height: 100%;
   float: right;
   overflow: hidden;
@@ -640,7 +639,6 @@ input[type=submit]{
 }
 
 #footbar {
-  position: relative;
   height: auto;
   width: 100%;
   overflow: hidden;

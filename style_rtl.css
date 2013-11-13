@@ -1,4 +1,6 @@
-/* From Style */
+body {
+  direction: rtl;
+}
 
 .alignleft {
   float: right;

@@ -87,7 +87,7 @@
   <div id="container">
   <?php } ?>
     <div id="header">
-      <div id="head">
+      <div id="logo">
         <div id="logo-header">
           <?php if (get_theme_mod('show_logo', true)) { ?>
           <a href="<?php print home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>

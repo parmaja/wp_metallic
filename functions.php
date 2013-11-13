@@ -117,10 +117,11 @@ function metallic_customize_register($wp_customize) {
     //  =============================
 
     $wp_customize->add_setting('user_color', array(
-        'default'           => '',
+        'default'           => null,
         'sanitize_callback' => 'sanitize_hex_color',
         'capability'        => 'edit_theme_options',
         'type'              => 'theme_mod',
+        'transport'         => 'postMessage'
 
     ));
 
@@ -139,7 +140,7 @@ function metallic_customize_register($wp_customize) {
     $shemes = array();
     $shemes[''] = '';
 
-    $dir = dirname(__FILE__).'/schemes';
+    $dir = __DIR__.'/schemes';
 
     if ($handle = opendir($dir)) {
         while (false !== ($entry = readdir($handle))) {
@@ -188,13 +189,13 @@ function metallic_generate_css_cache(){
   $gradients = get_theme_mod('gradients', true);
   $user_color = get_theme_mod('user_color', '');
   $css_macro = new CssMacro;
-  $css_macro->load_values(dirname(__FILE__).'/default.scheme.ini');
-  $css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
+  $css_macro->load_values(__DIR__.'/default.scheme.ini');
+  $css_macro->load_values(__DIR__.'/schemes/'.$scheme.'.scheme.ini');
   $css_macro->set('gradients', $gradients);
   $css_macro->set('scheme', $scheme);
   if (empty($scheme) && !empty($user_color))
     $css_macro->set('base', '#'.$user_color);
-  $file= dirname(__FILE__).'/style.css';
+  $file= __DIR__.'/style.css';
   if (file_exists($file)) {
     $style = file_get_contents($file);
     $css_dir = get_stylesheet_directory() . '/css/';
