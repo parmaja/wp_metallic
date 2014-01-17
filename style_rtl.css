@@ -10,6 +10,10 @@ body {
    float: right;
 }
 
+caption, th, td {
+  text-align: left;
+}
+
 #logo_image{
   float: right;
 }

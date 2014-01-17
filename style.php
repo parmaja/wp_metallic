@@ -29,12 +29,12 @@ if (empty($scheme) and (empty($user_color)))
   $scheme = 'gray'; //default;
 
 $css_macro = new CssMacro();
-$css_macro->load_values(dirname(__FILE__).'/default.scheme.ini'); //load default values
-$css_macro->load_values(dirname(__FILE__).'/schemes/'.$scheme.'.scheme.ini');
+$css_macro->load_values(__DIR__.'/default.scheme.ini'); //load default values
+$css_macro->load_values(__DIR__.'/schemes/'.$scheme.'.scheme.ini');
 $css_macro->set('gradients', $gradients);
 $css_macro->set('scheme', $scheme);
 if (empty($scheme) && !empty($user_color))
   $css_macro->set('base', '#'.$user_color);
-echo $css_macro->generate(file_get_contents(dirname(__FILE__).'/style.css'));
+echo $css_macro->generate(file_get_contents(__DIR__.'/style.css'));
 
 ?>
