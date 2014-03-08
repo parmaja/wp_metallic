@@ -1,0 +1,120 @@
+html {
+}
+
+body {
+  height: 100%;
+  width: auto;
+  padding: 0em;
+  margin:  0em;
+  max-width: 100%; /* Good to be flexible */
+}
+
+#container {
+  overflow: hidden;
+}
+
+#header {
+  position: relative;
+  z-index: 999;
+  vertical-align: middle;
+  overflow: hidden;
+  min-height: 0.5em;
+}
+
+#logo-header{
+  overflow: auto;
+  height: auto;
+  padding: 0.5em 1em;
+  display: table;
+}
+
+#title{
+}
+
+#logo-image{
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0.1em;
+}
+
+#logo-text {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0em 0.5em;
+}
+
+#title{
+  font-size: 200%;
+  margin: auto 0;
+  line-height: 100%;
+}
+
+#description{
+  font-size: 80%;
+  line-height: 1em;
+}
+
+#content {
+  clear: both;
+  margin: 0;
+}
+
+/**      main content     */
+
+#main { /*do not put padding or margin or border width */
+  margin: 0em;
+  padding: 0em;
+}
+
+#inside {
+  width: auto;
+  padding: 1em;
+  border-width: 0px;/* Will override it in other css*/
+}
+
+#nav{
+  clear: both;
+  padding: 0.1em 1em;
+  overflow: auto;
+}
+
+@media print{
+  #nav{
+    display: none;
+  }
+}
+
+/* sidebar */
+
+@media print{
+  #sidebar {
+    display: none;
+  }
+
+  #footbar {
+    display: none;
+  }
+}
+
+#sidebar {
+  width: 30%;
+  height: 100%;
+  float: right;
+  overflow: hidden;
+  padding: 0em;
+  margin: 0em;
+  font-size: 100%;
+}
+
+#footbar {
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+}
+
+/*------------------------*/
+
+#footer {
+  clear: both;
+  font-size: 80%;
+}
