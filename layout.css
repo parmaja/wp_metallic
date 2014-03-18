@@ -1,3 +1,14 @@
+/**
+*
+*
+*
+*
+*
+*
+*
+*
+*/
+
 html {
 }
 
@@ -54,7 +65,7 @@ body {
   line-height: 1em;
 }
 
-#content {
+#wrapper {
   clear: both;
   margin: 0;
 }
@@ -66,7 +77,7 @@ body {
   padding: 0em;
 }
 
-#inside {
+#contents {
   width: auto;
   padding: 1em;
   border-width: 0px;/* Will override it in other css*/

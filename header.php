@@ -141,6 +141,6 @@
     <?php if (get_theme_mod('wide_header', true)) { ?>
     <div id="container">
     <?php } ?>
-    <div id="content">
+    <div id="wrapper">
       <div id="main">
-        <div id="inside">
+        <div id="contents">

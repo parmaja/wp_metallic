@@ -107,7 +107,7 @@ caption, th, td {
 }
 
 @media screen{
-  #inside {
+  #contents {
     border-right-width: 1px;
   }
 }

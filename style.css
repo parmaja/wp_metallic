@@ -187,7 +187,7 @@ $if(gradients)<
   color: $color(title_color);
 }
 
-#content {
+#wrapper {
 }
 
 /**      main content     */
@@ -196,7 +196,7 @@ $if(gradients)<
   background: $color(canvas_back);
 }
 
-#inside {
+#contents {
   border-style: solid;
   border-color: $color(border);
 }
