@@ -2,6 +2,10 @@ body{
   width: 100%;
 }
 
+#main {
+  width: 100%;
+}
+
 #container{
 }
 
@@ -26,10 +30,6 @@ body{
   body{
     margin: 0em 0em;
   }
-}
-
-#main {
-  width: 100%;
 }
 
 @media screen{

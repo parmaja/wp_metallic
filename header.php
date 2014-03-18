@@ -7,9 +7,17 @@
   <meta name="viewport" content="width=device-width; initial-scale=1.0" />
   <?php
     global $wp_customize;
+    /** Init Options variables */
+    $wide_header = get_theme_mod('wide_header', true);
+    $show_sidebar = get_theme_mod('show_sidebar', true);
+    $show_logo = get_theme_mod('show_logo', true);
+    $show_title = get_theme_mod('show_title', true);
+    $show_navigator = get_theme_mod('show_navigator', true);
+
     $header_font_name = get_theme_mod('header_font_name', 'Arial');
     $header_font_size = get_theme_mod('header_font_size', '16');
     $logo_file = get_theme_mod('logo_url', '');
+
     if (empty($logo_file)) {
       if (file_exists(get_stylesheet_directory().'/images/logo.png'))
         $logo_file = get_stylesheet_directory_uri().'/images/logo.png';
@@ -61,12 +69,12 @@
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
   <?php } else  { ?>
-    <?php if (get_theme_mod('wide_header', true)) { ?>
+    <?php if ($wide_header) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/wide-screen.css" type='text/css' />
   <?php } else  { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/screen.css" type='text/css' />
   <?php } ?>
-    <?php if (get_theme_mod('show_sidebar', true)) { ?>
+    <?php if ($show_sidebar) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/sidebar.css" type='text/css' />
     <?php } ?>
   <?php } ?>
@@ -84,16 +92,16 @@
 </head>
 
 <body <?php body_class(); ?>>
-  <?php if (!get_theme_mod('wide_header', true)) { ?>
+  <?php if (!$wide_header) { ?>
   <div id="container">
   <?php } ?>
     <div id="header">
       <div id="logo">
         <div id="logo-header">
-          <?php if (get_theme_mod('show_logo', true)) { ?>
+          <?php if ($show_logo) { ?>
           <a href="<?php print home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>
           <?php } ?>
-          <?php if (get_theme_mod('show_title', true)) { ?>
+          <?php if ($show_title) { ?>
           <div id="logo-text">
             <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>
             <p id="description"><?php print get_bloginfo('description') ?></p>
@@ -101,7 +109,7 @@
           <?php } ?>
         </div>
 
-        <?php if (get_theme_mod('pages_navigator', true)) { ?>
+        <?php if ($show_navigator) { ?>
         <div id="nav">
         <?php
           $output = "";
@@ -138,7 +146,7 @@
       <?php } ?>
       </div>
     </div>
-    <?php if (get_theme_mod('wide_header', true)) { ?>
+    <?php if ($wide_header) { ?>
     <div id="container">
     <?php } ?>
     <div id="wrapper">
