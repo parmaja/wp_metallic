@@ -100,7 +100,7 @@ function metallic_customize_register($wp_customize) {
         'priority' => 120,
   ));
 
-    metallic_add_option($wp_customize, 'show_navigator', __('Navigation Menus', 'default'));
+    metallic_add_option($wp_customize, 'show_navigator', __('Show Navigation', 'metallic'));
     metallic_add_option($wp_customize, 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'wide_header', __('Wide Header', 'metallic'));
