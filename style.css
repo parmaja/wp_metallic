@@ -24,7 +24,7 @@ GitHub Branch:    release
 $<
   border=$mix(canvas_back, base, 70)
 ;  border = $darken(border, 10)
-  background: $mix(canvas_back, base, 90)
+  background= $mix(canvas_back, base, 90)
 >
 
 /*
