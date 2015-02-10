@@ -113,27 +113,6 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'logo_url', __('Logo URL', 'metallic'), 'text', '');
 
     //  =============================
-    //  = Color Picker              =
-    //  =============================
-
-    $wp_customize->add_setting('user_color', array(
-        'default'           => null,
-        'sanitize_callback' => 'sanitize_hex_color',
-        'capability'        => 'edit_theme_options',
-        'type'              => 'theme_mod',
-        'transport'         => 'postMessage'
-
-    ));
-
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'user_color', array(
-          'settings' => 'user_color',
-          'label'    => __('User Color', 'metallic'),
-          'section'  => 'metallic_options'
-        )
-      )
-    );
-
-    //  =============================
     //  Select Scheme
     //  =============================
 
@@ -160,6 +139,26 @@ function metallic_customize_register($wp_customize) {
       'type'           => 'theme_mod', //or 'option' if u want to have a record in database
 
     ));
+
+    //  =============================
+    //  = Color Picker              =
+    //  =============================
+
+    $wp_customize->add_setting('user_color', array(
+        'default'           => null,
+        'sanitize_callback' => 'sanitize_hex_color',
+        'capability'        => 'edit_theme_options',
+        'type'              => 'theme_mod',
+
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'user_color', array(
+          'settings' => 'user_color',
+          'label'    => __('User Color', 'metallic'),
+          'section'  => 'metallic_options'
+        )
+      )
+    );
 
     $wp_customize->add_control('color_select_box', array(
         'settings' => 'color_scheme',

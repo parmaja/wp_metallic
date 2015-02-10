@@ -25,34 +25,38 @@
         $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
     }
 
+    $dont_cache = true;
     /* if Debug is enabled or using theme customize we need on the fly css */
-    if (WP_DEBUG || isset($wp_customize) || isset($_GET['scheme'])) {
+    if (WP_DEBUG || $dont_cache || isset($wp_customize) || isset($_GET['scheme']) || isset($_GET['color'])) {
       $gradients = get_theme_mod('gradients', true);
-      $pass = '?gradients=';
+      $params = '?gradients=';
       if ($gradients)
-        $pass .= '1';
+        $params .= '1';
       else
-        $pass .= '0';
+        $params .= '0';
 
       if (isset($_GET['scheme']))
         $scheme = $_GET['scheme'];
-      else
+      else if (isset($_GET['color'])){
+          $user_color = $_GET['color'];
+      }
+      else {
         $scheme = get_theme_mod('color_scheme', 'gray');
+      }
 
-      if (!empty($scheme))
-        $pass.='&scheme='.$scheme;
-
-      if (empty($scheme)) {
-        if (isset($_GET['user_color']) and !empty($_GET['user_color']))
-          $user_color = $_GET['user_color'];
-        else
+      if (empty($scheme))
+      {
+        if (empty($user_color))
           $user_color = get_theme_mod('user_color', '');
 
         if (!empty($user_color)) {
           if (substr($user_color, 0, 1) === '#')
             $user_color = substr($user_color, 1);
-          $pass .= '&user_color='.$user_color;
+          $params .= '&user_color='.$user_color;
         }
+      }
+      else {
+        $params.='&scheme='.$scheme;
       }
     }
   ?>
@@ -61,10 +65,10 @@
   <link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
   <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/layout.css" type='text/css' />
-  <?php if (empty($pass)) { ?>
+  <?php if (empty($params)) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' />
   <?php } else { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php<?php echo $pass; ?>" type='text/css' />
+  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php<?php echo $params; ?>" type='text/css' />
   <?php } ?>
   <?php if (wp_is_mobile()) { ?>
   <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
