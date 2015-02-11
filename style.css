@@ -226,7 +226,7 @@ ol#posts {
 
 li.post{
   list-style: none outside none;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 
 ol#posts .more-link{
