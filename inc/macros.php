@@ -48,7 +48,7 @@ $<
 
 $if(b)<
   border=$mix(canvas_back, base, 80)
-  background: $mix(canvas_back, base, 90);
+  background=$mix(canvas_back, base, 90);
 >
 
   TODO:

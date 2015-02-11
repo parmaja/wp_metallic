@@ -182,6 +182,7 @@ add_action('customize_register', 'metallic_customize_register');
 
 require('inc/macros.php');
 
+/*Cache it to disk, removed now
 function metallic_generate_css_cache(){
   global $wp_customize;
   $scheme = get_theme_mod('color_scheme', 'gray');
@@ -201,17 +202,18 @@ function metallic_generate_css_cache(){
     $css = $css_macro->generate($style);
     file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
-}
+} */
 
 function metallic_customize_save_after(){
-  metallic_generate_css_cache();
+//  metallic_generate_css_cache();
 }
 
 function metallic_activation($old_theme)
 {
-  metallic_generate_css_cache();
+//  metallic_generate_css_cache();
   return;
 }
+
 
 add_action('customize_save_after', 'metallic_customize_save_after');
 add_action("after_switch_theme", 'metallic_activation');

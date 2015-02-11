@@ -80,8 +80,28 @@ body {
 
 #contents {
   width: auto;
-  padding: 1em;
+  padding: 0em;
   border-width: 0px;/* Will override it in other css*/
+}
+
+.post-top{
+  padding: 0.5em 1em;
+}
+
+.post-rest{
+  padding: 0.5em 1em;
+}
+
+.comment-top{
+  padding: 0.5em 1em;
+}
+
+.comment-rest{
+  padding: 0.5em 1em;
+}
+
+#comments{
+  padding: 0.5em 1em;
 }
 
 #nav{
