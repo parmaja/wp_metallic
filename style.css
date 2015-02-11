@@ -23,7 +23,7 @@ GitHub Branch:    release
 
 $<
   border=$mix(canvas_back, base, 70)
-;  border = $darken(border, 10)
+  eadge = $darken(border, 10)
   background= $mix(canvas_back, base, 90)
 >
 
@@ -208,7 +208,7 @@ $if(gradients)<
 
 @media screen{
   #main h2.title {
-    border-bottom: 1px solid $get(border);
+    border-bottom: 1px solid $get(eadge);
   }
 }
 
