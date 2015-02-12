@@ -212,7 +212,7 @@ $if(gradients)<
   }
 
   .post-rest{
-    border-top: 2px solid $color(background);
+    border-top: 2pt solid $color(background);
   }
 }
 

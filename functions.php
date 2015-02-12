@@ -12,6 +12,8 @@
 
 define('Metallic', 'Metallic');
 
+$is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
+
 add_theme_support( 'automatic-feed-links' );
 
 if (!isset($content_width)) {
