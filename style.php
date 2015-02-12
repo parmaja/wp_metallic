@@ -37,6 +37,9 @@ $css_macro->set('scheme', $scheme);
 if (isset($_GET['font_size']) && !empty($_GET['font_size']))
   $css_macro->set('font_size', $_GET['font_size']);
 
+if (isset($_GET['font_name']) && !empty($_GET['font_name']))
+  $css_macro->set('font_name', str_replace("'",'', $_GET['font_name']));
+
 if (empty($scheme) && !empty($user_color))
   $css_macro->set('base', '#'.$user_color);
 echo $css_macro->generate(file_get_contents(__DIR__.'/style.css'));

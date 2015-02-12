@@ -43,6 +43,11 @@
         $params .= '&font_size='.$font_size;
       }
 
+      $font_size = get_theme_mod('user_font_name', '');
+      if (!empty($font_size)) {
+        $params .= '&font_name=\''.$font_size."'";
+      }
+
       if (isset($_GET['scheme']))
         $scheme = $_GET['scheme'];
       else if (isset($_GET['color'])){
