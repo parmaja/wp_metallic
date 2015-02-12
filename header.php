@@ -16,8 +16,8 @@
 
     $header_font_name = get_theme_mod('header_font_name', 'Arial');
     $header_font_size = get_theme_mod('header_font_size', '16');
+
     $logo_file = get_theme_mod('logo_url', '');
-    $font_size = 20;//get_theme_mod('user_font_size', '');
 
     if (empty($logo_file)) {
       if (file_exists(get_stylesheet_directory().'/images/logo.png'))
@@ -31,11 +31,17 @@
     if (WP_DEBUG || $dont_cache || isset($wp_customize) || isset($_GET['scheme']) || isset($_GET['color']))
     {
       $gradients = get_theme_mod('gradients', true);
+
       $params = '?gradients=';
       if ($gradients)
         $params .= '1';
       else
         $params .= '0';
+
+      $font_size = get_theme_mod('user_font_size', '');
+      if (!empty($font_size)) {
+        $params .= '&font_size='.$font_size;
+      }
 
       if (isset($_GET['scheme']))
         $scheme = $_GET['scheme'];
