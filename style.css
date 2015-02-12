@@ -346,13 +346,26 @@ div.post {
 /* pagination */
 
 .pagination {
+  font-size: 80%;
   list-style: none;
-  margin: 0.5em 0.1em 0;
+  /*margin: 0.5em 0.1em 0;*/
+  margin: 0em;
   padding: 0.1em 0.5em;
   overflow: auto;
-  color: $color(canvas_ink);
-  background: $color(border);
+/*  color: $color(canvas_ink);*/
+/*  background: $color(border);*/
+/*  border-radius: 3px 3px 0 0; */
+  background: $mix(base, canvas_back, 70);
 }
+
+.pagination a{
+  color: $color(title_text);
+}
+
+.pagination a:hover{
+  color: $mix(title_text, highlight);
+}
+
 
 @media print{
   #pagination {
@@ -594,7 +607,7 @@ input[type=submit]{
 #footbar {
   background: #000;
   color: $color(canvas_back);
-  border-top: 3px solid $get(base);
+/*  border-top: 3px solid $get(base); */
 }
 
 #footbar a{

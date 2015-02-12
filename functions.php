@@ -112,6 +112,8 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'show_logo', __('Show Logo', 'default'));
     metallic_add_option($wp_customize, 'logo_url', __('Logo URL', 'metallic'), 'text', '');
 
+    metallic_add_option($wp_customize, 'user_font_size', __('Font Size', 'metallic'), 'number', '');
+
     //  =============================
     //  Select Scheme
     //  =============================
