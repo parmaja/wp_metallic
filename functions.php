@@ -12,6 +12,8 @@
 
 define('Metallic', 'Metallic');
 
+$is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
+
 add_theme_support( 'automatic-feed-links' );
 
 if (!isset($content_width)) {
@@ -113,6 +115,7 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'logo_url', __('Logo URL', 'metallic'), 'text', '');
 
     metallic_add_option($wp_customize, 'user_font_size', __('Font Size', 'metallic'), 'number', '');
+//    metallic_add_option($wp_customize, 'user_font_name', __('Font Name', 'metallic'), 'text', '');
 
     //  =============================
     //  Select Scheme
@@ -220,7 +223,6 @@ function metallic_activation($old_theme)
 add_action('customize_save_after', 'metallic_customize_save_after');
 add_action("after_switch_theme", 'metallic_activation');
 
-/*  */
 /*
 add_action('wp_enqueue_scripts', 'prefix_add_my_stylesheet');
 

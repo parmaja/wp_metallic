@@ -14,9 +14,6 @@
     $show_title = get_theme_mod('show_title', true);
     $show_navigator = get_theme_mod('show_navigator', true);
 
-    $header_font_name = get_theme_mod('header_font_name', 'Arial');
-    $header_font_size = get_theme_mod('header_font_size', '16');
-
     $logo_file = get_theme_mod('logo_url', '');
 
     if (empty($logo_file)) {
@@ -39,9 +36,15 @@
         $params .= '0';
 
       $font_size = get_theme_mod('user_font_size', '');
+
       if (!empty($font_size)) {
         $params .= '&font_size='.$font_size;
       }
+
+/*      $font_size = get_theme_mod('user_font_name', '');
+      if (!empty($font_size)) {
+        $params .= '&font_name=\''.$font_size."'";
+      }*/
 
       if (isset($_GET['scheme']))
         $scheme = $_GET['scheme'];
