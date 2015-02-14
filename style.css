@@ -295,8 +295,6 @@ th, td {
 }
 
 blockquote{
-
-  : 0.5em;
   padding: 0.5em;
   background: $color(background);
   color: $color(canvas_ink);
