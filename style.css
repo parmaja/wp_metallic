@@ -334,6 +334,7 @@ div.post {
 }
 
 .post-content {
+  font-size: 90%;
   color: #222;
   clear: both;
   overflow: hidden;
