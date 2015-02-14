@@ -9,7 +9,6 @@
     global $wp_customize;
     /** Init Options variables */
     $wide_header = get_theme_mod('wide_header', true);
-    $show_sidebar = get_theme_mod('show_sidebar', true);
     $show_logo = get_theme_mod('show_logo', true);
     $show_title = get_theme_mod('show_title', true);
     $show_navigator = get_theme_mod('show_navigator', true);
@@ -22,82 +21,11 @@
       else
         $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
     }
-
-    $dont_cache = true;
-    /* if Debug is enabled or using theme customize we need on the fly css */
-    if (WP_DEBUG || $dont_cache || isset($wp_customize) || isset($_GET['scheme']) || isset($_GET['color']))
-    {
-      $gradients = get_theme_mod('gradients', true);
-
-      $params = '?gradients=';
-      if ($gradients)
-        $params .= '1';
-      else
-        $params .= '0';
-
-      $font_size = get_theme_mod('user_font_size', '');
-
-      if (!empty($font_size)) {
-        $params .= '&font_size='.$font_size;
-      }
-
-/*      $font_size = get_theme_mod('user_font_name', '');
-      if (!empty($font_size)) {
-        $params .= '&font_name=\''.$font_size."'";
-      }*/
-
-      if (isset($_GET['scheme']))
-        $scheme = $_GET['scheme'];
-      else if (isset($_GET['color'])){
-          $user_color = $_GET['color'];
-      }
-      else {
-        $scheme = get_theme_mod('color_scheme', 'gray');
-      }
-
-      if (empty($scheme))
-      {
-        if (empty($user_color))
-          $user_color = get_theme_mod('user_color', '');
-
-        if (!empty($user_color)) {
-          if (substr($user_color, 0, 1) === '#')
-            $user_color = substr($user_color, 1);
-          $params .= '&user_color='.$user_color;
-        }
-      }
-      else {
-        $params.='&scheme='.$scheme;
-      }
-    }
   ?>
   <title><?php if (!is_home()) { the_title(); print ' - '; } bloginfo('name'); ?></title>
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
   <link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
   <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/layout.css" type='text/css' />
-  <?php if (empty($params)) { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/css/style.css" type='text/css' />
-  <?php } else { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style.php<?php echo $params; ?>" type='text/css' />
-  <?php } ?>
-  <?php if (wp_is_mobile()) { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/mobile.css" type='text/css' />
-  <?php } else  { ?>
-    <?php if ($wide_header) { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/wide-screen.css" type='text/css' />
-  <?php } else  { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/screen.css" type='text/css' />
-  <?php } ?>
-    <?php if ($show_sidebar) { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/sidebar.css" type='text/css' />
-    <?php } ?>
-  <?php } ?>
-  <?php if (is_rtl()) { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style_rtl.css" type='text/css' />
-  <?php } else  { ?>
-  <link rel='stylesheet' href="<?php print get_stylesheet_directory_uri(); ?>/style_ltr.css" type='text/css' />
-  <?php } ?>
   <link rel="pingback" href="<?php print bloginfo('pingback_url'); ?>" />
   <?php
     wp_get_archives('type=monthly&format=link');

@@ -211,6 +211,7 @@ function metallic_generate_css_cache(){
 
 function metallic_customize_save_after(){
 //  metallic_generate_css_cache();
+
 }
 
 function metallic_activation($old_theme)
@@ -228,8 +229,93 @@ add_action('wp_enqueue_scripts', 'prefix_add_my_stylesheet');
 
 function prefix_add_my_stylesheet() {
     wp_register_style( 'custom-supersized-styles', get_template_directory_uri(). '/css/style.css', array('style','supersized'));
-    wp_enqueue_style( 'custom-supersized-styles' );
+    wp_enqueue_style('custom-supersized-styles');
 }
 */
+
+
+function mettalic_styles()
+{
+  $gradients = get_theme_mod('gradients', true);
+
+  $params = '?gradients=';
+  if ($gradients)
+    $params .= '1';
+  else
+    $params .= '0';
+
+  $font_size = get_theme_mod('user_font_size', '');
+
+  if (!empty($font_size)) {
+    $params .= '&font_size='.$font_size;
+  }
+
+/*      $font_size = get_theme_mod('user_font_name', '');
+  if (!empty($font_size)) {
+    $params .= '&font_name=\''.$font_size."'";
+  }*/
+
+  if (isset($_GET['scheme']))
+    $scheme = $_GET['scheme'];
+  else if (isset($_GET['color'])){
+      $user_color = $_GET['color'];
+  }
+  else {
+    $scheme = get_theme_mod('color_scheme', 'gray');
+  }
+
+  if (empty($scheme))
+  {
+    if (empty($user_color))
+      $user_color = get_theme_mod('user_color', '');
+
+    if (!empty($user_color)) {
+      if (substr($user_color, 0, 1) === '#')
+        $user_color = substr($user_color, 1);
+      $params .= '&user_color='.$user_color;
+    }
+  }
+  else {
+    $params.='&scheme='.$scheme;
+  }
+
+  wp_register_style('metallic_layout', get_stylesheet_directory_uri().'/layout.css');
+  wp_enqueue_style('metallic_layout');
+
+  wp_register_style('metallic_style', get_stylesheet_directory_uri().'/style.php'.$params);
+  wp_enqueue_style('metallic_style');
+
+  $wide_header = get_theme_mod('wide_header', true);
+
+  if (wp_is_mobile())
+  {
+    wp_register_style('metallic_mobile', get_stylesheet_directory_uri().'/mobile.css');
+    wp_enqueue_style('metallic_mobile');
+  }
+  elseif ($wide_header)
+  {
+    wp_register_style('metallic_wide_screen', get_stylesheet_directory_uri().'/wide-screen.css');
+    wp_enqueue_style('metallic_wide_screen');
+  }
+  else {
+    wp_register_style('metallic_screen', get_stylesheet_directory_uri().'/screen.css');
+    wp_enqueue_style('metallic_screen');
+  }
+
+  $show_sidebar = get_theme_mod('show_sidebar', true);
+  if ($show_sidebar) {
+    wp_register_style('metallic_sidebar', get_stylesheet_directory_uri().'/sidebar.css');
+    wp_enqueue_style('metallic_sidebar');
+  }
+
+  if (is_rtl())
+    wp_register_style('metallic_bidi', get_stylesheet_directory_uri().'/style_rtl.css');
+  else
+    wp_register_style('metallic_bidi', get_stylesheet_directory_uri().'/style_ltr.css');
+
+  wp_enqueue_style('metallic_bidi');
+}
+
+add_action('wp_enqueue_scripts', 'mettalic_styles');
 
 ?>
