@@ -136,7 +136,7 @@ pre {
 }
 
 pre {
-  padding: 0.5em;
+  padding: 0.2em;
   margin: 0em;
   overflow: auto;
   background: $color(background);

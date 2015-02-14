@@ -318,28 +318,48 @@ function mettalic_styles()
 
 add_action('wp_enqueue_scripts', 'mettalic_styles');
 
-/*
+
 //http://www.smashingmagazine.com/2009/08/18/10-useful-wordpress-hook-hacks/
 
-function metallic_formatter($content) {
-  $new_content = '';
-  $pattern_full = '{([code].*?[/code])}is';
-  $pattern_contents = '{[code](.*?)[/code]}is';
-  $pieces = preg_split($pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE);
-
-  foreach ($pieces as $piece) {
-    if (preg_match($pattern_contents, $piece, $matches)) {
-      $new_content .= $matches[1];
-    } else {
-      $new_content .= wptexturize(wpautop($piece));
-    }
-  }
-
-  return $new_content;
+function parse_code($lang, $value){
+  $value = '<pre class="'.$lang.'" >'.$value."</pre>";
+  return $value;
 }
 
-//remove_filter('the_content', 'wpautop');
+function metallic_formatter($content) {
+
+/**
+  <pre:php> </pre>
+*/
+  $parts = preg_split('#\n?\<\/?pre\:?(.*?)\>\n?#is', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+  $lang = '';
+  $text = '';
+  $idx = 0;
+  foreach ($parts as $value)
+  {
+    $idx++;
+    switch ($idx)
+    {
+      case 1:
+        $text .= wptexturize(wpautop($value));
+        break;
+      case 2:
+        $lang = $value;
+        break;
+      case 3:
+        $text .= parse_code($lang, $value);
+        break;
+      case 4:
+        $lang = $value;
+        $idx = 0;
+        break;
+    }
+  }
+  return $text;
+}
+
+remove_filter('the_content', 'wpautop');
 remove_filter('the_content', 'wptexturize');
 add_filter('the_content', 'metallic_formatter', 99);
-*/
+
 ?>
