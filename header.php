@@ -27,6 +27,7 @@
   <link rel="alternate" type="text/xml" title="RSS .92" href="<?php bloginfo('rss_url'); ?>" />
   <link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="<?php bloginfo('atom_url'); ?>" />
   <link rel="pingback" href="<?php print bloginfo('pingback_url'); ?>" />
+  <link rel="shortlink" href="<?php print wp_get_shortlink(); ?>" />
   <?php
     wp_get_archives('type=monthly&format=link');
     if ( is_singular() ) wp_enqueue_script( "comment-reply" );
