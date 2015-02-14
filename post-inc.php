@@ -19,7 +19,7 @@
       <?php if (!get_theme_mod('hide_post_avatar', false)) { ?><li class="avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></li> <?php } ?>
       <?php if (!get_theme_mod('hide_mata', false)) { ?>
       <li class="entry-author"><?php the_author_posts_link(); ?></li>
-      <li class="entry-date"><?php print get_the_date(); ?></li>
+      <li class="entry-date"><a href="<?php print wp_get_shortlink(get_the_ID(), 'post') ?>"><?php print get_the_date(); ?></a></li>
       <li class="entry-edit"><?php edit_post_link(__('Edit', 'default')); ?></li>
       <?php } ?>
     </ul>

@@ -144,9 +144,15 @@ pre {
   border: 1px dotted $color(border)
 }
 
+code{
+  padding: 0.1em;
+  margin: 0em;
+}
+
 pre, code{
   font-family: monospace, serif;
   font-size: 11pt;
+  border-radius: 3px;
 }
 
 embed, iframe, object {
@@ -323,7 +329,7 @@ blockquote{
 }
 
 .entry-date:before{
-  content: "≡ "
+  content: "◊ "
 }
 
 .entry-author{
@@ -421,6 +427,11 @@ div.post {
 /*  border-top: 1px solid $mix(base, canvas_back);*/
   border-radius: 3px 3px 0 0;
   background: $mix(base, canvas_back, 70);
+  color: $color(title_text);
+}
+
+#nav-button:before{
+  content: "≡";
 }
 
 #nav-page, #nav-subpage {
@@ -450,6 +461,13 @@ div.post {
   margin: 0.1em
 }
 
+#nav a{
+}
+
+#nav a:hover{
+  color: $mix(title_text, highlight);
+}
+
 #header .current_page_item{
   border-radius: 3px;
   box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
@@ -460,14 +478,6 @@ div.post {
   border-radius: 2px;
   box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
   background: $color(title_text);
-}
-
-#nav a{
-  color: $color(title_text);
-}
-
-#nav a:hover{
-  color: $mix(title_text, highlight);
 }
 
 #header .current_page_item a {
