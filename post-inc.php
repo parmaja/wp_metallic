@@ -14,7 +14,7 @@
 ?>
 
   <li id="post-<?php the_ID(); ?>" <?php post_class($post_class); ?>>
-<section>
+  <article>
     <h2 class="title<?php if ($posts_count > 0) print(' pagebreak') ?>"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
     <ul class="infobar">
       <?php if (!get_theme_mod('hide_post_avatar', false)) { ?><li class="avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></li> <?php } ?>
@@ -24,7 +24,7 @@
       <li class="entry-edit"><?php edit_post_link(__('Edit', 'default')); ?></li>
       <?php } ?>
     </ul>
-    <summary class="post-content"><?php the_content(__('More...', 'default')); ?></summary>
+    <div class="post-content"><?php the_content(__('More...', 'default')); ?></div>
     <?php if (!get_theme_mod('hide_mata', false)) { ?>
     <ul class="infobar">
       <li class="category"><?php print __('Category', 'default').': '; print the_category(', ') ?></li>
@@ -33,7 +33,7 @@
     </ul>
      <?php } ?>
     <hr class="skip" />
-</section>
+  </article>
   </li>
 
   <?php

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head profile="http://gmpg.org/xfn/11">
-  <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+<head>
   <meta charset="<?php bloginfo('charset'); ?>" />
   <!-- Tell the browser to use the same width of the device -->
   <meta name="HandheldFriendly" content="true"/>
@@ -30,7 +29,7 @@
   <link rel="pingback" href="<?php print bloginfo('pingback_url'); ?>" />
   <link rel="shortlink" href="<?php print wp_get_shortlink(); ?>" />
   <?php
-    wp_get_archives('type=monthly&format=link');
+//    wp_get_archives( array( 'type' => 'monthly', 'format' => 'link', 'limit' => 12 ) );
     if ( is_singular() ) wp_enqueue_script( "comment-reply" );
     wp_head();
   ?>
@@ -38,9 +37,9 @@
 
 <body <?php body_class(); ?>>
   <?php if (!$wide_header) { ?>
-  <article id="container">
+  <section id="container">
   <?php } ?>
-    <div id="header">
+    <header id="header">
       <div id="logo">
         <div id="logo-header">
           <?php if ($show_logo) { ?>
@@ -48,7 +47,7 @@
           <?php } ?>
           <?php if ($show_title) { ?>
           <div id="logo-text">
-            <p class="title" id="title"><strong><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></strong></p>
+            <p id="title"><h1><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></h1></p>
             <p id="description"><?php print get_bloginfo('description') ?></p>
           </div>
           <?php } ?>
@@ -90,9 +89,9 @@
         </nav>
       <?php } ?>
       </div>
-    </div>
+    </header>
     <?php if ($wide_header) { ?>
-    <article id="container">
+    <section id="container">
     <?php } ?>
     <div id="wrapper">
       <div id="main">

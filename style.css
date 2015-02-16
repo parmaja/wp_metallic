@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.8.17
+Version: 1.8.18
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -42,15 +42,17 @@ body {
 }
 
 /* H1 of head/title not same size of h1 of post content*/
-h1.head, h1#head, h1.title{
-  font-size: 180%;
+#header h1 {
+  font-size: 200%;
+  font-weight: bold;
+
 }
 
-h2.head, h2#head, h2.title{
+#header h2 {
   font-size: 170%;
 }
 
-h3.head, h3#head, h3.title {
+#header h3 {
   font-size: 160%;
 }
 
@@ -191,14 +193,16 @@ $if(gradients)<
 }
 
 @media screen {
-  #title{
+  #header h1{
   /*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
     text-shadow: 0.1em 0.1em 0.1em $color(base, -20);
+    line-height: 0.1em;
   }
 }
 
 #description{
   color: $color(title_text);
+  line-height: 0em;
 }
 
 #header a{
