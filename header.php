@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
 <head profile="http://gmpg.org/xfn/11">
   <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
   <!-- Tell the browser to use the same width of the device -->
@@ -54,7 +54,7 @@
         </div>
 
         <?php if ($show_navigator) { ?>
-        <div id="nav">
+        <nav id="nav">
         <?php
           $output = "";
           $subpage = "";
@@ -86,7 +86,7 @@
           }
           print $output;
         ?>
-        </div>
+        </nav>
       <?php } ?>
       </div>
     </div>
@@ -95,4 +95,4 @@
     <?php } ?>
     <div id="wrapper">
       <div id="main">
-        <div id="contents">
+        <article id="contents">

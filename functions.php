@@ -286,26 +286,28 @@ function mettalic_styles()
   wp_enqueue_style('metallic_style');
 
   $wide_header = get_theme_mod('wide_header', true);
+  $show_sidebar = get_theme_mod('show_sidebar', true);
 
   if (wp_is_mobile())
   {
     wp_register_style('metallic_mobile', get_stylesheet_directory_uri().'/mobile.css');
     wp_enqueue_style('metallic_mobile');
-  }
-  elseif ($wide_header)
+  } else
   {
-    wp_register_style('metallic_wide_screen', get_stylesheet_directory_uri().'/wide-screen.css');
-    wp_enqueue_style('metallic_wide_screen');
-  }
-  else {
-    wp_register_style('metallic_screen', get_stylesheet_directory_uri().'/screen.css');
-    wp_enqueue_style('metallic_screen');
-  }
+    if ($wide_header)
+    {
+      wp_register_style('metallic_wide_screen', get_stylesheet_directory_uri().'/wide-screen.css');
+      wp_enqueue_style('metallic_wide_screen');
+    }
+    else {
+      wp_register_style('metallic_screen', get_stylesheet_directory_uri().'/screen.css');
+      wp_enqueue_style('metallic_screen');
+    }
 
-  $show_sidebar = get_theme_mod('show_sidebar', true);
-  if ($show_sidebar) {
-    wp_register_style('metallic_sidebar', get_stylesheet_directory_uri().'/sidebar.css');
-    wp_enqueue_style('metallic_sidebar');
+    if ($show_sidebar) {
+      wp_register_style('metallic_sidebar', get_stylesheet_directory_uri().'/sidebar.css');
+      wp_enqueue_style('metallic_sidebar');
+    }
   }
 
   if (is_rtl())
@@ -314,6 +316,9 @@ function mettalic_styles()
     wp_register_style('metallic_bidi', get_stylesheet_directory_uri().'/style_ltr.css');
 
   wp_enqueue_style('metallic_bidi');
+
+  wp_register_style('metallic_fshl', get_stylesheet_directory_uri().'/fshl.css');
+  wp_enqueue_style('metallic_fshl');
 }
 
 add_action('wp_enqueue_scripts', 'mettalic_styles');
@@ -321,16 +326,32 @@ add_action('wp_enqueue_scripts', 'mettalic_styles');
 
 //http://www.smashingmagazine.com/2009/08/18/10-useful-wordpress-hook-hacks/
 
-function parse_code($lang, $value){
-  $value = '<pre class="'.$lang.'" >'.$value."</pre>";
+include(__DIR__.'/FSHL/Highlighter.php');
+include(__DIR__.'/FSHL/Output.php');
+include(__DIR__.'/FSHL/Lexer.php');
+include(__DIR__.'/FSHL/Generator.php');
+
+include(__DIR__.'/FSHL/Output/Html.php');
+include(__DIR__.'/FSHL/Lexer/Php.php');
+/*
+function parse_code($lang, $value)
+{
+  $highlighter = new \FSHL\Highlighter(new \FSHL\Output\Html(), \FSHL\Highlighter::OPTION_LINE_COUNTER);
+  $highlighter->setLexer(new \FSHL\Lexer\Php());
+  //echo '<pre>';
+  $value = "<pre>".$highlighter->highlight($value)."</pre>";
+//  echo '</pre>';
+
+//  $value = '<pre class="'.$lang.'" >'.$value."</pre>";
   return $value;
 }
 
 function metallic_formatter($content) {
-
+*/
 /**
   <pre:php> </pre>
 */
+/*
   $parts = preg_split('#\n?\<\/?pre\:?(.*?)\>\n?#is', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
   $lang = '';
   $text = '';
@@ -361,5 +382,5 @@ function metallic_formatter($content) {
 remove_filter('the_content', 'wpautop');
 remove_filter('the_content', 'wptexturize');
 add_filter('the_content', 'metallic_formatter', 99);
-
+  */
 ?>
