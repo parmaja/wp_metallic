@@ -2,6 +2,7 @@
 <html <?php language_attributes(); ?>>
 <head profile="http://gmpg.org/xfn/11">
   <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+  <meta charset="<?php bloginfo('charset'); ?>" />
   <!-- Tell the browser to use the same width of the device -->
   <meta name="HandheldFriendly" content="true"/>
   <meta name="viewport" content="width=device-width; initial-scale=1.0" />
@@ -37,7 +38,7 @@
 
 <body <?php body_class(); ?>>
   <?php if (!$wide_header) { ?>
-  <div id="container">
+  <article id="container">
   <?php } ?>
     <div id="header">
       <div id="logo">
@@ -91,8 +92,8 @@
       </div>
     </div>
     <?php if ($wide_header) { ?>
-    <div id="container">
+    <article id="container">
     <?php } ?>
     <div id="wrapper">
       <div id="main">
-        <article id="contents">
+        <div id="contents">
