@@ -4,6 +4,10 @@ body{
   max-width: 100%;
 }
 
+#main {
+  width: 100%;
+}
+
 #container {
   margin: 0em;
   width: 100%;

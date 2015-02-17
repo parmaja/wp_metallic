@@ -187,8 +187,9 @@ add_action('customize_register', 'metallic_customize_register');
 
 require('inc/macros.php');
 
-/*Cache it to disk, removed now
-function metallic_generate_css_cache(){
+/* Cache it to disk, removed now
+function metallic_generate_css_cache()
+{
   global $wp_customize;
   $scheme = get_theme_mod('color_scheme', 'gray');
   $gradients = get_theme_mod('gradients', true);
@@ -207,11 +208,17 @@ function metallic_generate_css_cache(){
     $css = $css_macro->generate($style);
     file_put_contents($css_dir.'style.css', $css, LOCK_EX);
   }
-} */
+}
+*/
 
-function metallic_customize_save_after(){
+//Increase version of style to purge any cache of style
+
+function metallic_customize_save_after()
+{
 //  metallic_generate_css_cache();
-
+  $ver = get_theme_mod('style_ver', 1);
+  $ver = $ver + 1;
+  set_theme_mod('style_ver', $ver);
 }
 
 function metallic_activation($old_theme)
@@ -220,19 +227,8 @@ function metallic_activation($old_theme)
   return;
 }
 
-
 add_action('customize_save_after', 'metallic_customize_save_after');
 add_action("after_switch_theme", 'metallic_activation');
-
-/*
-add_action('wp_enqueue_scripts', 'prefix_add_my_stylesheet');
-
-function prefix_add_my_stylesheet() {
-    wp_register_style( 'custom-supersized-styles', get_template_directory_uri(). '/css/style.css', array('style','supersized'));
-    wp_enqueue_style('custom-supersized-styles');
-}
-*/
-
 
 function mettalic_styles()
 {
@@ -279,10 +275,12 @@ function mettalic_styles()
     $params.='&scheme='.$scheme;
   }
 
+  $ver = get_theme_mod('style_ver', 1);
+
   wp_register_style('metallic_layout', get_stylesheet_directory_uri().'/layout.css');
   wp_enqueue_style('metallic_layout');
 
-  wp_register_style('metallic_style', get_stylesheet_directory_uri().'/style.php'.$params);
+  wp_register_style('metallic_style', get_stylesheet_directory_uri().'/style.php'.$params, array(), $ver);
   wp_enqueue_style('metallic_style');
 
   $wide_header = get_theme_mod('wide_header', true);
@@ -323,6 +321,15 @@ function mettalic_styles()
 
 add_action('wp_enqueue_scripts', 'mettalic_styles');
 
+/*
+add_action('wp_enqueue_scripts', 'prefix_add_my_stylesheet');
+
+function prefix_add_my_stylesheet() {
+    wp_register_style( 'custom-supersized-styles', get_template_directory_uri(). '/css/style.css', array('style','supersized'));
+    wp_enqueue_style('custom-supersized-styles');
+}
+*/
+
 
 //http://www.smashingmagazine.com/2009/08/18/10-useful-wordpress-hook-hacks/
 
@@ -333,6 +340,7 @@ include(__DIR__.'/FSHL/Generator.php');
 
 include(__DIR__.'/FSHL/Output/Html.php');
 include(__DIR__.'/FSHL/Lexer/Php.php');
+
 /*
 function parse_code($lang, $value)
 {

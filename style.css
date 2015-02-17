@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.8.18
+Version: 1.8.19
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -203,6 +203,7 @@ $if(gradients)<
 #description{
   color: $color(title_text);
   line-height: 0em;
+  padding: 0.5em 0em;
 }
 
 #header a{
@@ -217,12 +218,9 @@ $if(gradients)<
 
 #main { /*do not put padding or margin or border width */
   background: $color(canvas_back);
+  width: 100%;
 }
 
-#contents {
-  border-style: solid;
-  border-color: $color(border);
-}
 
 #main h2 {
   padding: 0.2em 0;
@@ -243,6 +241,11 @@ $if(gradients)<
   #main h2.title {
     border-bottom: 1px solid #333;
   }
+}
+
+#contents {
+  border-style: solid;
+  border-color: $color(border);
 }
 
 ol#posts {
