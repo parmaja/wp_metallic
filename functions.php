@@ -341,26 +341,24 @@ include(__DIR__.'/FSHL/Generator.php');
 include(__DIR__.'/FSHL/Output/Html.php');
 include(__DIR__.'/FSHL/Lexer/Php.php');
 
-/*
+
 function parse_code($lang, $value)
 {
   $highlighter = new \FSHL\Highlighter(new \FSHL\Output\Html(), \FSHL\Highlighter::OPTION_LINE_COUNTER);
   $highlighter->setLexer(new \FSHL\Lexer\Php());
-  //echo '<pre>';
-  $value = "<pre>".$highlighter->highlight($value)."</pre>";
-//  echo '</pre>';
-
-//  $value = '<pre class="'.$lang.'" >'.$value."</pre>";
+  $value = "<code>".$highlighter->highlight($value)."</code>";
+//  $value = '<code class="'.$lang.'" >'.$value."</code>";
   return $value;
 }
 
-function metallic_formatter($content) {
-*/
+//function metallic_formatter($content)
+function metallic_formatter($data , $postarr)
+{
+  $text = $data['post_content'];
 /**
-  <pre:php> </pre>
+  <code class="php"> </code>
 */
-/*
-  $parts = preg_split('#\n?\<\/?pre\:?(.*?)\>\n?#is', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+  $parts = preg_split('#\n?\<\/?code(.*?)\>\n?#is', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
   $lang = '';
   $text = '';
   $idx = 0;
@@ -370,10 +368,12 @@ function metallic_formatter($content) {
     switch ($idx)
     {
       case 1:
-        $text .= wptexturize(wpautop($value));
+//        $text .= wptexturize(wpautop($value));
+        $text .= $value;
         break;
       case 2:
-        $lang = $value;
+        preg_match("/class=\"?(\w+)\"?/i", $value, $m);
+        $lang = $m[1];
         break;
       case 3:
         $text .= parse_code($lang, $value);
@@ -384,11 +384,13 @@ function metallic_formatter($content) {
         break;
     }
   }
-  return $text;
+  $data['post_content'] = $text;
+  return $data;
 }
 
-remove_filter('the_content', 'wpautop');
-remove_filter('the_content', 'wptexturize');
-add_filter('the_content', 'metallic_formatter', 99);
-  */
+//remove_filter('the_content', 'wpautop');
+//remove_filter('the_content', 'wptexturize');
+//add_filter('the_content', 'metallic_formatter', 99);
+add_filter('wp_insert_post_data', 'metallic_formatter', 99)
+
 ?>
