@@ -12,6 +12,8 @@
 
 define('Metallic', 'Metallic');
 
+const IS_MSH_META = '_wpcom_is_msh';
+
 $is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
 
 add_theme_support( 'automatic-feed-links' );
@@ -80,7 +82,7 @@ if ( function_exists('register_sidebar') )
 
 /** Register customize */
 
-function metallic_add_option($wp_customize, $name, $title, $type = 'checkbox', $default = 'true') {
+function metallic_add_option($wp_customize, $section, $name, $title, $type = 'checkbox', $default = 'true') {
     $wp_customize->add_setting($name, array(
         'capability' => 'edit_theme_options',
         'default' => $default,
@@ -90,31 +92,36 @@ function metallic_add_option($wp_customize, $name, $title, $type = 'checkbox', $
     $wp_customize->add_control($name, array(
         'settings' => $name,
         'label'    => $title,
-        'section'  => 'metallic_options',
+        'section'  => $section,
         'type'     => $type,
     ));
 }
 
 function metallic_customize_register($wp_customize) {
 
-  $wp_customize->add_section('metallic_options', array(
-        'title'    => __('Options', 'metallic'),
+  $wp_customize->add_section('metallic_layout', array(
+        'title'    => __('Layout', 'metallic'),
         'priority' => 120,
   ));
 
-    metallic_add_option($wp_customize, 'show_navigator', __('Show Navigation', 'metallic'));
-    metallic_add_option($wp_customize, 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
-    metallic_add_option($wp_customize, 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
-    metallic_add_option($wp_customize, 'wide_header', __('Wide Header', 'metallic'));
-    metallic_add_option($wp_customize, 'show_sidebar', __('Show Sidebar', 'default'));
-    metallic_add_option($wp_customize, 'show_subpages', __('Show SubPages', 'metallic'));
-    metallic_add_option($wp_customize, 'show_footbar', __('Show Footbar', 'default'));
-    metallic_add_option($wp_customize, 'show_title', __('Show Title', 'default'));
-    metallic_add_option($wp_customize, 'gradients', __('Gradients', 'metallic'));
-    metallic_add_option($wp_customize, 'show_logo', __('Show Logo', 'default'));
-    metallic_add_option($wp_customize, 'logo_url', __('Logo URL', 'metallic'), 'text', '');
+  $wp_customize->add_section('metallic_options', array(
+        'title'    => __('Options', 'metallic'),
+        'priority' => 121,
+  ));
 
-    metallic_add_option($wp_customize, 'user_font_size', __('Font Size', 'metallic'), 'number', '');
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_navigator', __('Show Navigation', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_options', 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
+    metallic_add_option($wp_customize, 'metallic_options', 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
+    metallic_add_option($wp_customize, 'metallic_layout', 'wide_header', __('Wide Header', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_sidebar', __('Show Sidebar', 'default'));
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_subpages', __('Show SubPages', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_footbar', __('Show Footbar', 'default'));
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_title', __('Show Title', 'default'));
+    metallic_add_option($wp_customize, 'metallic_options', 'gradients', __('Gradients', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'default'));
+    metallic_add_option($wp_customize, 'metallic_options', 'logo_url', __('Logo URL', 'metallic'), 'text', '');
+
+    metallic_add_option($wp_customize, 'metallic_options', 'user_font_size', __('Font Size', 'metallic'), 'number', '');
 //    metallic_add_option($wp_customize, 'user_font_name', __('Font Name', 'metallic'), 'text', '');
 
     //  =============================
@@ -333,21 +340,23 @@ function prefix_add_my_stylesheet() {
 
 //http://www.smashingmagazine.com/2009/08/18/10-useful-wordpress-hook-hacks/
 
-include(__DIR__.'/FSHL/Highlighter.php');
-include(__DIR__.'/FSHL/Output.php');
-include(__DIR__.'/FSHL/Lexer.php');
-include(__DIR__.'/FSHL/Generator.php');
-
-include(__DIR__.'/FSHL/Output/Html.php');
-include(__DIR__.'/FSHL/Lexer/Php.php');
-
-
 function parse_code($lang, $value)
 {
+  include_once(__DIR__.'/FSHL/Highlighter.php');
+  include_once(__DIR__.'/FSHL/Output.php');
+  include_once(__DIR__.'/FSHL/Lexer.php');
+  include_once(__DIR__.'/FSHL/Generator.php');
+
+  include_once(__DIR__.'/FSHL/Output/Html.php');
+  include_once(__DIR__.'/FSHL/Lexer/Php.php');
+  include_once(__DIR__.'/FSHL/Lexer/C.php');
+
   $highlighter = new \FSHL\Highlighter(new \FSHL\Output\Html(), \FSHL\Highlighter::OPTION_LINE_COUNTER);
   $highlighter->setLexer(new \FSHL\Lexer\Php());
+
   $value = "<code>".$highlighter->highlight($value)."</code>";
-//  $value = '<code class="'.$lang.'" >'.$value."</code>";
+  if (!empty($lang))
+    $value = "<span class=\"xlang\">[".$lang."]</span><br/>".$value;
   return $value;
 }
 
@@ -365,20 +374,23 @@ function metallic_formatter($data , $postarr)
   foreach ($parts as $value)
   {
     $idx++;
-    switch ($idx)
+    switch ($idx-1)
     {
-      case 1:
+      case 0:
 //        $text .= wptexturize(wpautop($value));
         $text .= $value;
         break;
-      case 2:
+      case 1:
         preg_match("/class=\"?(\w+)\"?/i", $value, $m);
-        $lang = $m[1];
+        if (array_key_exists(1, $m))
+          $lang = $m[1];
+        else
+          $lang = "";
         break;
-      case 3:
+      case 2:
         $text .= parse_code($lang, $value);
         break;
-      case 4:
+      case 3:
         $lang = $value;
         $idx = 0;
         break;
