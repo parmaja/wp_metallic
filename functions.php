@@ -135,11 +135,15 @@ function metallic_customize_register($wp_customize) {
 
     if ($handle = opendir($dir)) {
         while (false !== ($entry = readdir($handle))) {
-            if ($entry != "." && $entry != "..") {
-                $ini = parse_ini_file($dir.'/'.$entry, false);
-                $name = strstr($entry, '.', true);//explode('.', $entry);
-                $title = $ini['name'];
-                $shemes[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
+            if ($entry != "." && $entry != "..")
+            {
+                $ext = pathinfo($entry, PATHINFO_EXTENSION);
+                if ($ext == "ini") {
+                  $ini = parse_ini_file($dir.'/'.$entry, false);
+                  $name = strstr($entry, '.', true);//explode('.', $entry);
+                  $title = $ini['name'];
+                  $shemes[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
+                }
             }
         }
         closedir($handle);
@@ -252,6 +256,9 @@ function mettalic_styles()
   if (!empty($font_size)) {
     $params .= '&font_size='.$font_size;
   }
+
+  if (wp_is_mobile())
+    $params .= '&is_mobile=1';
 
 /*      $font_size = get_theme_mod('user_font_name', '');
   if (!empty($font_size)) {

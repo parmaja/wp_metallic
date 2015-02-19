@@ -22,9 +22,8 @@ GitHub Branch:    release
 /* Set Variables values */
 
 $<
-  border=$mix(canvas_back, base, 70)
-  eadge = $darken(border, 10)
-  background=$mix(canvas_back, base, 90)
+  panel=$mix(canvas_back, base, 90)
+  eadge = $mix(canvas_back, base, 60)
 >
 
 /*
@@ -37,7 +36,7 @@ html {
 
 body {
   font: $get(font_size)pt/1.3 $get(font_name);
-  background: $color(back);
+  background: $get(back);
   color: $get(fore);
 }
 
@@ -87,7 +86,7 @@ a{
 
 a:hover{
   text-decoration: none;
-  color: $color(highlight, 10);
+  color: $change(highlight, 10);
 }
 
 caption, th, td {
@@ -97,9 +96,9 @@ caption, th, td {
 .wp-caption {
   max-width: 100%;
   padding: 0.1em;
-  background: $color(background);
-  color: $color(canvas_ink);
-  border: 1px dotted $color(border)
+  background: $get(panel);
+  color: $get(canvas_ink);
+  border: 1px dotted $get(eadge)
 }
 
 .post-content img{
@@ -109,14 +108,14 @@ caption, th, td {
 }
 
 .wp-caption-text{
-  color: $color(canvas_ink);
+  color: $get(canvas_ink);
 }
 
 .sticky{
 }
 
 .gallery-caption{
-  color: $color(canvas_ink);
+  color: $get(canvas_ink);
 }
 
 .bypostauthor{
@@ -141,9 +140,9 @@ pre {
   padding: 0.2em;
   margin: 0em;
   overflow: auto;
-  background: $color(background);
-  color: $color(canvas_ink);
-  border: 1px dotted $color(border)
+  background: $get(panel);
+  color: $get(canvas_ink);
+  border: 1px dotted $get(eadge)
 }
 
 code{
@@ -165,14 +164,14 @@ embed, iframe, object {
 /*----------------*/
 
 #container {
-  background: $color(background);
-  color: $color(canvas_ink);
+  background: $get(panel);
+  color: $get(canvas_ink);
 }
 
 #header {
-  background: $color(base);
+  background: $get(base);
 $if(gradients)<
-  background: linear-gradient(to bottom, $color(base, 20) 15%, $color(base, 20) 10%, $color(base) 70%);
+  background: linear-gradient(to bottom, $change(base, 20) 15%, $change(base, 20) 10%, $change(base) 70%);
 >
   text-decoration: none;
 }
@@ -195,20 +194,34 @@ $if(gradients)<
 @media screen {
   #header h1{
   /*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
-    text-shadow: 0.1em 0.1em 0.1em $color(base, -20);
+    text-shadow: 0.1em 0.1em 0.1em $change(base, -20);
     line-height: 0.1em;
   }
 }
 
+$ifnot(is_mobile)<
+@media screen{
+  #container {
+    box-shadow: 0.3em 0.3em 0.3em #999;
+    border-radius: 0px 0px 5px 5px;
+    margin-bottom: 1em;
+  }
+
+  #header {
+    box-shadow: 0em 0.2em 0.5em 0.0em $darken(base, -30);
+  }
+}
+>
+
 #description{
-  color: $color(title_text);
+  color: $get(title_text);
   line-height: 0em;
   padding: 0.5em 0em;
 }
 
 #header a{
   text-decoration: none;
-  color: $color(title_color);
+  color: $get(title_color);
 }
 
 #wrapper {
@@ -217,7 +230,7 @@ $if(gradients)<
 /**      main content     */
 
 #main { /*do not put padding or margin or border width */
-  background: $color(canvas_back);
+  background: $get(canvas_back);
   width: 100%;
 }
 
@@ -233,7 +246,7 @@ $if(gradients)<
   }
 
   .post-rest{
-    border-top: 3pt solid $color(background);
+    border-top: 3pt solid $get(panel);
   }
 }
 
@@ -245,7 +258,7 @@ $if(gradients)<
 
 #contents {
   border-style: solid;
-  border-color: $color(border);
+  border-color: $get(eadge);
 }
 
 ol#posts {
@@ -270,7 +283,7 @@ ol#posts .more-link{
 }
 
 .post h2 a{
-  color: $color(canvas_ink);
+  color: $get(canvas_ink);
   text-decoration: none;
 }
 
@@ -283,7 +296,7 @@ ol#posts .more-link{
   list-style: none outside none;
   overflow: auto;
   font-size: 80%;
-  color: #797979;
+  color: $mix(canvas_back, canvas_ink, 50);
   padding: 0.1em 0 0 0;
 }
 
@@ -312,7 +325,7 @@ li.post{
 }
 
 table, th ,td, tr {
-  border: 1px solid $color(border);
+  border: 1px solid $get(eadge);
   border-collapse: collapse;
 }
 
@@ -322,9 +335,9 @@ th, td {
 
 blockquote{
   padding: 0.5em;
-  background: $color(background);
-  color: $color(canvas_ink);
-  border: 1px dotted $color(border)
+  background: $get(panel);
+  color: $get(canvas_ink);
+  border: 1px dotted $get(eadge)
 }
 
 /* Shared with comments */
@@ -360,7 +373,6 @@ div.post {
 }
 
 .post-content {
-  color: #222;
   clear: both;
   overflow: hidden;
   padding: 0.5em 0 0.5em 0;
@@ -376,14 +388,14 @@ div.post {
   margin: 0em;
   padding: 0.1em 0.5em;
   overflow: auto;
-/*  color: $color(canvas_ink);*/
-/*  background: $color(border);*/
+/*  color: $get(canvas_ink);*/
+/*  background: $get(border);*/
 /*  border-radius: 3px 3px 0 0; */
   background: $mix(base, canvas_back, 70);
 }
 
 .pagination a{
-  color: $color(title_text);
+  color: $get(title_text);
 }
 
 .pagination a:hover{
@@ -412,13 +424,13 @@ div.post {
   margin: 0.5em 0.1em 0;
   padding: 0.1em 0.5em;
   overflow: auto;
-  color: $color(canvas_ink);
-  background: $color(border);
+  color: $get(canvas_ink);
+  background: $get(eadge);
 }
 
 .page-numbers a{
-  color: $color(canvas_back);
-  background: $color(base, -20);
+  color: $get(canvas_back);
+  background: $change(base, -20);
 }
 
 .page-numbers a:hover{
@@ -434,7 +446,7 @@ div.post {
 /*  border-top: 1px solid $mix(base, canvas_back);*/
   border-radius: 3px 3px 0 0;
   background: $mix(base, canvas_back, 70);
-  color: $color(title_text);
+  color: $get(title_text);
 }
 
 #nav-button:before{
@@ -478,23 +490,23 @@ div.post {
 #header .current_page_item{
   border-radius: 3px;
   box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
-  background: $color(title_text);
+  background: $get(title_text);
 }
 
 #header .current_page_parent{
   border-radius: 2px;
   box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
-  background: $color(title_text);
+  background: $get(title_text);
 }
 
 #header .current_page_item a {
   text-decoration: none;
-  color: $color(base);
+  color: $get(base);
 }
 
 #header .current_page_parent a {
   text-decoration: none;
-  color: $color(base);
+  color: $get(base);
 }
 
 .widget_tag_cloud a {
@@ -517,7 +529,7 @@ textarea#comment {
   padding: 0.2em;
   border-radius: 3px;
   border: 1px solid $mix(canvas_back, base, 50);
-  color: $color(canvas_ink);
+  color: $get(canvas_ink);
 }
 
 .comment-list {
@@ -526,7 +538,7 @@ textarea#comment {
 }
 
 .comment-body {
-  border-bottom: 1px solid $color(border);
+  border-bottom: 1px solid $get(eadge);
   margin: 0.5em;
   padding-bottom: 0.5em;
 }
@@ -535,8 +547,8 @@ textarea#comment {
 }
 
 .comment{
-  background: $color(background);
-  color: $color(canvas_ink);
+  background: $get(panel);
+  color: $get(canvas_ink);
   padding: 0;
   overflow: auto;
 }
@@ -552,11 +564,11 @@ textarea#comment {
 }
 
 input[type=text]{
-  border: 1px solid $color(border);
+  border: 1px solid $get(eadge);
   padding: 0.2em;
   margin: 0;
   border-radius: 3px;
-  color:$color(canvas_ink);
+  color: $get(canvas_ink);
 }
 
 input[type=submit]{
@@ -565,7 +577,8 @@ input[type=submit]{
   font: $get(font_size)/1.3 $get(font_name)
   border-radius: 3px;
   border: 1px solid $mix(canvas_back, base);
-  color: $color(canvas_ink);
+  color: $get(canvas_ink);
+  background: $get(canvas_back);
 }
 
 #reply-title{
@@ -586,7 +599,7 @@ input[type=submit]{
 /* sidebar */
 
 #sidebar {
-  color: $color(canvas_ink);
+  color: $get(canvas_ink);
 }
 
 #sidebar a{
@@ -599,7 +612,7 @@ input[type=submit]{
   text-decoration: none;
 }
 
-#sidebar>ul {
+#sidebar > ul {
   padding: 0em 1em;
   list-style-type: none;
 }
@@ -607,48 +620,48 @@ input[type=submit]{
 #sidebar li{
 }
 
-#sidebar>ul>li {
+#sidebar > ul > li {
   text-shadow: 2px 2px #d7d7d7;
   padding-bottom: 1em;
   margin-bottom: 1em;
   list-style-type: none;
-  border-bottom: 1px solid $color(border); /* Will override in other css */
-  text-shadow: 2px 2px #d7d7d7;
+  border-bottom: 1px solid $get(eadge); /* Will override in other css */
+  text-shadow: 2px 2px $get(eadge);
 }
 
-#sidebar>ul>li>ul {
+#sidebar > ul > li > ul {
   text-shadow: none;
-  color: $color(base, -20);
+  color: $change(base, -20);
   text-decoration: none;
 }
 
 /* sub pages less padding */
 
-#sidebar>ul>li>ul>li>ul {
+#sidebar > ul > li > ul > li > ul {
   font-size: 80%;
 }
 
 .widget#sidebar li{
-  color: $color(base, -20);
+  color: $change(base, -20);
 }
 
 #footbar {
   background: #000;
-  color: $color(canvas_back);
+  color: $get(canvas_back);
 /*  border-top: 3px solid $get(base); */
 }
 
 #footbar a{
-  color: $color(canvas_back);
+  color: $get(canvas_back);
   text-decoration: none;
 }
 
-#footbar>ul {
+#footbar > ul {
   list-style-type: none;
   margin: 0;
 }
 
-#footbar>ul>li {
+#footbar > ul >li {
   list-style-type: none;
   padding: 0.5em;
 }

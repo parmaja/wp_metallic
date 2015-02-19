@@ -20,17 +20,6 @@ body{
   margin: 1em;
 }
 
-@media screen{
-  #container {
-    box-shadow: 0.3em 0.3em 0.3em #AAA;
-    border-radius: 5px;
-  }
-
-  #header {
-    box-shadow: 0em 0.2em 0.5em 0.0em #AAA;
-  }
-}
-
 #contents {
   border-bottom-width: 1px;
 }

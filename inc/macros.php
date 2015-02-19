@@ -23,13 +23,13 @@
   color: $set(mycolor, #000);
 
   color: $get(mycolor); get the color without any change
-  color: $color(mycolor); same
+  color: $change(mycolor); same
 
   color: $lighten(mycolor, 10); make it lighten +10, rabge 0..100
-  color: $color(mycolor, 10); make it lighten +10, rabge 100..0..100
+  color: $change(mycolor, 10); make it lighten +10, rabge 100..0..100
 
   color: $darken(mycolor, 10); make it darken +10, range 0..100
-  color: $color(mycolor, -10); range 100..0..100
+  color: $change(mycolor, -10); range 100..0..100
 
   color: $mix(mycolor1, mycolor2); mix 2 colors
   color: $mix(mycolor1, mycolor2, 50); mix 2 colors but put more mycolor2 ranged 100..0..100
@@ -62,7 +62,7 @@ $if(b)<
 
 require('color.php');
 
-use phpColors\Color;
+use Mexitek\phpColors\Color;
 
 //define('REGEX_COMMAND', '/\$([a-z_]*)\((.*)\)/iU');
 define('REGEX_COMMAND', '/\$([a-z_]*)\((.*)\)/iU');
@@ -122,6 +122,8 @@ function split_arg(&$code, $separator = ',')
 
 class CssMacro {
 
+  public $contrast = 100;
+
   public $values = array();
 
   public $colors = array(
@@ -152,7 +154,7 @@ class CssMacro {
     'get'=>array('func_get',''),
     'set'=>array('func_set',''), //set value to new value and return the same value
     'def'=>array('func_def',''), //like set but without retrun any value, it return empty string
-    'color'=>array('func_color',''),
+    'change'=>array('func_change',''),
     'lighten'=>array('func_lighten',''),
     'darken'=>array('func_darken',''),
     'mix'=>array('func_mix',''),
@@ -166,10 +168,12 @@ class CssMacro {
       $this->values = $values;
   }
 
-  private function func_color($color, $amount = 0){
+  private function func_change($color, $amount = 0){
     if ($amount == 0)
       return $color;
     else {
+      if ($this->contrast != 100)
+        $amount = $amount * $this->contrast / 100;
       $co = new Color($color);
       if ($amount > 0)
         return '#'.$co->lighten($amount);
@@ -179,11 +183,15 @@ class CssMacro {
   }
 
   private function func_lighten($color, $amount = 0){
-    return $this->func_color($color, $amount);
+    if (abs($this->contrast) != 100)
+      $amount = $amount * abs($this->contrast) / 100;
+    return $this->func_change($color, $amount);
   }
 
   private function func_darken($color, $amount = 0){
-    return $this->func_color($color, -$amount);
+    if (abs($this->contrast) != 100)
+      $amount = $amount * abs($this->contrast) / 100;
+    return $this->func_change($color, -$amount);
   }
 
   private function func_get($value){
@@ -200,8 +208,14 @@ class CssMacro {
   }
 
   private function func_mix($color1, $color2, $amount = 0) {
-    $co = new Color($color1);
-    return '#'.$co->mix($color2, $amount);
+    $amount = ($amount * $this->contrast) / 100;
+    if ($amount >= 0) {
+      $co = new Color($color1);
+      return '#'.$co->mix($color2, $amount);
+    }else {
+      $co = new Color($color2);
+      return '#'.$co->mix($color1, $amount);
+    }
   }
 
   private function func_if($args){

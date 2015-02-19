@@ -17,6 +17,11 @@ if (empty($gradients))
 if (isset($_GET['user_color']) && !empty($_GET['user_color']))
   $user_color = $_GET['user_color'];
 
+if (isset($_GET['is_mobile']) && !empty($_GET['is_mobile']))
+  $is_mobile= $_GET['is_mobile'];
+else
+  $is_mobile= false;
+
 if (!empty($user_color)) {
   if (substr($user_color, 0, 1) === '#')
     $user_color = substr($user_color, 1);
@@ -32,8 +37,16 @@ $css_macro = new CssMacro();
 $css_macro->load_values(__DIR__.'/default.scheme.ini'); //load default values
 if (!empty($scheme))
   $css_macro->load_values(__DIR__.'/schemes/'.$scheme.'.scheme.ini');
+
+$contrast = $css_macro->values['contrast'];
+if (isset($_GET['contrast']) && !empty($_GET['contrast']))
+  $contrast = $_GET['contrast'];
+
+$css_macro->contrast = $contrast;
+
 $css_macro->set('gradients', $gradients);
 $css_macro->set('scheme', $scheme);
+$css_macro->set('is_mobile', $is_mobile);
 
 if (isset($_GET['font_size']) && !empty($_GET['font_size']))
   $css_macro->set('font_size', $_GET['font_size']);

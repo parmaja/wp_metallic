@@ -6,7 +6,7 @@
  * License: http://arlo.mit-license.org/
  */
 
-namespace phpColors;
+namespace Mexitek\PHPColors;
 
 use \Exception;
 
@@ -29,6 +29,7 @@ class Color {
     /**
      * Instantiates the class with a HEX value
      * @param string $hex
+     * @throws Exception "Bad color format"
      */
     function __construct( $hex ) {
         // Strip # sign is present
@@ -227,6 +228,7 @@ class Color {
 
     /**
      * Given a HEX value, returns a mixed color. If no desired amount provided, then the color mixed by this ratio
+     * @param string $hex2 Secondary HEX value to mix with
      * @param int $amount = -100..0..+100
      * @return string mixed HEX value
      */
@@ -306,7 +308,7 @@ class Color {
         // Return the new value in HEX
         return self::hslToHex($hsl);
     }
-
+    
     /**
      * Returns your color's HSL array
      */
@@ -325,15 +327,17 @@ class Color {
     public function getRgb() {
         return $this->_rgb;
     }
-
+    
     /**
      * Returns the cross browser CSS3 gradient
-     * @param int Optional: percentage amount to light/darken the gradient
+     * @param int $amount Optional: percentage amount to light/darken the gradient
+     * @param boolean $vintageBrowsers Optional: include vendor prefixes for browsers that almost died out already
      * @param string $prefix Optional: prefix for every lines
      * @param string $suffix Optional: suffix for every lines
+     * @link  http://caniuse.com/css-gradients Resource for the browser support
      * @return string CSS3 gradient for chrome, safari, firefox, opera and IE10
      */
-    public function getCssGradient($amount = self::DEFAULT_ADJUST, $suffix = "" , $prefix = "" ) {
+    public function getCssGradient( $amount = self::DEFAULT_ADJUST, $vintageBrowsers = FALSE, $suffix = "" , $prefix = "" ) {
 
         // Get the recommended gradient
         $g = $this->makeGradient($amount);
@@ -346,19 +350,25 @@ class Color {
         $css .= "{$prefix}filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#".$g['light']."', endColorstr='#".$g['dark']."');{$suffix}";
 
         /* Safari 4+, Chrome 1-9 */
-        $css .= "{$prefix}background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#".$g['light']."), to(#".$g['dark']."));{$suffix}";
+        if ( $vintageBrowsers ) {
+            $css .= "{$prefix}background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#".$g['light']."), to(#".$g['dark']."));{$suffix}";
+        }
 
         /* Safari 5.1+, Mobile Safari, Chrome 10+ */
         $css .= "{$prefix}background-image: -webkit-linear-gradient(top, #".$g['light'].", #".$g['dark'].");{$suffix}";
 
         /* Firefox 3.6+ */
-        $css .= "{$prefix}background-image: -moz-linear-gradient(top, #".$g['light'].", #".$g['dark'].");{$suffix}";
-
-        /* IE 10+ */
-        $css .= "{$prefix}background-image: -ms-linear-gradient(top, #".$g['light'].", #".$g['dark'].");{$suffix}";
+        if ( $vintageBrowsers ) {
+            $css .= "{$prefix}background-image: -moz-linear-gradient(top, #".$g['light'].", #".$g['dark'].");{$suffix}";
+        }
 
         /* Opera 11.10+ */
-        $css .= "{$prefix}background-image: -o-linear-gradient(top, #".$g['light'].", #".$g['dark'].");{$suffix}";
+        if ( $vintageBrowsers ) {
+            $css .= "{$prefix}background-image: -o-linear-gradient(top, #".$g['light'].", #".$g['dark'].");{$suffix}";
+        }
+
+        /* Unprefixed version (standards): FF 16+, IE10+, Chrome 26+, Safari 7+, Opera 12.1+ */
+        $css .= "{$prefix}background-image: linear-gradient(to bottom, #".$g['light'].", #".$g['dark'].");{$suffix}";
 
         // Return our CSS
         return $css;
@@ -430,9 +440,9 @@ class Color {
 
     /**
      * Given a Hue, returns corresponding RGB value
-     * @param type $v1
-     * @param type $v2
-     * @param type $vH
+     * @param int $v1
+     * @param int $v2
+     * @param int $vH
      * @return int
      */
     private static function _huetorgb( $v1,$v2,$vH ) {
