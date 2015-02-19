@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.8.19
+Version: 1.8.20
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -530,6 +530,7 @@ textarea#comment {
   border-radius: 3px;
   border: 1px solid $mix(canvas_back, base, 50);
   color: $get(canvas_ink);
+  background: $get(panel);
 }
 
 .comment-list {
@@ -569,6 +570,7 @@ input[type=text]{
   margin: 0;
   border-radius: 3px;
   color: $get(canvas_ink);
+  background: $get(canvas_back);
 }
 
 input[type=submit]{
