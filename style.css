@@ -22,10 +22,11 @@ GitHub Branch:    release
 /* Set Variables values */
 
 $<
+  eadge=$mix(canvas_back, base, 50)
   panel=$mix(canvas_back, base, 90)
-  eadge = $mix(canvas_back, base, 60)
-  link = $change(base, -20)
-  hover = $change(base, -50)
+  box=$change(canvas_back, -10)
+  link=$change(base, -20)
+  hover=$change(base, -50)
 >
 
 /*
@@ -142,7 +143,7 @@ pre {
   padding: 0.2em;
   margin: 0em;
   overflow: auto;
-  background: $get(panel);
+  background: $get(box);
   color: $get(canvas_ink);
   border: 1px dotted $get(eadge)
 }
@@ -155,7 +156,7 @@ code{
 pre, code{
   font-family: monospace, serif;
   font-size: 11pt;
-  border-radius: 3px;
+  border-radius: 0.2em;
 }
 
 embed, iframe, object {
@@ -525,16 +526,6 @@ div.post {
   vertical-align: top;
 }
 
-textarea#comment {
-  width: 95%;
-  font-size: 100%;
-  padding: 0.2em;
-  border-radius: 3px;
-  border: 1px solid $mix(canvas_back, base, 50);
-  color: $get(canvas_ink);
-  background: $get(panel);
-}
-
 .comment-list {
   list-style: none outside none;
   padding: 0.5em 0 0 0;
@@ -572,7 +563,7 @@ input[type=text]{
   margin: 0;
   border-radius: 3px;
   color: $get(canvas_ink);
-  background: $get(canvas_back);
+  background: $get(box);
 }
 
 input[type=submit]{
@@ -582,7 +573,17 @@ input[type=submit]{
   border-radius: 3px;
   border: 1px solid $mix(canvas_back, base);
   color: $get(canvas_ink);
-  background: $get(canvas_back);
+  background: $get(box);
+}
+
+textarea#comment {
+  width: 95%;
+  font-size: 100%;
+  padding: 0.2em;
+  border-radius: 3px;
+  border: 1px solid $mix(canvas_back, base, 50);
+  color: $get(canvas_ink);
+  background: $get(box);
 }
 
 #reply-title{
