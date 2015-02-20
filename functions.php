@@ -109,6 +109,12 @@ function metallic_customize_register($wp_customize) {
         'priority' => 121,
   ));
 
+  $wp_customize->add_section('metallic_colors', array(
+        'title'    => __('Colors', 'metallic'),
+        'priority' => 121,
+  ));
+
+
     metallic_add_option($wp_customize, 'metallic_layout', 'show_navigator', __('Show Navigation', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'metallic_options', 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
@@ -128,8 +134,8 @@ function metallic_customize_register($wp_customize) {
     //  Select Scheme
     //  =============================
 
-    $shemes = array();
-    $shemes[''] = '';
+    $schemes = array();
+//    $schemes[''] = '';
 
     $dir = __DIR__.'/schemes';
 
@@ -142,12 +148,14 @@ function metallic_customize_register($wp_customize) {
                   $ini = parse_ini_file($dir.'/'.$entry, false);
                   $name = strstr($entry, '.', true);//explode('.', $entry);
                   $title = $ini['name'];
-                  $shemes[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
+                  $schemes[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
                 }
             }
         }
         closedir($handle);
     }
+
+    metallic_add_option($wp_customize, 'metallic_colors', 'custom_color', __('Custom Color', 'metallic'), 'checkbox', 'false');
 
     $wp_customize->add_setting('color_scheme', array(
       'default'        => 'Gray',
@@ -161,7 +169,7 @@ function metallic_customize_register($wp_customize) {
     //  =============================
 
     $wp_customize->add_setting('user_color', array(
-        'default'           => null,
+        'default'           => '',
         'sanitize_callback' => 'sanitize_hex_color',
         'capability'        => 'edit_theme_options',
         'type'              => 'theme_mod',
@@ -171,7 +179,7 @@ function metallic_customize_register($wp_customize) {
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'user_color', array(
           'settings' => 'user_color',
           'label'    => __('User Color', 'metallic'),
-          'section'  => 'metallic_options'
+          'section'  => 'metallic_colors'
         )
       )
     );
@@ -179,9 +187,9 @@ function metallic_customize_register($wp_customize) {
     $wp_customize->add_control('color_select_box', array(
         'settings' => 'color_scheme',
         'label'    => __('Select Scheme', 'metallic'),
-        'section'  => 'metallic_options',
+        'section'  => 'metallic_colors',
         'type'     => 'select',
-        'choices'  => $shemes
+        'choices'  => $schemes
         )
     );
 }
@@ -267,26 +275,22 @@ function mettalic_styles()
 
   if (isset($_GET['scheme']))
     $scheme = $_GET['scheme'];
-  else if (isset($_GET['color'])){
-      $user_color = $_GET['color'];
-  }
-  else {
+  else
     $scheme = get_theme_mod('color_scheme', 'gray');
-  }
 
-  if (empty($scheme))
-  {
-    if (empty($user_color))
-      $user_color = get_theme_mod('user_color', '');
-
-    if (!empty($user_color)) {
-      if (substr($user_color, 0, 1) === '#')
-        $user_color = substr($user_color, 1);
-      $params .= '&user_color='.$user_color;
-    }
-  }
-  else {
+  if (!empty($scheme))
     $params.='&scheme='.$scheme;
+
+  if (isset($_GET['color']))
+      $user_color = $_GET['color'];
+
+  if (empty($user_color) && get_theme_mod('custom_color', ''))
+    $user_color = get_theme_mod('user_color', '');
+
+  if (!empty($user_color)) {
+    if (substr($user_color, 0, 1) === '#')
+      $user_color = substr($user_color, 1);
+    $params .= '&user_color='.$user_color;
   }
 
   $ver = get_theme_mod('style_ver', 1);

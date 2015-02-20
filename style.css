@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.8.20
+Version: 1.8.21
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -24,6 +24,8 @@ GitHub Branch:    release
 $<
   panel=$mix(canvas_back, base, 90)
   eadge = $mix(canvas_back, base, 60)
+  link = $change(base, -20)
+  hover = $change(base, -50)
 >
 
 /*
@@ -81,12 +83,12 @@ h6{
 
 a{
   text-decoration: none;
-  color: $get(highlight);
+  color: $get(link);
 }
 
 a:hover{
   text-decoration: none;
-  color: $change(highlight, 10);
+  color: $change(link, -20);
 }
 
 caption, th, td {
@@ -246,7 +248,7 @@ $ifnot(is_mobile)<
   }
 
   .post-rest{
-    border-top: 3pt solid $get(panel);
+    border-top: 2pt solid $change(canvas_back, -25);
   }
 }
 
@@ -282,13 +284,13 @@ ol#posts .more-link{
   margin: 0.1em 0.1em 0.5em;
 }
 
-.post h2 a{
+h2.title a{
   color: $get(canvas_ink);
   text-decoration: none;
 }
 
-.post h2 a:hover {
-  color: $mix(highlight, canvas_ink, 50);
+h2.title a:hover {
+  color: $mix(link, canvas_ink, 50);
   text-decoration: none;
 }
 
@@ -307,7 +309,7 @@ ol#posts .more-link{
 
 .infobar a{
   text-decoration: none;
-  color: #558caa;
+  color: $get(link);
 }
 
 .infobar .category{
@@ -633,7 +635,7 @@ input[type=submit]{
 
 #sidebar > ul > li > ul {
   text-shadow: none;
-  color: $change(base, -20);
+  color: $get(link);
   text-decoration: none;
 }
 
