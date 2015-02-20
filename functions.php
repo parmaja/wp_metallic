@@ -283,13 +283,13 @@ function mettalic_styles()
 
   if (isset($_GET['color']))
       $user_color = $_GET['color'];
-
-  if (empty($user_color) && get_theme_mod('custom_color', ''))
-    $user_color = get_theme_mod('user_color', '');
+  else if (empty($user_color) && get_theme_mod('custom_color', 'false'))
+      $user_color = get_theme_mod('user_color', '');
 
   if (!empty($user_color)) {
     if (substr($user_color, 0, 1) === '#')
       $user_color = substr($user_color, 1);
+
     $params .= '&user_color='.$user_color;
   }
 
