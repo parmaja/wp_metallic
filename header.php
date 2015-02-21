@@ -47,7 +47,7 @@
           <?php } ?>
           <?php if ($show_title) { ?>
           <div id="logo-text">
-            <p id="title"><h1><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></h1></p>
+            <h1 id="title"><a href=<?php print '"'.home_url().'">'.get_bloginfo('name'); ?></a></h1>
             <p id="description"><?php print get_bloginfo('description') ?></p>
           </div>
           <?php } ?>
