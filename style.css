@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.9.1
+Version: 1.9.2
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -40,8 +40,7 @@ html {
 }
 
 body {
-  font-size: $get(font_size)pt/1.3;
-  font-family: $get(font_name);
+  font: $get(font_size)pt/1.3 $get(font_name);
   background: $get(back);
   color: $get(fore);
 }
