@@ -150,22 +150,29 @@ class CssMacro {
     c: Condition
     a: Pass paramters as an array otherwise as arguments
   */
-  private $functions = array(
-    'get'=>array('func_get',''),
-    'set'=>array('func_set',''), //set value to new value and return the same value
-    'def'=>array('func_def',''), //like set but without retrun any value, it return empty string
-    'change'=>array('func_change',''),
-    'lighten'=>array('func_lighten',''),
-    'darken'=>array('func_darken',''),
-    'mix'=>array('func_mix',''),
-    'if'=>array('func_if','a,c'),
-    'ifnot'=>array('func_ifnot','a,c'),
-    'gradient'=>array('func_gradient','')
-    );
+  private $functions;
 
   function __construct($values = array()) {
     if (is_array($values))
       $this->values = $values;
+
+    $this->functions = array(
+      'get'=>array('func_get','', $this),
+      'set'=>array('func_set','', $this), //set value to new value and return the same value
+      'def'=>array('func_def','', $this), //like set but without retrun any value, it return empty string
+      'change'=>array('func_change','', $this),
+      'lighten'=>array('func_lighten','', $this),
+      'darken'=>array('func_darken','', $this),
+      'mix'=>array('func_mix','', $this),
+      'if'=>array('func_if','a,c', $this),
+      'ifnot'=>array('func_ifnot','a,c', $this),
+      'gradient'=>array('func_gradient','', $this)
+    );
+  }
+
+  public function register($owner, $name, $func, $attr = ''){
+    //check if $name is exists
+    $this->functions[$name] = array($func, $attr, $owner); //
   }
 
   private function func_change($color, $amount = 0){
@@ -269,11 +276,15 @@ class CssMacro {
   }
 
   public function call($name, $arg) {
-//    echo '>>>'.$name.">>>".$arg."\n";
-    if (array_key_exists($name, $this->functions)) {
+//    echo '>>>'.$name.">>>\n";
+//   print_r($arg)."\n";
+    if (array_key_exists($name, $this->functions))
+    {
       $func = $this->functions[$name][0];
       $func_opt = explode(',', $this->functions[$name][1]);
-      if(is_callable(array($this, $func)))
+      $me = $this->functions[$name][2];//owner
+
+      if(is_callable(array($me, $func)))
       {
         if (is_string($arg)) {
           $values = split_arg($arg);
@@ -285,15 +296,18 @@ class CssMacro {
           }
           try {
             if (in_array('a', $func_opt))
-              return call_user_func(array($this, $func), $values);
+              return call_user_func(array($me, $func), $values);
             else
-              return call_user_func_array(array($this, $func), $values);
+              return call_user_func_array(array($me, $func), $values);
           } catch (Exception $e) {
             echo 'Error : '.$name.'('.$arg.') > ',  $e->getMessage(), "\n";
           }
         }
       }
+      echo 'Error : '.$name." not callable!\n";
     }
+    else
+      echo 'Error : '.$name." not found!\n";
   }
 
   function _macro_replace($matches) {

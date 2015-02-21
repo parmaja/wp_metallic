@@ -131,13 +131,13 @@ function metallic_customize_register($wp_customize) {
 //    metallic_add_option($wp_customize, 'user_font_name', __('Font Name', 'metallic'), 'text', '');
 
     //  =============================
-    //  Select Scheme
+    //  Select style
     //  =============================
 
-    $schemes = array();
-//    $schemes[''] = '';
+    $styles = array();
+//    $styles[''] = '';
 
-    $dir = __DIR__.'/schemes';
+    $dir = __DIR__.'/styles';
 
     if ($handle = opendir($dir)) {
         while (false !== ($entry = readdir($handle))) {
@@ -148,7 +148,7 @@ function metallic_customize_register($wp_customize) {
                   $ini = parse_ini_file($dir.'/'.$entry, false);
                   $name = strstr($entry, '.', true);//explode('.', $entry);
                   $title = $ini['name'];
-                  $schemes[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
+                  $styles[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
                 }
             }
         }
@@ -157,7 +157,7 @@ function metallic_customize_register($wp_customize) {
 
     metallic_add_option($wp_customize, 'metallic_colors', 'custom_color', __('Custom Color', 'metallic'), 'checkbox', 'false');
 
-    $wp_customize->add_setting('color_scheme', array(
+    $wp_customize->add_setting('color_style', array(
       'default'        => 'Gray',
       'capability'     => 'edit_theme_options',
       'type'           => 'theme_mod', //or 'option' if u want to have a record in database
@@ -185,11 +185,11 @@ function metallic_customize_register($wp_customize) {
     );
 
     $wp_customize->add_control('color_select_box', array(
-        'settings' => 'color_scheme',
-        'label'    => __('Select Scheme', 'metallic'),
+        'settings' => 'color_style',
+        'label'    => __('Select style', 'metallic'),
         'section'  => 'metallic_colors',
         'type'     => 'select',
-        'choices'  => $schemes
+        'choices'  => $styles
         )
     );
 }
@@ -210,15 +210,15 @@ require('inc/macros.php');
 function metallic_generate_css_cache()
 {
   global $wp_customize;
-  $scheme = get_theme_mod('color_scheme', 'gray');
+  $style = get_theme_mod('color_style', 'gray');
   $gradients = get_theme_mod('gradients', true);
   $user_color = get_theme_mod('user_color', '');
   $css_macro = new CssMacro;
-  $css_macro->load_values(__DIR__.'/default.scheme.ini');
-  $css_macro->load_values(__DIR__.'/schemes/'.$scheme.'.scheme.ini');
+  $css_macro->load_values(__DIR__.'/default.style.ini');
+  $css_macro->load_values(__DIR__.'/styles/'.$style.'.ini');
   $css_macro->set('gradients', $gradients);
-  $css_macro->set('scheme', $scheme);
-  if (empty($scheme) && !empty($user_color))
+  $css_macro->set('style', $style);
+  if (empty($style) && !empty($user_color))
     $css_macro->set('base', '#'.$user_color);
   $file= __DIR__.'/style.css';
   if (file_exists($file)) {
@@ -273,13 +273,13 @@ function mettalic_styles()
     $params .= '&font_name=\''.$font_size."'";
   }*/
 
-  if (isset($_GET['scheme']))
-    $scheme = $_GET['scheme'];
+  if (isset($_GET['style']))
+    $style = $_GET['style'];
   else
-    $scheme = get_theme_mod('color_scheme', 'gray');
+    $style = get_theme_mod('color_style', 'gray');
 
-  if (!empty($scheme))
-    $params.='&scheme='.$scheme;
+  if (!empty($style))
+    $params.='&style='.$style;
 
   if (isset($_GET['color']))
       $user_color = $_GET['color'];
