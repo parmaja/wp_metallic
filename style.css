@@ -28,7 +28,7 @@ $<
   hover=$change(link, -50)
 >
 
-$import(imports)<
+$import(import)<
 >
 
 /*

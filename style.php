@@ -37,9 +37,9 @@ class MyCssMacro extends CssMacro
 {
   public function func_import($arg)
   {
-    global $imports;
-    if (!empty($imports))
-      return file_get_contents(__DIR__.'/styles/'.$imports);
+    global $import;
+    if (!empty($import))
+      return file_get_contents(__DIR__.'/styles/'.$import);
   }
 
   public function __construct()
@@ -55,10 +55,10 @@ $css_macro->load_values(__DIR__.'/default.style.ini'); //load default values
 if (!empty($style))
   $css_macro->load_values(__DIR__.'/styles/'.$style.'.ini');
 
-if (array_key_exists('imports', $css_macro->values))
-  $imports = $css_macro->values['imports'];
+if (array_key_exists('import', $css_macro->values))
+  $import = $css_macro->values['import'];
 else
-  $imports = '';
+  $import = '';
 
 $contrast = $css_macro->values['contrast'];
 if (isset($_GET['contrast']) && !empty($_GET['contrast']))
