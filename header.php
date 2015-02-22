@@ -37,7 +37,7 @@
 
 <body <?php body_class(); ?>>
   <?php if (!$wide_header) { ?>
-  <section id="container">
+  <div id="container">
   <?php } ?>
     <header id="header">
       <div id="logo">
