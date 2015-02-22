@@ -2,11 +2,15 @@
 <html <?php language_attributes(); ?>>
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
+<?php
+  global $wp_customize;
+  if (wp_is_mobile())
+  { ?>
   <!-- Tell the browser to use the same width of the device -->
   <meta name="HandheldFriendly" content="true"/>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <?php
-    global $wp_customize;
+    }
     /** Init Options variables */
     $wide_header = get_theme_mod('wide_header', true);
     $show_logo = get_theme_mod('show_logo', true);
