@@ -8,7 +8,11 @@
   <?php
     global $wp_customize;
     /** Init Options variables */
-    $wide_header = get_theme_mod('wide_header', true);
+    if (isset($_GET['wide']))
+      $wide_header = $_GET['wide'];
+    else
+      $wide_header = get_theme_mod('wide_header', true);
+
     $show_logo = get_theme_mod('show_logo', true);
     $show_title = get_theme_mod('show_title', true);
     $show_navigator = get_theme_mod('show_navigator', true);

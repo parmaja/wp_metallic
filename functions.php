@@ -301,8 +301,15 @@ function mettalic_styles()
   wp_register_style('metallic_style', get_stylesheet_directory_uri().'/style.php'.$params, array(), $ver);
   wp_enqueue_style('metallic_style');
 
-  $wide_header = get_theme_mod('wide_header', true);
-  $show_sidebar = get_theme_mod('show_sidebar', true);
+  if (isset($_GET['wide']))
+    $wide_header = $_GET['wide'];
+  else
+    $wide_header = get_theme_mod('wide_header', true);
+
+  if (isset($_GET['sidebar']))
+    $show_sidebar = $_GET['sidebar'];
+  else
+    $show_sidebar = get_theme_mod('show_sidebar', true);
 
   if (wp_is_mobile())
   {
