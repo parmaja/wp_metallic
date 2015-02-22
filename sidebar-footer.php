@@ -8,7 +8,7 @@
 <div id="footbar" class="footbar">
   <ul>
   <?php
-        dynamic_sidebar($footer);
+     dynamic_sidebar($footer);
   ?>
   </ul>
 </div>

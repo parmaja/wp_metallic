@@ -1,6 +1,6 @@
 <?php
     if (get_theme_mod('show_sidebar', true)) {
-      if (!wp_is_mobile()) {
+
 ?>
 <aside id="sidebar">
   <ul>
@@ -13,6 +13,5 @@
   </ul>
 </aside>
 <?php
-    }
   }
 ?>

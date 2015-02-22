@@ -8,9 +8,10 @@
   { ?>
   <!-- Tell the browser to use the same width of the device -->
   <meta name="HandheldFriendly" content="true"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <?php
     }
+//    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     /** Init Options variables */
     if (isset($_GET['wide']))
       $wide_header = $_GET['wide'];
