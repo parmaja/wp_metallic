@@ -91,7 +91,7 @@
       </div>
     </header>
     <?php if ($wide_header) { ?>
-    <section id="container">
+    <div id="container">
     <?php } ?>
     <div id="wrapper">
       <div id="main">
