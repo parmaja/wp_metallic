@@ -212,7 +212,7 @@ $ifnot(is_mobile)<
   }
 
   #header {
-    box-shadow: 0em 0.2em 0.5em 0.0em $darken(base, -30);
+    box-shadow: 0em 0.2em 0.5em 0.0em $mix(base, canvas_back);
   }
 }
 >
