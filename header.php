@@ -52,7 +52,7 @@
       <div id="logo">
         <div id="logo-header">
           <?php if ($show_logo) { ?>
-          <a href="<?php print home_url(); ?>"><img id="logo-image" src="<?php print $logo_file ?>" alt="" /></a>
+          <a id="logo-image" href="<?php print home_url(); ?>"><img src="<?php print $logo_file ?>" alt="" /></a>
           <?php } ?>
           <?php if ($show_title) { ?>
           <div id="logo-text">
@@ -94,9 +94,34 @@
             }
           }
           print $output;
+
+          if (wp_is_mobile()){
         ?>
+          <a id="drawer" class="drawer" href = "#">
+            <div id="drawer-button">
+              <span></span>
+            </div>
+          </a>
+<script>
+  document.getElementById("drawer").addEventListener("click", showSidebar);
+
+  function showSidebar() {
+    sidebar = document.getElementById("sidebar");
+    main = document.getElementById("main");
+    if (sidebar.style.display != "block") {
+      sidebar.style.display = "block";
+      main.style.width = "70%";
+    }
+    else {
+      sidebar.style.display = "none";
+      main.style.width = "100%";
+    }
+  }
+</script>
         </nav>
-      <?php } ?>
+      <?php
+        }
+      } ?>
       </div>
     </header>
     <?php if ($wide_header) { ?>

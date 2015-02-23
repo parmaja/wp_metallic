@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.9.6
+Version: 1.9.7
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -266,6 +266,11 @@ $ifnot(is_mobile)<
   border-color: $get(eadge);
 }
 
+@media screen{
+  #contents {
+    border-bottom-width: 1px;
+  }
+}
 ol#posts {
   list-style: none outside none;
   margin: 0;
@@ -714,4 +719,37 @@ table#wp-calendar {
   .pagebreak {
     page-break-before: auto;
   }
+}
+
+#nav {
+}
+
+.drawer {
+  color: White;
+  width: 1.4em;
+  height: 1.4em;
+  display: block;
+  float: right;
+  padding: 0.1em;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: $change(panel, -10);
+  border-radius: 0.2em;
+/*  content: "≡"; */
+}
+
+/*
+* ref: http://css-tricks.com/three-line-menu-navicon/
+       in comments
+*/
+
+#drawer-button {
+    display: block;
+    width: 1.20em;
+    height: 0.25em;
+    line-height: 0;
+    border-top: .50em double $change(panel, -10);
+    border-bottom: .50em double $change(panel, -10);
+    margin: 0.1em;
 }

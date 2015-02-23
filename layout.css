@@ -113,7 +113,7 @@ h1#title{
 
 #nav{
   clear: both;
-  padding: 0.3em 1em;
+  padding: 0.3em 0.3em 0.3em 0.3em;
   overflow: auto;
 }
 
@@ -136,6 +136,7 @@ h1#title{
 }
 
 #sidebar {
+  display: block;
   width: 30%;
   height: 100%;
   overflow: hidden;
