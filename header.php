@@ -95,7 +95,7 @@
           }
           print $output;
 
-          if (wp_is_mobile()){
+          if (wp_is_mobile() && get_theme_mod('show_sidebar', true)){
         ?>
           <a id="drawer" class="drawer" href = "#">
             <div id="drawer-button">
