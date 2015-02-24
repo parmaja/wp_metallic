@@ -9,7 +9,7 @@
 
   if (wp_is_mobile())
   { ?>
-  <!-- Tell the browser to use the same width of the device -->
+    <!-- Tell the browser to use the same width of the device -->
   <meta name="HandheldFriendly" content="true"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <?php
@@ -41,6 +41,8 @@
   <link rel="pingback" href="<?php print bloginfo('pingback_url'); ?>" />
   <link rel="shortlink" href="<?php print wp_get_shortlink(); ?>" />
   <?php
+/*  <link rel='prev' title='' href=''/>
+  <link rel='next' title='' href=''/>*/
 //    wp_get_archives( array( 'type' => 'monthly', 'format' => 'link', 'limit' => 12 ) );
     if ( is_singular() ) wp_enqueue_script( "comment-reply" );
     wp_head();
