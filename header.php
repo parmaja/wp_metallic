@@ -97,25 +97,29 @@
 
           if (wp_is_mobile() && get_theme_mod('show_sidebar', true)){
         ?>
-          <a id="drawer" class="drawer" href = "#">
+          <a id="drawer" class="drawer-closed" href = "#">
             <div id="drawer-button">
               <span></span>
             </div>
           </a>
 <script>
-  document.getElementById("drawer").addEventListener("click", showSidebar);
+  document.getElementById("drawer").addEventListener("click", drawerClick);
 
-  function showSidebar() {
+  function drawerClick(e) {
+    t = document.getElementById("drawer");//e.currentTarget;
     sidebar = document.getElementById("sidebar");
     main = document.getElementById("main");
     if (sidebar.style.display != "block") {
       sidebar.style.display = "block";
       main.style.width = "70%";
+      t.className = "drawer-opened";
     }
     else {
       sidebar.style.display = "none";
       main.style.width = "100%";
+      t.className = "drawer-closed";
     }
+    return true;
   }
 </script>
         </nav>
