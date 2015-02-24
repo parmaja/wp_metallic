@@ -98,8 +98,8 @@
           if (wp_is_mobile() && get_theme_mod('show_sidebar', true)){
         ?>
           <a id="drawer" class="drawer-closed" href = "#">
-            <div id="drawer-button">
-              <span></span>
+             <div id="drawer-button">
+               <span></span>
             </div>
           </a>
 <script>

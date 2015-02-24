@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.9.7
+Version: 1.9.8
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -723,6 +723,7 @@ table#wp-calendar {
   }
 }
 
+/* drawer */
 .drawer-opened {
   background: $change(panel);
   border-color: $change(panel, -10);
@@ -742,9 +743,6 @@ table#wp-calendar {
   padding: 0.2em;
   float: right;
 
-/*  border-width: 1px;
-  border-style: solid;*
-/*  border-radius: 0.1em; */
 /*  content: "≡"; */
 }
 
@@ -753,7 +751,8 @@ table#wp-calendar {
        in comments
 */
 
-#drawer-button {
+#drawer-button
+{
     display: block;
     width: 1.20em;
     height: 0.24em;
