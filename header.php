@@ -4,6 +4,9 @@
   <meta charset="<?php bloginfo('charset'); ?>" />
 <?php
   global $wp_customize;
+
+  $is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
+
   if (wp_is_mobile())
   { ?>
   <!-- Tell the browser to use the same width of the device -->
@@ -103,20 +106,31 @@
             </div>
           </a>
 <script>
+  isMobile = <?php if (wp_is_mobile) echo "true"; else echo "false"; ?>;
+  isTablet = <?php if ($is_tablet) echo "true"; else echo "false"; ?>;
   document.getElementById("drawer").addEventListener("click", drawerClick);
 
   function drawerClick(e) {
     t = document.getElementById("drawer");//e.currentTarget;
     sidebar = document.getElementById("sidebar");
     main = document.getElementById("main");
-    if (sidebar.style.display != "block") {
+    if (sidebar.style.display != "block")
+    {
+      if (isTablet) {
+        sidebar.style.width = "30%";
+        main.style.width = "70%";
+      }
+      else {
+        sidebar.style.width = "100%";
+        main.style.display = "none";
+      }
       sidebar.style.display = "block";
-      main.style.width = "70%";
       t.className = "drawer-opened";
     }
     else {
       sidebar.style.display = "none";
       main.style.width = "100%";
+      main.style.display = "block";
       t.className = "drawer-closed";
     }
     return true;
