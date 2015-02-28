@@ -741,7 +741,8 @@ table#wp-calendar {
   display: block;
 
   padding: 0.2em;
-  float: right;
+  margin: 0.1em;
+  float: left;
 
 /*  content: "≡"; */
 }
@@ -757,7 +758,7 @@ table#wp-calendar {
     width: 1.20em;
     height: 0.26em;
     line-height: 0;
-    border-top: .74em double $change(panel, -10);
-    border-bottom: .24em solid $change(panel, -10);
+    border-top: .74em double $change(title_color, -10);
+    border-bottom: .24em solid $change(title_color, -10);
     margin: 0.1em;
 }

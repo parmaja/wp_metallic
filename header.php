@@ -108,7 +108,7 @@
             </div>
           </a>
 <script>
-  isMobile = <?php if (wp_is_mobile) echo "true"; else echo "false"; ?>;
+  isMobile = <?php if (wp_is_mobile()) echo "true"; else echo "false"; ?>;
   isTablet = <?php if ($is_tablet) echo "true"; else echo "false"; ?>;
   document.getElementById("drawer").addEventListener("click", drawerClick);
 

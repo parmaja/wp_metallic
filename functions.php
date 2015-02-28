@@ -196,6 +196,12 @@ function metallic_customize_register($wp_customize) {
 
 add_action('customize_register', 'metallic_customize_register');
 
+add_action('after_setup_theme', 'metallic_theme_setup');
+
+function metallic_theme_setup(){
+    load_theme_textdomain('metallic', get_template_directory() . '/languages');
+}
+
 /** Save after */
 
 /*

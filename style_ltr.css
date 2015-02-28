@@ -111,3 +111,7 @@ caption, th, td {
     border-right-width: 1px;
   }
 }
+
+#drawer {
+  float: right;
+}
