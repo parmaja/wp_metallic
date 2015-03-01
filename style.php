@@ -3,7 +3,7 @@ header("Content-type: text/css; charset: UTF-8");
 header('Content-type: text/css');
 header('Cache-control: must-revalidate');
 
-require('inc/macros.php');
+require('inc/macro.php');
 /**
   using get make it more faster, we will call get_theme_mod('color_style')
   in the header of theme, no need to use SQL/Classes of wordpress here.
