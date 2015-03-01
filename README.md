@@ -1,11 +1,9 @@
-WP Metallic Theme and CSS Macros
+WP Metallic Theme
 ===========
 
 This project have two projects,
 
 WordPress Metallic Theme: is a very simple and light theme for wordpress work for desktop and mobile.
-
-CSS Macros, small engine macros.php used by this theme, so you can take the theme as good exapmple how to write css with macro.
 
 WP Metallic Theme
 -----------------
