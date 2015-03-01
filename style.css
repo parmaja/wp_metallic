@@ -726,12 +726,14 @@ table#wp-calendar {
 /* drawer */
 .drawer-opened {
   background: $change(panel);
-  border-color: $change(panel, -10);
+  color: $get(canvas_ink);
+  border-color: $get(canvas_ink);
 }
 
 .drawer-closed {
   background: $change(nav);
-  border-color: $change(panel, -10);
+  color: $get(title_text);
+  border-color: $get(title_text);
 }
 
 #drawer {
@@ -755,10 +757,11 @@ table#wp-calendar {
 #drawer-button
 {
     display: block;
-    width: 1.20em;
     height: 0.26em;
     line-height: 0;
-    border-top: .74em double $change(title_color, -10);
-    border-bottom: .24em solid $change(title_color, -10);
+    width: auto;
+    border-top: .74em double;
+    border-bottom: .24em solid;
     margin: 0.1em;
+    padding: 0em;
 }

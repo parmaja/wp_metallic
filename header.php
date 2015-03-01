@@ -114,6 +114,7 @@
 
   function drawerClick(e) {
     t = document.getElementById("drawer");//e.currentTarget;
+    b = document.getElementById("drawer-button");
     sidebar = document.getElementById("sidebar");
     main = document.getElementById("main");
     if (sidebar.style.display != "block")
@@ -128,12 +129,14 @@
       }
       sidebar.style.display = "block";
       t.className = "drawer-opened";
+      b.className = "drawer-opened";
     }
     else {
       sidebar.style.display = "none";
       main.style.width = "100%";
       main.style.display = "block";
       t.className = "drawer-closed";
+      b.className = "drawer-closed";
     }
     return true;
   }
