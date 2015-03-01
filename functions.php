@@ -260,6 +260,7 @@ add_action("after_switch_theme", 'metallic_activation');
 function mettalic_styles()
 {
   global $is_tablet;
+
   $gradients = get_theme_mod('gradients', true);
 
   $params = '?gradients=';
@@ -268,10 +269,12 @@ function mettalic_styles()
   else
     $params .= '0';
 
-  if (wp_is_mobile())
-    $font_size = get_theme_mod('mobile_font_size', '');
-  elseif ($is_tablet)
-    $font_size = get_theme_mod('tablet_font_size', '');
+  if (wp_is_mobile()) {
+    if ($is_tablet)
+      $font_size = get_theme_mod('tablet_font_size', '');
+    else
+      $font_size = get_theme_mod('mobile_font_size', '');
+  }
   else
     $font_size = get_theme_mod('desktop_font_size', '');
 
