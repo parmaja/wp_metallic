@@ -210,7 +210,7 @@ function metallic_theme_setup(){
         http://stackoverflow.com/questions/14802251/hook-into-the-wordpress-theme-customizer-save-action
 */
 
-require('inc/macros.php');
+require('inc/macro.php');
 
 /* Cache it to disk, removed now
 function metallic_generate_css_cache()
