@@ -743,7 +743,7 @@ table#wp-calendar {
   display: block;
 
   padding: 0.2em;
-  margin: 0.1em;
+  margin: 0.0em;
   float: left;
 
 /*  content: "≡"; */
@@ -762,6 +762,6 @@ table#wp-calendar {
     width: auto;
     border-top: .74em double;
     border-bottom: .24em solid;
-    margin: 0.1em;
+    margin: 0.2em;
     padding: 0em;
 }

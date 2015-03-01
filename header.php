@@ -113,7 +113,7 @@
   document.getElementById("drawer").addEventListener("click", drawerClick);
 
   function drawerClick(e) {
-    t = document.getElementById("drawer");//e.currentTarget;
+    t = document.getElementById("drawer");
     b = document.getElementById("drawer-button");
     sidebar = document.getElementById("sidebar");
     main = document.getElementById("main");
