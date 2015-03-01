@@ -127,7 +127,9 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'default'));
     metallic_add_option($wp_customize, 'metallic_options', 'logo_url', __('Logo URL', 'metallic'), 'text', '');
 
-    metallic_add_option($wp_customize, 'metallic_options', 'user_font_size', __('Font Size', 'metallic'), 'number', '');
+    metallic_add_option($wp_customize, 'metallic_options', 'desktop_font_size', __('Desktop Font Size', 'metallic'), 'number', '');
+    metallic_add_option($wp_customize, 'metallic_options', 'tablet_font_size', __('Tablet Font Size', 'metallic'), 'number', '');
+    metallic_add_option($wp_customize, 'metallic_options', 'mobile_font_size', __('Mobile Font Size', 'metallic'), 'number', '');
 //    metallic_add_option($wp_customize, 'user_font_name', __('Font Name', 'metallic'), 'text', '');
 
     //  =============================
@@ -257,6 +259,7 @@ add_action("after_switch_theme", 'metallic_activation');
 
 function mettalic_styles()
 {
+  global $is_tablet;
   $gradients = get_theme_mod('gradients', true);
 
   $params = '?gradients=';
@@ -265,7 +268,12 @@ function mettalic_styles()
   else
     $params .= '0';
 
-  $font_size = get_theme_mod('user_font_size', '');
+  if (wp_is_mobile())
+    $font_size = get_theme_mod('mobile_font_size', '');
+  elseif ($is_tablet)
+    $font_size = get_theme_mod('tablet_font_size', '');
+  else
+    $font_size = get_theme_mod('desktop_font_size', '');
 
   if (!empty($font_size)) {
     $params .= '&font_size='.$font_size;
