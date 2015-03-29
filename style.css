@@ -104,7 +104,7 @@ caption, th, td {
   padding: 0.1em;
   background: $get(panel);
   color: $get(canvas_ink);
-  border: 1px dotted $get(eadge)
+  border: 1px dotted $get(eadge);
   text-align: center;
 }
 
