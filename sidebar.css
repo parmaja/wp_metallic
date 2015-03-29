@@ -3,3 +3,9 @@
     width: 70%;
   }
 }
+
+@media print{
+  #sidebar {
+    display: none;
+  }
+}
