@@ -25,13 +25,14 @@
     $show_title = get_theme_mod('show_title', true);
     $show_navigator = get_theme_mod('show_navigator', true);
 
-    $logo_file = get_theme_mod('logo_url', '');
+    $logo_image = get_theme_mod('logo_url', '');
+    $bg_image = get_theme_mod('user_bg_image', '');
 
-    if (empty($logo_file)) {
+    if (empty($logo_image)) {
       if (file_exists(get_stylesheet_directory().'/images/logo.png'))
-        $logo_file = get_stylesheet_directory_uri().'/images/logo.png';
+        $logo_image = get_stylesheet_directory_uri().'/images/logo.png';
       else
-        $logo_file = get_stylesheet_directory_uri().'/images/wp_logo.png';
+        $logo_image = get_stylesheet_directory_uri().'/images/wp_logo.png';
     }
   ?>
   <title><?php if (!is_home()) { the_title(); print ' - '; } bloginfo('name'); ?></title>
@@ -46,7 +47,16 @@
 //    wp_get_archives( array( 'type' => 'monthly', 'format' => 'link', 'limit' => 12 ) );
     if ( is_singular() ) wp_enqueue_script( "comment-reply" );
     wp_head();
+    if (!empty($bg_image)) {
   ?>
+<style type="text/css" media="screen">
+  #header {
+    background-image: url("<?php print $bg_image; ?>");
+  }
+</style>
+<?php
+}
+?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -57,7 +67,7 @@
       <div id="logo">
         <div id="logo-header">
           <?php if ($show_logo) { ?>
-          <a id="logo-image" href="<?php print home_url(); ?>"><img src="<?php print $logo_file ?>" alt="" /></a>
+          <a id="logo-image" href="<?php print home_url(); ?>"><img src="<?php print $logo_image ?>" alt="" /></a>
           <?php } ?>
           <?php if ($show_title) { ?>
           <div id="logo-text">

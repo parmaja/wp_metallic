@@ -125,7 +125,6 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'metallic_layout', 'show_title', __('Show Title', 'default'));
     metallic_add_option($wp_customize, 'metallic_options', 'gradients', __('Gradients', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'default'));
-    metallic_add_option($wp_customize, 'metallic_options', 'logo_url', __('Logo URL', 'metallic'), 'text', '');
 
     metallic_add_option($wp_customize, 'metallic_options', 'desktop_font_size', __('Desktop Font Size', 'metallic'), 'number', '');
     metallic_add_option($wp_customize, 'metallic_options', 'tablet_font_size', __('Tablet Font Size', 'metallic'), 'number', '');
@@ -193,6 +192,44 @@ function metallic_customize_register($wp_customize) {
         'type'     => 'select',
         'choices'  => $styles
         )
+    );
+
+    //  =============================
+    //  = Image Picker              =
+    //  =============================
+
+    $wp_customize->add_setting('logo_url', array(
+        'default'           => '',
+        'capability'        => 'edit_theme_options',
+        'type'              => 'theme_mod',
+
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'logo_url', array(
+          'settings' => 'logo_url',
+          'label'    => __('Header Image', 'metallic'),
+          'section'  => 'metallic_options'
+        )
+      )
+    );
+
+    //  =============================
+    //  = Image Picker              =
+    //  =============================
+
+    $wp_customize->add_setting('user_bg_image', array(
+        'default'           => '',
+        'capability'        => 'edit_theme_options',
+        'type'              => 'theme_mod',
+
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'user_bg_image', array(
+          'settings' => 'user_bg_image',
+          'label'    => __('Header Image', 'metallic'),
+          'section'  => 'metallic_options'
+        )
+      )
     );
 }
 
