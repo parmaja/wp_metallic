@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.10.8
+Version: 1.10.10
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -21,7 +21,7 @@ GitHub Branch:    release
 
 /* Set Variables values */
 $<
-  eadge=$mix(canvas_back, base, 50)
+  edge=$mix(canvas_back, base, 50)
   panel=$mix(canvas_back, base, 90)
   box=$change(canvas_back, -10)
   link=$change(highlight, -20)
@@ -102,9 +102,10 @@ caption, th, td {
 .wp-caption {
   max-width: 100%;
   padding: 0.1em;
+  margin: 0.5em;
   background: $get(panel);
   color: $get(canvas_ink);
-  border: 1px dotted $get(eadge);
+  border: 1px dotted $get(edge);
   text-align: center;
 }
 
@@ -154,7 +155,7 @@ pre {
   overflow: auto;
   background: $get(box);
   color: $get(canvas_ink);
-  border: 1px dotted $get(eadge)
+  border: 1px dotted $get(edge)
 }
 
 code{
@@ -244,15 +245,22 @@ $ifnot(is_mobile)<
   width: 100%;
 }
 
-
 #main h2 {
   padding: 0.2em 0;
   margin: 0.2em 0 0 0;
 }
 
+hr {
+  color: $change(edge);
+  border-style: dotted;
+  border-width: 0px 0px 1px 0px;
+  margin: 0em;
+  padding: 0em;
+}
+
 @media screen{
   #main h2.title {
-    border-bottom: 1px solid $get(eadge);
+    border-bottom: 1px solid $get(edge);
   }
 
   .post-rest{
@@ -269,7 +277,7 @@ $ifnot(is_mobile)<
 
 #contents {
   border-style: solid;
-  border-color: $get(eadge);
+  border-color: $get(edge);
 }
 
 @media screen{
@@ -341,7 +349,7 @@ li.post{
 }
 
 table, th ,td, tr {
-  border: 1px solid $get(eadge);
+  border: 1px solid $get(edge);
   border-collapse: collapse;
 }
 
@@ -353,7 +361,7 @@ blockquote{
   padding: 0.5em;
   background: $get(panel);
   color: $get(canvas_ink);
-  border: 1px dotted $get(eadge)
+  border: 1px dotted $get(edge)
 }
 
 /* Shared with comments */
@@ -441,7 +449,7 @@ div.post {
   padding: 0.1em 0.5em;
   overflow: auto;
   color: $get(canvas_ink);
-  background: $get(eadge);
+  background: $get(edge);
 }
 
 .page-numbers a{
@@ -546,7 +554,7 @@ div.post {
 }
 
 .comment-body {
-  border-bottom: 1px solid $get(eadge);
+  border-bottom: 1px solid $get(edge);
   margin: 0.5em;
   padding-bottom: 0.5em;
 }
@@ -572,7 +580,7 @@ div.post {
 }
 
 input[type=text]{
-  border: 1px solid $get(eadge);
+  border: 1px solid $get(edge);
   padding: 0.2em;
   margin: 0;
   border-radius: 3px;
@@ -644,8 +652,8 @@ textarea#comment {
   padding-bottom: 1em;
   margin-bottom: 1em;
   list-style-type: none;
-  border-bottom: 1px solid $get(eadge); /* Will override in other css */
-  text-shadow: 2px 2px 2px $get(eadge);
+  border-bottom: 1px solid $get(edge); /* Will override in other css */
+  text-shadow: 2px 2px 2px $get(edge);
 }
 
 #sidebar > ul > li > ul {
