@@ -2,14 +2,6 @@ body {
   direction: ltr;
 }
 
-.alignleft {
-  float: left;
-}
-
-.alignright {
-   float: right;
-}
-
 caption, th, td {
   text-align: right;
 }

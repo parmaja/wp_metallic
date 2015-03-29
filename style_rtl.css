@@ -2,14 +2,6 @@ body {
   direction: rtl;
 }
 
-.alignleft {
-  float: right;
-}
-
-.alignright {
-   float: right;
-}
-
 caption, th, td {
   text-align: left;
 }
@@ -64,7 +56,7 @@ caption, th, td {
   float: right;
 }
 
-#nav_subpage li {
+#nav-subpage li {
   float: right;
 }
 

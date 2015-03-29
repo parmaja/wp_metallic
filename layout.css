@@ -157,3 +157,11 @@ h1#title{
   clear: both;
   font-size: 80%;
 }
+
+.alignleft {
+  float: left;
+}
+
+.alignright {
+   float: right;
+}
