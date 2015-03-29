@@ -2,7 +2,7 @@
 Theme Name: Metallic
 Theme URI: https://github.com/parmaja/wp_metallic
 Download: https://github.com/parmaja/wp_metallic/releases
-Version: 1.10.5
+Version: 1.10.6
 Author: Zaher Dirkey
 Author URI: http://www.parmaja.com
 License: GNU General Public License v2 or later
@@ -105,13 +105,13 @@ caption, th, td {
   background: $get(panel);
   color: $get(canvas_ink);
   border: 1px dotted $get(eadge)
+  text-align: center;
 }
 
 .post-content img{
   height: auto;
   max-width: 100%;
-/*  padding: 0.1em; */
-  padding: 0.5em;
+  margin: 0.5em;
 }
 
 .wp-caption-text{
