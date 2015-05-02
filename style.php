@@ -23,7 +23,7 @@ if (isset($_GET['style']) && !empty($_GET['style']))
   $style = $_GET['style'];
 
 if (empty($style))
-  $style = 'gray'; //default;
+  $style = 'blue-black-tahoma'; //default; //bad, fix it
 
 if (isset($_GET['user_color']) && !empty($_GET['user_color']))
   $user_color = $_GET['user_color'];
@@ -79,5 +79,5 @@ if (isset($_GET['font_size']) && !empty($_GET['font_size']))
 if (!empty($user_color))
   $css_macro->set('base', '#'.$user_color);
 
-echo $css_macro->generate(file_get_contents(__DIR__.'/style.css'));
+echo $css_macro->generate(file_get_contents(__DIR__.'/css/main.css'));
 ?>
