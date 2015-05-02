@@ -207,7 +207,7 @@ function metallic_customize_register($wp_customize) {
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'logo_url', array(
           'settings' => 'logo_url',
-          'label'    => __('Header Image', 'metallic'),
+          'label'    => __('Logo Image', 'metallic'),
           'section'  => 'metallic_options'
         )
       )

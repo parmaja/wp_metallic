@@ -22,8 +22,8 @@ else
 if (isset($_GET['style']) && !empty($_GET['style']))
   $style = $_GET['style'];
 
-if (empty($style))
-  $style = 'blue-black-tahoma'; //default; //bad, fix it
+/*if (empty($style))
+  $style = 'blue-black-tahoma'; //default; //bad, fix it*/
 
 if (isset($_GET['user_color']) && !empty($_GET['user_color']))
   $user_color = $_GET['user_color'];
