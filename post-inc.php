@@ -28,7 +28,12 @@
     <?php if (!get_theme_mod('hide_mata', false)) { ?>
     <ul class="infobar">
       <li class="category"><?php print __('Category', 'default').': '; print the_category(', ') ?></li>
-      <li class="tags"><?php the_tags(__('Tags: ', 'default'), ', ', '') ?></li>
+      <?php
+        $tag = get_the_tags(__('Tags: ', 'default'), ', ', '');
+        if (!empty($tag)) { ?>
+      <li class="tags"><?php print($tag) ?></li>
+        <?php
+      } ?>
       <li class="entry-edit"><?php comments_popup_link(__('No Comments', 'default'), __('1 Comment', 'default'), __('% Comments', 'default'), ''); ?></li>
     </ul>
      <?php } ?>
