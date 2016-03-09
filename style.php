@@ -21,6 +21,8 @@ else
 
 if (isset($_GET['style']) && !empty($_GET['style']))
   $style = $_GET['style'];
+else
+  $style = '';
 
 if (isset($_GET['user_color']) && !empty($_GET['user_color']))
   $user_color = $_GET['user_color'];

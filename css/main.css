@@ -477,11 +477,13 @@ div.post {
 }
 
 #nav-page li{
-  display: block;
+  display: block;  
+  margin: 0.1em 0.5em;  
 }
 
 #nav-subpage li {
   display: inline;
+  margin: 0.1em 0.5em;  
 }
 
 #nav a{

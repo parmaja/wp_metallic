@@ -90,23 +90,31 @@
           $output .= '</ul>';
 
           // second level?
+          
           if (get_theme_mod('show_subpages', true)) {
-            if($post->post_parent)
+
+          	$sub_params = "";
+
+            if(isset($post->post_parent) and ($post->post_parent > 0))
             {
-              $params .= "&child_of=" . $post->post_parent;
+              $sub_params .= "&child_of=" . $post->post_parent;
             }
             else
             {
-              $params .= "&child_of=" . $post->ID;
+              if (isset($post->ID) and ($post->ID>0))
+                $sub_params .= "&child_of=" . $post->ID;
             }
-            $subpage = wp_list_pages($params);
 
-            if ($subpage)
-            {
-              $output .= '<ul id="nav-subpage">';
-              $output .= $subpage;
-              $output .= '</ul>';
-            }
+            if (!empty($sub_params)) {
+	            $subpage = wp_list_pages($params.$sub_params);
+
+	            if (!empty($subpage))
+	            {
+	              $output .= '<ul id="nav-subpage">';
+	              $output .= $subpage;
+	              $output .= '</ul>';
+	            }
+	        }
           }
           print $output;
 
