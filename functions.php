@@ -118,7 +118,6 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'metallic_layout', 'show_navigator', __('Show Navigation', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'metallic_options', 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
-    metallic_add_option($wp_customize, 'metallic_layout', 'wide_header', __('Wide Header', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_layout', 'show_sidebar', __('Show Sidebar', 'default'));
     metallic_add_option($wp_customize, 'metallic_layout', 'show_subpages', __('Show SubPages', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_layout', 'show_footbar', __('Show Footbar', 'default'));
@@ -355,11 +354,6 @@ function mettalic_styles()
   wp_register_style('metallic_style', get_stylesheet_directory_uri().'/style.php'.$params, array(), $ver);
   wp_enqueue_style('metallic_style');
 
-  if (isset($_GET['wide']))
-    $wide_header = $_GET['wide'];
-  else
-    $wide_header = get_theme_mod('wide_header', true);
-
   if (isset($_GET['sidebar']))
     $show_sidebar = $_GET['sidebar'];
   else
@@ -371,15 +365,8 @@ function mettalic_styles()
     wp_enqueue_style('metallic_mobile');
   } else
   {
-    if ($wide_header)
-    {
-      wp_register_style('metallic_wide_screen', get_stylesheet_directory_uri().'/css/wide-screen.css');
-      wp_enqueue_style('metallic_wide_screen');
-    }
-    else {
-      wp_register_style('metallic_screen', get_stylesheet_directory_uri().'/css/screen.css');
-      wp_enqueue_style('metallic_screen');
-    }
+    wp_register_style('metallic_screen', get_stylesheet_directory_uri().'/css/screen.css');
+    wp_enqueue_style('metallic_screen');
 
     if ($show_sidebar) {
       wp_register_style('metallic_sidebar', get_stylesheet_directory_uri().'/css/sidebar.css');

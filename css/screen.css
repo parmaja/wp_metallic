@@ -1,11 +1,23 @@
 body{
+  width: 100%;
+}
+
+#container{
+}
+
+#header {
+  width: 100%;
+  display: block;
+}
+
+#container, #logo {
   margin: 0em auto;
   min-width: 100px;
   max-width: 100%;
 }
 
 @media screen{
-  body{
+  #container, #logo{
     width: 900px;
   }
 }
@@ -14,10 +26,6 @@ body{
   body{
     margin: 0em 0em;
   }
-}
-
-#container {
-  margin: 1em;
 }
 
 #contents {
