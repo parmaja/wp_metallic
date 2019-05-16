@@ -120,6 +120,13 @@ function split_arg(&$code, $separator = ',')
   return $return;
 }
 
+function trim_color($color) {
+    if (substr($color, 0, 1) == '#')
+           return substr($color, 1);
+    else
+        return $color;
+}
+
 class CssMacro {
 
   public $contrast = 100;
@@ -181,7 +188,8 @@ class CssMacro {
     else {
       if ($this->contrast != 100)
         $amount = $amount * $this->contrast / 100;
-      $co = new Color($color);
+
+      $co = new Color(trim_color($color));
       if ($amount > 0)
         return '#'.$co->lighten($amount);
       else
@@ -217,10 +225,10 @@ class CssMacro {
   private function func_mix($color1, $color2, $amount = 0) {
     $amount = ($amount * $this->contrast) / 100;
     if ($amount >= 0) {
-      $co = new Color($color1);
+      $co = new Color(trim_color($color1));
       return '#'.$co->mix($color2, $amount);
     }else {
-      $co = new Color($color2);
+      $co = new Color(trim_color($color2));
       return '#'.$co->mix($color1, $amount);
     }
   }
@@ -276,7 +284,7 @@ class CssMacro {
   }
 
   public function call($name, $arg) {
-//    echo '>>>'.$name.">>>\n";
+//   echo '>>>'.$name.">>>\n";
 //   print_r($arg)."\n";
     if (array_key_exists($name, $this->functions))
     {
@@ -310,16 +318,6 @@ class CssMacro {
       echo 'Error : '.$name." not found!\n";
   }
 
-  function _macro_replace($matches) {
-    return $this->call($matches[1], $matches[2]);
-  }
-
-  private function do_replace($contents) {
-    $return = preg_replace_callback('/'.'^\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/imsU', array($this, '_replace_values'), $contents);
-    $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
-    return $return;
-  }
-
   public function generate($contents) {
     $this->_comments = array();
     
@@ -334,24 +332,6 @@ class CssMacro {
     $key = '/*CCTMP'.count($this->_comments).'*/';
     $this->_comments[$key] = $match[1];
     return $key;
-  }
-
-
-  private function _replace_values($match) {
-    $cmd = $match[1];
-    $cmd = strstr($cmd, '(', true);
-    $arg = $match[2];
-    $contents = $match[3];
-
-    if (empty($cmd)) {
-      $ini = $this->parse_string($this->values, $contents);
-      return '';//Empty, we want to delete it from the css
-    } else {
-      $args = split_arg($arg);
-      $args[] = $contents;
-      $ret = $this->call($cmd, $args);
-      return $ret;
-    }
   }
 
   function parse_string(&$values, $string) {
@@ -370,6 +350,37 @@ class CssMacro {
         }
       }
     }
+  }
+
+  private function _macro_replace($matches) {
+    return $this->call($matches[1], $matches[2]);
+  }
+
+  private function _replace_values($matches) {
+    preg_match('/(.*)\((.*)\)/i', $matches[1], $a);
+    if (isset($a[1]))
+        $cmd = $a[1];
+    if (isset($a[2]))
+        $arg = $a[2];
+    $contents = $matches[2];
+
+    if (empty($cmd)) {
+      $ini = $this->parse_string($this->values, $contents);
+      return '';//Empty, we want to delete it from the css
+    } else {
+      $args = split_arg($arg);
+      $args[] = $contents;
+      $ret = $this->call($cmd, $args);
+      return $ret;
+    }
+  }
+
+  private function do_replace($contents) {
+      //Good Tool: https://regex101.com/
+    $return = preg_replace_callback('/'.'^\$'.'(.*)'.'\<(.*)\>'.'/misU', array($this, '_replace_values'), $contents);
+//    $return = preg_replace_callback('/'.'^\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/misU', array($this, '_replace_values'), $contents);
+    $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
+    return $return;
   }
 
   public function load_values($filename) {

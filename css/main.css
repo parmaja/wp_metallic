@@ -4,8 +4,8 @@ $<
   panel=$mix(canvas_back, base, 90)
   box=$change(canvas_back, -10)
   link=$change(highlight, -20)
-  hover=$change(link, -50)
   nav=$mix(base, canvas_back, 70)
+  hover=$change(highlight, -50)
 >
 
 $import(import)<
