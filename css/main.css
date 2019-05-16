@@ -3,9 +3,8 @@ $<
   edge=$mix(canvas_back, base, 50)
   panel=$mix(canvas_back, base, 90)
   box=$change(canvas_back, -10)
-  link=$change(highlight, -20)
+  link=$change(highlight)
   nav=$mix(base, canvas_back, 70)
-  hover=$change(highlight, -50)
 >
 
 $import(import)<
@@ -71,7 +70,7 @@ a{
 
 a:hover{
   text-decoration: none;
-  color: $change(link, -20);
+  color: $get(link);
 }
 
 caption, th, td {
@@ -124,9 +123,6 @@ caption, th, td {
   display: none;
 }
 
-pre {
-  margin: 1em;
-}
 
 pre {
   padding: 0.2em;
@@ -243,7 +239,7 @@ hr {
   }
 
   .post-rest{
-    border-top: 0.2em solid $change(canvas_back, -15);
+    border-top: 0.3em solid $change(canvas_back, -15);
     padding-top: 2em;
   }
 }
@@ -282,7 +278,7 @@ ol#posts .more-link{
 }
 
 .post-content p{
-  margin: 0.1em 0.1em 0.5em;
+  margin: 0.1em 0.1em 1em;
 }
 
 h2.title a{
@@ -389,7 +385,7 @@ div.post {
   list-style: none;
   /*margin: 0.5em 0.1em 0;*/
   margin: 0em;
-  padding: 0.1em 0.5em;
+  padding: 0.5em 0.5em;
   overflow: auto;
 /*  color: $get(canvas_ink);*/
 /*  background: $get(border);*/
@@ -490,7 +486,7 @@ div.post {
 }
 
 #nav a:hover{
-  color: $mix(title_text, highlight);
+  color: $get(link);
 }
 
 #header .current_page_item{
