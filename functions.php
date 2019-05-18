@@ -197,25 +197,6 @@ function metallic_customize_register($wp_customize) {
     //  = Image Picker              =
     //  =============================
 
-    $wp_customize->add_setting('logo_url', array(
-        'default'           => '',
-        'capability'        => 'edit_theme_options',
-        'type'              => 'theme_mod',
-
-    ));
-
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'logo_url', array(
-          'settings' => 'logo_url',
-          'label'    => __('Logo Image', 'metallic'),
-          'section'  => 'metallic_options'
-        )
-      )
-    );
-
-    //  =============================
-    //  = Image Picker              =
-    //  =============================
-
     $wp_customize->add_setting('user_bg_image', array(
         'default'           => '',
         'capability'        => 'edit_theme_options',

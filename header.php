@@ -23,11 +23,9 @@
 
     $bg_image = get_theme_mod('user_bg_image', '');
 
-    $logo_image = get_theme_mod('logo_url', '');
+    $logo_image = get_site_icon_url(32);
     if (empty($logo_image)) {
-/*    	if (has_site_icon()) //it is bad idea to use site_icon
-          $logo_image = get_site_icon_url(32);
-      else */if (file_exists(get_stylesheet_directory().'/images/logo.png'))
+      if (file_exists(get_stylesheet_directory().'/images/logo.png'))
         $logo_image = get_stylesheet_directory_uri().'/images/logo.png';
       else
         $logo_image = get_stylesheet_directory_uri().'/images/wp_logo.png';
