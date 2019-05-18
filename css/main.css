@@ -38,16 +38,16 @@ body {
   font-size: 180%;
 }
 
-.title {
-  font-size: 170%;
+.post-title{ /* should be .post-title h1*/
+  font-size: 180%;
 }
 
 h1{
-  font-size: 150%;
+  font-size: 160%;
 }
 
 h2{
-  font-size: 140%;
+  font-size: 150%;
 }
 
 h3{
@@ -64,6 +64,10 @@ h5{
 
 h6{
   font-size: 100%;
+}
+
+.title {         /* in sidebar */
+  font-size: 120%;
 }
 
 a{
@@ -179,9 +183,6 @@ $if(gradients)<
 #logo-text {
 }
 
-#title{
-}
-
 @media screen {
   #header h1{
   /*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
@@ -223,7 +224,7 @@ $ifnot(is_mobile)<
   width: 100%;
 }
 
-#main .title {
+#main .post-title {
   padding: 0.2em 0;
   margin: 0.2em 0 0 0;
 }
@@ -237,18 +238,25 @@ hr {
 }
 
 @media screen{
-  #main .title {
+  #main .post-title {
     border-bottom: 1px solid $get(edge);
   }
 
+  .post{
+      border-bottom: 0.2em solid $change(panel, -15);
+/*    box-shadow: 0em 0.5em 0.5em -0.5em red;*/
+/*    margin-bottom: 0.5em; */
+  }
+
   .post-rest{
-    border-top: 0.5em solid $change(back);
+    border-top: 0.3em solid $change(back);
     padding-top: 2em;
   }
+
 }
 
 @media print{
-  #main .title {
+  #main .post-title {
     border-bottom: 1px solid #333;
   }
 }
@@ -284,12 +292,12 @@ ol#posts .more-link{
   margin: 0.1em 0.1em 1em;
 }
 
-.title a{
+.post-title a{
   color: $get(canvas_ink);
   text-decoration: none;
 }
 
-.title a:hover {
+.post-title a:hover {
   color: $mix(link, canvas_ink, 50);
   text-decoration: none;
 }
@@ -700,19 +708,17 @@ table#wp-calendar {
 }
 
 @media print{
-  #footer-info {
+
+  #pagination, #footer-info {
     display: none;
   }
 }
 
 @media print
 {
-  .post {
-    page-break-inside: avoid;
-  }
-
   .pagebreak {
-    page-break-before: auto;
+    page-break-inside: avoid; /* wrong when print one select post */
+    page-break-after: auto;
   }
 }
 

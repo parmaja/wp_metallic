@@ -1,21 +1,21 @@
 <?php get_header(); ?>
 <ol id="posts">
-<?php	if (!have_posts()) { ?>
-    <p><?php __('Sorry, no posts matched your criteria.', 'default'); ?></p>
-<?php	} else {
-        $posts_count = 0;
-        while (have_posts()) {
-          the_post();
-  if ($posts_count==0)
-    $post_class = "post-top";
-  else
-    $post_class = "post-rest";
-
+<?php
+if (!have_posts()) { ?>
+<p><?php __('Sorry, no posts matched your criteria.', 'default'); ?></p>
+<?php
+    } else {
+    while (have_posts()) {
+        the_post();
+        if ($wp_query->current_post==0)
+          $post_class = "post-top";
+        else
+          $post_class = "post-rest";
+        $page_break = ($wp_query->post_count > 1) and ($wp_query->current_post < $wp_query->post_count);
 ?>
-
   <li id="post-<?php the_ID(); ?>" <?php post_class($post_class); ?>>
-  <article>
-    <h1 class="title<?php if ($posts_count > 0) print(' pagebreak') ?>"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+  <article <?php if ($page_break) print('class="pagebreak"') ?> >
+    <h1 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h1>
     <ul class="infobar">
       <?php if (!get_theme_mod('hide_post_avatar', false)) { ?><li class="avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></li> <?php } ?>
       <?php if (!get_theme_mod('hide_mata', false)) { ?>
@@ -40,9 +40,7 @@
     <hr class="skip" />
   </article>
   </li>
-
   <?php
-      $posts_count++;
     } ?>
 </ol>
 <?php
