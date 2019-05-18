@@ -26,41 +26,44 @@ body {
 
 /* H1 of head/title not same size of h1 of post content*/
 #header h1 {
-  font-size: 200%;
+  font-size: 220%;
   font-weight: bold;
-
 }
 
 #header h2 {
-  font-size: 170%;
+  font-size: 180%;
 }
 
 #header h3 {
+  font-size: 170%;
+}
+
+.title {
   font-size: 160%;
 }
 
 h1{
-  font-size: 160%;
-}
-
-h2{
   font-size: 150%;
 }
 
-h3{
+h2{
   font-size: 140%;
 }
 
-h4{
+h3{
   font-size: 130%;
 }
 
-h5{
+h4{
   font-size: 120%;
 }
 
-h6{
+h5{
   font-size: 110%;
+}
+
+h6{
+  font-size: 100%;
 }
 
 a{
@@ -87,12 +90,6 @@ caption, th, td {
   text-align: center;
 }
 
-.post-content img{
-  height: auto;
-  max-width: 100%;
-  margin: 0.5em;
-}
-
 .wp-caption img{
   margin: 0.5em 0em;
 }
@@ -100,6 +97,12 @@ caption, th, td {
 
 .wp-caption-text{
   color: $get(canvas_ink);
+}
+
+.post-content img{
+  height: auto;
+  max-width: 100%;
+  margin: 0.5em;
 }
 
 .sticky{
@@ -220,7 +223,7 @@ $ifnot(is_mobile)<
   width: 100%;
 }
 
-#main h2 {
+#main .title {
   padding: 0.2em 0;
   margin: 0.2em 0 0 0;
 }
@@ -234,18 +237,18 @@ hr {
 }
 
 @media screen{
-  #main h2.title {
+  #main .title {
     border-bottom: 1px solid $get(edge);
   }
 
   .post-rest{
-    border-top: 0.3em solid $change(canvas_back, -15);
+    border-top: 0.5em solid $change(back);
     padding-top: 2em;
   }
 }
 
 @media print{
-  #main h2.title {
+  #main .title {
     border-bottom: 1px solid #333;
   }
 }
@@ -281,12 +284,12 @@ ol#posts .more-link{
   margin: 0.1em 0.1em 1em;
 }
 
-h2.title a{
+.title a{
   color: $get(canvas_ink);
   text-decoration: none;
 }
 
-h2.title a:hover {
+.title a:hover {
   color: $mix(link, canvas_ink, 50);
   text-decoration: none;
 }

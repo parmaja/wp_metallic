@@ -41,6 +41,9 @@ body {
 }
 
 #title{
+  margin: auto 0;
+  line-height: 100%;
+  margin: 0.2em 0em 0em 0em;
 }
 
 #logo-image{
@@ -53,18 +56,6 @@ body {
   display: table-cell;
   vertical-align: middle;
   padding: 0.1em 0.5em;
-}
-
-#title{
-  font-size: 200%;
-  margin: auto 0;
-  line-height: 100%;
-}
-
-h1#title{
-  font-size: 200%;
-  margin: 0.2em 0em 0em 0em;
-  line-height: 100%;
 }
 
 #description{

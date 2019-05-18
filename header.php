@@ -26,7 +26,7 @@
     $logo_image = get_theme_mod('logo_url', '');
     if (empty($logo_image)) {
 /*    	if (has_site_icon()) //it is bad idea to use site_icon
-      	$logo_image = get_site_icon_url(32);
+          $logo_image = get_site_icon_url(32);
       else */if (file_exists(get_stylesheet_directory().'/images/logo.png'))
         $logo_image = get_stylesheet_directory_uri().'/images/logo.png';
       else
@@ -88,7 +88,7 @@
           
           if (get_theme_mod('show_subpages', true)) {
 
-          	$sub_params = "";
+              $sub_params = "";
 
             if(isset($post->post_parent) and ($post->post_parent > 0))
             {
@@ -101,15 +101,15 @@
             }
 
             if (!empty($sub_params)) {
-	            $subpage = wp_list_pages($params.$sub_params);
+                $subpage = wp_list_pages($params.$sub_params);
 
-	            if (!empty($subpage))
-	            {
-	              $output .= '<ul id="nav-subpage">';
-	              $output .= $subpage;
-	              $output .= '</ul>';
-	            }
-	        }
+                if (!empty($subpage))
+                {
+                  $output .= '<ul id="nav-subpage">';
+                  $output .= $subpage;
+                  $output .= '</ul>';
+                }
+            }
           }
           print $output;
 
