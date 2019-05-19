@@ -325,7 +325,11 @@ class CssMacro {
     $return = $this->do_replace($return);
     return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
   }
-  
+
+  public function generate_from_file($file) {
+      return $this->generate(file_get_contents($file));
+  }
+
   private $_comments = array();
 
   private function _replace_comments($match) {

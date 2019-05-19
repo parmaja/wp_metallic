@@ -78,5 +78,6 @@ if (isset($_GET['font_size']) && !empty($_GET['font_size']))
 if (!empty($user_color))
   $css_macro->set('base', '#'.$user_color);
 
-echo $css_macro->generate(file_get_contents(__DIR__.'/css/main.css'));
+echo $css_macro->generate_from_file(__DIR__.'/css/main.css');
 ?>
+
