@@ -52,34 +52,38 @@ function metallic_set_current_user() {
 }
 
 function metallic_widgets_init() {
+
     /** Register sidebar */
 
-    if ( function_exists('register_sidebar') )
-    {
-      register_sidebars(1, array(
-        'name' => 'Sidebar',
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget' => '</li>',
-        'before_title' => '<div class="title">',
-        'after_title' => '</div>',
-      ));
+  register_sidebar(array(
+    'name' => __('Sidebar', 'wp_metallic'),
+    'id'            => 'sidebar-1',
+    'description'   => __('Left or Right sidebar', 'wp_metallic'),
+    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+    'after_widget' => '</li>',
+    'before_title' => '<div class="title">',
+    'after_title' => '</div>',
+  ));
 
-      register_sidebars(1, array(
-        'name' => 'Mobile',
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget' => '</li>',
-        'before_title' => '<div class="title">',
-        'after_title' => '</div>',
-      ));
+  register_sidebar(array(
+    'name' => __('Mobile', 'wp_metallic'),
+    'id'            => 'sidebar-2',
+    'description'   => __('Popup bar only show in mobile devices', 'wp_metallic'),
+    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+    'after_widget' => '</li>',
+    'before_title' => '<div class="title">',
+    'after_title' => '</div>',
+  ));
 
-      register_sidebars(1, array(
-        'name' => 'Footer',
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget' => '</li>',
-        'before_title' => '<div class="title">',
-        'after_title' => '</div>',
-      ));
-    }
+  register_sidebar(array(
+    'name' => __('Footer' , 'wp_metallic'),
+    'id'            => 'sidebar-3',
+    'description'   => __('Footer Side bar', 'wp_metallic'),
+    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+    'after_widget' => '</li>',
+    'before_title' => '<div class="title">',
+    'after_title' => '</div>',
+  ));
 }
 /** Register customize */
 
@@ -365,4 +369,5 @@ function mettalic_styles()
 }
 
 add_action('wp_enqueue_scripts', 'mettalic_styles');
+add_action( 'widgets_init', 'metallic_widgets_init' );
 ?>
