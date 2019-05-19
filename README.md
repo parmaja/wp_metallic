@@ -1,5 +1,5 @@
 WP Metallic Theme
-===========
+=================
 
 This project have two projects,
 
@@ -26,5 +26,10 @@ WP Metallic Theme
 Need PHP 5.3 or above to work
 
 Put all file here \wp-content\themes\metallic
-Put your logo in \wp-content\themes\metallic\images\logo.png
-Sorry only logo.png we accept, and be careful about the size.
+
+
+Gihub Repository
+----------------
+
+https://github.com/parmaja/wp_metallic
+
