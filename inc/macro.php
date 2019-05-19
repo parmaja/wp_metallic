@@ -60,7 +60,7 @@ $if(b)<
   bug when
 */
 
-require('color.php');
+include_once __DIR__ . '/color.php';
 
 use Mexitek\phpColors\Color;
 
@@ -326,10 +326,6 @@ class CssMacro {
     return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
   }
 
-  public function generate_from_file($file) {
-      return $this->generate(file_get_contents($file));
-  }
-
   private $_comments = array();
 
   private function _replace_comments($match) {
@@ -354,6 +350,10 @@ class CssMacro {
         }
       }
     }
+  }
+
+  public function parse_values($contents) {
+    $this->parse_string($this->values, $contents);
   }
 
   private function _macro_replace($matches) {
@@ -386,17 +386,5 @@ class CssMacro {
     $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
     return $return;
   }
-
-  public function load_values($filename) {
-    $this->parse_string($this->values, file_get_contents($filename));
-  }
-}
-
-function macro_print_css_file($css_file, $values_file) {
-  $css_macro = new CssMacro();
-  if (file_exists($values_file))
-    $css_macro->load_values($values_file);
-  $style = file_get_contents($css_file);
-  echo $css_macro->generate($style);
 }
 ?>

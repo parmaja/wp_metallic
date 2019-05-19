@@ -3,7 +3,14 @@ header("Content-type: text/css; charset: UTF-8");
 header('Content-type: text/css');
 header('Cache-control: must-revalidate');
 
-require 'inc/macro.php';
+include_once __DIR__ . '/inc/macro.php';
+
+include_once __DIR__ . '../../../../wp-includes/class-wp-error.php';
+include_once __DIR__ . '../../../../wp-admin/includes/class-wp-filesystem-base.php';
+include_once __DIR__ . '../../../../wp-admin/includes/class-wp-filesystem-direct.php';
+
+$wp_filesystem = new WP_Filesystem_Direct(null);
+
 /**
   using get make it more faster, we will call get_theme_mod('color_style')
   in the header of theme, no need to use SQL/Classes of wordpress here.
@@ -36,15 +43,20 @@ class MyCssMacro extends CssMacro
 {
   public function func_import($arg)
   {
-    global $import;
+    global $import, $wp_filesystem;
     if (!empty($import))
-      return file_get_contents(__DIR__.'/styles/'.$import);
+      return $wp_filesystem->get_contents(__DIR__.'/styles/'.$import);
   }
 
   public function __construct()
   {
     parent::__construct();
     $this->register($this, 'import', 'func_import', '');
+  }
+
+  public function load_values($filename) {
+      global $wp_filesystem;
+    $this->parse_values($wp_filesystem->get_contents($filename));
   }
 }
 
@@ -78,6 +90,7 @@ if (isset($_GET['font_size']) && !empty($_GET['font_size']))
 if (!empty($user_color))
   $css_macro->set('base', '#'.$user_color);
 
-echo $css_macro->generate_from_file(__DIR__.'/css/main.css');
+$file = $wp_filesystem->get_contents(__DIR__.'/css/main.css');
+echo $css_macro->generate($file);
 ?>
 

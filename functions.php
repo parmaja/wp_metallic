@@ -16,12 +16,50 @@ const IS_MSH_META = '_wpcom_is_msh';
 
 $is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
 
-if (!function_exists( 'metallic_setup' ) ) {
-    function metallic_setup() {
-        load_theme_textdomain( 'metallic' );
-        add_theme_support( 'automatic-feed-links' );
-    }
+function metallic_setup() {
+    load_theme_textdomain( 'metallic' );
+    add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'title-tag' );
+
+    $args = array(
+        'width'         => 980,
+        'height'        => 200,
+        'flex-width'    => true,
+        'flex-height'    => true
+    );
+    add_theme_support('custom-header', $args );
+
+    add_theme_support('custom-background', array()); //nop we dont have background
 }
+
+add_action('after_setup_theme', 'metallic_setup');
+
+function metallic_title($title, $sep) {
+    global $paged, $page;
+
+    if (is_feed())
+        return $title;
+
+    // Add the site name.
+    if ($title <> '')
+        $title = $title . ' - ' . ' ';
+    $title = $title . get_bloginfo( 'name' );
+
+    // Add the site description for the home/front page.
+    if ( ( is_home() || is_front_page() ) ) {
+        $site_description = get_bloginfo( 'description', 'display' );
+        if ($site_description)
+            $title = $title . ' - ' .$site_description;
+    }
+
+    // Add a page number if necessary.
+    if ( $paged >= 2 || $page >= 2 )
+        $title = $title .' ' . $sep . ' ' . sprintf( __( 'Page %s', 'metallic' ), max( $paged, $page ) );
+
+    return $title;
+}
+add_filter( 'wp_title', 'metallic_title', 10, 2 );
+
 
 if (!isset($content_width)) {
   if (wp_is_mobile()) {
@@ -47,16 +85,6 @@ function metallic_link_pages(){
         'previouspagelink' => __('Previous page', 'metallic')
         )
     );
-}
-
-/* set_current_user */
-
-add_action('set_current_user', 'metallic_set_current_user');
-
-function metallic_set_current_user() {
-  if (!current_user_can('edit_posts')) {
-    show_admin_bar(false);
-  }
 }
 
 function metallic_widgets_init() {
@@ -93,6 +121,9 @@ function metallic_widgets_init() {
     'after_title' => '</div>',
   ));
 }
+
+add_action( 'widgets_init', 'metallic_widgets_init' );
+
 /** Register customize */
 
 function metallic_add_option($wp_customize, $section, $name, $title, $type = 'checkbox', $default = 'true') {
@@ -157,8 +188,7 @@ function metallic_customize_register($wp_customize) {
     //  =============================
 
     $styles = array();
-//    $styles[''] = '';
-
+    $styles[''] = ''; //add empty default style
     $dir = __DIR__.'/styles';
 
     if ($handle = opendir($dir)) {
@@ -177,14 +207,21 @@ function metallic_customize_register($wp_customize) {
         closedir($handle);
     }
 
-    metallic_add_option($wp_customize, 'metallic_colors', 'custom_color', __('Custom Color', 'metallic'), 'checkbox', 'false');
-
     $wp_customize->add_setting('color_style', array(
-      'default'        => 'Gray',
+      'default'        => '',
       'capability'     => 'edit_theme_options',
       'type'           => 'theme_mod', //or 'option' if u want to have a record in database
       'sanitize_callback' => 'sanitize_color_style'
     ));
+
+    $wp_customize->add_control('color_select_box', array(
+        'settings' => 'color_style',
+        'label'    => __('Select style', 'metallic'),
+        'section'  => 'metallic_colors',
+        'type'     => 'select',
+        'choices'  => $styles
+        )
+    );
 
     //  =============================
     //  = Color Picker              =
@@ -205,15 +242,6 @@ function metallic_customize_register($wp_customize) {
           'section'  => 'metallic_colors'
         )
       )
-    );
-
-    $wp_customize->add_control('color_select_box', array(
-        'settings' => 'color_style',
-        'label'    => __('Select style', 'metallic'),
-        'section'  => 'metallic_colors',
-        'type'     => 'select',
-        'choices'  => $styles
-        )
     );
 
     //  =============================
@@ -239,9 +267,6 @@ function metallic_customize_register($wp_customize) {
 
 add_action('customize_register', 'metallic_customize_register');
 
-add_action('after_setup_theme', 'metallic_setup');
-
-
 /** Save after */
 
 /*
@@ -250,13 +275,12 @@ add_action('after_setup_theme', 'metallic_setup');
         http://stackoverflow.com/questions/14802251/hook-into-the-wordpress-theme-customizer-save-action
 */
 
-require get_template_directory() . '/inc/macro.php';
-
 /* Cache it to disk, removed now
+require get_template_directory() . '/inc/macro.php';
 function metallic_generate_css_cache()
 {
   global $wp_customize;
-  $style = get_theme_mod('color_style', 'gray');
+  $style = get_theme_mod('color_style', '');
   $gradients = get_theme_mod('gradients', true);
   $user_color = get_theme_mod('user_color', '');
   $css_macro = new CssMacro;
@@ -331,14 +355,14 @@ function mettalic_styles()
   if (isset($_GET['style']))
     $style = $_GET['style'];
   else
-    $style = get_theme_mod('color_style', 'gray');
+    $style = get_theme_mod('color_style', '');
 
   if (!empty($style))
     $params.='&style='.$style;
 
   if (isset($_GET['color']))
       $user_color = $_GET['color'];
-  else if (empty($user_color) && get_theme_mod('custom_color', 'false'))
+  else if (empty($user_color))
       $user_color = get_theme_mod('user_color', '');
 
   if (!empty($user_color)) {
@@ -385,5 +409,4 @@ function mettalic_styles()
 }
 
 add_action('wp_enqueue_scripts', 'mettalic_styles');
-add_action( 'widgets_init', 'metallic_widgets_init' );
 ?>

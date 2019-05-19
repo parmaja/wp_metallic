@@ -28,6 +28,7 @@ WP Metallic Theme
 
 **Disadvantages**
 
+* No Menu bavigator support (maybe todo)
 * CSS3, not all browsers can show it, but it still works all browser that i know
 
 **Install**
