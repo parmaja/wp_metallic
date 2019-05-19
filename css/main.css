@@ -24,24 +24,6 @@ body {
   color: $get(fore);
 }
 
-/* H1 of head/title not same size of h1 of post content*/
-#header h1 {
-  font-size: 220%;
-  font-weight: bold;
-}
-
-#header h2 {
-  font-size: 200%;
-}
-
-#header h3 {
-  font-size: 180%;
-}
-
-.post-title{ /* should be .post-title h1*/
-  font-size: 180%;
-}
-
 h1{
   font-size: 160%;
 }
@@ -68,6 +50,24 @@ h6{
 
 .title {         /* in sidebar */
   font-size: 120%;
+}
+
+/* H1 of head/title not same size of h1 of post content*/
+#header h1 {
+  font-size: 220%;
+  font-weight: bold;
+}
+
+#header h2 {
+  font-size: 200%;
+}
+
+#header h3 {
+  font-size: 180%;
+}
+
+.post-title h1{ /* should be .post-title h1*/
+  font-size: 300%;
 }
 
 a{
@@ -97,7 +97,6 @@ caption, th, td {
 .wp-caption img{
   margin: 0.5em 0em;
 }
-
 
 .wp-caption-text{
   color: $get(canvas_ink);
@@ -129,7 +128,6 @@ caption, th, td {
 .skip {
   display: none;
 }
-
 
 pre {
   padding: 0.2em;
