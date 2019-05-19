@@ -22,14 +22,14 @@ function metallic_setup() {
     add_theme_support( 'title-tag' );
 
     $args = array(
-        'width'         => 980,
-        'height'        => 200,
+        'width'         => 1600,
+        'height'        => 120,
         'flex-width'    => true,
         'flex-height'    => true
     );
     add_theme_support('custom-header', $args );
 
-    add_theme_support('custom-background', array()); //nop we dont have background
+    //add_theme_support('custom-background', array()); //nop we dont have background
 }
 
 add_action('after_setup_theme', 'metallic_setup');
@@ -152,6 +152,8 @@ function sanitize_value($value) {
 
 function metallic_customize_register($wp_customize) {
 
+  $wp_customize->remove_control( 'header_textcolor' );
+
   $wp_customize->add_section('metallic_layout', array(
         'title'    => __('Layout', 'metallic'),
         'priority' => 120,
@@ -240,26 +242,6 @@ function metallic_customize_register($wp_customize) {
           'settings' => 'user_color',
           'label'    => __('User Color', 'metallic'),
           'section'  => 'metallic_colors'
-        )
-      )
-    );
-
-    //  =============================
-    //  = Image Picker              =
-    //  =============================
-
-    $wp_customize->add_setting('user_bg_image', array(
-        'default'           => '',
-        'capability'        => 'edit_theme_options',
-        'type'              => 'theme_mod',
-        'sanitize_callback' => 'sanitize_value'
-
-    ));
-
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'user_bg_image', array(
-          'settings' => 'user_bg_image',
-          'label'    => __('Header Image', 'metallic'),
-          'section'  => 'metallic_options'
         )
       )
     );

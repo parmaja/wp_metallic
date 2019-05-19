@@ -21,8 +21,6 @@
     $show_title = get_theme_mod('show_title', true);
     $show_navigator = get_theme_mod('show_navigator', true);
 
-    $bg_image = get_theme_mod('user_bg_image', '');
-
     $logo_image = get_site_icon_url(32);
     if (empty($logo_image)) {
       if (file_exists(get_stylesheet_directory().'/images/logo.png'))
@@ -43,11 +41,11 @@
 //    wp_get_archives( array( 'type' => 'monthly', 'format' => 'link', 'limit' => 12 ) );
     if ( is_singular() ) wp_enqueue_script( "comment-reply" );
     wp_head();
-    if (!empty($bg_image)) {
+    if (get_header_image()) {
   ?>
 <style type="text/css" media="screen">
   #header {
-    background-image: url("<?php print $bg_image; ?>");
+    background-image: url("<?php header_image(); ?>");
   }
 </style>
 <?php
