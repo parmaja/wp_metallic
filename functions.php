@@ -16,7 +16,12 @@ const IS_MSH_META = '_wpcom_is_msh';
 
 $is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
 
-add_theme_support( 'automatic-feed-links' );
+if (!function_exists( 'metallic_setup' ) ) {
+    function metallic_setup() {
+        load_theme_textdomain( 'metallic' );
+        add_theme_support( 'automatic-feed-links' );
+    }
+}
 
 if (!isset($content_width)) {
   if (wp_is_mobile()) {
@@ -27,6 +32,9 @@ if (!isset($content_width)) {
     $content_width = 900;
 }
 
+if ( version_compare( $GLOBALS['wp_version'], '5.0', '<' ) ) {
+}
+
 function metallic_link_pages(){
     wp_link_pages(
       array(
@@ -35,8 +43,8 @@ function metallic_link_pages(){
         'link_before' => '<li class="page-number">',
         'link_after' => '</li>',
         'pagelink'         => '%',
-        'nextpagelink'     => __('Next page', 'default'),
-        'previouspagelink' => __('Previous page', 'default')
+        'nextpagelink'     => __('Next page', 'metallic'),
+        'previouspagelink' => __('Previous page', 'metallic')
         )
     );
 }
@@ -56,9 +64,9 @@ function metallic_widgets_init() {
     /** Register sidebar */
 
   register_sidebar(array(
-    'name' => __('Sidebar', 'wp_metallic'),
+    'name' => __('Sidebar', 'metallic'),
     'id'            => 'sidebar-1',
-    'description'   => __('Left or Right sidebar', 'wp_metallic'),
+    'description'   => __('Left or Right sidebar', 'metallic'),
     'before_widget' => '<li id="%1$s" class="widget %2$s">',
     'after_widget' => '</li>',
     'before_title' => '<div class="title">',
@@ -66,9 +74,9 @@ function metallic_widgets_init() {
   ));
 
   register_sidebar(array(
-    'name' => __('Mobile', 'wp_metallic'),
+    'name' => __('Mobile', 'metallic'),
     'id'            => 'sidebar-2',
-    'description'   => __('Popup bar only show in mobile devices', 'wp_metallic'),
+    'description'   => __('Popup bar only show in mobile devices', 'metallic'),
     'before_widget' => '<li id="%1$s" class="widget %2$s">',
     'after_widget' => '</li>',
     'before_title' => '<div class="title">',
@@ -76,9 +84,9 @@ function metallic_widgets_init() {
   ));
 
   register_sidebar(array(
-    'name' => __('Footer' , 'wp_metallic'),
+    'name' => __('Footer' , 'metallic'),
     'id'            => 'sidebar-3',
-    'description'   => __('Footer Side bar', 'wp_metallic'),
+    'description'   => __('Footer Side bar', 'metallic'),
     'before_widget' => '<li id="%1$s" class="widget %2$s">',
     'after_widget' => '</li>',
     'before_title' => '<div class="title">',
@@ -89,9 +97,10 @@ function metallic_widgets_init() {
 
 function metallic_add_option($wp_customize, $section, $name, $title, $type = 'checkbox', $default = 'true') {
     $wp_customize->add_setting($name, array(
-        'capability' => 'edit_theme_options',
         'default' => $default,
+        'capability' => 'edit_theme_options',
         'type'       => 'theme_mod',
+        'sanitize_callback' => 'sanitize_value'
     ));
 
     $wp_customize->add_control($name, array(
@@ -100,6 +109,14 @@ function metallic_add_option($wp_customize, $section, $name, $title, $type = 'ch
         'section'  => $section,
         'type'     => $type,
     ));
+}
+
+function sanitize_color_style($color) {
+    return $color;
+}
+
+function sanitize_value($value) {
+    return $value;
 }
 
 function metallic_customize_register($wp_customize) {
@@ -123,12 +140,12 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'metallic_layout', 'show_navigator', __('Show Navigation', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'metallic_options', 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_sidebar', __('Show Sidebar', 'default'));
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_sidebar', __('Show Sidebar', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_layout', 'show_subpages', __('Show SubPages', 'metallic'));
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_footbar', __('Show Footbar', 'default'));
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_title', __('Show Title', 'default'));
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_footbar', __('Show Footbar', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_layout', 'show_title', __('Show Title', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'gradients', __('Gradients', 'metallic'));
-    metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'default'));
+    metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'metallic'));
 
     metallic_add_option($wp_customize, 'metallic_options', 'desktop_font_size', __('Desktop Font Size', 'metallic'), 'number', '');
     metallic_add_option($wp_customize, 'metallic_options', 'tablet_font_size', __('Tablet Font Size', 'metallic'), 'number', '');
@@ -153,7 +170,7 @@ function metallic_customize_register($wp_customize) {
                   $ini = parse_ini_file($dir.'/'.$entry, false);
                   $name = strstr($entry, '.', true);//explode('.', $entry);
                   $title = $ini['name'];
-                  $styles[$name] = __($title, 'default');//It is a color name we can translate it //TODO use own gettext domain
+                  $styles[$name] = $title;//It is a color name we can translate it //TODO use own gettext domain
                 }
             }
         }
@@ -166,7 +183,7 @@ function metallic_customize_register($wp_customize) {
       'default'        => 'Gray',
       'capability'     => 'edit_theme_options',
       'type'           => 'theme_mod', //or 'option' if u want to have a record in database
-
+      'sanitize_callback' => 'sanitize_color_style'
     ));
 
     //  =============================
@@ -178,6 +195,7 @@ function metallic_customize_register($wp_customize) {
         'sanitize_callback' => 'sanitize_hex_color',
         'capability'        => 'edit_theme_options',
         'type'              => 'theme_mod',
+        'sanitize_callback' => 'sanitize_color_style'
 
     ));
 
@@ -206,6 +224,7 @@ function metallic_customize_register($wp_customize) {
         'default'           => '',
         'capability'        => 'edit_theme_options',
         'type'              => 'theme_mod',
+        'sanitize_callback' => 'sanitize_value'
 
     ));
 
@@ -220,11 +239,8 @@ function metallic_customize_register($wp_customize) {
 
 add_action('customize_register', 'metallic_customize_register');
 
-add_action('after_setup_theme', 'metallic_theme_setup');
+add_action('after_setup_theme', 'metallic_setup');
 
-function metallic_theme_setup(){
-    load_theme_textdomain('metallic', get_template_directory() . '/languages');
-}
 
 /** Save after */
 
@@ -234,7 +250,7 @@ function metallic_theme_setup(){
         http://stackoverflow.com/questions/14802251/hook-into-the-wordpress-theme-customizer-save-action
 */
 
-require('inc/macro.php');
+require get_template_directory() . '/inc/macro.php';
 
 /* Cache it to disk, removed now
 function metallic_generate_css_cache()
@@ -244,7 +260,7 @@ function metallic_generate_css_cache()
   $gradients = get_theme_mod('gradients', true);
   $user_color = get_theme_mod('user_color', '');
   $css_macro = new CssMacro;
-  $css_macro->load_values(__DIR__.'/default.style.ini');
+  $css_macro->load_values(__DIR__.'/style.ini');
   $css_macro->load_values(__DIR__.'/styles/'.$style.'.ini');
   $css_macro->set('gradients', $gradients);
   $css_macro->set('style', $style);

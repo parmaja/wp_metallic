@@ -18,8 +18,8 @@ function metallic_comment($comment, $args, $depth) {
       <ul class="infobar">
         <li class="entry-author"><?php comment_author_link(); ?></li>
         <li class="entry-date"><?php comment_date(); ?> <?php comment_time(); ?></li>
-        <li class="entry-type"><?php comment_type('', __('Trackback', 'default'), __('Pingback', 'default')); ?></li>
-        <li class="entry-edit"><?php edit_comment_link(__('Edit', 'default')); ?></li>
+        <li class="entry-type"><?php comment_type('', __('Trackback', 'metallic'), __('Pingback', 'metallic')); ?></li>
+        <li class="entry-edit"><?php edit_comment_link(__('Edit', 'metallic')); ?></li>
       </ul>
       <?php } ?>
       <div class="comment-body">
@@ -51,13 +51,13 @@ function metallic_comment($comment, $args, $depth) {
       if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) {
     ?>
     <nav class="navigation comment-navigation" role="navigation">
-      <div class="nav-previous"><?php previous_comments_link(__( '&laquo; Older Comments', 'default' ) ); ?></div>
-      <div class="nav-next"><?php next_comments_link(__('Newer Comments &raquo;', 'default')); ?></div>
+      <div class="nav-previous"><?php previous_comments_link(__( '&laquo; Older Comments', 'metallic' ) ); ?></div>
+      <div class="nav-next"><?php next_comments_link(__('Newer Comments &raquo;', 'metallic')); ?></div>
     </nav><!-- .comment-navigation -->
     <?php } // Check for comment navigation ?>
 
     <?php if (!comments_open() && get_comments_number() ) { ?>
-    <p class="no-comments"><?php __( 'Comments are closed.' , 'default' ); ?></p>
+    <p class="no-comments"><?php __( 'Comments are closed.' , 'metallic' ); ?></p>
     <?php } ?>
 
   <?php } // have_comments() ?>

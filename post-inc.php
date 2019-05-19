@@ -2,7 +2,7 @@
 <ol id="posts">
 <?php
 if (!have_posts()) { ?>
-<p><?php __('Sorry, no posts matched your criteria.', 'default'); ?></p>
+<p><?php __('Sorry, no posts matched your criteria.', 'metallic'); ?></p>
 <?php
     } else {
     while (have_posts()) {
@@ -21,20 +21,20 @@ if (!have_posts()) { ?>
       <?php if (!get_theme_mod('hide_mata', false)) { ?>
       <li class="entry-author"><?php the_author_posts_link(); ?></li>
       <li class="entry-date"><a href="<?php print wp_get_shortlink(get_the_ID(), 'post') ?>"><?php print get_the_date(); ?></a></li>
-      <li class="entry-edit"><?php edit_post_link(__('Edit', 'default')); ?></li>
+      <li class="entry-edit"><?php edit_post_link(__('Edit', 'metallic')); ?></li>
       <?php } ?>
     </ul>
-    <div class="post-content"><?php the_content(__('More...', 'default')); ?></div>
+    <div class="post-content"><?php the_content(__('More...', 'metallic')); ?></div>
     <?php if (!get_theme_mod('hide_mata', false)) { ?>
     <ul class="infobar">
-      <li class="category"><?php print __('Category', 'default').': '; print the_category(', ') ?></li>
+      <li class="category"><?php print __('Category', 'metallic').': '; print the_category(', ') ?></li>
       <?php
-        $tag = get_the_tags(__('Tags: ', 'default'), ', ', '');
+        $tag = get_the_tags(__('Tags: ', 'metallic'), ', ', '');
         if (!empty($tag)) { ?>
       <li class="tags"><?php print($tag) ?></li>
         <?php
       } ?>
-      <li class="entry-edit"><?php comments_popup_link(__('No Comments', 'default'), __('1 Comment', 'default'), __('% Comments', 'default'), ''); ?></li>
+      <li class="entry-edit"><?php comments_popup_link(__('No Comments', 'metallic'), __('1 Comment', 'metallic'), __('% Comments', 'metallic'), ''); ?></li>
     </ul>
      <?php } ?>
     <hr class="skip" />

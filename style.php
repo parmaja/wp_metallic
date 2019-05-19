@@ -3,7 +3,7 @@ header("Content-type: text/css; charset: UTF-8");
 header('Content-type: text/css');
 header('Cache-control: must-revalidate');
 
-require('inc/macro.php');
+require 'inc/macro.php';
 /**
   using get make it more faster, we will call get_theme_mod('color_style')
   in the header of theme, no need to use SQL/Classes of wordpress here.
@@ -50,7 +50,7 @@ class MyCssMacro extends CssMacro
 
 $css_macro = new MyCssMacro();
 
-$css_macro->load_values(__DIR__.'/default.style.ini'); //load default values
+$css_macro->load_values(__DIR__.'/style.ini'); //load default values
 if (!empty($style))
   $css_macro->load_values(__DIR__.'/styles/'.$style.'.ini');
 
