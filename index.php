@@ -1,6 +1,5 @@
   <?php
-    if (function_exists('get_template_part')) {
-        get_template_part('post', 'inc');    
+    get_template_part('post', 'inc');
   ?>
 
   <ul id="pagination" class="pagination">
@@ -8,6 +7,5 @@
     <li class="next-posts"><?php next_posts_link(__('Next &raquo;', 'default')) ?></li>
   </ul>
   <?php
-          get_footer(); 
-    }
+    get_footer();
   ?>

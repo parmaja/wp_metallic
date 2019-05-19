@@ -51,35 +51,36 @@ function metallic_set_current_user() {
   }
 }
 
-/** Register sidebar */
+function metallic_widgets_init() {
+    /** Register sidebar */
 
-if ( function_exists('register_sidebar') )
-{
-  register_sidebars(1, array(
-    'name' => 'Sidebar',
-    'before_widget' => '<li id="%1$s" class="widget %2$s">',
-    'after_widget' => '</li>',
-    'before_title' => '<div class="title">',
-    'after_title' => '</div>',
-  ));
+    if ( function_exists('register_sidebar') )
+    {
+      register_sidebars(1, array(
+        'name' => 'Sidebar',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget' => '</li>',
+        'before_title' => '<div class="title">',
+        'after_title' => '</div>',
+      ));
 
-  register_sidebars(1, array(
-    'name' => 'Mobile',
-    'before_widget' => '<li id="%1$s" class="widget %2$s">',
-    'after_widget' => '</li>',
-    'before_title' => '<div class="title">',
-    'after_title' => '</div>',
-  ));
+      register_sidebars(1, array(
+        'name' => 'Mobile',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget' => '</li>',
+        'before_title' => '<div class="title">',
+        'after_title' => '</div>',
+      ));
 
-  register_sidebars(1, array(
-    'name' => 'Footer',
-    'before_widget' => '<li id="%1$s" class="widget %2$s">',
-    'after_widget' => '</li>',
-    'before_title' => '<div class="title">',
-    'after_title' => '</div>',
-  ));
+      register_sidebars(1, array(
+        'name' => 'Footer',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget' => '</li>',
+        'before_title' => '<div class="title">',
+        'after_title' => '</div>',
+      ));
+    }
 }
-
 /** Register customize */
 
 function metallic_add_option($wp_customize, $section, $name, $title, $type = 'checkbox', $default = 'true') {
