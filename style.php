@@ -1,4 +1,5 @@
 <?php
+
 header("Content-type: text/css; charset: UTF-8");
 header('Content-type: text/css');
 header('Cache-control: must-revalidate');
@@ -12,9 +13,9 @@ include_once __DIR__ . '../../../../wp-admin/includes/class-wp-filesystem-direct
 $wp_filesystem = new WP_Filesystem_Direct(null);
 
 /**
-  using get make it more faster, we will call get_theme_mod('color_style')
-  in the header of theme, no need to use SQL/Classes of wordpress here.
+  Using GET make it more faster, in the header of theme, no need to use SQL/Classes of wordpress here.
 */
+
 if (isset($_GET['gradients']) && !empty($_GET['gradients']))
   $gradients = $_GET['gradients'];
 
@@ -26,11 +27,6 @@ if (isset($_GET['is_mobile']) && !empty($_GET['is_mobile']))
 else
   $is_mobile= false;
 
-if (isset($_GET['style']) && !empty($_GET['style']))
-  $style = $_GET['style'];
-else
-  $style = '';
-
 if (isset($_GET['user_color']) && !empty($_GET['user_color']))
   $user_color = $_GET['user_color'];
 
@@ -41,18 +37,6 @@ if (!empty($user_color)) {
 
 class MyCssMacro extends CssMacro
 {
-  public function func_import($arg)
-  {
-    global $import, $wp_filesystem;
-    if (!empty($import))
-      return $wp_filesystem->get_contents(__DIR__.'/styles/'.$import);
-  }
-
-  public function __construct()
-  {
-    parent::__construct();
-    $this->register($this, 'import', 'func_import', '');
-  }
 
   public function load_values($filename) {
       global $wp_filesystem;
@@ -63,8 +47,6 @@ class MyCssMacro extends CssMacro
 $css_macro = new MyCssMacro();
 
 $css_macro->load_values(__DIR__.'/style.ini'); //load default values
-if (!empty($style))
-  $css_macro->load_values(__DIR__.'/styles/'.$style.'.ini');
 
 if (array_key_exists('import', $css_macro->values))
   $import = $css_macro->values['import'];
@@ -78,7 +60,6 @@ if (isset($_GET['contrast']) && !empty($_GET['contrast']))
 $css_macro->contrast = $contrast;
 
 $css_macro->set('gradients', $gradients);
-$css_macro->set('style', $style);
 $css_macro->set('is_mobile', $is_mobile);
 
 if (isset($_GET['font_size']) && !empty($_GET['font_size']))
@@ -89,5 +70,6 @@ if (!empty($user_color))
 
 $file = $wp_filesystem->get_contents(__DIR__.'/css/main.css');
 echo $css_macro->generate($file);
+
 ?>
 

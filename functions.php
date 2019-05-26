@@ -142,17 +142,11 @@ function metallic_add_option($wp_customize, $section, $name, $title, $type = 'ch
     ));
 }
 
-function sanitize_color_style($color) {
-    return $color;
-}
-
 function sanitize_value($value) {
     return $value;
 }
 
 function metallic_customize_register($wp_customize) {
-
-  $wp_customize->remove_control( 'header_textcolor' );
 
   $wp_customize->add_section('metallic_layout', array(
         'title'    => __('Layout', 'metallic'),
@@ -160,15 +154,9 @@ function metallic_customize_register($wp_customize) {
   ));
 
   $wp_customize->add_section('metallic_options', array(
-        'title'    => __('Options', 'metallic'),
+        'title'    => __('Theme Options', 'metallic'),
         'priority' => 121,
   ));
-
-  $wp_customize->add_section('metallic_colors', array(
-        'title'    => __('Colors', 'metallic'),
-        'priority' => 121,
-  ));
-
 
     metallic_add_option($wp_customize, 'metallic_layout', 'show_navigator', __('Show Navigation', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
@@ -183,47 +171,6 @@ function metallic_customize_register($wp_customize) {
     metallic_add_option($wp_customize, 'metallic_options', 'desktop_font_size', __('Desktop Font Size', 'metallic'), 'number', '');
     metallic_add_option($wp_customize, 'metallic_options', 'tablet_font_size', __('Tablet Font Size', 'metallic'), 'number', '');
     metallic_add_option($wp_customize, 'metallic_options', 'mobile_font_size', __('Mobile Font Size', 'metallic'), 'number', '');
-//    metallic_add_option($wp_customize, 'user_font_name', __('Font Name', 'metallic'), 'text', '');
-
-    //  =============================
-    //  Select style
-    //  =============================
-
-    $styles = array();
-    $styles[''] = ''; //add empty default style
-    $dir = __DIR__.'/styles';
-
-    if ($handle = opendir($dir)) {
-        while (false !== ($entry = readdir($handle))) {
-            if ($entry != "." && $entry != "..")
-            {
-                $ext = pathinfo($entry, PATHINFO_EXTENSION);
-                if ($ext == "ini") {
-                  $ini = parse_ini_file($dir.'/'.$entry, false);
-                  $name = strstr($entry, '.', true);//explode('.', $entry);
-                  $title = $ini['name'];
-                  $styles[$name] = $title;//It is a color name we can translate it //TODO use own gettext domain
-                }
-            }
-        }
-        closedir($handle);
-    }
-
-    $wp_customize->add_setting('color_style', array(
-      'default'        => '',
-      'capability'     => 'edit_theme_options',
-      'type'           => 'theme_mod', //or 'option' if u want to have a record in database
-      'sanitize_callback' => 'sanitize_color_style'
-    ));
-
-    $wp_customize->add_control('color_select_box', array(
-        'settings' => 'color_style',
-        'label'    => __('Select style', 'metallic'),
-        'section'  => 'metallic_colors',
-        'type'     => 'select',
-        'choices'  => $styles
-        )
-    );
 
     //  =============================
     //  = Color Picker              =
@@ -234,14 +181,14 @@ function metallic_customize_register($wp_customize) {
         'sanitize_callback' => 'sanitize_hex_color',
         'capability'        => 'edit_theme_options',
         'type'              => 'theme_mod',
-        'sanitize_callback' => 'sanitize_color_style'
+        'sanitize_callback' => 'sanitize_value'
 
     ));
 
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'user_color', array(
           'settings' => 'user_color',
           'label'    => __('User Color', 'metallic'),
-          'section'  => 'metallic_colors'
+          'section'  => 'metallic_options'
         )
       )
     );
@@ -295,14 +242,6 @@ function mettalic_styles()
 
   if (wp_is_mobile())
     $params .= '&is_mobile=1';
-
-  if (isset($_GET['style']))
-    $style = $_GET['style'];
-  else
-    $style = get_theme_mod('color_style', '');
-
-  if (!empty($style))
-    $params.='&style='.$style;
 
   if (isset($_GET['color']))
       $user_color = $_GET['color'];
