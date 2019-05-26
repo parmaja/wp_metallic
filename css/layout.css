@@ -112,11 +112,7 @@ body {
   #nav{
     display: none;
   }
-}
 
-/* sidebar */
-
-@media print{
   #sidebar {
     display: none;
   }

@@ -79,12 +79,13 @@
           $output .= '<ul id="nav-page">';
           $output .= wp_list_pages($params);
           $output .= '</ul>';
+          print $output;
 
           // second level?
           
           if (get_theme_mod('show_subpages', true)) {
 
-              $sub_params = "";
+            $sub_params = "";
 
             if(isset($post->post_parent) and ($post->post_parent > 0))
             {
@@ -92,11 +93,15 @@
             }
             else
             {
-              if (isset($post->ID) and ($post->ID>0))
+              if (isset($post->ID) and ($post->ID > 0))
                 $sub_params .= "&child_of=" . $post->ID;
             }
 
-            if (!empty($sub_params)) {
+            get_template_part('nav', 'inc');
+
+            if (!empty($sub_params))
+            {
+                $output = '';
                 $subpage = wp_list_pages($params.$sub_params);
 
                 if (!empty($subpage))
@@ -105,54 +110,12 @@
                   $output .= $subpage;
                   $output .= '</ul>';
                 }
+                print $output;
             }
           }
-          print $output;
-
-          if (wp_is_mobile() && get_theme_mod('show_sidebar', true)){
         ?>
-          <a id="drawer" class="drawer-closed" href = "#">
-             <div id="drawer-button">
-               <span></span>
-            </div>
-          </a>
-<script>
-  isMobile = <?php if (wp_is_mobile()) echo "true"; else echo "false"; ?>;
-  isTablet = <?php if ($metallic_is_tablet) echo "true"; else echo "false"; ?>;
-  document.getElementById("drawer").addEventListener("click", drawerClick);
-
-  function drawerClick(e) {
-    t = document.getElementById("drawer");
-    b = document.getElementById("drawer-button");
-    sidebar = document.getElementById("sidebar");
-    main = document.getElementById("main");
-    if (sidebar.style.display != "block")
-    {
-      if (isTablet) {
-        sidebar.style.width = "30%";
-        main.style.width = "70%";
-      }
-      else {
-        sidebar.style.width = "100%";
-        main.style.display = "none";
-      }
-      sidebar.style.display = "block";
-      t.className = "drawer-opened";
-      b.className = "drawer-opened";
-    }
-    else {
-      sidebar.style.display = "none";
-      main.style.width = "100%";
-      main.style.display = "block";
-      t.className = "drawer-closed";
-      b.className = "drawer-closed";
-    }
-    return true;
-  }
-</script>
         </nav>
       <?php
-        }
       } ?>
       </div>
     </header>

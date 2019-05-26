@@ -436,10 +436,6 @@ div.post {
   color: $get(title_text);
 }
 
-#nav-button:before{
-  content: "≡";
-}
-
 #nav-page, #nav-subpage {
   list-style: none;
   padding: 0;
@@ -467,7 +463,8 @@ div.post {
 
 #nav-subpage li {
   display: inline;
-  margin: 0.1em 0.5em;  
+  margin: 0.1em 0.5em;
+  padding: 0.2em;
 }
 
 #nav a{
@@ -709,16 +706,12 @@ textarea#comment {
 }
 
 #drawer {
-  color: White;
-  width: 1.6em;
-  height: 1.6em;
+/*  content: "≡"; */
   display: block;
-
-  padding: 0.2em;
+  width: 1.6em;
+  height: auto;
   margin: 0.0em;
   float: left;
-
-/*  content: "≡"; */
 }
 
 /*
