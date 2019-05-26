@@ -121,6 +121,10 @@ add_action( 'widgets_init', 'metallic_widgets_init' );
 
 /** Register customize */
 
+function metallic_sanitize_value($value) {
+    return $value;
+}
+
 function metallic_add_option($wp_customize, $section, $name, $title, $type = 'checkbox', $default = 'true')
 {
 
@@ -128,7 +132,7 @@ function metallic_add_option($wp_customize, $section, $name, $title, $type = 'ch
         'default' => $default,
         'capability' => 'edit_theme_options',
         'type'       => 'theme_mod',
-        'sanitize_callback' => 'sanitize_value'
+        'sanitize_callback' => 'metallic_sanitize_value'
     ));
 
     $wp_customize->add_control($name, array(
@@ -137,10 +141,6 @@ function metallic_add_option($wp_customize, $section, $name, $title, $type = 'ch
         'section'  => $section,
         'type'     => $type,
     ));
-}
-
-function sanitize_value($value) {
-    return $value;
 }
 
 function metallic_customize_register($wp_customize) {
@@ -174,7 +174,7 @@ function metallic_customize_register($wp_customize) {
         'sanitize_callback' => 'sanitize_hex_color',
         'capability'        => 'edit_theme_options',
         'type'              => 'theme_mod',
-        'sanitize_callback' => 'sanitize_value'
+        'sanitize_callback' => 'metallic_sanitize_value'
 
     ));
 

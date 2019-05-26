@@ -1,5 +1,4 @@
 <?php
-
 header("Content-type: text/css; charset: UTF-8");
 header('Content-type: text/css');
 header('Cache-control: must-revalidate');
@@ -70,6 +69,5 @@ if (!empty($user_color))
 
 $file = $wp_filesystem->get_contents(__DIR__.'/css/style.css');
 echo $css_macro->generate($file);
-
 ?>
 

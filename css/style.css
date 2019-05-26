@@ -87,6 +87,10 @@ caption, th, td {
   margin: 0.5em;
 }
 
+img.aligncenter{
+  margin: 0.5em 0em;
+}
+
 .sticky{
 }
 
