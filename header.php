@@ -5,7 +5,7 @@
 <?php
   global $wp_customize;
 
-  $is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
+  $metallic_is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
 
   if (wp_is_mobile())
   { ?>
@@ -14,11 +14,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <?php
     }
-//    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     /** Init Options variables */
 
     $show_logo = get_theme_mod('show_logo', true);
-    $show_title = get_theme_mod('show_title', true);
+    $show_title = display_header_text();
     $show_navigator = get_theme_mod('show_navigator', true);
 
     $logo_image = get_site_icon_url(32);
@@ -118,7 +118,7 @@
           </a>
 <script>
   isMobile = <?php if (wp_is_mobile()) echo "true"; else echo "false"; ?>;
-  isTablet = <?php if ($is_tablet) echo "true"; else echo "false"; ?>;
+  isTablet = <?php if ($metallic_is_tablet) echo "true"; else echo "false"; ?>;
   document.getElementById("drawer").addEventListener("click", drawerClick);
 
   function drawerClick(e) {

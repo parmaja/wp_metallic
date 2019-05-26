@@ -39,7 +39,7 @@ class MyCssMacro extends CssMacro
 {
 
   public function load_values($filename) {
-      global $wp_filesystem;
+    global $wp_filesystem;
     $this->parse_values($wp_filesystem->get_contents($filename));
   }
 }
@@ -68,7 +68,7 @@ if (isset($_GET['font_size']) && !empty($_GET['font_size']))
 if (!empty($user_color))
   $css_macro->set('base', '#'.$user_color);
 
-$file = $wp_filesystem->get_contents(__DIR__.'/css/main.css');
+$file = $wp_filesystem->get_contents(__DIR__.'/css/style.css');
 echo $css_macro->generate($file);
 
 ?>

@@ -7,9 +7,6 @@ $<
   nav=$mix(base, canvas_back, 70)
 >
 
-$import(import)<
->
-
 /*
   ref:
     http://codex.wordpress.org/CSS
@@ -82,24 +79,6 @@ a:hover{
 
 caption, th, td {
   font-weight: normal;
-}
-
-.wp-caption {
-  max-width: 100%;
-  padding: 0.1em;
-  margin: 0.5em;
-  background: $get(panel);
-  color: $get(canvas_ink);
-  border: 1px dotted $get(edge);
-  text-align: center;
-}
-
-.wp-caption img{
-  margin: 0.5em 0em;
-}
-
-.wp-caption-text{
-  color: $get(canvas_ink);
 }
 
 .post-content img{
@@ -684,10 +663,6 @@ textarea#comment {
 #footer {
 }
 
-table#wp-calendar {
-  width: 100%;
-}
-
 #calendar_wrap th, #calendar_wrap td{
   text-align: center;
 }
@@ -794,4 +769,29 @@ table#wp-calendar {
     z-index: 100000;
     /* Above WP toolbar. */
 }
+
+/** WordPress */
+
+.wp-caption {
+  max-width: 100%;
+  padding: 0.1em;
+  margin: 0.5em;
+  background: $get(panel);
+  color: $get(canvas_ink);
+  border: 1px dotted $get(edge);
+  text-align: center;
+}
+
+.wp-caption img{
+  margin: 0.5em 0em;
+}
+
+.wp-caption-text{
+  color: $get(canvas_ink);
+}
+
+table#wp-calendar {
+  width: 100%;
+}
+
 

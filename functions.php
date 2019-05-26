@@ -12,9 +12,7 @@
 
 define('Metallic', 'Metallic');
 
-const IS_MSH_META = '_wpcom_is_msh';
-
-$is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
+$metallic_is_tablet = strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false;
 
 function metallic_setup() {
     load_theme_textdomain( 'metallic' );
@@ -28,8 +26,7 @@ function metallic_setup() {
         'flex-height'    => true
     );
     add_theme_support('custom-header', $args );
-
-    //add_theme_support('custom-background', array()); //nop we dont have background
+    add_theme_support('custom-background', array());
 }
 
 add_action('after_setup_theme', 'metallic_setup');
@@ -58,6 +55,7 @@ function metallic_title($title, $sep) {
 
     return $title;
 }
+
 add_filter( 'wp_title', 'metallic_title', 10, 2 );
 
 
@@ -68,9 +66,6 @@ if (!isset($content_width)) {
     $content_width = 600; //70%
   else
     $content_width = 900;
-}
-
-if ( version_compare( $GLOBALS['wp_version'], '5.0', '<' ) ) {
 }
 
 function metallic_link_pages(){
@@ -126,7 +121,9 @@ add_action( 'widgets_init', 'metallic_widgets_init' );
 
 /** Register customize */
 
-function metallic_add_option($wp_customize, $section, $name, $title, $type = 'checkbox', $default = 'true') {
+function metallic_add_option($wp_customize, $section, $name, $title, $type = 'checkbox', $default = 'true')
+{
+
     $wp_customize->add_setting($name, array(
         'default' => $default,
         'capability' => 'edit_theme_options',
@@ -148,25 +145,21 @@ function sanitize_value($value) {
 
 function metallic_customize_register($wp_customize) {
 
-  $wp_customize->add_section('metallic_layout', array(
-        'title'    => __('Layout', 'metallic'),
-        'priority' => 120,
-  ));
-
   $wp_customize->add_section('metallic_options', array(
         'title'    => __('Theme Options', 'metallic'),
         'priority' => 121,
   ));
 
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_navigator', __('Show Navigation', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_options', 'show_navigator', __('Show Navigation', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_options', 'show_sidebar', __('Show Sidebar', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_options', 'show_footbar', __('Show Footbar', 'metallic'));
+
     metallic_add_option($wp_customize, 'metallic_options', 'hide_mata', __('Hide Meta', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'metallic_options', 'hide_post_avatar', __('Hide Posts Avatar', 'metallic'), 'checkbox', 'false');
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_sidebar', __('Show Sidebar', 'metallic'));
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_subpages', __('Show SubPages', 'metallic'));
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_footbar', __('Show Footbar', 'metallic'));
-    metallic_add_option($wp_customize, 'metallic_layout', 'show_title', __('Show Title', 'metallic'));
+    metallic_add_option($wp_customize, 'metallic_options', 'show_subpages', __('Show SubPages', 'metallic'));
+
     metallic_add_option($wp_customize, 'metallic_options', 'gradients', __('Gradients', 'metallic'));
-    metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'metallic'));
 
     metallic_add_option($wp_customize, 'metallic_options', 'desktop_font_size', __('Desktop Font Size', 'metallic'), 'number', '');
     metallic_add_option($wp_customize, 'metallic_options', 'tablet_font_size', __('Tablet Font Size', 'metallic'), 'number', '');
@@ -188,7 +181,7 @@ function metallic_customize_register($wp_customize) {
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'user_color', array(
           'settings' => 'user_color',
           'label'    => __('User Color', 'metallic'),
-          'section'  => 'metallic_options'
+          'section'  => 'colors'
         )
       )
     );
@@ -215,9 +208,9 @@ function metallic_activation($old_theme)
 add_action('customize_save_after', 'metallic_customize_save_after');
 add_action("after_switch_theme", 'metallic_activation');
 
-function mettalic_styles()
+function metallic_styles()
 {
-  global $is_tablet;
+  global $metallic_is_tablet;
 
   $gradients = get_theme_mod('gradients', true);
 
@@ -228,7 +221,7 @@ function mettalic_styles()
     $params .= '0';
 
   if (wp_is_mobile()) {
-    if ($is_tablet)
+    if ($metallic_is_tablet)
       $font_size = get_theme_mod('tablet_font_size', '');
     else
       $font_size = get_theme_mod('mobile_font_size', '');
@@ -287,9 +280,8 @@ function mettalic_styles()
     wp_register_style('metallic_bidi', get_stylesheet_directory_uri().'/css/style_rtl.css');
   else
     wp_register_style('metallic_bidi', get_stylesheet_directory_uri().'/css/style_ltr.css');
-
   wp_enqueue_style('metallic_bidi');
 }
 
-add_action('wp_enqueue_scripts', 'mettalic_styles');
+add_action('wp_enqueue_scripts', 'metallic_styles');
 ?>
