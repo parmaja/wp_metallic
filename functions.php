@@ -251,42 +251,10 @@ add_action('customize_register', 'metallic_customize_register');
 
 /** Save after */
 
-/*
-  Ref:
-        http://aquagraphite.com/2011/11/dynamically-generate-static-css-files-using-php/
-        http://stackoverflow.com/questions/14802251/hook-into-the-wordpress-theme-customizer-save-action
-*/
-
-/* Cache it to disk, removed now
-require get_template_directory() . '/inc/macro.php';
-function metallic_generate_css_cache()
-{
-  global $wp_customize;
-  $style = get_theme_mod('color_style', '');
-  $gradients = get_theme_mod('gradients', true);
-  $user_color = get_theme_mod('user_color', '');
-  $css_macro = new CssMacro;
-  $css_macro->load_values(__DIR__.'/style.ini');
-  $css_macro->load_values(__DIR__.'/styles/'.$style.'.ini');
-  $css_macro->set('gradients', $gradients);
-  $css_macro->set('style', $style);
-  if (empty($style) && !empty($user_color))
-    $css_macro->set('base', '#'.$user_color);
-  $file= __DIR__.'/style.css';
-  if (file_exists($file)) {
-    $style = file_get_contents($file);
-    $css_dir = get_stylesheet_directory() . '/css/';
-    $css = $css_macro->generate($style);
-    file_put_contents($css_dir.'style.css', $css, LOCK_EX);
-  }
-}
-*/
-
 //Increase version of style to purge any cache of style
 
 function metallic_customize_save_after()
 {
-//  metallic_generate_css_cache();
   $ver = get_theme_mod('style_ver', 1);
   $ver = $ver + 1;
   set_theme_mod('style_ver', $ver);
@@ -294,7 +262,6 @@ function metallic_customize_save_after()
 
 function metallic_activation($old_theme)
 {
-//  metallic_generate_css_cache();
   return;
 }
 
@@ -328,11 +295,6 @@ function mettalic_styles()
 
   if (wp_is_mobile())
     $params .= '&is_mobile=1';
-
-/*      $font_size = get_theme_mod('user_font_name', '');
-  if (!empty($font_size)) {
-    $params .= '&font_name=\''.$font_size."'";
-  }*/
 
   if (isset($_GET['style']))
     $style = $_GET['style'];

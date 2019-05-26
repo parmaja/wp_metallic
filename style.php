@@ -84,9 +84,6 @@ $css_macro->set('is_mobile', $is_mobile);
 if (isset($_GET['font_size']) && !empty($_GET['font_size']))
   $css_macro->set('font_size', $_GET['font_size']);
 
-/*if (isset($_GET['font_name']) && !empty($_GET['font_name']))
-  $css_macro->set('font_name', str_replace("'",'', $_GET['font_name'])); */
-
 if (!empty($user_color))
   $css_macro->set('base', '#'.$user_color);
 

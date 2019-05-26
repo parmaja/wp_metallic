@@ -6,7 +6,7 @@
 
       <footer id="footer">
         <?php wp_footer(); ?>
-        <div id="copyright">Powered by WordPress, Metallic Plain Theme by PARMAJA. Valid XHTML 1.1 and CSS 3.</div>
+        <div id="copyright">Powered by WordPress, Metallic Plain Theme. Valid XHTML 1.1 and CSS 3.</div>
       </footer>
 
       </div>
