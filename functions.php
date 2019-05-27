@@ -150,6 +150,7 @@ function metallic_customize_register($wp_customize) {
         'priority' => 121,
   ));
 
+    metallic_add_option($wp_customize, 'colors', 'invert', __('Invert', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'show_navigator', __('Show Navigation', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'show_sidebar', __('Show Sidebar', 'metallic'));
@@ -219,6 +220,10 @@ function metallic_styles()
     $params .= '1';
   else
     $params .= '0';
+
+  if (get_theme_mod('invert', false)) {
+    $params .= '&invert=1';
+  }
 
   if (wp_is_mobile()) {
     if ($metallic_is_tablet)

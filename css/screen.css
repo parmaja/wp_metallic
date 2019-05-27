@@ -10,14 +10,14 @@ body{
   display: block;
 }
 
-#container, #logo {
+#container, #headerbar {
   margin: 0em auto;
   min-width: 100px;
   max-width: 100%;
 }
 
 @media screen{
-  #container, #logo{
+  #container, #headerbar{
     width: 900px;
   }
 }

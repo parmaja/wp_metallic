@@ -18,6 +18,9 @@ $wp_filesystem = new WP_Filesystem_Direct(null);
 if (isset($_GET['gradients']) && !empty($_GET['gradients']))
   $gradients = $_GET['gradients'];
 
+if (isset($_GET['invert']) && !empty($_GET['invert']))
+  $gradients = $_GET['invert'];
+
 if (empty($gradients))
   $gradients = '0'; //default;
 
@@ -59,13 +62,14 @@ if (isset($_GET['contrast']) && !empty($_GET['contrast']))
 $css_macro->contrast = $contrast;
 
 $css_macro->set('gradients', $gradients);
+$css_macro->set('invert', $gradients);
 $css_macro->set('is_mobile', $is_mobile);
 
 if (isset($_GET['font_size']) && !empty($_GET['font_size']))
   $css_macro->set('font_size', $_GET['font_size']);
 
 if (!empty($user_color))
-  $css_macro->set('base', '#'.$user_color);
+  $css_macro->set('header_back', '#'.$user_color);
 
 $file = $wp_filesystem->get_contents(__DIR__.'/css/style.css');
 echo $css_macro->generate($file);

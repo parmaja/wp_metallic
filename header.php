@@ -55,7 +55,7 @@
 
 <body <?php body_class(); ?>>
     <header id="header">
-      <div id="logo">
+      <div id="headerbar">
         <div id="logo-header">
           <?php if ($show_logo) { ?>
           <a id="logo-image" href="<?php print home_url(); ?>"><img src="<?php print $logo_image ?>" alt="" /></a>
@@ -121,5 +121,5 @@
     </header>
     <div id="container">
     <div id="wrapper">
-      <div id="main">
+      <div id="mainbar">
         <div id="contents">

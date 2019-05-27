@@ -170,6 +170,7 @@ class CssMacro {
       'change'=>array('func_change','', $this),
       'lighten'=>array('func_lighten','', $this),
       'darken'=>array('func_darken','', $this),
+      'opposite'=>array('func_opposite','', $this),
       'mix'=>array('func_mix','', $this),
       'if'=>array('func_if','a,c', $this),
       'ifnot'=>array('func_ifnot','a,c', $this),
@@ -207,6 +208,14 @@ class CssMacro {
     if (abs($this->contrast) != 100)
       $amount = $amount * abs($this->contrast) / 100;
     return $this->func_change($color, -$amount);
+  }
+
+  private function func_opposite($color){
+    $co = new Color(trim_color($color));
+      if ($co->isLight())
+        return '#000000';
+    else
+        return '#ffffff';
   }
 
   private function func_get($value){

@@ -4,6 +4,8 @@
 | Header_Back_Color                                               |
 |                                                                 |
 +--------+-------------------------+------------------------------+
+| Nav_Back_Color                                                  |
++--------+-------------------------+------------------------------+
          |                         |  +------------------+
          |  Canvas_Text_Color      |  |                  |
          |  Canvas_Back_Color      |  | Panel_Back_Color |
@@ -15,15 +17,28 @@
          +-----------------------------------------------+
          |                                               |
          +-----------------------------------------------+
+
+Body_Back_Color
+Body_Back_Text
+
 */
 
 /* Set Variables values */
 $<
-  edge=$mix(canvas_back, base, 50)
-  panel=$mix(canvas_back, base, 90)
-  box=$change(canvas_back, -10)
-  link=$change(highlight)
-  nav=$mix(base, canvas_back, 70)
+  header_text=$opposite(header_back)
+
+  canvas_text=$opposite(canvas_back)
+
+  body_text=$opposite(body_back)
+
+  panel_back=$mix(canvas_back, header_back, 90)
+  border_color=$mix(canvas_back, header_back, 50) /* Panels border color */
+
+  nav_back=$mix(header_back, canvas_back, 70) /* deprecated */
+
+  box_back=$get(panel_back) /* Controls like EditBox, Code Box or Quote */ /* deprecated */
+
+  link_text=$change(highlight)
 >
 
 /*
@@ -36,8 +51,8 @@ html {
 
 body {
   font: $get(font_size)pt $get(font_name);
-  background: $get(back);
-  color: $get(fore);
+  background: $get(body_back);
+  color: $get(body_text);
 }
 
 h1{
@@ -88,12 +103,12 @@ h6{
 
 a{
   text-decoration: none;
-  color: $get(link);
+  color: $get(link_text);
 }
 
 a:hover{
   text-decoration: none;
-  color: $get(link);
+  color: $get(link_text);
 }
 
 caption, th, td {
@@ -114,7 +129,7 @@ img.aligncenter{
 }
 
 .gallery-caption{
-  color: $get(canvas_ink);
+  color: $get(canvas_text);
 }
 
 .bypostauthor{
@@ -135,9 +150,9 @@ pre {
   padding: 0.2em;
   margin: 0em;
   overflow: auto;
-  background: $get(box);
-  color: $get(canvas_ink);
-  border: 1px dotted $get(edge)
+  background: $get(box_back);
+  color: $get(canvas_text);
+  border: 1px dotted $get(border_color)
 }
 
 code{
@@ -159,14 +174,14 @@ embed, iframe, object {
 /*----------------*/
 
 #container {
-  background: $get(panel);
-  color: $get(canvas_ink);
+  background: $get(panel_back);
+  color: $get(canvas_text);
 }
 
 #header {
-  background: $get(base);
+  background: $get(header_back);
 $if(gradients)<
-  background: linear-gradient(to bottom, $change(base, 20) 15%, $change(base, 20) 10%, $change(base) 70%);
+  background: linear-gradient(to bottom, $change(header_back, 20) 15%, $change(header_back, 20) 10%, $change(header_back) 70%);
 >
   text-decoration: none;
 }
@@ -186,7 +201,7 @@ $if(gradients)<
 @media screen {
   #header h1{
   /*  text-outline: 2px 2px #ff0000; not supported yet by any browser */
-    text-shadow: 0.1em 0.1em 0.1em $change(base, -20);
+    text-shadow: 0.1em 0.1em 0.1em $change(header_back, -20);
   }
 }
 
@@ -199,38 +214,38 @@ $ifnot(is_mobile)<
   }
 
   #header {
-    box-shadow: 0em 0.2em 0.5em 0.0em $mix(base, canvas_back);
+    box-shadow: 0em 0.2em 0.5em 0.0em $mix(header_back, canvas_back);
   }
 }
 >
 
 #description{
-  color: $get(title_text);
+  color: $get(header_text);
   margin: 0.5em 0em;
 }
 
 #header a{
   text-decoration: none;
-  color: $get(title_color);
+  color: $get(header_text);
 }
 
 #wrapper {
 }
 
-/**      main content     */
+/**      mainbar content     */
 
-#main { /*do not put padding or margin or border width */
+#mainbar { /*do not put padding or margin or border width */
   background: $get(canvas_back);
   width: 100%;
 }
 
-#main .post-title {
+#mainbar .post-title {
   padding: 0.2em 0;
   margin: 0.2em 0 0 0;
 }
 
 hr {
-  color: $change(edge);
+  color: $change(border_color);
   border-style: dotted;
   border-width: 0px 0px 1px 0px;
   margin: 0em;
@@ -238,32 +253,32 @@ hr {
 }
 
 @media screen{
-  #main .post-title {
-    border-bottom: 1px solid $get(edge);
+  #mainbar .post-title {
+    border-bottom: 1px solid $get(border_color);
   }
 
   .post{
-      border-bottom: 0.2em solid $change(panel, -15);
+      border-bottom: 0.2em solid $change(panel_back, -15);
 /*    box-shadow: 0em 0.5em 0.5em -0.5em red;*/
 /*    margin-bottom: 0.5em; */
   }
 
   .post-rest{
-    border-top: 0.3em solid $change(back);
+    border-top: 0.3em solid $change(body_back);
     padding-top: 2em;
   }
 
 }
 
 @media print{
-  #main .post-title {
+  #mainbar .post-title {
     border-bottom: 1px solid #333;
   }
 }
 
 #contents {
   border-style: solid;
-  border-color: $get(edge);
+  border-color: $get(border_color);
 }
 
 @media screen{
@@ -293,12 +308,12 @@ ol#posts .more-link{
 }
 
 .post-title a{
-  color: $get(canvas_ink);
+  color: $get(canvas_text);
   text-decoration: none;
 }
 
 .post-title a:hover {
-  color: $mix(link, canvas_ink, 50);
+  color: $mix(link_text, canvas_text, 50);
   text-decoration: none;
 }
 
@@ -306,7 +321,7 @@ ol#posts .more-link{
   list-style: none outside none;
   overflow: auto;
   font-size: 80%;
-  color: $mix(canvas_back, canvas_ink, 50);
+  color: $mix(canvas_back, canvas_text, 50);
   padding: 0.1em 0 0 0;
 }
 
@@ -317,7 +332,7 @@ ol#posts .more-link{
 
 .infobar a{
   text-decoration: none;
-  color: $get(link);
+  color: $get(link_text);
 }
 
 .infobar .category{
@@ -335,7 +350,7 @@ li.post{
 }
 
 table, th ,td, tr {
-  border: 1px solid $get(edge);
+  border: 1px solid $get(border_color);
   border-collapse: collapse;
 }
 
@@ -345,9 +360,9 @@ th, td {
 
 blockquote{
   padding: 0.5em;
-  background: $get(panel);
-  color: $get(canvas_ink);
-  border: 1px dotted $get(edge)
+  background: $get(panel_back);
+  color: $get(canvas_text);
+  border: 1px dotted $get(border_color)
 }
 
 /* Shared with comments */
@@ -398,20 +413,19 @@ div.post {
   margin: 0em;
   padding: 0.5em 0.5em;
   overflow: auto;
-/*  color: $get(canvas_ink);*/
+/*  color: $get(canvas_text);*/
 /*  background: $get(border);*/
 /*  border-radius: 3px 3px 0 0; */
-  background: $mix(base, canvas_back, 70);
+  background: $mix(header_back, canvas_back, 70);
 }
 
 .pagination a{
-  color: $get(title_text);
+  color: $get(header_text);
 }
 
 .pagination a:hover{
-  color: $mix(title_text, highlight);
+  color: $mix(header_text, highlight);
 }
-
 
 @media print{
   #pagination {
@@ -434,17 +448,17 @@ div.post {
   margin: 0.5em 0.1em 0;
   padding: 0.1em 0.5em;
   overflow: auto;
-  color: $get(canvas_ink);
-  background: $get(edge);
+  color: $get(canvas_text);
+  background: $get(border_color);
 }
 
 .page-numbers a{
   color: $get(canvas_back);
-  background: $change(base, -20);
+  background: $change(header_back, -20);
 }
 
 .page-numbers a:hover{
-  color: $mix(highlight, canvas_ink, 50);
+  color: $mix(highlight, canvas_text, 50);
 }
 
 .page-number{
@@ -453,10 +467,10 @@ div.post {
 }
 
 #nav{
-/*  border-top: 1px solid $mix(base, canvas_back);*/
+/*  border-top: 1px solid $mix(header_back, canvas_back);*/
   border-radius: 3px 3px 0 0;
-  background: $get(nav);
-  color: $get(title_text);
+  background: $get(nav_back);
+  color: $get(header_text);
 }
 
 #nav-page, #nav-subpage {
@@ -491,32 +505,39 @@ div.post {
 }
 
 #nav a{
+    color: $get(header_text);
 }
 
 #nav a:hover{
-  color: $get(link);
+  color: $get(header_text);
+  border-color: #f00;
 }
 
-#header .current_page_item{
+#nav a:hover{
+  color: $get(header_text);
+}
+
+#nav .current_page_item{
   border-radius: 3px;
-  box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
-  background: $get(title_text);
+  box-shadow: 0 0 0.4em 0 $mix(header_text, highlight);
+  color: $get(header_back);
+  background: $get(header_text);
 }
 
-#header .current_page_parent{
+#nav .current_page_parent{
   border-radius: 2px;
-  box-shadow: 0 0 0.4em 0 $mix(title_text, highlight);
-  background: $get(title_text);
+  box-shadow: 0 0 0.4em 0 $mix(header_text, highlight);
+  background: $get(header_text);
 }
 
-#header .current_page_item a {
+#nav .current_page_item a {
   text-decoration: none;
-  color: $get(base);
+  color: $get(header_back);
 }
 
-#header .current_page_parent a {
+#nav .current_page_parent a {
   text-decoration: none;
-  color: $get(base);
+  color: $get(header_back);
 }
 
 .widget_tag_cloud a {
@@ -539,7 +560,7 @@ div.post {
 }
 
 .comment-body {
-  border-bottom: 1px solid $get(edge);
+  border-bottom: 1px solid $get(border_color);
   margin: 0.5em;
   padding-bottom: 0.5em;
 }
@@ -548,8 +569,8 @@ div.post {
 }
 
 .comment{
-  background: $get(panel);
-  color: $get(canvas_ink);
+  background: $get(panel_back);
+  color: $get(canvas_text);
   padding: 0;
   overflow: auto;
 }
@@ -565,12 +586,12 @@ div.post {
 }
 
 input[type=text]{
-  border: 1px solid $get(edge);
+  border: 1px solid $get(border_color);
   padding: 0.2em;
   margin: 0;
   border-radius: 3px;
-  color: $get(canvas_ink);
-  background: $get(box);
+  color: $get(canvas_text);
+  background: $get(box_back);
 }
 
 input[type=submit]{
@@ -578,9 +599,9 @@ input[type=submit]{
   margin: 0;
   font: $get(font_size)pt $get(font_name);
   border-radius: 3px;
-  border: 1px solid $mix(canvas_back, base);
-  color: $get(canvas_ink);
-  background: $get(box);
+  border: 1px solid $mix(canvas_back, header_back);
+  color: $get(canvas_text);
+  background: $get(box_back);
 }
 
 textarea#comment {
@@ -588,9 +609,9 @@ textarea#comment {
   font-size: 100%;
   padding: 0.2em;
   border-radius: 3px;
-  border: 1px solid $mix(canvas_back, base, 50);
-  color: $get(canvas_ink);
-  background: $get(box);
+  border: 1px solid $mix(canvas_back, header_back, 50);
+  color: $get(canvas_text);
+  background: $get(box_back);
 }
 
 #reply-title{
@@ -611,16 +632,16 @@ textarea#comment {
 /* sidebar */
 
 #sidebar {
-  color: $get(canvas_ink);
+  color: $get(canvas_text);
 }
 
 #sidebar a{
-  color: $mix(highlight, canvas_ink, 0);
+  color: $mix(highlight, canvas_text, 0);
   text-decoration: none;
 }
 
 #sidebar a:hover{
-  color: $mix(highlight, canvas_ink, 100);
+  color: $mix(highlight, canvas_text, 100);
   text-decoration: none;
 }
 
@@ -637,13 +658,13 @@ textarea#comment {
   padding-bottom: 1em;
   margin-bottom: 1em;
   list-style-type: none;
-  border-bottom: 1px solid $get(edge); /* Will override in other css */
-  text-shadow: 2px 2px 2px $get(edge);
+  border-bottom: 1px solid $get(border_color); /* Will override in other css */
+  text-shadow: 2px 2px 2px $get(border_color);
 }
 
 #sidebar > ul > li > ul {
   text-shadow: none;
-  color: $get(link);
+  color: $get(link_text);
   text-decoration: none;
 }
 
@@ -654,13 +675,13 @@ textarea#comment {
 }
 
 .widget#sidebar li{
-  color: $change(base, -20);
+  color: $change(header_back, -20);
 }
 
 #footbar {
   background: #000;
   color: $get(canvas_back);
-/*  border-top: 3px solid $get(base); */
+/*  border-top: 3px solid $get(header_back); */
 }
 
 #footbar a{
@@ -693,7 +714,7 @@ textarea#comment {
   margin: 0 1em;
   width: auto;
   height: auto;
-  color: $mix(canvas_back, base, 40);
+  color: $mix(canvas_back, header_back, 40);
   font-size: 80%;
 }
 
@@ -717,15 +738,13 @@ textarea#comment {
 
 /* drawer */
 .drawer-opened {
-  background: $change(panel);
-  color: $get(canvas_ink);
-  border-color: $get(canvas_ink);
+  background: $change(panel_back);
+  color: $get(canvas_text);
+  border-color: $get(canvas_text);
 }
 
 .drawer-closed {
-  background: $change(nav);
-  color: $get(title_text);
-  border-color: $get(title_text);
+  border-color: $get(header_text);
 }
 
 #drawer {
@@ -792,9 +811,9 @@ textarea#comment {
   max-width: 100%;
   padding: 0.1em;
   margin: 0.5em;
-  background: $get(panel);
-  color: $get(canvas_ink);
-  border: 1px dotted $get(edge);
+  background: $get(panel_back);
+  color: $get(canvas_text);
+  border: 1px dotted $get(border_color);
   text-align: center;
 }
 
@@ -803,7 +822,7 @@ textarea#comment {
 }
 
 .wp-caption-text{
-  color: $get(canvas_ink);
+  color: $get(canvas_text);
 }
 
 table#wp-calendar {
