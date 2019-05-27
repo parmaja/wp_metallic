@@ -190,10 +190,11 @@ class Color {
             throw new Exception("Param was not an RGB array");
         }
 
+        // https://github.com/mexitek/phpColors/issues/25#issuecomment-88354815
         // Convert RGB to HEX
-        $hex[0] = dechex( $rgb['R'] );
-        $hex[1] = dechex( $rgb['G'] );
-        $hex[2] = dechex( $rgb['B'] );
+        $hex[0] = str_pad(dechex($rgb['R']), 2, '0', STR_PAD_LEFT);
+        $hex[1] = str_pad(dechex($rgb['G']), 2, '0', STR_PAD_LEFT);
+        $hex[2] = str_pad(dechex($rgb['B']), 2, '0', STR_PAD_LEFT);
 
         return implode( '', $hex );
 
@@ -262,9 +263,10 @@ class Color {
     /**
      * Returns whether or not given color is considered "light"
      * @param string|Boolean $color
+     * @param int $lighterThan
      * @return boolean
      */
-    public function isLight( $color = FALSE ){
+    public function isLight( $color = FALSE, $lighterThan = 130 ){
         // Get our color
         $color = ($color) ? $color : $this->_hex;
 
@@ -273,15 +275,16 @@ class Color {
         $g = hexdec($color[2].$color[3]);
         $b = hexdec($color[4].$color[5]);
 
-        return (( $r*299 + $g*587 + $b*114 )/1000 > 130);
+        return (( $r*299 + $g*587 + $b*114 )/1000 > $lighterThan);
     }
 
     /**
      * Returns whether or not a given color is considered "dark"
      * @param string|Boolean $color
+     * @param int $darkerThan
      * @return boolean
      */
-    public function isDark( $color = FALSE ){
+    public function isDark( $color = FALSE, $darkerThan = 130 ){
         // Get our color
         $color = ($color) ? $color:$this->_hex;
 
@@ -290,7 +293,7 @@ class Color {
         $g = hexdec($color[2].$color[3]);
         $b = hexdec($color[4].$color[5]);
 
-        return (( $r*299 + $g*587 + $b*114 )/1000 <= 130);
+        return (( $r*299 + $g*587 + $b*114 )/1000 <= $darkerThan);
     }
 
     /**
@@ -489,5 +492,82 @@ class Color {
 
         return $color;
     }
+    
+    /**
+     * Converts object into its string representation
+     * @return string Color
+     */
+    public function __toString() {
+        return "#".$this->getHex();
+    }
 
+    public function __get($name)
+    {
+        switch (strtolower($name))
+        {
+            case 'red':
+            case 'r':
+                return $this->_rgb["R"];
+            case 'green':
+            case 'g':
+                return $this->_rgb["G"];
+            case 'blue':
+            case 'b':
+                return $this->_rgb["B"];
+            case 'hue':
+            case 'h':
+                return $this->_hsl["H"];
+            case 'saturation':
+            case 's':
+                return $this->_hsl["S"];
+            case 'lightness':
+            case 'l':
+                return $this->_hsl["L"];
+        }
+    }
+
+    public function __set($name, $value)
+    {
+        switch (strtolower($name))
+        {
+            case 'red':
+            case 'r':
+                $this->_rgb["R"] = $value;
+                $this->_hex = $this->rgbToHex($this->_rgb);
+                $this->_hsl = $this->hexToHsl($this->_hex);
+                break;
+            case 'green':
+            case 'g':
+                $this->_rgb["G"] = $value;
+                $this->_hex = $this->rgbToHex($this->_rgb);
+                $this->_hsl = $this->hexToHsl($this->_hex);
+                break;
+            case 'blue':
+            case 'b':
+                $this->_rgb["B"] = $value;
+                $this->_hex = $this->rgbToHex($this->_rgb);
+                $this->_hsl = $this->hexToHsl($this->_hex);
+                break;
+            case 'hue':
+            case 'h':
+                $this->_hsl["H"] = $value;
+                $this->_hex = $this->hslToHex($this->_hsl);
+                $this->_rgb = $this->hexToRgb($this->_hex);
+                break;
+            case 'saturation':
+            case 's':
+                $this->_hsl["S"] = $value;
+                $this->_hex = $this->hslToHex($this->_hsl);
+                $this->_rgb = $this->hexToRgb($this->_hex);
+                break;
+            case 'lightness':
+            case 'light':
+            case 'l':
+                $this->_hsl["L"] = $value;
+                $this->_hex = $this->hslToHex($this->_hsl);
+                $this->_rgb = $this->hexToRgb($this->_hex);
+                break;
+        }
+    }
 }
+?>

@@ -1,44 +1,39 @@
-/*
-+-----------------------------------------------------------------+
-| Header_Text_Color                                               |
-| Header_Back_Color                                               |
-|                                                                 |
-+--------+-------------------------+------------------------------+
-| Nav_Back_Color                                                  |
-+--------+-------------------------+------------------------------+
-         |                         |  +------------------+
-         |  Canvas_Text_Color      |  |                  |
-         |  Canvas_Back_Color      |  | Panel_Back_Color |
-         |                         |  |                  |
-         |                         |  +------------------+
-         |                         |  +------------------+
-         |                         |  |                  |
-         +-------------------------+  +------------------+
-         +-----------------------------------------------+
-         |                                               |
-         +-----------------------------------------------+
+/************************************************************************
+
++------------------------------------------------------------------+
+| Header_Text_Color                                                |
+| Header_Back_Color                                                |
+|                                                                  |
++--------+-------------------------+-------------------------------+
+|        |  Nav_Back_Color  Header_Back_Color             |        |
++--------+-------------------------+-------------------------------+
+         |                         |  +-------------------+
+         |  Canvas_Text_Color      |  | Panel_Back_Color  |
+         |  Canvas_Back_Color      |  | Canvas_Back_Color |
+         |                         |  |                   |
+         |                         |  +-------------------+
+         |                         |  +-------------------+
+         |                         |  |                   |
+         +-------------------------+  +-------------------+
+         +------------------------------------------------+
+         |                                                |
+         +------------------------------------------------+
 
 Body_Back_Color
 Body_Back_Text
 
-*/
+*************************************************************************/
 
 /* Set Variables values */
 $<
   header_text=$opposite(header_back)
-
   canvas_text=$opposite(canvas_back)
-
   body_text=$opposite(body_back)
-
   panel_back=$mix(canvas_back, header_back, 90)
   border_color=$mix(canvas_back, header_back, 50) /* Panels border color */
-
-  nav_back=$mix(header_back, canvas_back, 70) /* deprecated */
-
+  nav_back=$mix(header_back, canvas_back, 70)
   box_back=$get(panel_back) /* Controls like EditBox, Code Box or Quote */ /* deprecated */
-
-  link_text=$change(highlight)
+  link_text=$mix(canvas_text, header_back, 50)
 >
 
 /*
@@ -636,12 +631,13 @@ textarea#comment {
 }
 
 #sidebar a{
-  color: $mix(highlight, canvas_text, 0);
+/*  color: $mix(highlight, canvas_text, 0); */
+  color: $get(canvas_text);
   text-decoration: none;
 }
 
 #sidebar a:hover{
-  color: $mix(highlight, canvas_text, 100);
+  color: $get(highlight);
   text-decoration: none;
 }
 

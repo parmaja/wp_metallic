@@ -329,7 +329,7 @@ class CssMacro {
 
   public function generate($contents) {
     $this->_comments = array();
-    
+
     $return = preg_replace_callback('/(\/\*.*\*\/)/isU', array($this, '_replace_comments'), $contents);
     $return = $this->do_replace($return);
     return str_replace(array_keys($this->_comments), array_values($this->_comments), $return);
@@ -396,4 +396,6 @@ class CssMacro {
     return $return;
   }
 }
+
 ?>
+

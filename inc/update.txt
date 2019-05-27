@@ -10,6 +10,7 @@ curl --output macro.php "https://raw.githubusercontent.com/parmaja/php-macro/mas
 #   Author: Arlo Carreon <http://arlocarreon.com>
 #
 
-curl --output color.php "https://raw.githubusercontent.com/parmaja/php-macro/master/src/color.php"
+#curl --output color.php "https://raw.githubusercontent.com/parmaja/php-macro/master/src/color.php"
+curl --output color.php "https://raw.githubusercontent.com/mexitek/phpColors/master/src/Mexitek/PHPColors/Color.php"
 
 # I dislike using submodules
