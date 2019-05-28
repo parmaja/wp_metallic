@@ -82,9 +82,10 @@ if (!empty($header_color))
 if (!empty($canvas_color))
   $css_macro->set('canvas_back', '#'.$canvas_color);
 else
-  $canvas_color = $css_macro->get('canvas_back');
+  $canvas_color = $css_macro->values['canvas_back'];
 
 $contrast = $css_macro->values['contrast'];
+
 if (isset($_GET['contrast']) && !empty($_GET['contrast']))
   $contrast = $_GET['contrast'];
 
