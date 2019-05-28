@@ -29,11 +29,11 @@ $<
   header_text=$opposite(header_back)
   canvas_text=$opposite(canvas_back)
   body_text=$opposite(body_back)
-  panel_back=$mix(canvas_back, header_back, 90)
+  panel_back=$mix(canvas_back, header_back, 85)
   border_color=$mix(canvas_back, header_back, 50) /* Panels border color */
   nav_back=$mix(header_back, canvas_back, 70)
   box_back=$get(panel_back) /* Controls like EditBox, Code Box or Quote */ /* deprecated */
-  link_text=$mix(canvas_text, header_back, 50)
+  link_text=$mix(canvas_text, highlight, 50)
 >
 
 /*
@@ -103,7 +103,7 @@ a{
 
 a:hover{
   text-decoration: none;
-  color: $get(link_text);
+  color: $get(highlight);
 }
 
 caption, th, td {
@@ -142,7 +142,7 @@ img.aligncenter{
 }
 
 pre {
-  padding: 0.2em;
+  padding: 0.5em;
   margin: 0em;
   overflow: auto;
   background: $get(box_back);
@@ -308,7 +308,7 @@ ol#posts .more-link{
 }
 
 .post-title a:hover {
-  color: $mix(link_text, canvas_text, 50);
+  color: $mix(highlight, canvas_text, 50);
   text-decoration: none;
 }
 
@@ -328,6 +328,17 @@ ol#posts .more-link{
 .infobar a{
   text-decoration: none;
   color: $get(link_text);
+}
+
+
+.infobar a{
+  text-decoration: none;
+  color: $get(link_text);
+}
+
+.infobar a:hover{
+  text-decoration: none;
+  color: $get(highlight);
 }
 
 .infobar .category{
@@ -419,7 +430,7 @@ div.post {
 }
 
 .pagination a:hover{
-  color: $mix(header_text, highlight);
+  color: $get(highlight);
 }
 
 @media print{
@@ -448,12 +459,12 @@ div.post {
 }
 
 .page-numbers a{
-  color: $get(canvas_back);
+  color: $get(link_text);
   background: $change(header_back, -20);
 }
 
 .page-numbers a:hover{
-  color: $mix(highlight, canvas_text, 50);
+  color: $get(highlight);
 }
 
 .page-number{

@@ -21,6 +21,10 @@ body {
   max-width: 100%; /* Good to be flexible */
 }
 
+.post-title, p {
+  text-align: start; /* for bidi posts */
+}
+
 #container {
   overflow: hidden;
 }

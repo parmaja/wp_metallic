@@ -150,7 +150,6 @@ function metallic_customize_register($wp_customize) {
         'priority' => 121,
   ));
 
-    metallic_add_option($wp_customize, 'colors', 'invert', __('Invert', 'metallic'), 'checkbox', 'false');
     metallic_add_option($wp_customize, 'metallic_options', 'show_logo', __('Show Logo', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'show_navigator', __('Show Navigation', 'metallic'));
     metallic_add_option($wp_customize, 'metallic_options', 'show_sidebar', __('Show Sidebar', 'metallic'));
@@ -170,7 +169,7 @@ function metallic_customize_register($wp_customize) {
     //  = Color Picker              =
     //  =============================
 
-    $wp_customize->add_setting('user_color', array(
+    $wp_customize->add_setting('header_color', array(
         'default'           => '',
         'sanitize_callback' => 'sanitize_hex_color',
         'capability'        => 'edit_theme_options',
@@ -179,9 +178,47 @@ function metallic_customize_register($wp_customize) {
 
     ));
 
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'user_color', array(
-          'settings' => 'user_color',
-          'label'    => __('User Color', 'metallic'),
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'header_color', array(
+          'default'           => '',
+          'settings' => 'header_color',
+          'label'    => __('Header Back Color', 'metallic'),
+          'section'  => 'colors'
+        )
+      )
+    );
+
+
+    $wp_customize->add_setting('canvas_color', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'capability'        => 'edit_theme_options',
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'metallic_sanitize_value'
+
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'canvas_color', array(
+          'default'           => '',
+          'settings' => 'canvas_color',
+          'label'    => __('Canvas Back Color', 'metallic'),
+          'section'  => 'colors'
+        )
+      )
+    );
+
+    $wp_customize->add_setting('highlight_color', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'capability'        => 'edit_theme_options',
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'metallic_sanitize_value'
+
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'highlight_color', array(
+          'default'           => '',
+          'settings' => 'highlight_color',
+          'label'    => __('Highlight Color', 'metallic'),
           'section'  => 'colors'
         )
       )
@@ -221,10 +258,6 @@ function metallic_styles()
   else
     $params .= '0';
 
-  if (get_theme_mod('invert', false)) {
-    $params .= '&invert=1';
-  }
-
   if (wp_is_mobile()) {
     if ($metallic_is_tablet)
       $font_size = get_theme_mod('tablet_font_size', '');
@@ -241,16 +274,31 @@ function metallic_styles()
   if (wp_is_mobile())
     $params .= '&is_mobile=1';
 
-  if (isset($_GET['color']))
-      $user_color = $_GET['color'];
-  else if (empty($user_color))
-      $user_color = get_theme_mod('user_color', '');
+  $header_color = get_theme_mod('header_color', '');
 
-  if (!empty($user_color)) {
-    if (substr($user_color, 0, 1) === '#')
-      $user_color = substr($user_color, 1);
+  if (!empty($header_color)) {
+    if (substr($header_color, 0, 1) === '#')
+      $header_color = substr($header_color, 1);
 
-    $params .= '&user_color='.$user_color;
+    $params .= '&header='.$header_color;
+  }
+
+  $canvas_color = get_theme_mod('canvas_color', '');
+
+  if (!empty($canvas_color)) {
+    if (substr($canvas_color, 0, 1) === '#')
+      $canvas_color = substr($canvas_color, 1);
+
+    $params .= '&canvas='.$canvas_color;
+  }
+
+  $highlight_color = get_theme_mod('highlight_color', '');
+
+  if (!empty($highlight_color)) {
+    if (substr($highlight_color, 0, 1) === '#')
+      $highlight_color = substr($highlight_color, 1);
+
+    $params .= '&highlight='.$highlight_color;
   }
 
   $ver = get_theme_mod('style_ver', 1);

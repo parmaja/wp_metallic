@@ -56,10 +56,6 @@ $if(b)<
     color: $mix($lighten(mycolor1, 10), mycolor2, 50);
 */
 
-/*TODO
-  bug when
-*/
-
 include_once __DIR__ . '/color.php';
 
 use Mexitek\phpColors\Color;
@@ -172,6 +168,7 @@ class CssMacro {
       'darken'=>array('func_darken','', $this),
       'opposite'=>array('func_opposite','', $this),
       'mix'=>array('func_mix','', $this),
+      'merge'=>array('func_merge','', $this), //Same as mix but it use contrast
       'if'=>array('func_if','a,c', $this),
       'ifnot'=>array('func_ifnot','a,c', $this),
       'gradient'=>array('func_gradient','', $this)
@@ -232,13 +229,23 @@ class CssMacro {
   }
 
   private function func_mix($color1, $color2, $amount = 0) {
+    if ($amount >= 0) {
+      $co = new Color(trim_color($color1));
+      return '#'.$co->mix($color2, $amount);
+    } else {
+      $co = new Color(trim_color($color2));
+      return '#'.$co->mix($color1, -$amount);
+    }
+  }
+
+  private function func_merge($color1, $color2, $amount = 0) {
     $amount = ($amount * $this->contrast) / 100;
     if ($amount >= 0) {
       $co = new Color(trim_color($color1));
       return '#'.$co->mix($color2, $amount);
-    }else {
+    } else {
       $co = new Color(trim_color($color2));
-      return '#'.$co->mix($color1, $amount);
+      return '#'.$co->mix($color1, -$amount);
     }
   }
 
@@ -292,9 +299,8 @@ class CssMacro {
     return $value;
   }
 
-  public function call($name, $arg) {
-//   echo '>>>'.$name.">>>\n";
-//   print_r($arg)."\n";
+  public function call($name, $arg)
+  {
     if (array_key_exists($name, $this->functions))
     {
       $func = $this->functions[$name][0];
@@ -389,9 +395,8 @@ class CssMacro {
   }
 
   private function do_replace($contents) {
-      //Good Tool: https://regex101.com/
+    //Good Tool: https://regex101.com/
     $return = preg_replace_callback('/'.'^\$'.'(.*)'.'\<(.*)\>'.'/misU', array($this, '_replace_values'), $contents);
-//    $return = preg_replace_callback('/'.'^\$([a-z]*(\(.*\))?)?\<(.*)^\>$'.'/misU', array($this, '_replace_values'), $contents);
     $return = preg_replace_callback(REGEX_COMMAND, array($this, '_macro_replace'), $return);
     return $return;
   }
